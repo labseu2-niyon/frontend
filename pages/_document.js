@@ -19,9 +19,10 @@ export default class MyDocument extends Document {
       <html>
         <Head>
           <title>My page</title>
+          <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
           {this.props.styleTags}
         </Head>
-        <body>
+        <body style={{ margin: 0, padding: 0, fontFamily: 'Lato' }}>
           <Main />
           <NextScript />
         </body>

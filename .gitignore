@@ -21,3 +21,11 @@ yarn-error.log*
 # Environment Variables
 .env
 .env.build
+
+# Config files
+now.json
+production.now.json
+staging.now.json
+
+# Niyon-design components
+components/~common
