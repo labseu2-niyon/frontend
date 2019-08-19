@@ -130,7 +130,7 @@ function Components() {
           <p>Input</p>
           <Input placeholder="Text here..."/>
           <p>Input Error</p>
-          <Input placeholder="Password here..." type="password" value='1234' error errorMsg="Password must be longer than 4 characters" />
+          <Input placeholder="Password here..." type="password" value='1234' readOnly error errorMsg="Password must be longer than 4 characters" />
         </Section>
 
       </Column>
