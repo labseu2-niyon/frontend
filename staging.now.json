@@ -1,0 +1,11 @@
+{
+    "version": 2,
+    "name": "niyon staging",
+    "alias": "niyon-staging",
+    "builds": [
+        { "use": "@now/next", "src": "next.config.js" }
+    ],
+    "env": {
+        "ENV": "staging"
+    }
+}
