@@ -4,7 +4,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "deploy:staging": "now -A staging.now.json --target staging",
+    "deploy:staging": "now -A staging.now.json --target production",
     "deploy:production": "now -A production.now.json --target production"
   },
   "dependencies": {
@@ -19,6 +19,23 @@
     "styled-theming": "^2.2.0"
   },
   "devDependencies": {
+    "eslint": "^6.2.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^3.0.4",
+    "just": "^0.1.8",
+    "lint-staged": "^9.2.3",
+    "prettier": "^1.18.2",
     "redux-devtools-extension": "^2.13.8"
-  }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test",
+      "pre-push": "npm test"
+    }
+  },
+  "pre-commit": "lint-staged",
+  "pre-push": "npm test"
 }
