@@ -29,3 +29,6 @@ staging.now.json
 
 # Niyon-design components
 components/~common
+
+# yarn ting
+yarn.lock

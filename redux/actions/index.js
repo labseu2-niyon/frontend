@@ -1,13 +1,7 @@
-import { actionTypes } from "../constants";
+import { actionTypes } from '../constants';
 
-export const incrementCount = () => {
-  return { type: actionTypes.INCREMENT };
-};
+export const incrementCount = () => ({ type: actionTypes.INCREMENT });
 
-export const decrementCount = () => {
-  return { type: actionTypes.DECREMENT };
-};
+export const decrementCount = () => ({ type: actionTypes.DECREMENT });
 
-export const resetCount = () => {
-  return { type: actionTypes.RESET };
-};
+export const resetCount = () => ({ type: actionTypes.RESET });

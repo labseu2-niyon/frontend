@@ -1,34 +1,20 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { incrementCount, decrementCount, resetCount } from "../redux/actions";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../redux/actions';
 
-function Counter(props) {
-  const increment = () => {
-    const { incrementCount } = props;
-    incrementCount();
-  };
-
-  const decrement = () => {
-    const { decrementCount } = props;
-    decrementCount();
-  };
-
-  const reset = () => {
-    const { resetCount } = props;
-    resetCount();
-  };
-
-  const { count } = props;
-  
+function Counter({
+  incrementCount, decrementCount, resetCount, count,
+}) {
   return (
     <div>
       <h1>
         Count: <span>{count}</span>
       </h1>
-      <button onClick={increment}>+1</button>
-      <button onClick={decrement}>-1</button>
-      <button onClick={reset}>Reset</button>
+      <button type="button" onClick={incrementCount}>+1</button>
+      <button type="button" onClick={decrementCount}>-1</button>
+      <button type="button" onClick={resetCount}>Reset</button>
     </div>
   );
 }
@@ -37,10 +23,17 @@ function mapStateToProps(state) {
   const { count } = state;
   return { count };
 }
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ incrementCount, decrementCount, resetCount }, dispatch);
+
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
+
+Counter.propTypes = {
+  incrementCount: PropTypes.func.isRequired,
+  decrementCount: PropTypes.func.isRequired,
+  resetCount: PropTypes.func.isRequired,
+  count: PropTypes.number.isRequired,
+};
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Counter);

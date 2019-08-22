@@ -1,19 +1,13 @@
 import { actionTypes } from '../constants';
 
-export default (state = exampleInitialState, action) => {
+export default (state, action) => {
   switch (action.type) {
     case actionTypes.INCREMENT:
-      return Object.assign({}, state, {
-        count: state.count + 1
-      });
+      return { ...state, count: state.count + 1 };
     case actionTypes.DECREMENT:
-      return Object.assign({}, state, {
-        count: state.count - 1
-      });
+      return { ...state, count: state.count - 1 };
     case actionTypes.RESET:
-      return Object.assign({}, state, {
-        count: exampleInitialState.count
-      });
+      return { ...state, count: 0 };
     default:
       return state;
   }

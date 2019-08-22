@@ -4,26 +4,34 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
+    "lint": "./node_modules/.bin/eslint . --fix",
     "deploy:staging": "now -A staging.now.json --target production",
     "deploy:production": "now -A production.now.json --target production"
   },
   "dependencies": {
+    "components": "^0.1.0",
     "next": "^9.0.2",
     "niyon-design": "^0.0.5",
     "polished": "^3.4.1",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
     "redux": "^4.0.4",
+    "styled": "^1.0.0",
     "styled-components": "^4.3.2",
     "styled-theming": "^2.2.0"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.2",
     "eslint": "^6.2.1",
+    "eslint-config-airbnb": "^18.0.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.1.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.3",
     "husky": "^3.0.4",
     "just": "^0.1.8",
     "lint-staged": "^9.2.3",
@@ -32,9 +40,15 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm test",
+      "pre-commit": "lint-staged",
       "pre-push": "npm test"
     }
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint",
+      "git add"
+    ]
   },
   "pre-commit": "lint-staged",
   "pre-push": "npm test"

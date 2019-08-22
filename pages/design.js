@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 import {
   Button,
   Heading,
@@ -8,8 +8,8 @@ import {
   Heading4,
   Card,
   CardContent,
-  Input
-} from "niyon-design";
+  Input,
+} from 'niyon-design';
 
 const Wrapper = styled.div`
   box-sizing: border-box;
@@ -121,16 +121,23 @@ function Components() {
           <Card height="200px" width="500px">
             <CardContent>
               <Heading3>Hello</Heading3>
-              <p>Here's some card contents</p>
+              <p>Here&apos;s some card contents</p>
             </CardContent>
           </Card>
         </Section>
 
         <Section id="inputs">
           <p>Input</p>
-          <Input placeholder="Text here..."/>
+          <Input placeholder="Text here..." />
           <p>Input Error</p>
-          <Input placeholder="Password here..." type="password" value='1234' readOnly error errorMsg="Password must be longer than 4 characters" />
+          <Input
+            placeholder="Password here..."
+            type="password"
+            value="1234"
+            readOnly
+            error
+            errorMsg="Password must be longer than 4 characters"
+          />
         </Section>
 
       </Column>

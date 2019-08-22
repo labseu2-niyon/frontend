@@ -5,9 +5,7 @@ export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
     const sheet = new ServerStyleSheet();
 
-    const page = renderPage((App) => (props) =>
-      sheet.collectStyles(<App {...props} />),
-    );
+    const page = renderPage((App) => (props) => sheet.collectStyles(<App {...props} />));
 
     const styleTags = sheet.getStyleElement();
 
@@ -16,7 +14,7 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <html>
+      <html lang="en">
         <Head>
           <title>My page</title>
           <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
