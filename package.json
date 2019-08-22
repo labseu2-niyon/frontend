@@ -5,6 +5,7 @@
     "build": "next build",
     "start": "next start",
     "test": "jest --watch --verbose",
+    "husky-test": "jest",
     "circle-ci-test": "jest",
     "lint": "./node_modules/.bin/eslint . --fix",
     "deploy:staging": "now -A staging.now.json --target production",
@@ -44,7 +45,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "npm run circle-ci-test"
+      "pre-push": "npm run husky-test"
     }
   },
   "lint-staged": {
