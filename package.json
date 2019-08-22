@@ -5,6 +5,7 @@
     "build": "next build",
     "start": "next start",
     "test": "jest --watch --verbose",
+    "circle-ci-test": "jest",
     "lint": "./node_modules/.bin/eslint . --fix",
     "deploy:staging": "now -A staging.now.json --target production",
     "deploy:production": "now -A production.now.json --target production"
