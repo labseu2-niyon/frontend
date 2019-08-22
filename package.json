@@ -44,7 +44,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "npm circle-ci-test"
+      "pre-push": "npm run circle-ci-test"
     }
   },
   "lint-staged": {
