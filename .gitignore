@@ -28,7 +28,7 @@ production.now.json
 staging.now.json
 
 # Niyon-design components
-components/~common
+# components/~common
 
 # yarn ting
 yarn.lock
