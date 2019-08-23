@@ -9,7 +9,6 @@ const I = styled.input`
 	margin: 0.5rem;
 `;
 
-
 function TextInput(props) {
 	const { customStyles, password, short, half, long } = props;
 
@@ -28,6 +27,7 @@ function TextInput(props) {
 				<I
 					type="password"
 					placeholder="password"
+					widthSize={size}
 					{...props}
 					{...customStyles}
 				/>
