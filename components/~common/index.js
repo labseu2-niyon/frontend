@@ -13,6 +13,7 @@ import Spinner from './Spinner';
 import TeamCard from './TeamCard';
 import UserCard from './UserCard';
 import Text from './Text';
+import Avatar from './Avatar';
 
 export {
   Button,
@@ -30,4 +31,5 @@ export {
   TeamCard,
   UserCard,
   Text,
+  Avatar,
 };
