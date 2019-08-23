@@ -12,7 +12,7 @@ const Text = props => {
   if (large) {
     size = '20px';
   } else if (medium) {
-    size = '18';
+    size = '18px';
   } else if (regular) {
     size = '16px';
   } else if (small) {
