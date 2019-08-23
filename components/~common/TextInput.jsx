@@ -9,10 +9,6 @@ const I = styled.input`
 	margin: 0.5rem;
 `;
 
-const Img = styled.img`
-	max-height: 5%;
-	max-width: 5%;
-`;
 
 function TextInput(props) {
 	const { customStyles, password } = props;
