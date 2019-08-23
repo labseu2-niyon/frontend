@@ -12,6 +12,7 @@ import Skip from './Skip';
 import Spinner from './Spinner';
 import TeamCard from './TeamCard';
 import UserCard from './UserCard';
+import Text from './Text';
 
 export {
   Button,
@@ -28,4 +29,5 @@ export {
   Spinner,
   TeamCard,
   UserCard,
+  Text,
 };
