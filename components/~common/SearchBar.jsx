@@ -37,14 +37,14 @@ function Search(props) {
 
 	return (
 		<Container>
-			<Img src="../static/search.png" alt="search" />
+			<Img src="../static/icons/search.png" alt="search" />
 			<I
 				ref={searchRef}
 				{...props}
 				placeholder={placeholder}
 				{...customStyles}
 			/>
-			<Img src="../static/clear.png" alt="clear" onClick={handleClick} />
+			<Img src="../static/icons/clear.png" alt="clear" onClick={handleClick} />
 		</Container>
 	);
 }
