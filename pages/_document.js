@@ -1,30 +1,45 @@
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, {
+  Html, Head, Main, NextScript,
+} from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
-  static getInitialProps({ renderPage }) {
+  static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet();
+    const originalRenderPage = ctx.renderPage;
 
-    const page = renderPage((App) => (props) => sheet.collectStyles(<App {...props} />));
+    try {
+      ctx.renderPage = () => originalRenderPage({
+        enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+      });
 
-    const styleTags = sheet.getStyleElement();
-
-    return { ...page, styleTags };
+      const initialProps = await Document.getInitialProps(ctx);
+      return {
+        ...initialProps,
+        styles: (
+          <>
+            {initialProps.styles}
+            {sheet.getStyleElement()}
+          </>
+        ),
+      };
+    } finally {
+      sheet.seal();
+    }
   }
 
   render() {
     return (
-      <html lang="en">
+      <Html>
         <Head>
-          <title>My page</title>
-          <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
-          {this.props.styleTags}
+          <link href="https://cdn.jsdelivr.net/npm/inter-ui@3.9.0/inter.min.css" rel="stylesheet" />
+          <script src="https://use.fontawesome.com/7d67ad6b57.js" />
         </Head>
-        <body style={{ margin: 0, padding: 0, fontFamily: 'Lato' }}>
+        <body style={{ margin: 0, padding: 0, fontFamily: 'Inter' }}>
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }
