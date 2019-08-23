@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const I = styled.input`
-	max-width: 100%;
+	width: ${({ widthSize }) => widthSize || '20%'};
 	max-height: 100%;
 	border-radius: 10px;
 	padding: 0.5rem;
@@ -11,22 +11,31 @@ const I = styled.input`
 
 
 function TextInput(props) {
-	const { customStyles, password } = props;
+	const { customStyles, password, short, half, long } = props;
+
+	let size;
+  if (short) {
+    size = '10%';
+  } else if (half) {
+    size = '50%';
+  } else if (long) {
+    size = '90%';
+  }
 
 	if (password) {
 		return (
 			<div>
 				<I
 					type="password"
+					placeholder="password"
 					{...props}
 					{...customStyles}
-					placeholder="password"
 				/>
 			</div>
 		);
 	}
 
-	return <I {...props} {...customStyles} placeholder="text input" />;
+	return <I placeholder="text input" widthSize={size} {...props} {...customStyles} />;
 }
 
 export default TextInput;
