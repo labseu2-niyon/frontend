@@ -8,7 +8,6 @@
   "plugins": ["react", "jsx-a11y", "import"],
   "settings": { "import/core-modules": ["styled-jsx", "styled-jsx/css"] },
   "rules": {
-    "max-len": ["error", 200],
     "react/jsx-one-expression-per-line": "off",
     "no-underscore-dangle": "off",
     "prefer-destructuring": [
