@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "components": "^0.1.0",
+    "formik": "^1.5.8",
     "next": "^9.0.2",
     "niyon-design": "^0.0.6",
     "polished": "^3.4.1",

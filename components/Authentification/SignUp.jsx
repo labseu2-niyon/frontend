@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { Text, Button } from './~common/index';
+import { Text, Button } from '../~common/index';
 //import { primary, secondary } from '../lib/theme';
 import Link from 'next/link';
+import Router from 'next/router';
 
 const SignUp = () => {
   return (
@@ -20,11 +21,13 @@ const SignUp = () => {
         <Button large style={{ background: 'green' }}>
           Facebook
         </Button>
-        <Button large outline primary>
+        <Button large outline primary onClick={() => Router.push('/emailTest')}>
           Email
         </Button>
       </ButtonArea>
-      <Text small>Already a member? Login IN </Text>
+      <Text small>
+        Already a member? <Link href="/login">Login IN</Link>{' '}
+      </Text>
     </Root>
   );
 };
@@ -35,17 +38,18 @@ const Root = styled.div`
   height: 90vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   p {
     text-align: center;
+    margin: 50px 0;
   }
 `;
 
 const ButtonArea = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  height: 300px;
+  height: 320px;
 `;

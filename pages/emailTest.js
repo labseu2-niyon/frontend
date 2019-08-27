@@ -1,6 +1,8 @@
+import Email from '../components/Authentification/Email';
+
 const emailTest = () => (
   <div>
-    <p>emailTest Page</p>
+    <Email />
   </div>
 );
 
