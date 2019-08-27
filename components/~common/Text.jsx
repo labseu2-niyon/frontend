@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 const P = styled.p`
   font-size: ${({ fontSize }) => fontSize || '16px'};
+  margin: ${({ margin }) => margin};
+  padding: ${({ padding }) => padding};
 `;
 
 const Text = props => {
