@@ -5,9 +5,9 @@ function Icon({ className }) {
 }
 
 const I = styled.i`
-  font-size: ${({ theme }) => theme.s};
-  color: ${({ theme }) => theme.primary};
-  margin: ${({ theme }) => theme.xs};
+  font-size: ${({ theme }) => theme.smallText};
+  color: ${({ theme }) => theme.black};
+  margin: 0 5px;
 `;
 
 export default Icon;

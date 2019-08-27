@@ -8,6 +8,7 @@ import {
   Text,
   Avatar,
   TeamCard,
+  UserCard,
   Button,
 } from '../components/~common/index';
 
@@ -78,7 +79,7 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 20px;
+  margin-right: 30px;
 `;
 
 function Components() {
@@ -212,14 +213,43 @@ function Components() {
         <Section id="cards">
           <Heading4>Cards</Heading4>
           <p>Team Card</p>
-          <TeamCard
-            source={exampleAvatar}
-            name="Jane Doe"
-            title="Web Developer"
-            githubURL="https://github.com/"
-            linkedinURL="https://www.linkedin.com/"
-            twitterURL="https://twitter.com/"
-          />
+          <Row>
+            <Card>
+              <TeamCard
+                source={exampleAvatar}
+                name="Jane Doe"
+                title="Web Developer"
+                githubURL="https://github.com/"
+                linkedinURL="https://www.linkedin.com/"
+                twitterURL="https://twitter.com/"
+              />
+            </Card>
+            <Card>
+              <TeamCard
+                source={exampleAvatar}
+                name="Jane Doe"
+                title="Web Developer"
+                githubURL="https://github.com/"
+                linkedinURL="https://www.linkedin.com/"
+                twitterURL="https://twitter.com/"
+              />
+            </Card>
+            <Card>
+              <TeamCard
+                source={exampleAvatar}
+                name="Jane Doe"
+                title="Web Developer"
+                githubURL="https://github.com/"
+                linkedinURL="https://www.linkedin.com/"
+                twitterURL="https://twitter.com/"
+              />
+            </Card>
+          </Row>
+
+          <Row>
+            <p>User Card</p>
+            <UserCard source={exampleAvatar} />
+          </Row>
         </Section>
 
         <Section id="inputs">
