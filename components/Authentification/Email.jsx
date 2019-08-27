@@ -3,20 +3,28 @@ import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link';
+import { warning } from '../../lib/theme';
 
-const Email = () => {
+const Email = ({ errors, touched }) => {
   return (
     <Root>
       <h5>Progress Bar- Step1</h5>
       <Heading4>Email login</Heading4>
       <FormArea>
-        <Field name="username" type="text" placeholder="username"></Field>
-        <Field name="firstName" type="text" placeholder="First Name"></Field>
-        <Field name="lastName" type="text" placeholder="Last Name"></Field>
-        <Field name="email" type="email" placeholder="email"></Field>
-        <Field name="password" type="password" placeholder="password"></Field>
+        <Field name="username" type="text" placeholder="username" />
+        {touched.username && errors.username && (
+          <Error>{errors.username}</Error>
+        )}
+        <Field name="firstName" type="text" placeholder="First Name" />
+        <Field name="lastName" type="text" placeholder="Last Name" />
+        <Field name="email" type="email" placeholder="email" />
+        {touched.email && errors.email && <Error>{errors.email}</Error>}
+        <Field name="password" type="password" placeholder="password" />
+        {touched.password && errors.password && (
+          <Error>{errors.password}</Error>
+        )}
         <Text small>Lorem Ipsum, terms and conditions, blah blah blah.</Text>
-        <Button small primary>
+        <Button small primary type="submit">
           Register
         </Button>
       </FormArea>
@@ -47,7 +55,10 @@ const FormikWithEmailForm = withFormik({
     password: Yup.string()
       .min(3, 'Password must be at least 3 characters')
       .required('Password is required')
-  })
+  }),
+  handleSubmit(values, { setStatus }) {
+    console.log(values);
+  }
 })(Email);
 
 export default FormikWithEmailForm;
@@ -68,7 +79,7 @@ const FormArea = styled(Form)`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 380px;
+  height: 450px;
 
   input {
     padding: 0.5rem;
@@ -78,10 +89,14 @@ const FormArea = styled(Form)`
     color: #4d2d52;
     border: 1px solid rgba(77, 45, 82, 0.8);
     border-radius: 4px;
-
     ::placeholder {
       color: grey;
       opacity: 0.4;
     }
   }
+`;
+
+const Error = styled.p`
+  margin: 0;
+  color: #e29273;
 `;
