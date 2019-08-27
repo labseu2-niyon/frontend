@@ -3,10 +3,21 @@ import styled from 'styled-components';
 
 const P = styled.p`
   font-size: ${({ fontSize }) => fontSize || '1rem'};
+  font-weight: ${({ fontWeight }) => fontWeight || 400};
+  margin: ${({ margin }) => margin || '15px'};
 `;
 
 const Text = props => {
-  const { large, medium, small, children } = props;
+  const {
+    large,
+    medium,
+    small,
+    light,
+    regular,
+    bold,
+    margin,
+    children
+  } = props;
 
   let size;
   if (large) {
@@ -17,7 +28,20 @@ const Text = props => {
     size = '0.875rem';
   }
 
-  return <P fontSize={size}>{children}</P>;
+  let weight;
+  if (light) {
+    weight = 300;
+  } else if (regular) {
+    weight = 400;
+  } else if (bold) {
+    weight = 600;
+  }
+
+  return (
+    <P fontSize={size} fontWeight={weight} margin={margin}>
+      {children}
+    </P>
+  );
 };
 
 export default Text;

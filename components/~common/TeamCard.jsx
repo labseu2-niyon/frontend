@@ -28,12 +28,12 @@ const Social = styled.div`
 `;
 
 const TeamCard = props => {
-  const { source, name, title, githubURL, linkedinURL, twitterURL } = props;
+  const { source, name, jobTitle, githubURL, linkedinURL, twitterURL } = props;
   return (
     <C>
       <Avatar extraLarge source={source} />
       <Name>{name}</Name>
-      <Role>{title}</Role>
+      <Role>{jobTitle}</Role>
       <Social>
         <a href={githubURL} target="_blank">
           <Icon className="fab fa-github" />

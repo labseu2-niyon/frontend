@@ -218,7 +218,7 @@ function Components() {
               <TeamCard
                 source={exampleAvatar}
                 name="Jane Doe"
-                title="Web Developer"
+                jobTitle="Web Developer"
                 githubURL="https://github.com/"
                 linkedinURL="https://www.linkedin.com/"
                 twitterURL="https://twitter.com/"
@@ -228,7 +228,7 @@ function Components() {
               <TeamCard
                 source={exampleAvatar}
                 name="Jane Doe"
-                title="Web Developer"
+                jobTitle="Web Developer"
                 githubURL="https://github.com/"
                 linkedinURL="https://www.linkedin.com/"
                 twitterURL="https://twitter.com/"
@@ -238,7 +238,7 @@ function Components() {
               <TeamCard
                 source={exampleAvatar}
                 name="Jane Doe"
-                title="Web Developer"
+                jobTitle="Web Developer"
                 githubURL="https://github.com/"
                 linkedinURL="https://www.linkedin.com/"
                 twitterURL="https://twitter.com/"
@@ -246,9 +246,32 @@ function Components() {
             </Card>
           </Row>
 
+          <p>User Card - Desktop and Mobile</p>
           <Row>
-            <p>User Card</p>
-            <UserCard source={exampleAvatar} />
+            <UserCard
+              desktop
+              source={exampleAvatar}
+              name="Jane Doe with long name"
+              jobTitle="Software Engineer"
+              city="Port Harcourt"
+              country="Nigeria"
+            />
+            <UserCard
+              desktop
+              source={exampleAvatar}
+              name="Jane Doe"
+              jobTitle="Software Engineer"
+              city="Port Harcourt"
+              country="Nigeria"
+            />
+            <UserCard
+              desktop
+              source={exampleAvatar}
+              name="Jane Doe"
+              jobTitle="Software Engineer"
+              city="Port Harcourt"
+              country="Nigeria"
+            />
           </Row>
         </Section>
 

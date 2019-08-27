@@ -1,203 +1,75 @@
 import React from 'react';
 import styled from 'styled-components';
+import Avatar from './Avatar';
+import Icon from './Icon';
+import Text from './Text';
 
-const C = styled.div`
-  box-sizing: border-box;
-  max-width: ${({ width }) => width || '400px'};
-  max-height: ${({ height }) => height || '150px'};
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+const Card = styled.div`
+  width: ${({ width }) => width || '250px'};
+  max-height: ${({ height }) => height || '80px'};
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  border-radius: ${({ theme }) => theme.borderRadius};
   margin: 0 10px;
+  position: relative;
 `;
 
-//mobile view Image
-const Image = styled.img`
-  border-radius: 50%;
-  width: 100px;
-  padding: 10px;
-  padding-bottom: 0;
-  margin: 0;
-`;
-
-//desktop view Image
-const ImageDesktop = styled.img`
-  border-radius: 50%;
-  width: 120px;
-  padding: 10px;
-  padding-bottom: 0;
-  margin: 0;
-`;
-
-//card display for mobile
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-//card display for desktop
-const Flex = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
-`;
-
-//information about: image, name , job type
-const First = styled.div`
+const Row = styled.div`
+  margin: 10px;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
 `;
 
-//information on desktopView
-const FirstMobile = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+const Col = styled.div`
+  margin: 0 5px;
 `;
 
-//info about name, job type
-const Info = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  margin-top: 20px;
-  h3 {
-    margin: 0;
+const P = styled.p`
+  margin: 3px 0px;
+  font-size: ${({ theme }) => theme.smallText};
+  white-space: nowrap;
+  overflow: hidden;
+
+  &.name {
+    font-weight: ${({ theme }) => theme.bold};
   }
-  p {
-    margin: 7px 0;
+
+  &.location {
     font-style: italic;
   }
 `;
 
-//information about location and add user icon on mobile
-const Second = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 20px;
-  p {
-    margin: 0;
-  }
+const ConnectIcon = styled.div`
+  position: absolute;
+  right: 5px;
+  top: 10px;
 `;
 
-//information about location and add user icon on desktop
-const SecondDesktop = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const Location = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-function Card(props) {
-  const {
-    children,
-    customStyles,
-    src,
-    title,
-    type,
-    town,
-    country,
-    mobile,
-    desktop,
-    addUserHandler
-  } = props;
-
-  if (mobile) {
-    return (
-      <C {...props} {...customStyles}>
-        <Column>
-          <First>
-            <Image src={src} />
-            <Info>
-              <h3>{title}</h3>
-              <p>{type}</p>
-            </Info>
-          </First>
-          <Second>
-            <Location>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                <path d="M0 0h24v24H0z" fill="none" />
-              </svg>
-              <p>{town}</p>, <span>&nbsp;</span>
-              <p>{country}</p>
-            </Location>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="45"
-              height="45"
-              viewBox="0 0 24 24"
-              onClick={addUserHandler}
-            >
-              <path d="M0 0h24v24H0z" fill="none" />
-              <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-            </svg>
-          </Second>
-        </Column>
-      </C>
-    );
-  }
-
-  if (desktop) {
-    return (
-      <C {...props} {...customStyles}>
-        <Flex>
-          <ImageDesktop src={src} />
-          <div style={{ paddingRight: '40px' }}>
-            <FirstMobile>
-              <Info>
-                <h3>{title}</h3>
-                <p>{type}</p>
-              </Info>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="45"
-                height="45"
-                viewBox="0 0 24 24"
-                onClick={addUserHandler}
-              >
-                <path d="M0 0h24v24H0z" fill="none" />
-                <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-              </svg>
-            </FirstMobile>
-            <SecondDesktop>
-              <Location>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                  <path d="M0 0h24v24H0z" fill="none" />
-                </svg>
-                <p>{town}</p>, <span>&nbsp;</span>
-                <p>{country}</p>
-              </Location>
-            </SecondDesktop>
-          </div>
-        </Flex>
-      </C>
-    );
-  }
+function UserCard(props) {
+  const { source, name, jobTitle, city, country } = props;
 
   return (
-    <C {...props} {...customStyles}>
-      {children}
-    </C>
+    <Card>
+      <Row>
+        <Col>
+          <Avatar medium source={source} />
+        </Col>
+        <Col>
+          <P className="name">{name}</P>
+          <P>{jobTitle}</P>
+          <div>
+            <P className="location">
+              <Icon small className="fas fa-map-marker-alt" />
+              {city}, {country}
+            </P>
+          </div>
+        </Col>
+      </Row>
+
+      <ConnectIcon>
+        <Icon medium className="fas fa-user-plus" />
+      </ConnectIcon>
+    </Card>
   );
 }
 
-export default Card;
+export default UserCard;
