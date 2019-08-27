@@ -1,6 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TeamCard } from '../components/~common/index';
+import {
+  Heading,
+  Heading2,
+  Heading3,
+  Heading4,
+  TeamCard,
+} from '../components/~common/index';
 
 const Wrapper = styled.div`
   box-sizing: border-box;
@@ -60,7 +66,7 @@ function Components() {
   return (
     <Wrapper>
       <Menu>
-        {/* <div>
+        <div>
           <Heading3>Components</Heading3>
         </div>
         <div>
@@ -74,18 +80,15 @@ function Components() {
         </div>
         <div>
           <a href="#inputs">Inputs</a>
-        </div> */}
+        </div>
       </Menu>
       <Column>
         <Section id="headings">
-          {/* <p>Heading</p>
-          <Heading>Heading One</Heading>
-          <p>Heading2</p>
-          <Heading2>Heading</Heading2>
-          <p>Heading3</p>
-          <Heading3>Heading</Heading3>
-          <p>Heading4</p>
-          <Heading4>Heading</Heading4> */}
+          <p>Headings</p>
+          <Heading>Heading 1</Heading>
+          <Heading2>Heading 2</Heading2>
+          <Heading3>Heading 3</Heading3>
+          <Heading4>Heading 4</Heading4>
         </Section>
 
         <Section id="buttons">
@@ -110,8 +113,8 @@ function Components() {
         <Section id="cards">
           <p>Card</p>
           <TeamCard
-            source="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-            name="John Doe"
+            source="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbqXXZ9bvEdMLqeIostuHOdpP4KSwTry_pDOyMTfQCDUKCXiMw"
+            name="Jane Doe"
             title="Web Developer"
             githubURL="https://github.com/"
             linkedinURL="https://www.linkedin.com/"
