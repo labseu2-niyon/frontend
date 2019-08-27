@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import git from './social/git.png';
-import ln from './social/linkedin.png';
+// import git from './social/git.png';
+// import ln from './social/linkedin.png';
 
 const C = styled.div`
   box-sizing: border-box;
@@ -32,10 +32,10 @@ const Social = styled.div`
   justify-content: center;
 `;
 
-const SocialMedia = styled.img`
-  width: 60px;
-  padding: 6px;
-`;
+// const SocialMedia = styled.img`
+//   width: 60px;
+//   padding: 6px;
+// `;
 
 const CardT = props => {
   const {
@@ -51,14 +51,14 @@ const CardT = props => {
       <Image src={source} />
       <Name>{name}</Name>
       <Role>{role}</Role>
-      <Social>
+      {/* <Social>
         <a href={gitHubHandler} target="_blank">
           <SocialMedia src={git} />
         </a>
         <a href={linkedinHandler} target="_blank">
           <SocialMedia src={ln} />
         </a>
-      </Social>
+      </Social> */}
     </C>
   );
 };

@@ -96,12 +96,11 @@ function Button(props) {
     color = `${getColor.third}`;
   }
 
-  //setting the width
   let w;
   if (small) {
     w = '140px';
   } else if (large) {
-    w = '334px';
+    w = '300px';
   }
 
   // Overrode css for the Spinner
