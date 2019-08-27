@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Avatar from './Avatar';
 import Icon from './Icon';
 
 const C = styled.div`
@@ -11,15 +12,10 @@ const C = styled.div`
   color: ${({ theme }) => theme.black};
 `;
 
-const Image = styled.img`
-  border-radius: 50%;
-  max-width: 90%;
-  padding: 10px;
-`;
-
 const Name = styled.p`
   margin: 0;
   font-weight: ${({ theme }) => theme.medium};
+  margin-top: ${({ theme }) => theme.xs};
 `;
 
 const Role = styled.p`
@@ -35,7 +31,7 @@ const TeamCard = props => {
   const { source, name, title, githubURL, linkedinURL, twitterURL } = props;
   return (
     <C>
-      <Image src={source} />
+      <Avatar extraLarge source={source} />
       <Name>{name}</Name>
       <Role>{title}</Role>
       <Social>

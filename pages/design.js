@@ -6,8 +6,11 @@ import {
   Heading3,
   Heading4,
   Text,
+  Avatar,
   TeamCard,
 } from '../components/~common/index';
+
+const exampleAvatar = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbqXXZ9bvEdMLqeIostuHOdpP4KSwTry_pDOyMTfQCDUKCXiMw';
 
 const Wrapper = styled.div`
   box-sizing: border-box;
@@ -63,6 +66,19 @@ const Section = styled.div`
   align-items: flex-start;
 `;
 
+const Row = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
+
+const Card = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+`;
+
 function Components() {
   return (
     <Wrapper>
@@ -77,6 +93,9 @@ function Components() {
           <a href="#text">Text</a>
         </div>
         <div>
+          <a href="#avatar">Avatar</a>
+        </div>
+        <div>
           <a href="#buttons">Buttons</a>
         </div>
         <div>
@@ -88,7 +107,7 @@ function Components() {
       </Menu>
       <Column>
         <Section id="headings">
-          <p>Headings</p>
+          <Heading4>Headings</Heading4>
           <Heading>Heading 1</Heading>
           <Heading2>Heading 2</Heading2>
           <Heading3>Heading 3</Heading3>
@@ -96,7 +115,7 @@ function Components() {
         </Section>
 
         <Section id="text">
-          <p>Text</p>
+          <Heading4>Text</Heading4>
 
           <Text large>
             Large Text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -116,6 +135,28 @@ function Components() {
             Cras auctor nulla non eros varius suscipit. Suspendisse ullamcorper
             urna a ipsum tincidunt accumsan. Fusce ac dui velit.
           </Text>
+        </Section>
+
+        <Section id="avatar">
+          <Heading4>Avatars</Heading4>
+          <Row>
+            <Card>
+              <Avatar extraLarge source={exampleAvatar} />
+              <p>Extra Large</p>
+            </Card>
+            <Card>
+              <Avatar large source={exampleAvatar} />
+              <p>Large</p>
+            </Card>
+            <Card>
+              <Avatar medium source={exampleAvatar} />
+              <p>Medium</p>
+            </Card>
+            <Card>
+              <Avatar small source={exampleAvatar} />
+              <p>Small</p>
+            </Card>
+          </Row>
         </Section>
 
         <Section id="buttons">
@@ -138,9 +179,10 @@ function Components() {
         </Section>
 
         <Section id="cards">
-          <p>Card</p>
+          <Heading4>Cards</Heading4>
+          <p>Team Card</p>
           <TeamCard
-            source="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbqXXZ9bvEdMLqeIostuHOdpP4KSwTry_pDOyMTfQCDUKCXiMw"
+            source={exampleAvatar}
             name="Jane Doe"
             title="Web Developer"
             githubURL="https://github.com/"
