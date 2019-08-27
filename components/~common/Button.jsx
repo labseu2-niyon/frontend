@@ -10,7 +10,7 @@ const B = styled.button`
   background: ${({ themeColor }) => `${themeColor}`};
   border: none;
   color: white;
-  border-radius: 25px;
+  border-radius: 7px;
   transition: background 400ms;
   cursor: pointer;
   display: flex;
@@ -28,7 +28,7 @@ const BRaised = styled.button`
   background: ${({ themeColor }) => `${themeColor}`};
   border: none;
   color: white;
-  border-radius: 25px;
+  border-radius: 7px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: transform 400ms, background 400ms;
   cursor: pointer;
@@ -49,7 +49,7 @@ const BOutline = styled.button`
   background: none;
   border: ${({ themeColor }) => `1px solid ${themeColor}`};
   color: ${({ themeColor }) => `${themeColor}`};
-  border-radius: 25px;
+  border-radius: 7px;
   transition: border 400ms, background 400ms, color 400ms;
   cursor: pointer;
   text-align: center;

@@ -2,7 +2,7 @@ import SignUp from '../components/SignUp';
 
 const signupTest = () => (
   <div>
-    <p>SignUp page Test</p>
+    <p>Navbar from Marketing</p>
     <SignUp />
   </div>
 );
