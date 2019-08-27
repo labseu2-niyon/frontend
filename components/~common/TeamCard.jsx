@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import git from './social/git.png';
-import ln from './social/linkedin.png';
 
 const C = styled.div`
   box-sizing: border-box;
