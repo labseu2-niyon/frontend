@@ -8,6 +8,7 @@ import {
   Text,
   Avatar,
   TeamCard,
+  Button,
 } from '../components/~common/index';
 
 const exampleAvatar = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbqXXZ9bvEdMLqeIostuHOdpP4KSwTry_pDOyMTfQCDUKCXiMw';
@@ -70,6 +71,7 @@ const Row = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  margin: 10px 0;
 `;
 
 const Card = styled.div`
@@ -138,7 +140,7 @@ function Components() {
         </Section>
 
         <Section id="avatar">
-          <Heading4>Avatars</Heading4>
+          <Heading4>Avatar</Heading4>
           <Row>
             <Card>
               <Avatar extraLarge source={exampleAvatar} />
@@ -160,22 +162,51 @@ function Components() {
         </Section>
 
         <Section id="buttons">
-          {/* <p>Button</p>
-          <Button>Hello</Button>
-          <p>Button Raised</p>
-          <Button raised>Hello</Button>
-          <p>Button Outline</p>
-          <Button outline>Hello</Button>
-          <p>Button Secondary</p>
-          <Button variant="secondary">Hello</Button>
-          <p>Button Raised Secondary</p>
-          <Button raised variant="secondary">
-            Hello
-          </Button>
-          <p>Button Outline Secondary</p>
-          <Button outline variant="secondary">
-            Hello
-          </Button> */}
+          <Heading4>Buttons</Heading4>
+          <p>Colours</p>
+          <Row>
+            <Card>
+              <Button primary>Primary</Button>
+            </Card>
+
+            <Card>
+              <Button secondary>Secondary</Button>
+            </Card>
+
+            <Card>
+              <Button warning>Warning</Button>
+            </Card>
+
+            <Card>
+              <Button danger>Danger</Button>
+            </Card>
+          </Row>
+          <p>Other Styles</p>
+          <Row>
+            <Card>
+              <Button primary raised>
+                Raised
+              </Button>
+            </Card>
+
+            <Card>
+              <Button primary outline>
+                Outline
+              </Button>
+            </Card>
+          </Row>
+          <p>Sizes</p>
+          <Row>
+            <Card>
+              <Button primary>Small</Button>
+            </Card>
+
+            <Card>
+              <Button primary large>
+                Large
+              </Button>
+            </Card>
+          </Row>
         </Section>
 
         <Section id="cards">
