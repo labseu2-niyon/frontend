@@ -13,6 +13,8 @@ import Spinner from './Spinner';
 import TeamCard from './TeamCard';
 import UserCard from './UserCard';
 import Text from './Text';
+import TextInput from './TextInput';
+import TextBox from './TextBox';
 import Avatar from './Avatar';
 
 export {
@@ -31,5 +33,7 @@ export {
   TeamCard,
   UserCard,
   Text,
+  TextInput,
+  TextBox,
   Avatar,
 };

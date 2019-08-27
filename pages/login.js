@@ -48,8 +48,16 @@ function Login() {
         }}
         render={() => (
           <WrapperForm onSubmit="">
-            <Field type="email" name="email" placeholder="Email" />
-            <Field type="password" name="password" placeholder="Password" />
+            <Field
+              name="email"
+              type="email"
+              render={() => <Comp.TextInput placeholder="Email" />}
+            />
+            <Field
+              name="password"
+              type="password"
+              render={() => <Comp.TextInput placeholder="Password" />}
+            />
             <Comp.Button primary>Sign In</Comp.Button>
           </WrapperForm>
         )}
