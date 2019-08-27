@@ -5,6 +5,7 @@ import {
   Heading2,
   Heading3,
   Heading4,
+  Text,
   TeamCard,
 } from '../components/~common/index';
 
@@ -73,6 +74,9 @@ function Components() {
           <a href="#headings">Headings</a>
         </div>
         <div>
+          <a href="#text">Text</a>
+        </div>
+        <div>
           <a href="#buttons">Buttons</a>
         </div>
         <div>
@@ -89,6 +93,29 @@ function Components() {
           <Heading2>Heading 2</Heading2>
           <Heading3>Heading 3</Heading3>
           <Heading4>Heading 4</Heading4>
+        </Section>
+
+        <Section id="text">
+          <p>Text</p>
+
+          <Text large>
+            Large Text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Cras auctor nulla non eros varius suscipit. Suspendisse ullamcorper
+            urna a ipsum tincidunt accumsan. Fusce ac dui velit.
+          </Text>
+
+          <Text medium>
+            Medium Text or also the p tag. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit. Cras auctor nulla non eros varius
+            suscipit. Suspendisse ullamcorper urna a ipsum tincidunt accumsan.
+            Fusce ac dui velit.
+          </Text>
+
+          <Text small>
+            Small Text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Cras auctor nulla non eros varius suscipit. Suspendisse ullamcorper
+            urna a ipsum tincidunt accumsan. Fusce ac dui velit.
+          </Text>
         </Section>
 
         <Section id="buttons">

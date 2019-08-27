@@ -2,28 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 
 const P = styled.p`
-  font-size: ${({ fontSize }) => fontSize || '16px'};
+  font-size: ${({ fontSize }) => fontSize || '1rem'};
 `;
 
 const Text = props => {
-  const { large, medium, regular, small, children, customStyles } = props;
+  const { large, medium, small, children } = props;
 
   let size;
   if (large) {
-    size = '20px';
+    size = '1.2rem';
   } else if (medium) {
-    size = '18px';
-  } else if (regular) {
-    size = '16px';
+    size = '1rem';
   } else if (small) {
-    size = '14px';
+    size = '0.875rem';
   }
 
-  return (
-    <P fontSize={size} {...customStyles} {...props}>
-      {children}
-    </P>
-  );
+  return <P fontSize={size}>{children}</P>;
 };
 
 export default Text;
