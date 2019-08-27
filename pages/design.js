@@ -1,15 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-  Button,
-  Heading,
-  Heading2,
-  Heading3,
-  Heading4,
-  Card,
-  CardContent,
-  Input,
-} from 'niyon-design';
+import { TeamCard } from '../components/~common/index';
 
 const Wrapper = styled.div`
   box-sizing: border-box;
@@ -56,7 +47,7 @@ const Column = styled.div`
   margin-left: 20%;
 `;
 
-const Section = styled.div` 
+const Section = styled.div`
   box-sizing: border-box;
   border-bottom: #ddd 1px solid;
   padding: 20px 0;
@@ -69,7 +60,7 @@ function Components() {
   return (
     <Wrapper>
       <Menu>
-        <div>
+        {/* <div>
           <Heading3>Components</Heading3>
         </div>
         <div>
@@ -83,22 +74,22 @@ function Components() {
         </div>
         <div>
           <a href="#inputs">Inputs</a>
-        </div>
+        </div> */}
       </Menu>
       <Column>
         <Section id="headings">
-          <p>Heading</p>
-          <Heading>Heading</Heading>
+          {/* <p>Heading</p>
+          <Heading>Heading One</Heading>
           <p>Heading2</p>
           <Heading2>Heading</Heading2>
           <p>Heading3</p>
           <Heading3>Heading</Heading3>
           <p>Heading4</p>
-          <Heading4>Heading</Heading4>
+          <Heading4>Heading</Heading4> */}
         </Section>
 
         <Section id="buttons">
-          <p>Button</p>
+          {/* <p>Button</p>
           <Button>Hello</Button>
           <p>Button Raised</p>
           <Button raised>Hello</Button>
@@ -113,21 +104,23 @@ function Components() {
           <p>Button Outline Secondary</p>
           <Button outline variant="secondary">
             Hello
-          </Button>
+          </Button> */}
         </Section>
 
         <Section id="cards">
           <p>Card</p>
-          <Card height="200px" width="500px">
-            <CardContent>
-              <Heading3>Hello</Heading3>
-              <p>Here&apos;s some card contents</p>
-            </CardContent>
-          </Card>
+          <TeamCard
+            source="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+            name="John Doe"
+            title="Web Developer"
+            githubURL="https://github.com/"
+            linkedinURL="https://www.linkedin.com/"
+            twitterURL="https://twitter.com/"
+          />
         </Section>
 
         <Section id="inputs">
-          <p>Input</p>
+          {/* <p>Input</p>
           <Input placeholder="Text here..." />
           <p>Input Error</p>
           <Input
@@ -137,9 +130,8 @@ function Components() {
             readOnly
             error
             errorMsg="Password must be longer than 4 characters"
-          />
+          /> */}
         </Section>
-
       </Column>
     </Wrapper>
   );
