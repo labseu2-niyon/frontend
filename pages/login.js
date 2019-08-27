@@ -40,23 +40,21 @@ function Login() {
 
       <Formik
         initialValues={{ Email: '', Password: '' }}
-        onSubmit={(values, actions) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            actions.setSubmitting(false);
-          }, 1000);
-        }}
         render={() => (
           <WrapperForm onSubmit="">
             <Field
               name="email"
               type="email"
-              render={() => <Comp.TextInput placeholder="Email" />}
+              render={() => (
+                <Comp.TextInput placeholder="Email" widthSize="80%" />
+              )}
             />
             <Field
               name="password"
               type="password"
-              render={() => <Comp.TextInput placeholder="Password" />}
+              render={() => (
+                <Comp.TextInput placeholder="Password" widthSize="80%" />
+              )}
             />
             <Comp.Button primary>Sign In</Comp.Button>
           </WrapperForm>
