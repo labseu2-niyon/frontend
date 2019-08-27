@@ -2,6 +2,7 @@ import Document, {
   Html, Head, Main, NextScript,
 } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+import { bodyStyles } from '../lib/globalStyles';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -32,10 +33,13 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link href="https://cdn.jsdelivr.net/npm/inter-ui@3.9.0/inter.min.css" rel="stylesheet" />
-          <script src="https://use.fontawesome.com/7d67ad6b57.js" />
+          <link
+            href="https://cdn.jsdelivr.net/npm/inter-ui@3.9.0/inter.min.css"
+            rel="stylesheet"
+          />
+          <script src="https://kit.fontawesome.com/51283197d2.js" />
         </Head>
-        <body style={{ margin: 0, padding: 0, fontFamily: 'Inter' }}>
+        <body style={bodyStyles}>
           <Main />
           <NextScript />
         </body>
