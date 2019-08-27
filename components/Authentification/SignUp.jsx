@@ -44,6 +44,9 @@ const Root = styled.div`
     text-align: center;
     margin: 50px 0;
   }
+  a {
+    text-decoration: none;
+  }
 `;
 
 const ButtonArea = styled.div`
