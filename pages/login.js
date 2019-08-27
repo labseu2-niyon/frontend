@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { Formik, Field } from 'formik';
 import * as Comp from '../components/~common/index';
-
 import { theme } from '../lib/theme';
 
 const Wrapper = styled.div`
@@ -18,6 +18,14 @@ const customStyles = {
   margin: theme.h1,
 };
 
+const WrapperForm = styled.form`
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+`;
+
 function Login() {
   return (
     <Wrapper>
@@ -30,8 +38,22 @@ function Login() {
         professional world.
       </Comp.Text>
 
-
-      <Comp.Button primary>Sign In</Comp.Button>
+      <Formik
+        initialValues={{ Email: '', Password: '' }}
+        onSubmit={(values, actions) => {
+          setTimeout(() => {
+            alert(JSON.stringify(values, null, 2));
+            actions.setSubmitting(false);
+          }, 1000);
+        }}
+        render={() => (
+          <WrapperForm onSubmit="">
+            <Field type="email" name="email" placeholder="Email" />
+            <Field type="password" name="password" placeholder="Password" />
+            <Comp.Button primary>Sign In</Comp.Button>
+          </WrapperForm>
+        )}
+      />
 
       <Link href="/resetPassword">
         <Comp.Text fontSize={theme.largeText}>Forgot Password?</Comp.Text>
