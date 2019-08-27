@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { darken } from 'polished';
 import { PacmanLoader } from 'react-spinners';
-import { css } from '@emotion/core';
+// import { css } from '@emotion/core';
 
 const B = styled.button`
   height: 40px;
@@ -104,10 +104,10 @@ function Button(props) {
   }
 
   // Overrode css for the Spinner
-  const override = css`
-    margin: 0 auto;
-    width: 30px;
-  `;
+  // const override = css`
+  //   margin: 0 auto;
+  //   width: 30px;
+  // `;
 
   if (outline) {
     return (
@@ -122,7 +122,7 @@ function Button(props) {
           <PacmanLoader
             loading={true}
             color="#EBB64E"
-            css={override}
+            // css={override}
             sizeUnit={'px'}
             size={10}
           />

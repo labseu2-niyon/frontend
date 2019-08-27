@@ -14,6 +14,7 @@ import TeamCard from './TeamCard';
 import UserCard from './UserCard';
 import Text from './Text';
 import Avatar from './Avatar';
+import Icon from './Icon';
 
 export {
   Button,
@@ -32,4 +33,5 @@ export {
   UserCard,
   Text,
   Avatar,
+  Icon,
 };

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link';
-import { warning } from '../../lib/theme';
+import Router from 'next/router';
 
 const Email = ({ errors, touched }) => {
   return (
@@ -58,6 +58,7 @@ const FormikWithEmailForm = withFormik({
   }),
   handleSubmit(values, { setStatus }) {
     console.log(values);
+    Router.push('/locationTest');
   }
 })(Email);
 
