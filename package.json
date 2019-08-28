@@ -13,7 +13,9 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.16",
+    "@zeit/next-css": "^1.0.1",
     "components": "^0.1.0",
+    "formik": "^1.5.8",
     "next": "^9.0.2",
     "niyon-design": "^0.0.6",
     "polished": "^3.4.1",
@@ -25,7 +27,8 @@
     "redux": "^4.0.4",
     "styled": "^1.0.0",
     "styled-components": "^4.3.2",
-    "styled-theming": "^2.2.0"
+    "styled-theming": "^2.2.0",
+    "yup": "^0.27.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.2",

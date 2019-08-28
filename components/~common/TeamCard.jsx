@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Avatar from './Avatar';
 import Icon from './Icon';
 
+
 const C = styled.div`
   box-sizing: border-box;
   max-width: ${({ width }) => width || '150px'};
@@ -26,7 +27,6 @@ const Role = styled.p`
 const Social = styled.div`
   display: flex;
   justify-content: center;
-
   a {
     margin: 0 5px;
   }
@@ -38,6 +38,7 @@ const TeamCard = props => {
     <C>
       <Avatar large source={source} />
       <Name>{name}</Name>
+
       <Role>{jobTitle}</Role>
       <Social>
         <a href={githubURL} target="_blank">
@@ -50,7 +51,7 @@ const TeamCard = props => {
         <a href={twitterURL} target="_blank">
           <Icon className="fab fa-twitter" primary />
         </a>
-      </Social>
+      </Social> */}
     </C>
   );
 };

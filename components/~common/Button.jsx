@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { lighten, darken } from 'polished';
 import { PacmanLoader } from 'react-spinners';
+
 import { css } from '@emotion/core';
 import { theme } from '../../lib/theme';
 
@@ -108,7 +109,6 @@ function Button(props) {
     color = `${theme.danger}`;
   }
 
-  // Setting the width
   let width;
   if (small) {
     width = '150px';
