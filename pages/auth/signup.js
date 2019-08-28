@@ -1,4 +1,4 @@
-import SignUp from '../components/Authentification/SignUp';
+import SignUp from '../../components/Authentification/SignUp';
 
 const signupTest = () => (
   <div>

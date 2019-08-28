@@ -4,34 +4,37 @@ import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link';
 import Router from 'next/router';
+import Steps from './StepsComp';
 
 const Email = ({ errors, touched }) => {
   return (
-    <Root>
-      <h5>Progress Bar- Step1</h5>
-      <Heading4>Email login</Heading4>
-      <FormArea>
-        <Field name="username" type="text" placeholder="username" />
-        {touched.username && errors.username && (
-          <Error>{errors.username}</Error>
-        )}
-        <Field name="firstName" type="text" placeholder="First Name" />
-        <Field name="lastName" type="text" placeholder="Last Name" />
-        <Field name="email" type="email" placeholder="email" />
-        {touched.email && errors.email && <Error>{errors.email}</Error>}
-        <Field name="password" type="password" placeholder="password" />
-        {touched.password && errors.password && (
-          <Error>{errors.password}</Error>
-        )}
-        <Text small>Lorem Ipsum, terms and conditions, blah blah blah.</Text>
-        <Button small primary type="submit">
-          Register
-        </Button>
-      </FormArea>
-      <Text>
-        <Link href="/signupTest">Login with Social Media</Link>
-      </Text>
-    </Root>
+    <>
+      <Steps />
+      <Root>
+        <Heading4>Email login</Heading4>
+        <FormArea>
+          <Field name="username" type="text" placeholder="username" />
+          {touched.username && errors.username && (
+            <Error>{errors.username}</Error>
+          )}
+          <Field name="firstName" type="text" placeholder="First Name" />
+          <Field name="lastName" type="text" placeholder="Last Name" />
+          <Field name="email" type="email" placeholder="email" />
+          {touched.email && errors.email && <Error>{errors.email}</Error>}
+          <Field name="password" type="password" placeholder="password" />
+          {touched.password && errors.password && (
+            <Error>{errors.password}</Error>
+          )}
+          <Text small>Lorem Ipsum, terms and conditions, blah blah blah.</Text>
+          <Button small primary type="submit">
+            Register
+          </Button>
+        </FormArea>
+        <Text>
+          <Link href="/auth/signup">Login with Social Media</Link>
+        </Text>
+      </Root>
+    </>
   );
 };
 
@@ -58,7 +61,7 @@ const FormikWithEmailForm = withFormik({
   }),
   handleSubmit(values, { setStatus }) {
     console.log(values);
-    Router.push('/locationTest');
+    Router.push('/auth/location');
   }
 })(Email);
 

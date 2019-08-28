@@ -1,4 +1,4 @@
-import Location from '../components/Authentification/Location';
+import Location from '../../components/Authentification/Location';
 
 const locationTest = () => (
   <div>

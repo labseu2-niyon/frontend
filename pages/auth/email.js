@@ -1,4 +1,4 @@
-import Email from '../components/Authentification/Email';
+import Email from '../../components/Authentification/Email';
 
 const emailTest = () => (
   <div>
