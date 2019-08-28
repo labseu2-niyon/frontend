@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { GridLoader } from 'react-spinners';
-import { Icon } from '../~common/index';
 
 const StepsComp = ({ stepNumber, childrens }) => {
   if (stepNumber === '1') {
@@ -9,15 +8,19 @@ const StepsComp = ({ stepNumber, childrens }) => {
         <Step>
           <GridLoader color={'green'} sizeUnit={'px'} size={7} />
         </Step>
+        <Divider />
         <Step>
           <i className="fas fa-compass fa-4x"></i>
         </Step>
+        <Divider />
         <Step>
           <i className="fas fa-chalkboard-teacher fa-4x"></i>
         </Step>
+        <Divider />
         <Step>
           <i className="far fa-smile-beam fa-4x"></i>
         </Step>
+        <Divider />
         <Step>
           <i className="fas fa-share-alt-square fa-4x"></i>
         </Step>
@@ -126,4 +129,12 @@ const Step = styled.div`
   align-items: center;
 
   background-color: ${props => props.color};
+`;
+
+const Divider = styled.hr`
+  width: 6%;
+
+  @media (min-width: 500px) {
+    width: 50%;
+  }
 `;
