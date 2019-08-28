@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import Steps from './StepsComp';
+import Router from 'next/router';
 
 const Location = ({ errors, touched }) => {
   return (
@@ -44,6 +45,7 @@ const FormikWithLocationForm = withFormik({
   }),
   handleSubmit(values) {
     console.log(values);
+    Router.push('/auth/job-title');
   }
 })(Location);
 
