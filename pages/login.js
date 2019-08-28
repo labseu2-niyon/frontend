@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { Formik, Field } from 'formik';
+import { Formik } from 'formik';
+// import * as Yup from 'yup';
 import * as Comp from '../components/~common/index';
 import { theme } from '../lib/theme';
 
@@ -9,9 +10,9 @@ const Wrapper = styled.div`
   width: 100%;
   height: 80vh;
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  flex-direction: column;
 `;
 
 const customStyles = {
@@ -21,10 +22,24 @@ const customStyles = {
 const WrapperForm = styled.form`
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  flex-direction: column;
 `;
+
+const WrapperInput = styled.div`
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+// const SignupSchema = Yup.object().shape({
+//   email: Yup.string()
+//     .email('Invalid email')
+//     .required('Required'),
+// });
 
 function Login() {
   return (
@@ -39,24 +54,48 @@ function Login() {
       </Comp.Text>
 
       <Formik
-        initialValues={{ Email: '', Password: '' }}
-        render={() => (
-          <WrapperForm onSubmit="">
-            <Field
-              name="email"
-              type="email"
-              render={() => (
-                <Comp.TextInput placeholder="Email" widthSize="30%" />
+        initialValues={{ email: '', password: '' }}
+        // validationSchema={SignupSchema}
+        validate={(values) => {
+          const errors = {};
+          // REGEX
+          const regex = !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+          // VALIDATION
+          if (!values.email) {
+            errors.email = 'Email is required';
+          } else if (regex.test(values.email)) {
+            errors.email = 'Invalid email address';
+          }
+
+          if (!values.password) {
+            errors.password = 'A password is required';
+          } else if (values.password.length < 6) {
+            errors.password = 'Password must be 6 characters';
+          }
+          return errors;
+        }}
+        // onSubmit={(values) => {
+        //   console.log(values);
+        // }}
+        render={({
+          values, errors, touched, handleSubmit, handleChange,
+        }) => (
+          <WrapperForm>
+            <WrapperInput>
+              <Comp.TextInput
+                onChange={handleChange}
+                value={values.email}
+                border={touched.email && errors.email && `1px solid ${theme.danger}`}
+                type="text"
+                name="email"
+                placeholder="Email"
+              />
+              {touched.email && errors.email && (
+              <Comp.Text fontSize={theme.smallText} color={theme.danger}>{errors.email}</Comp.Text>
               )}
-            />
-            <Field
-              name="password"
-              type="password"
-              render={() => (
-                <Comp.TextInput placeholder="Password" widthSize="30%" />
-              )}
-            />
-            <Comp.Button primary>Sign In</Comp.Button>
+            </WrapperInput>
+
+            <Comp.Button primary onClick={handleSubmit}>Sign In</Comp.Button>
           </WrapperForm>
         )}
       />

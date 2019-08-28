@@ -26,7 +26,8 @@
     "redux": "^4.0.4",
     "styled": "^1.0.0",
     "styled-components": "^4.3.2",
-    "styled-theming": "^2.2.0"
+    "styled-theming": "^2.2.0",
+    "yup": "^0.27.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.2",

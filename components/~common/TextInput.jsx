@@ -10,6 +10,7 @@ const I = styled.input`
   border-radius: 10px;
   padding: 0.5rem;
   margin: 0.5rem;
+  border: ${({ border }) => border || '1px solid grey'};
 `;
 
 function TextInput(props) {
