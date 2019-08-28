@@ -32,15 +32,19 @@ const StepsComp = ({ stepNumber, childrens }) => {
         <Step>
           <i className="far fa-envelope fa-4x"></i>
         </Step>
+        <Divider />
         <Step>
           <GridLoader color={'green'} sizeUnit={'px'} size={7} />
         </Step>
+        <Divider />
         <Step>
           <i className="fas fa-chalkboard-teacher fa-4x"></i>
         </Step>
+        <Divider />
         <Step>
           <i className="far fa-smile-beam fa-4x"></i>
         </Step>
+        <Divider />
         <Step>
           <i className="fas fa-share-alt-square fa-4x"></i>
         </Step>
@@ -52,15 +56,19 @@ const StepsComp = ({ stepNumber, childrens }) => {
         <Step>
           <i className="far fa-envelope fa-4x"></i>
         </Step>
+        <Divider />
         <Step>
           <i className="fas fa-compass fa-4x"></i>
         </Step>
+        <Divider />
         <Step>
           <GridLoader color={'green'} sizeUnit={'px'} size={7} />
         </Step>
+        <Divider />
         <Step>
           <i className="far fa-smile-beam fa-4x"></i>
         </Step>
+        <Divider />
         <Step>
           <i className="fas fa-share-alt-square fa-4x"></i>
         </Step>
@@ -72,15 +80,19 @@ const StepsComp = ({ stepNumber, childrens }) => {
         <Step>
           <i className="far fa-envelope fa-4x"></i>
         </Step>
+        <Divider />
         <Step>
           <i className="fas fa-compass fa-4x"></i>
         </Step>
+        <Divider />
         <Step>
           <i className="fas fa-chalkboard-teacher fa-4x"></i>
         </Step>
+        <Divider />
         <Step>
           <GridLoader color={'green'} sizeUnit={'px'} size={7} />
         </Step>
+        <Divider />
         <Step>
           <i className="fas fa-share-alt-square fa-4x"></i>
         </Step>
