@@ -2,11 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const H = styled.h3`
-  box-sizing: border-box;
-  margin: 4px 0;
-  /* font-size: 24px; */
-  font-size: 3rem;
-  font-weight: bold;
+  margin: 10px 0;
+  font-size: ${({ theme }) => theme.h3};
 `;
 
 function Heading3({ children }) {

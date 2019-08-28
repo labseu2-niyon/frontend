@@ -1,66 +1,59 @@
 import React from 'react';
 import styled from 'styled-components';
-// import git from './social/git.png';
-// import ln from './social/linkedin.png';
+import Avatar from './Avatar';
+import Icon from './Icon';
+
 
 const C = styled.div`
   box-sizing: border-box;
-  max-width: ${({ width }) => width || '200px'};
-  min-width: ${({ width }) => width || '230px'};
-  max-height: ${({ height }) => height || '340px'};
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+  max-width: ${({ width }) => width || '150px'};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: ${({ theme }) => theme.black};
 `;
 
-const Image = styled.img`
-  border-radius: 50%;
-  width: 160px;
-  padding: 10px;
-`;
-
-const Name = styled.h2`
+const Name = styled.p`
   margin: 0;
+  font-weight: ${({ theme }) => theme.medium};
+  margin: 3px;
 `;
 
 const Role = styled.p`
-  margin: 7px;
-  font-size: 20px;
+  font-size: ${({ theme }) => theme.smallText};
+  margin: 3px;
 `;
 
 const Social = styled.div`
   display: flex;
   justify-content: center;
+  a {
+    margin: 0 5px;
+  }
 `;
 
-// const SocialMedia = styled.img`
-//   width: 60px;
-//   padding: 6px;
-// `;
-
-const CardT = props => {
-  const {
-    customStyles,
-    source,
-    name,
-    role,
-    gitHubHandler,
-    linkedinHandler
-  } = props;
+const TeamCard = props => {
+  const { source, name, jobTitle, githubURL, linkedinURL, twitterURL } = props;
   return (
-    <C {...props} {...customStyles}>
-      <Image src={source} />
+    <C>
+      <Avatar large source={source} />
       <Name>{name}</Name>
-      <Role>{role}</Role>
-      {/* <Social>
-        <a href={gitHubHandler} target="_blank">
-          <SocialMedia src={git} />
+
+      <Role>{jobTitle}</Role>
+      <Social>
+        <a href={githubURL} target="_blank">
+          <Icon className="fab fa-github" black />
         </a>
-        <a href={linkedinHandler} target="_blank">
-          <SocialMedia src={ln} />
+        <a href={linkedinURL} target="_blank">
+          <Icon className="fab fa-linkedin-in" grey />
+        </a>
+
+        <a href={twitterURL} target="_blank">
+          <Icon className="fab fa-twitter" primary />
         </a>
       </Social> */}
     </C>
   );
 };
 
-export default CardT;
+export default TeamCard;

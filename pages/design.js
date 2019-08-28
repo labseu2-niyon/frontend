@@ -1,15 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import {
-  Button,
   Heading,
   Heading2,
   Heading3,
   Heading4,
-  Card,
-  CardContent,
-  Input,
-} from 'niyon-design';
+  Text,
+  Avatar,
+  TeamCard,
+  UserCard,
+  Button,
+  Divider,
+  Icon,
+  Spinner,
+  Skip,
+} from '../components/~common/index';
+
+const exampleAvatar = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbqXXZ9bvEdMLqeIostuHOdpP4KSwTry_pDOyMTfQCDUKCXiMw';
 
 const Wrapper = styled.div`
   box-sizing: border-box;
@@ -56,13 +63,31 @@ const Column = styled.div`
   margin-left: 20%;
 `;
 
-const Section = styled.div` 
+const Section = styled.div`
   box-sizing: border-box;
   border-bottom: #ddd 1px solid;
   padding: 20px 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+`;
+
+const Row = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 10px 0;
+
+  .icon {
+    margin-right: 10px;
+  }
+`;
+
+const Card = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 30px;
 `;
 
 function Components() {
@@ -76,10 +101,25 @@ function Components() {
           <a href="#headings">Headings</a>
         </div>
         <div>
+          <a href="#text">Text</a>
+        </div>
+        <div>
+          <a href="#avatar">Avatar</a>
+        </div>
+        <div>
           <a href="#buttons">Buttons</a>
         </div>
         <div>
           <a href="#cards">Cards</a>
+        </div>
+        <div>
+          <a href="#icons">Icons</a>
+        </div>
+        <div>
+          <a href="#spinner">Spinner</a>
+        </div>
+        <div>
+          <a href="#skip">Skip</a>
         </div>
         <div>
           <a href="#inputs">Inputs</a>
@@ -87,59 +127,202 @@ function Components() {
       </Menu>
       <Column>
         <Section id="headings">
-          <p>Heading</p>
-          <Heading>Heading</Heading>
-          <p>Heading2</p>
-          <Heading2>Heading</Heading2>
-          <p>Heading3</p>
-          <Heading3>Heading</Heading3>
-          <p>Heading4</p>
-          <Heading4>Heading</Heading4>
+          <Heading4>Headings</Heading4>
+          <Heading>Heading 1</Heading>
+          <Heading2>Heading 2</Heading2>
+          <Heading3>Heading 3</Heading3>
+          <Heading4>Heading 4</Heading4>
+        </Section>
+
+        <Section id="text">
+          <Heading4>Text</Heading4>
+
+          <Text large>
+            Large Text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Cras auctor nulla non eros varius suscipit. Suspendisse ullamcorper
+            urna a ipsum tincidunt accumsan. Fusce ac dui velit.
+          </Text>
+
+          <Text medium>
+            Medium Text or also the p tag. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit. Cras auctor nulla non eros varius
+            suscipit. Suspendisse ullamcorper urna a ipsum tincidunt accumsan.
+            Fusce ac dui velit.
+          </Text>
+
+          <Text small>
+            Small Text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Cras auctor nulla non eros varius suscipit. Suspendisse ullamcorper
+            urna a ipsum tincidunt accumsan. Fusce ac dui velit.
+          </Text>
+        </Section>
+
+        <Section id="avatar">
+          <Heading4>Avatar</Heading4>
+          <Row>
+            <Card>
+              <Avatar extraLarge source={exampleAvatar} />
+              <p>Extra Large</p>
+            </Card>
+            <Card>
+              <Avatar large source={exampleAvatar} />
+              <p>Large</p>
+            </Card>
+            <Card>
+              <Avatar medium source={exampleAvatar} />
+              <p>Medium</p>
+            </Card>
+            <Card>
+              <Avatar small source={exampleAvatar} />
+              <p>Small</p>
+            </Card>
+          </Row>
         </Section>
 
         <Section id="buttons">
-          <p>Button</p>
-          <Button>Hello</Button>
-          <p>Button Raised</p>
-          <Button raised>Hello</Button>
-          <p>Button Outline</p>
-          <Button outline>Hello</Button>
-          <p>Button Secondary</p>
-          <Button variant="secondary">Hello</Button>
-          <p>Button Raised Secondary</p>
-          <Button raised variant="secondary">
-            Hello
-          </Button>
-          <p>Button Outline Secondary</p>
-          <Button outline variant="secondary">
-            Hello
-          </Button>
+          <Heading4>Buttons</Heading4>
+          <p>Colours</p>
+          <Row>
+            <Card>
+              <Button primary>Primary</Button>
+            </Card>
+
+            <Card>
+              <Button secondary>Secondary</Button>
+            </Card>
+
+            <Card>
+              <Button warning>Warning</Button>
+            </Card>
+
+            <Card>
+              <Button danger>Danger</Button>
+            </Card>
+          </Row>
+          <p>Other Styles</p>
+          <Row>
+            <Card>
+              <Button primary raised>
+                Raised
+              </Button>
+            </Card>
+
+            <Card>
+              <Button primary outline>
+                Outline
+              </Button>
+            </Card>
+          </Row>
+          <p>Sizes</p>
+          <Row>
+            <Card>
+              <Button primary>Small</Button>
+            </Card>
+
+            <Card>
+              <Button primary large>
+                Large
+              </Button>
+            </Card>
+          </Row>
         </Section>
 
         <Section id="cards">
-          <p>Card</p>
-          <Card height="200px" width="500px">
-            <CardContent>
-              <Heading3>Hello</Heading3>
-              <p>Here&apos;s some card contents</p>
-            </CardContent>
-          </Card>
+          <Heading4>Cards</Heading4>
+          <p>Team Card</p>
+          <Row>
+            <Card>
+              <TeamCard
+                source={exampleAvatar}
+                name="Jane Doe"
+                jobTitle="Web Developer"
+                githubURL="https://github.com/"
+                linkedinURL="https://www.linkedin.com/"
+                twitterURL="https://twitter.com/"
+              />
+            </Card>
+            <Card>
+              <TeamCard
+                source={exampleAvatar}
+                name="Jane Doe"
+                jobTitle="Web Developer"
+                githubURL="https://github.com/"
+                linkedinURL="https://www.linkedin.com/"
+                twitterURL="https://twitter.com/"
+              />
+            </Card>
+            <Card>
+              <TeamCard
+                source={exampleAvatar}
+                name="Jane Doe"
+                jobTitle="Web Developer"
+                githubURL="https://github.com/"
+                linkedinURL="https://www.linkedin.com/"
+                twitterURL="https://twitter.com/"
+              />
+            </Card>
+          </Row>
+
+          <p>User Card - Desktop and Mobile</p>
+          <Row>
+            <UserCard
+              desktop
+              source={exampleAvatar}
+              name="Jane Doe with Long Name"
+              jobTitle="Software Engineer"
+              city="Lagos"
+              country="Nigeria"
+            />
+            <UserCard
+              desktop
+              source={exampleAvatar}
+              name="Jane Doe"
+              jobTitle="Software Engineer"
+              city="Port Harcourt"
+              country="Nigeria"
+            />
+            <UserCard
+              desktop
+              source={exampleAvatar}
+              name="Jane Doe"
+              jobTitle="Software Engineer"
+              city="Long City"
+              country="Even Longer Country"
+            />
+          </Row>
         </Section>
 
-        <Section id="inputs">
-          <p>Input</p>
-          <Input placeholder="Text here..." />
-          <p>Input Error</p>
-          <Input
-            placeholder="Password here..."
-            type="password"
-            value="1234"
-            readOnly
-            error
-            errorMsg="Password must be longer than 4 characters"
-          />
+        <Section id="divider">
+          <Heading4>Divider</Heading4>
+          <p>Dividers will fill up the space of their parent container.</p>
+          <Divider />
         </Section>
 
+        <Section id="icons">
+          <Heading4>Font Awesome Icons</Heading4>
+          <p>
+            Icons can be small, medium, large and any color options (e.g.
+            primary, secondary, etc). className must be added.
+          </p>
+          <Row>
+            <Icon small primary className="fas fa-cloud icon" />
+            <Icon medium secondary className="fas fa-leaf icon" />
+            <Icon large warning className="fas fa-poo-storm icon" />
+            <Icon small danger className="fas fa-exclamation-triangle icon" />
+            <Icon medium black className="fas fa-user-astronaut icon" />
+            <Icon large grey className="fas fa-hippo icon" />
+          </Row>
+        </Section>
+
+        <Section id="spinner">
+          <Heading4>Spinner</Heading4>
+          <Spinner />
+        </Section>
+
+        <Section id="skip">
+          <Heading4>Skip</Heading4>
+          <Skip />
+        </Section>
       </Column>
     </Wrapper>
   );
