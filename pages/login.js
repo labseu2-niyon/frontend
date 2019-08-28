@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { Formik } from 'formik';
-// import * as Yup from 'yup';
+import * as Yup from 'yup';
 import * as Comp from '../components/~common/index';
 import { theme } from '../lib/theme';
 
@@ -35,11 +35,13 @@ const WrapperInput = styled.div`
   align-items: center;
 `;
 
-// const SignupSchema = Yup.object().shape({
-//   email: Yup.string()
-//     .email('Invalid email')
-//     .required('Required'),
-// });
+const SignupSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email')
+    .required('Required'),
+  password: Yup.string()
+    .required('Required'),
+});
 
 function Login() {
   return (
@@ -55,25 +57,7 @@ function Login() {
 
       <Formik
         initialValues={{ email: '', password: '' }}
-        // validationSchema={SignupSchema}
-        validate={(values) => {
-          const errors = {};
-          // REGEX
-          const regex = !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-          // VALIDATION
-          if (!values.email) {
-            errors.email = 'Email is required';
-          } else if (regex.test(values.email)) {
-            errors.email = 'Invalid email address';
-          }
-
-          if (!values.password) {
-            errors.password = 'A password is required';
-          } else if (values.password.length < 6) {
-            errors.password = 'Password must be 6 characters';
-          }
-          return errors;
-        }}
+        validationSchema={SignupSchema}
         // onSubmit={(values) => {
         //   console.log(values);
         // }}
@@ -85,17 +69,43 @@ function Login() {
               <Comp.TextInput
                 onChange={handleChange}
                 value={values.email}
-                border={touched.email && errors.email && `1px solid ${theme.danger}`}
+                border={
+                  touched.email && errors.email && `1px solid ${theme.danger}`
+                }
                 type="text"
                 name="email"
                 placeholder="Email"
               />
               {touched.email && errors.email && (
-              <Comp.Text fontSize={theme.smallText} color={theme.danger}>{errors.email}</Comp.Text>
+              <Comp.Text fontSize={theme.smallText} color={theme.danger}>
+                {errors.email}
+              </Comp.Text>
               )}
             </WrapperInput>
 
-            <Comp.Button primary onClick={handleSubmit}>Sign In</Comp.Button>
+            <WrapperInput>
+              <Comp.TextInput
+                onChange={handleChange}
+                value={values.password}
+                border={
+                  touched.password
+                  && errors.password
+                  && `1px solid ${theme.danger}`
+                }
+                type="password"
+                name="password"
+                placeholder="Password"
+              />
+              {touched.password && errors.password && (
+              <Comp.Text fontSize={theme.smallText} color={theme.danger}>
+                {errors.password}
+              </Comp.Text>
+              )}
+            </WrapperInput>
+
+            <Comp.Button primary onClick={handleSubmit}>
+              Sign In
+            </Comp.Button>
           </WrapperForm>
         )}
       />
