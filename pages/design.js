@@ -13,6 +13,7 @@ import {
   Divider,
   Icon,
   Spinner,
+  Skip,
 } from '../components/~common/index';
 
 const exampleAvatar = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbqXXZ9bvEdMLqeIostuHOdpP4KSwTry_pDOyMTfQCDUKCXiMw';
@@ -119,6 +120,9 @@ function Components() {
         </div>
         <div>
           <a href="#spinner">Spinner</a>
+        </div>
+        <div>
+          <a href="#skip">Skip</a>
         </div>
         <div>
           <a href="#inputs">Inputs</a>
@@ -316,6 +320,11 @@ function Components() {
         <Section id="spinner">
           <Heading4>Spinner</Heading4>
           <Spinner />
+        </Section>
+
+        <Section id="skip">
+          <Heading4>Skip</Heading4>
+          <Skip />
         </Section>
       </Column>
     </Wrapper>

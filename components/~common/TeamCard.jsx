@@ -15,12 +15,12 @@ const C = styled.div`
 const Name = styled.p`
   margin: 0;
   font-weight: ${({ theme }) => theme.medium};
-  margin-top: ${({ theme }) => theme.xs};
   margin: 3px;
 `;
 
 const Role = styled.p`
-  margin: ${({ theme }) => theme.xs};
+  font-size: ${({ theme }) => theme.smallText};
+  margin: 3px;
 `;
 
 const Social = styled.div`
