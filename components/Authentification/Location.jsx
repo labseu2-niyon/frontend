@@ -1,4 +1,4 @@
-import { Text, Button } from '../~common/index';
+import { Text, Button, Heading2 } from '../~common/index';
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
@@ -8,7 +8,7 @@ const Location = ({ errors, touched }) => {
   return (
     <Root>
       <Steps stepNumber="2" />
-      <h1>Location Info</h1>
+      <Heading2>Location Info</Heading2>
       <IconT className="fas fa-user-tie"></IconT>
       <Text small>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nisl

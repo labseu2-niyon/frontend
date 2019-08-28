@@ -1,4 +1,4 @@
-import { Heading4, Text, Button } from '../~common/index';
+import { Heading2, Text, Button } from '../~common/index';
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
@@ -11,7 +11,7 @@ const Email = ({ errors, touched }) => {
     <>
       <Root>
         <Steps stepNumber="1" />
-        <Heading4>Email login</Heading4>
+        <Heading2>Email login</Heading2>
         <FormArea>
           <InputWrapper>
             <Field name="username" type="text" placeholder="username" />

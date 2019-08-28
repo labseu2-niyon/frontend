@@ -15,10 +15,10 @@ const SignUp = () => {
         <Button large secondary>
           Github
         </Button>
-        <Button large style={{ background: 'darkred' }}>
+        <Button large danger>
           Twitter
         </Button>
-        <Button large style={{ background: 'green' }}>
+        <Button large warning>
           Facebook
         </Button>
         <Button
