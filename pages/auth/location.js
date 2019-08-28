@@ -1,9 +1,9 @@
 import Location from '../../components/Authentification/Location';
 
-const locationTest = () => (
+const location = () => (
   <div>
     <Location />
   </div>
 );
 
-export default locationTest;
+export default location;

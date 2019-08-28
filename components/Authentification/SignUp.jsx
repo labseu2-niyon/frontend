@@ -21,16 +21,16 @@ const SignUp = () => {
         <Button large style={{ background: 'green' }}>
           Facebook
         </Button>
-        <Link href="/auth/email">
-          <Button
-            large
-            outline
-            primary
-            onClick={() => Router.push('/auth/email')}
-          >
-            Email
-          </Button>
-        </Link>
+        <Button
+          large
+          outline
+          primary
+          onClick={() => {
+            Router.push('/auth/email');
+          }}
+        >
+          Email
+        </Button>
       </ButtonArea>
       <Text small>
         Already a member? <Link href="/auth/login">Login IN</Link>{' '}

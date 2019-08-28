@@ -2,11 +2,12 @@ import { Text, Button } from '../~common/index';
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
+import Steps from './StepsComp';
 
-const Location = ({ touched, errors }) => {
+const Location = ({ errors, touched }) => {
   return (
     <Root>
-      <h5>Progress Bar- Step1</h5>
+      <Steps stepNumber="2" />
       <h1>Location Info</h1>
       <IconT className="fas fa-user-tie"></IconT>
       <Text small>
@@ -20,7 +21,7 @@ const Location = ({ touched, errors }) => {
           <option value="carnivore">City2</option>
           <option value="omnivore">City3</option>
         </Field>
-        <Field name="city" type="text" placeholder="City" />
+        <Field name="city" type="text" placeholder="City"></Field>
         {touched.city && errors.city && <Error>{errors.city}</Error>}
         <Button small primary type="submit">
           Next
@@ -37,17 +38,9 @@ const FormikWithLocationForm = withFormik({
     };
   },
   validationSchema: Yup.object().shape({
-    username: Yup.string().required('Username is required'),
-    firstName: Yup.string(),
-    lastName: Yup.string(),
-    email: Yup.string()
-      .email('Email is invalid')
-      .required('Email is required'),
-    password: Yup.string()
-      .min(3, 'Password must be at least 3 characters')
-      .required('Password is required')
+    city: Yup.string().required('Username is required')
   }),
-  handleSubmit(values, { setStatus }) {
+  handleSubmit(values) {
     console.log(values);
   }
 })(Location);
@@ -55,6 +48,7 @@ const FormikWithLocationForm = withFormik({
 export default FormikWithLocationForm;
 
 const Root = styled.div`
+  height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -72,6 +66,7 @@ const IconT = styled.i`
 `;
 
 const FormArea = styled(Form)`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -81,7 +76,7 @@ const FormArea = styled(Form)`
   input {
     padding: 0.5rem;
     font-size: 16px;
-    width: 80%;
+    width: 70%;
     display: block;
     color: #4d2d52;
     border: 1px solid rgba(77, 45, 82, 0.8);
@@ -95,8 +90,6 @@ const FormArea = styled(Form)`
   select {
     display: block;
     font-size: 14px;
-    font-family: sans-serif;
-    color: #444;
     line-height: 1.3;
     padding: 0.6em 1.4em 0.5em 0.8em;
     width: 80%;
@@ -117,4 +110,9 @@ const FormArea = styled(Form)`
       opacity: 0.4;
     }
   }
+`;
+
+const Error = styled.p`
+  margin: 0;
+  color: #e29273;
 `;

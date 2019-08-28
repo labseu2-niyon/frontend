@@ -9,7 +9,7 @@ import Steps from './StepsComp';
 const Email = ({ errors, touched }) => {
   return (
     <>
-      <Steps />
+      <Steps stepNumber="1" />
       <Root>
         <Heading4>Email login</Heading4>
         <FormArea>
@@ -30,7 +30,7 @@ const Email = ({ errors, touched }) => {
             Register
           </Button>
         </FormArea>
-        <Text>
+        <Text small>
           <Link href="/auth/signup">Login with Social Media</Link>
         </Text>
       </Root>
@@ -59,7 +59,7 @@ const FormikWithEmailForm = withFormik({
       .min(3, 'Password must be at least 3 characters')
       .required('Password is required')
   }),
-  handleSubmit(values, { setStatus }) {
+  handleSubmit(values) {
     console.log(values);
     Router.push('/auth/location');
   }
@@ -68,7 +68,7 @@ const FormikWithEmailForm = withFormik({
 export default FormikWithEmailForm;
 
 const Root = styled.div`
-  height: 95vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;

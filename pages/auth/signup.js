@@ -1,10 +1,10 @@
 import SignUp from '../../components/Authentification/SignUp';
 
-const signupTest = () => (
+const signup = () => (
   <div>
     <p>Navbar from Marketing</p>
     <SignUp />
   </div>
 );
 
-export default signupTest;
+export default signup;

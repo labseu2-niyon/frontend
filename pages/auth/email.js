@@ -1,9 +1,9 @@
 import Email from '../../components/Authentification/Email';
 
-const emailTest = () => (
+const email = () => (
   <div>
     <Email />
   </div>
 );
 
-export default emailTest;
+export default email;
