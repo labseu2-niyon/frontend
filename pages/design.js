@@ -9,6 +9,7 @@ import {
   Avatar,
   TeamCard,
   UserCard,
+  Divider,
   Button,
 } from '../components/~common/index';
 
@@ -103,6 +104,9 @@ function Components() {
         </div>
         <div>
           <a href="#cards">Cards</a>
+        </div>
+        <div>
+          <a href="#divider">Cards</a>
         </div>
         <div>
           <a href="#inputs">Inputs</a>
@@ -273,6 +277,11 @@ function Components() {
               country="Even Longer Country"
             />
           </Row>
+        </Section>
+
+        <Section id="divider">
+          <Heading4>Divider</Heading4>
+          <Divider />
         </Section>
 
         <Section id="inputs">

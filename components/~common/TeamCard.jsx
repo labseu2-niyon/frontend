@@ -16,6 +16,7 @@ const Name = styled.p`
   margin: 0;
   font-weight: ${({ theme }) => theme.medium};
   margin-top: ${({ theme }) => theme.xs};
+  margin: 3px;
 `;
 
 const Role = styled.p`
@@ -35,7 +36,7 @@ const TeamCard = props => {
   const { source, name, jobTitle, githubURL, linkedinURL, twitterURL } = props;
   return (
     <C>
-      <Avatar extraLarge source={source} />
+      <Avatar large source={source} />
       <Name>{name}</Name>
       <Role>{jobTitle}</Role>
       <Social>
