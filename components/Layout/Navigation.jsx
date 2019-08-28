@@ -16,11 +16,11 @@ const Navigation = () => {
       </div>
 
       <div className="mobile-avatar">
-        <Icon medium className="fas fa-times mobile-icon"></Icon>
+        {/* <Icon medium className="fas fa-times mobile-icon"></Icon> */}
         <Avatar small source={dummyUser.image}></Avatar>
       </div>
       <Links>
-        <Link href="/dashboard">
+        <Link href="/home">
           <div>
             <Icon medium className="fas fa-home icon"></Icon>
             <a className="desktop">Home</a>
@@ -71,6 +71,10 @@ const Nav = styled.div`
   padding: 40px 0;
   height: 100vh;
   width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
 
   .mobile {
     display: none;
@@ -81,6 +85,7 @@ const Nav = styled.div`
   }
 
   @media (max-width: 500px) {
+    padding: 30px 0;
     width: 50px;
     transition: width 2s ease;
 
