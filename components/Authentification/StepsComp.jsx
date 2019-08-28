@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { GridLoader } from 'react-spinners';
+import { theme } from '../../lib/theme';
 
 const StepsComp = ({ stepNumber, childrens }) => {
   if (stepNumber === '1') {
     return (
       <Root>
         <Step>
-          <GridLoader color={'green'} sizeUnit={'px'} size={7} />
+          <GridLoader color={theme.secondary} sizeUnit={'px'} size={7} />
         </Step>
         <Divider />
         <Step>
@@ -34,7 +35,7 @@ const StepsComp = ({ stepNumber, childrens }) => {
         </Step>
         <Divider />
         <Step>
-          <GridLoader color={'green'} sizeUnit={'px'} size={7} />
+          <GridLoader color={theme.secondary} sizeUnit={'px'} size={7} />
         </Step>
         <Divider />
         <Step>
@@ -62,7 +63,7 @@ const StepsComp = ({ stepNumber, childrens }) => {
         </Step>
         <Divider />
         <Step>
-          <GridLoader color={'green'} sizeUnit={'px'} size={7} />
+          <GridLoader color={theme.secondary} sizeUnit={'px'} size={7} />
         </Step>
         <Divider />
         <Step>
