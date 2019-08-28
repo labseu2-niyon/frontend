@@ -10,9 +10,14 @@ const dummyUser = {
 const Navigation = () => {
   return (
     <Nav>
-      <div>
+      <div className="desktop">
         <Avatar extraLarge source={dummyUser.image}></Avatar>
-        <Heading4>{dummyUser.name}</Heading4>
+        <Heading4 className="desktop">{dummyUser.name}</Heading4>
+      </div>
+
+      <div className="mobile-avatar">
+        <Icon medium className="fas fa-times mobile-icon"></Icon>
+        <Avatar small source={dummyUser.image}></Avatar>
       </div>
       <Links>
         <Link href="/dashboard">
@@ -24,31 +29,31 @@ const Navigation = () => {
         <Link href="/[username]">
           <div>
             <Icon medium className="fas fa-user-circle icon"></Icon>
-            <a>Profile</a>
+            <a className="desktop">Profile</a>
           </div>
         </Link>
         <Link href="/">
           <div>
             <Icon medium className="fas fa-users icon"></Icon>
-            <a>Connections</a>
+            <a className="desktop">Connections</a>
           </div>
         </Link>
         <Link href="/explore">
           <div>
             <Icon medium className="fas fa-compass icon"></Icon>
-            <a>Explore</a>
+            <a className="desktop">Explore</a>
           </div>
         </Link>
         <Link href="/settings">
           <div>
             <Icon medium className="fas fa-cog icon"></Icon>
-            <a>Settings</a>
+            <a className="desktop">Settings</a>
           </div>
         </Link>
         <Link href="/">
           <div>
             <Icon medium className="fas fa-sign-out-alt icon"></Icon>
-            <a>Log out</a>
+            <a className="desktop">Log out</a>
           </div>
         </Link>
       </Links>
@@ -67,9 +72,34 @@ const Nav = styled.div`
   height: 100vh;
   width: 250px;
 
+  .mobile {
+    display: none;
+  }
+
+  .mobile-avatar {
+    display: none;
+  }
+
   @media (max-width: 500px) {
+    width: 50px;
+    transition: width 2s ease;
+
     .desktop {
       display: none;
+    }
+
+    .mobile {
+      display: block;
+    }
+
+    .mobile-avatar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .mobile-icon {
+      margin-bottom: 20px;
     }
   }
 `;
@@ -87,7 +117,8 @@ const Links = styled.div`
   }
 
   .icon {
-    width: 30px;
+    width: 40px;
+    text-align: center;
   }
 `;
 
