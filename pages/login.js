@@ -30,17 +30,16 @@ const WrapperForm = styled.form`
 const WrapperInput = styled.div`
   max-width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
 `;
 
-const SignupSchema = Yup.object().shape({
+const LoginSchema = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email')
     .required('Required'),
-  password: Yup.string()
-    .required('Required'),
+  password: Yup.string().required('Required'),
 });
 
 function Login() {
@@ -57,7 +56,7 @@ function Login() {
 
       <Formik
         initialValues={{ email: '', password: '' }}
-        validationSchema={SignupSchema}
+        validationSchema={LoginSchema}
         // onSubmit={(values) => {
         //   console.log(values);
         // }}
@@ -76,11 +75,15 @@ function Login() {
                 name="email"
                 placeholder="Email"
               />
-              {touched.email && errors.email && (
-              <Comp.Text fontSize={theme.smallText} color={theme.danger}>
-                {errors.email}
+              <Comp.Text
+                fontSize={theme.smallText}
+                color={theme.danger}
+                margin="0"
+                padding="0"
+                visibility={!touched.email && !errors.email && 'hidden'}
+              >
+                {errors.email || 'Required'}
               </Comp.Text>
-              )}
             </WrapperInput>
 
             <WrapperInput>
@@ -96,11 +99,15 @@ function Login() {
                 name="password"
                 placeholder="Password"
               />
-              {touched.password && errors.password && (
-              <Comp.Text fontSize={theme.smallText} color={theme.danger}>
-                {errors.password}
+              <Comp.Text
+                fontSize={theme.smallText}
+                color={theme.danger}
+                margin="0"
+                padding="0"
+                visibility={!touched.password && !errors.password && 'hidden'}
+              >
+                {errors.password || 'Required'}
               </Comp.Text>
-              )}
             </WrapperInput>
 
             <Comp.Button primary onClick={handleSubmit}>

@@ -6,6 +6,7 @@ const P = styled.p`
   margin: ${({ margin }) => margin};
   padding: ${({ padding }) => padding};
   color: ${({ color }) => color};
+  visibility: ${({ visibility }) => visibility};
 `;
 
 const Text = props => {
