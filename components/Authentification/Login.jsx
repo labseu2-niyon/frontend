@@ -8,7 +8,11 @@ import { Heading4, Text, Button } from '../~common/index';
 const Login = ({ errors, touched }) => (
   <>
     <Root>
-      <Heading4>Login</Heading4>
+      <Heading4>Welcome Back</Heading4>
+      <Text small>
+        Do not miss your next opportunity. Sign in to stay updated on your
+        professional world.
+      </Text>
       <FormArea>
         <InputWrapper>
           <Field name="email" type="email" placeholder="email" />
@@ -25,7 +29,7 @@ const Login = ({ errors, touched }) => (
         </Button>
       </FormArea>
       <Text small>
-        <Link href="/auth/reset">Forgot Password?</Link>
+        <Link href="/auth/reset-password">Forgot Password?</Link>
       </Text>
       <Text small>
         <Link href="/auth/signup">New to Niyon? Join now</Link>
@@ -38,25 +42,25 @@ const FormikLoginForm = withFormik({
   mapPropsToValues({ email, password }) {
     return {
       email: email || '',
-      password: password || '',
+      password: password || ''
     };
   },
   validationSchema: Yup.object().shape({
     email: Yup.string()
       .email('Email is invalid')
       .required('Email is required'),
-    password: Yup.string().required('Password is required'),
+    password: Yup.string().required('Password is required')
   }),
   handleSubmit(values) {
     console.log(values);
     Router.push('/user/dashboard');
-  },
+  }
 })(Login);
 
 export default FormikLoginForm;
 
 const Root = styled.div`
-  height: 95vh;
+  height: 85vh;
   display: flex;
   flex-direction: column;
   align-items: center;
