@@ -113,9 +113,6 @@ function Components() {
           <a href="#cards">Cards</a>
         </div>
         <div>
-          <a href="#divider">Cards</a>
-        </div>
-        <div>
           <a href="#icons">Icons</a>
         </div>
         <div>
