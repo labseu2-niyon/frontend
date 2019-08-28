@@ -1,15 +1,18 @@
 import styled from 'styled-components';
+import { PulseLoader, GridLoader } from 'react-spinners';
 
 function Spinner() {
-  return <Circle />;
+  return (
+    <div>
+      <Circle />
+    </div>
+  );
 }
 
 const Circle = styled.div`
   border-radius: 50%;
-  border-top: 2px solid #4da5cf;
-  border-left: 2px solid #4da5cf;
-  border-right: 2px solid #4da5cf;
-  border-bottom: 2px solid #eaeaeb;
+  border: 2.5px solid #4da5cf;
+  border-bottom: 2.5px solid #eaeaeb;
   width: 20px;
   height: 20px;
   animation: spin 1.5s linear infinite;

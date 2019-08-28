@@ -12,6 +12,7 @@ import {
   Button,
   Divider,
   Icon,
+  Spinner,
 } from '../components/~common/index';
 
 const exampleAvatar = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbqXXZ9bvEdMLqeIostuHOdpP4KSwTry_pDOyMTfQCDUKCXiMw';
@@ -115,6 +116,9 @@ function Components() {
         </div>
         <div>
           <a href="#icons">Icons</a>
+        </div>
+        <div>
+          <a href="#spinner">Spinner</a>
         </div>
         <div>
           <a href="#inputs">Inputs</a>
@@ -289,23 +293,29 @@ function Components() {
 
         <Section id="divider">
           <Heading4>Divider</Heading4>
+          <p>Dividers will fill up the space of their parent container.</p>
           <Divider />
         </Section>
 
         <Section id="icons">
           <Heading4>Font Awesome Icons</Heading4>
+          <p>
+            Icons can be small, medium, large and any color options (e.g.
+            primary, secondary, etc). className must be added.
+          </p>
           <Row>
             <Icon small primary className="fas fa-cloud icon" />
             <Icon medium secondary className="fas fa-leaf icon" />
             <Icon large warning className="fas fa-poo-storm icon" />
-            <Icon
-              small
-              danger
-              className="fas fa-exclamation-triangle icon"
-            />
+            <Icon small danger className="fas fa-exclamation-triangle icon" />
             <Icon medium black className="fas fa-user-astronaut icon" />
             <Icon large grey className="fas fa-hippo icon" />
           </Row>
+        </Section>
+
+        <Section id="spinner">
+          <Heading4>Spinner</Heading4>
+          <Spinner />
         </Section>
       </Column>
     </Wrapper>

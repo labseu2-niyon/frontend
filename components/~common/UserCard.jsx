@@ -48,7 +48,7 @@ function UserCard(props) {
           <P className="name">{name}</P>
           <P>{jobTitle}</P>
           <P className="location">
-            <Icon small primary className="fas fa-map-marker-alt" /> {city},{' '}
+            <Icon small black className="fas fa-map-marker-alt" /> {city},{' '}
             {country}
           </P>
         </Info>
