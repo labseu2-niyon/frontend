@@ -33,10 +33,6 @@ const P = styled.p`
   &.name {
     font-weight: ${({ theme }) => theme.bold};
   }
-
-  &.location {
-    font-style: italic;
-  }
 `;
 
 function UserCard(props) {
@@ -52,10 +48,11 @@ function UserCard(props) {
           <P className="name">{name}</P>
           <P>{jobTitle}</P>
           <P className="location">
-            <Icon small className="fas fa-map-marker-alt" /> {city}, {country}
+            <Icon small primary className="fas fa-map-marker-alt" /> {city},{' '}
+            {country}
           </P>
         </Info>
-        <Icon medium className="fas fa-user-plus"></Icon>
+        <Icon medium className="fas fa-user-plus" black></Icon>
       </Row>
     </Card>
   );

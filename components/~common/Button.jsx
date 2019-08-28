@@ -82,17 +82,9 @@ const BOutline = styled.button`
   }
 `;
 
-// main colors of the application
-const getColor = {
-  primary: '#4DA5CF',
-  secondary: '#9EAF70',
-  third: '#F1CC83'
-};
-
 function Button(props) {
   const {
     children,
-    customStyles,
     outline,
     primary,
     secondary,

@@ -41,14 +41,14 @@ const TeamCard = props => {
       <Role>{jobTitle}</Role>
       <Social>
         <a href={githubURL} target="_blank">
-          <Icon className="fab fa-github" />
+          <Icon className="fab fa-github" black />
         </a>
         <a href={linkedinURL} target="_blank">
-          <Icon className="fab fa-linkedin-in" />
+          <Icon className="fab fa-linkedin-in" grey />
         </a>
 
         <a href={twitterURL} target="_blank">
-          <Icon className="fab fa-twitter" />
+          <Icon className="fab fa-twitter" primary />
         </a>
       </Social>
     </C>

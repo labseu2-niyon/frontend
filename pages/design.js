@@ -9,8 +9,9 @@ import {
   Avatar,
   TeamCard,
   UserCard,
-  Divider,
   Button,
+  Divider,
+  Icon,
 } from '../components/~common/index';
 
 const exampleAvatar = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbqXXZ9bvEdMLqeIostuHOdpP4KSwTry_pDOyMTfQCDUKCXiMw';
@@ -74,6 +75,10 @@ const Row = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   margin: 10px 0;
+
+  .icon {
+    margin-right: 10px;
+  }
 `;
 
 const Card = styled.div`
@@ -107,6 +112,9 @@ function Components() {
         </div>
         <div>
           <a href="#divider">Cards</a>
+        </div>
+        <div>
+          <a href="#icons">Icons</a>
         </div>
         <div>
           <a href="#inputs">Inputs</a>
@@ -284,18 +292,20 @@ function Components() {
           <Divider />
         </Section>
 
-        <Section id="inputs">
-          {/* <p>Input</p>
-          <Input placeholder="Text here..." />
-          <p>Input Error</p>
-          <Input
-            placeholder="Password here..."
-            type="password"
-            value="1234"
-            readOnly
-            error
-            errorMsg="Password must be longer than 4 characters"
-          /> */}
+        <Section id="icons">
+          <Heading4>Font Awesome Icons</Heading4>
+          <Row>
+            <Icon small primary className="fas fa-cloud icon" />
+            <Icon medium secondary className="fas fa-leaf icon" />
+            <Icon large warning className="fas fa-poo-storm icon" />
+            <Icon
+              small
+              danger
+              className="fas fa-exclamation-triangle icon"
+            />
+            <Icon medium black className="fas fa-user-astronaut icon" />
+            <Icon large grey className="fas fa-hippo icon" />
+          </Row>
         </Section>
       </Column>
     </Wrapper>

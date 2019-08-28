@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const D = styled.hr`
   width: ${({ widthSize }) => widthSize || '100%'};
-  border: ${({ theme }) => `0.5px solid ${theme.grey}`};
+  border: 0.5px solid #e2e2e2;
   align-content: center;
 `;
 
