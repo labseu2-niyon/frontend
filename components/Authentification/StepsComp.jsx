@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { GridLoader } from 'react-spinners';
+import { Icon } from '../~common/index';
 
 const StepsComp = ({ stepNumber, childrens }) => {
   if (stepNumber === '1') {
@@ -8,73 +9,95 @@ const StepsComp = ({ stepNumber, childrens }) => {
         <Step>
           <GridLoader color={'green'} sizeUnit={'px'} size={7} />
         </Step>
-        <Step color="blue" />
-        <Step color="blue" />
-        <Step color="blue" />
-        <Step color="blue" />
-        <Step color="blue" />
+        <Step>
+          <i className="fas fa-compass fa-4x"></i>
+        </Step>
+        <Step>
+          <i className="fas fa-chalkboard-teacher fa-4x"></i>
+        </Step>
+        <Step>
+          <i className="far fa-smile-beam fa-4x"></i>
+        </Step>
+        <Step>
+          <i className="fas fa-share-alt-square fa-4x"></i>
+        </Step>
       </Root>
     );
   } else if (stepNumber === '2') {
     return (
       <Root>
-        <Step color="green" />
+        <Step>
+          <i className="far fa-envelope fa-4x"></i>
+        </Step>
         <Step>
           <GridLoader color={'green'} sizeUnit={'px'} size={7} />
         </Step>
-        <Step color="blue" />
-        <Step color="blue" />
-        <Step color="blue" />
-        <Step color="blue" />
+        <Step>
+          <i className="fas fa-chalkboard-teacher fa-4x"></i>
+        </Step>
+        <Step>
+          <i className="far fa-smile-beam fa-4x"></i>
+        </Step>
+        <Step>
+          <i className="fas fa-share-alt-square fa-4x"></i>
+        </Step>
       </Root>
     );
   } else if (stepNumber === '3') {
     return (
       <Root>
-        <Step color="green" />
-        <Step color="green" />
+        <Step>
+          <i className="far fa-envelope fa-4x"></i>
+        </Step>
+        <Step>
+          <i className="fas fa-compass fa-4x"></i>
+        </Step>
         <Step>
           <GridLoader color={'green'} sizeUnit={'px'} size={7} />
         </Step>
-        <Step color="blue" />
-        <Step color="blue" />
-        <Step color="blue" />
+        <Step>
+          <i className="far fa-smile-beam fa-4x"></i>
+        </Step>
+        <Step>
+          <i className="fas fa-share-alt-square fa-4x"></i>
+        </Step>
       </Root>
     );
   } else if (stepNumber === '4') {
     return (
       <Root>
-        <Step color="green" />
-        <Step color="green" />
-        <Step color="green" />
+        <Step>
+          <i className="far fa-envelope fa-4x"></i>
+        </Step>
+        <Step>
+          <i className="fas fa-compass fa-4x"></i>
+        </Step>
+        <Step>
+          <i className="fas fa-chalkboard-teacher fa-4x"></i>
+        </Step>
         <Step>
           <GridLoader color={'green'} sizeUnit={'px'} size={7} />
         </Step>
-        <Step color="blue" />
-        <Step color="blue" />
+        <Step>
+          <i className="fas fa-share-alt-square fa-4x"></i>
+        </Step>
       </Root>
     );
   } else if (stepNumber === '5') {
     return (
       <Root>
-        <Step color="green" />
-        <Step color="green" />
-        <Step color="green" />
-        <Step color="green" />
         <Step>
-          <GridLoader color={'green'} sizeUnit={'px'} size={7} />
+          <i className="far fa-envelope fa-4x"></i>
         </Step>
-        <Step color="blue" />
-      </Root>
-    );
-  } else if (stepNumber === '6') {
-    return (
-      <Root>
-        <Step color="green" />
-        <Step color="green" />
-        <Step color="green" />
-        <Step color="green" />
-        <Step color="green" />
+        <Step>
+          <i className="fas fa-compass fa-4x"></i>
+        </Step>
+        <Step>
+          <i className="fas fa-chalkboard-teacher fa-4x"></i>
+        </Step>
+        <Step>
+          <i className="far fa-smile-beam fa-4x"></i>
+        </Step>
         <Step>
           <GridLoader color={'green'} sizeUnit={'px'} size={7} />
         </Step>
@@ -93,11 +116,14 @@ const Root = styled.div`
   align-items: center;
   height: 30px;
   margin: 10px;
+  font-size: 0.5rem;
 `;
 
 const Step = styled.div`
   width: 40px;
   height: 100%;
+  display: flex;
+  align-items: center;
 
   background-color: ${props => props.color};
 `;

@@ -18,8 +18,8 @@ const Location = ({ errors, touched }) => {
         <Field component="select" name="food">
           <option>Country</option>
           <option value="City1">City name</option>
-          <option value="carnivore">City2</option>
-          <option value="omnivore">City3</option>
+          <option value="City2">City2</option>
+          <option value="City3">City3</option>
         </Field>
         <InputWrapper>
           <Field name="city" type="text" placeholder="City"></Field>
@@ -40,7 +40,7 @@ const FormikWithLocationForm = withFormik({
     };
   },
   validationSchema: Yup.object().shape({
-    city: Yup.string().required('Username is required')
+    city: Yup.string().required('City name is required')
   }),
   handleSubmit(values) {
     console.log(values);
@@ -75,6 +75,10 @@ const FormArea = styled(Form)`
   justify-content: space-between;
   height: 200px;
 
+  @media (min-width: 500px) {
+    width: 50%;
+  }
+
   input {
     padding: 0.5rem;
     font-size: 16px;
@@ -94,7 +98,7 @@ const FormArea = styled(Form)`
     font-size: 14px;
     line-height: 1.3;
     padding: 0.6em 1.4em 0.5em 0.8em;
-    width: 80%;
+    width: 75%;
     border: 1px solid rgba(77, 45, 82, 0.8);
     box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
     -moz-appearance: none;
@@ -107,6 +111,9 @@ const FormArea = styled(Form)`
     background-position: right 0.7em top 50%, 0 0;
     background-size: 0.65em auto, 100%;
 
+    @media (min-width: 500px) {
+      width: 70%;
+    }
     option {
       color: grey;
       opacity: 0.4;
