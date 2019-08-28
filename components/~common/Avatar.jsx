@@ -7,21 +7,21 @@ const A = styled.img`
 `;
 
 const Avatar = props => {
-  const { large, regular, small, children, customStyles, src, extra } = props;
+  const { large, medium, small, children, source, extraLarge } = props;
 
   let size;
   if (large) {
-    size = '80px';
-  } else if (regular) {
-    size = '64px';
+    size = '88px';
+  } else if (medium) {
+    size = '58px';
   } else if (small) {
-    size = '40px';
-  } else if (extra) {
-    size = '100px';
+    size = '28px';
+  } else if (extraLarge) {
+    size = '120px';
   }
 
   return (
-    <A widthSize={size} {...customStyles} {...props} src={src}>
+    <A widthSize={size} src={source}>
       {children}
     </A>
   );
