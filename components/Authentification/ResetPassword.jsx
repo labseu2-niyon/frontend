@@ -16,15 +16,15 @@ const ResetPassword = ({ errors, touched }) => (
           {touched.email && errors.email && <Error>{errors.email}</Error>}
         </InputWrapper>
         <ButtonArea>
-          <Link href="/auth/email-sent">
-            <Button large primary type="submit">
-              Find Account
-            </Button>
-          </Link>
+          <Button large primary type="submit">
+            Find Account
+          </Button>
           <Link href="/auth/login">
-            <Button large secondary>
-              Cancel
-            </Button>
+            <a>
+              <Button large secondary>
+                Cancel
+              </Button>
+            </a>
           </Link>
         </ButtonArea>
       </FormArea>
@@ -33,22 +33,20 @@ const ResetPassword = ({ errors, touched }) => (
 );
 
 const FormikResetPasswordForm = withFormik({
-  mapPropsToValues({ email, password }) {
+  mapPropsToValues({ email }) {
     return {
-      email: email || '',
-      password: password || '',
+      email: email || ''
     };
   },
   validationSchema: Yup.object().shape({
     email: Yup.string()
       .email('Email is invalid')
-      .required('Email is required'),
-    password: Yup.string().required('Password is required'),
+      .required('Email is required')
   }),
   handleSubmit(values) {
     console.log(values);
-    Router.push('/user/dashboard');
-  },
+    Router.push('/auth/email-sent');
+  }
 })(ResetPassword);
 
 export default FormikResetPasswordForm;
