@@ -12,7 +12,7 @@ const Card = styled.div`
 `;
 
 const Row = styled.div`
-  margin: 5px;
+  margin: 8px 8px 5px 5px;
   display: flex;
   justify-content: flex-start;
 `;
