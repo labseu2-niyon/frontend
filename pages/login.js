@@ -46,14 +46,14 @@ function Login() {
               name="email"
               type="email"
               render={() => (
-                <Comp.TextInput placeholder="Email" widthSize="80%" />
+                <Comp.TextInput placeholder="Email" widthSize="30%" />
               )}
             />
             <Field
               name="password"
               type="password"
               render={() => (
-                <Comp.TextInput placeholder="Password" widthSize="80%" />
+                <Comp.TextInput placeholder="Password" widthSize="30%" />
               )}
             />
             <Comp.Button primary>Sign In</Comp.Button>
