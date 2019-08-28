@@ -16,7 +16,6 @@ function Icon({ className, small, medium, large }) {
 const I = styled.i`
   font-size: ${({ size }) => size};
   color: ${({ theme }) => theme.black};
-  margin: 0 5px;
 `;
 
 export default Icon;

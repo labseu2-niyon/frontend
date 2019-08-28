@@ -6,28 +6,29 @@ import Text from './Text';
 
 const Card = styled.div`
   width: ${({ width }) => width || '250px'};
-  max-height: ${({ height }) => height || '80px'};
   box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: ${({ theme }) => theme.borderRadius};
   margin: 0 10px;
-  position: relative;
 `;
 
 const Row = styled.div`
-  margin: 10px;
+  margin: 5px;
   display: flex;
   justify-content: flex-start;
 `;
 
-const Col = styled.div`
-  margin: 0 5px;
+const Info = styled.div`
+  flex-grow: 1;
+  min-width: 0;
+  margin: 0 2px;
 `;
 
 const P = styled.p`
-  margin: 3px 0px;
-  font-size: ${({ theme }) => theme.smallText};
-  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 3px;
+  font-size: ${({ theme }) => theme.smallText};
 
   &.name {
     font-weight: ${({ theme }) => theme.bold};
@@ -38,36 +39,24 @@ const P = styled.p`
   }
 `;
 
-const ConnectIcon = styled.div`
-  position: absolute;
-  right: 5px;
-  top: 10px;
-`;
-
 function UserCard(props) {
   const { source, name, jobTitle, city, country } = props;
 
   return (
     <Card>
-      <Row>
-        <Col>
-          <Avatar medium source={source} />
-        </Col>
-        <Col>
+      <Row style={{ display: 'flex' }}>
+        <div>
+          <Avatar medium source={source}></Avatar>
+        </div>
+        <Info style={{}}>
           <P className="name">{name}</P>
           <P>{jobTitle}</P>
-          <div>
-            <P className="location">
-              <Icon small className="fas fa-map-marker-alt" />
-              {city}, {country}
-            </P>
-          </div>
-        </Col>
+          <P className="location">
+            <Icon small className="fas fa-map-marker-alt" /> {city}, {country}
+          </P>
+        </Info>
+        <Icon medium className="fas fa-user-plus"></Icon>
       </Row>
-
-      <ConnectIcon>
-        <Icon medium className="fas fa-user-plus" />
-      </ConnectIcon>
     </Card>
   );
 }

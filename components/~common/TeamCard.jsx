@@ -25,6 +25,10 @@ const Role = styled.p`
 const Social = styled.div`
   display: flex;
   justify-content: center;
+
+  a {
+    margin: 0 5px;
+  }
 `;
 
 const TeamCard = props => {

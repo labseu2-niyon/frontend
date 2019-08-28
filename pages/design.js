@@ -251,9 +251,9 @@ function Components() {
             <UserCard
               desktop
               source={exampleAvatar}
-              name="Jane Doe with long name"
+              name="Jane Doe with Long Name"
               jobTitle="Software Engineer"
-              city="Port Harcourt"
+              city="Lagos"
               country="Nigeria"
             />
             <UserCard
@@ -269,8 +269,8 @@ function Components() {
               source={exampleAvatar}
               name="Jane Doe"
               jobTitle="Software Engineer"
-              city="Port Harcourt"
-              country="Nigeria"
+              city="Long City"
+              country="Even Longer Country"
             />
           </Row>
         </Section>
