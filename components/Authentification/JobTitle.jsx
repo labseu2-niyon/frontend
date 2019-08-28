@@ -1,42 +1,104 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import Steps from './StepsComp';
 import { Heading2, Button, Text } from '../~common/index';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 
-const JobTitle = ({ touched, errors }) => {
+const JobTitle = ({ touched, errors, values }) => {
+  const [mentorPressed, setMentorPressed] = useState(false);
+  const [menteeePresed, setMenteePressed] = useState(false);
+  const mentor = () => {
+    return (
+      <div>
+        <h1>Mentor info</h1>
+      </div>
+    );
+  };
+  const mentee = () => {
+    return (
+      <div>
+        <Text small>What kind of help are you looking for ?</Text>
+        <Label>
+          <Field type="checkbox" name="preparation" />
+          Job Preparation
+        </Label>
+        <Label>
+          <Field type="checkbox" name="development" />
+          Skils Development
+        </Label>
+
+        {/* <Label>
+          <Field
+            type="checkbox"
+            name="preparation"
+            checked={values.preparation}
+          />
+          Job Preparation
+          <span />
+        </Label>
+        <Label>
+          <Field
+            type="checkbox"
+            name="development"
+            checked={values.development}
+          />
+          Skils Development
+          <span />
+        </Label> */}
+      </div>
+    );
+  };
   return (
     <Root>
       <Steps stepNumber="3" />
-      <Heading2>Mentorship Info</Heading2>
-      <Text small>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nisl
-        nisl, aliquam nec erat et, efficitur mollis metus.
-      </Text>
+      <Header>
+        <Heading2>Mentorship Info</Heading2>
+        <Text small>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nisl
+          nisl, aliquam nec erat et, efficitur mollis metus.
+        </Text>
+      </Header>
       <MentorIcons>
         <Costum>
-          <i className="fas fa-user-graduate fa-6x"></i>
+          <i
+            className="fas fa-user-graduate fa-6x"
+            onClick={() => {
+              setMenteePressed(true);
+              setMentorPressed(false);
+            }}
+          ></i>
           <Info>
             <p>Mentee</p>
             <i className="fas fa-info-circle"></i>
           </Info>
         </Costum>
         <Costum>
-          <i className="fas fa-user-cog fa-6x"></i>
+          <i
+            className="fas fa-user-cog fa-6x"
+            onClick={() => {
+              setMenteePressed(false);
+              setMentorPressed(true);
+            }}
+          ></i>
           <Info>
             <p>Mentor</p>
             <i className="fas fa-info-circle"></i>
           </Info>
         </Costum>
       </MentorIcons>
-
       <FormArea>
-        <Field component="select" name="food">
-          <option>Job Title</option>
-          <option value="Job1">Web Developer</option>
-          <option value="Job2">Computer Science</option>
-          <option value="Job3">Data Science</option>
-        </Field>
+        {menteeePresed && mentee()}
+        {mentorPressed && mentor()}
+        <InputWrapper>
+          <Field component="select" name="job">
+            <option>Job Title</option>
+            <option value="Job1">Web Developer</option>
+            <option value="Job2">Computer Science</option>
+            <option value="Job3">Data Science</option>
+          </Field>
+          {touched.job && errors.job && <Error>{errors.job}</Error>}
+        </InputWrapper>
         <Button small primary type="submit">
           Next
         </Button>
@@ -46,11 +108,15 @@ const JobTitle = ({ touched, errors }) => {
 };
 
 const FormikWithJobTitleForm = withFormik({
-  mapPropsToValues({ city }) {
-    return {};
+  mapPropsToValues({ job, preparation, development }) {
+    return {
+      job: job || '',
+      preparation: preparation || false,
+      development: development || false
+    };
   },
   validationSchema: Yup.object().shape({
-    city: Yup.string().required('City name is required')
+    job: Yup.string().required('Job Type is required')
   }),
   handleSubmit(values) {
     console.log(values);
@@ -61,9 +127,23 @@ const FormikWithJobTitleForm = withFormik({
 export default FormikWithJobTitleForm;
 
 const Root = styled.div`
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+`;
+
+const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 0;
+  p {
+    padding: 0 20px;
+    text-align: center;
+  }
 `;
 
 const MentorIcons = styled.div`
@@ -104,7 +184,12 @@ const FormArea = styled(Form)`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 200px;
+  height: auto;
+  padding: 30px 0;
+
+  button {
+    margin-top: 30px;
+  }
 
   @media (min-width: 500px) {
     width: 50%;
@@ -168,4 +253,15 @@ const Error = styled.p`
   bottom: 10%;
   left: 7.5%;
   color: #e29273;
+`;
+
+const Label = styled.label`
+  display: flex;
+  align-items: center;
+
+  input {
+    width: 5px;
+    height: 5px;
+    padding: 12px;
+  }
 `;

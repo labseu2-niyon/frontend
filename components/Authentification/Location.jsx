@@ -16,12 +16,15 @@ const Location = ({ errors, touched }) => {
         nisl, aliquam nec erat et, efficitur mollis metus.
       </Text>
       <FormArea>
-        <Field component="select" name="food">
-          <option>Country</option>
-          <option value="City1">City name</option>
-          <option value="City2">City2</option>
-          <option value="City3">City3</option>
-        </Field>
+        <InputWrapper>
+          <Field component="select" name="country">
+            <option>Country</option>
+            <option value="City1">City name</option>
+            <option value="City2">City2</option>
+            <option value="City3">City3</option>
+          </Field>
+          {touched.country && errors.country && <Error>{errors.country}</Error>}
+        </InputWrapper>
         <InputWrapper>
           <Field name="city" type="text" placeholder="City"></Field>
           {touched.city && errors.city && <Error>{errors.city}</Error>}
@@ -35,13 +38,15 @@ const Location = ({ errors, touched }) => {
 };
 
 const FormikWithLocationForm = withFormik({
-  mapPropsToValues({ city }) {
+  mapPropsToValues({ city, country }) {
     return {
-      city: city || ''
+      city: city || '',
+      country: country || ''
     };
   },
   validationSchema: Yup.object().shape({
-    city: Yup.string().required('City name is required')
+    city: Yup.string().required('City name is required'),
+    country: Yup.string().required('Country name is required')
   }),
   handleSubmit(values) {
     console.log(values);

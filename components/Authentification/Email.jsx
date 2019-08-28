@@ -41,7 +41,9 @@ const Email = ({ errors, touched }) => {
           </Button>
         </FormArea>
         <Text small>
-          <Link href="/auth/signup">Login with Social Media</Link>
+          <Link href="/auth/signup">
+            <a>Login with Social Media</a>
+          </Link>
         </Text>
       </Root>
     </>

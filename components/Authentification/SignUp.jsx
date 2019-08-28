@@ -9,16 +9,16 @@ const SignUp = () => {
       <Text small>Lorem Ipsum, welcome message, blah blah blah.`</Text>
       <ButtonArea>
         <Button large primary>
-          Google
+          <Link href="/auth/social">Google</Link>
         </Button>
         <Button large secondary>
-          Github
+          <Link href="/auth/social">Github</Link>
         </Button>
         <Button large danger>
-          Twitter
+          <Link href="/auth/social">Twitter</Link>
         </Button>
         <Button large warning>
-          Facebook
+          <Link href="/auth/social">Facebook</Link>
         </Button>
         <Button large outline primary>
           <Link href="/auth/email">Email</Link>
