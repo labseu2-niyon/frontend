@@ -9,22 +9,32 @@ import Steps from './StepsComp';
 const Email = ({ errors, touched }) => {
   return (
     <>
-      <Steps stepNumber="1" />
       <Root>
+        <Steps stepNumber="1" />
         <Heading4>Email login</Heading4>
         <FormArea>
-          <Field name="username" type="text" placeholder="username" />
-          {touched.username && errors.username && (
-            <Error>{errors.username}</Error>
-          )}
-          <Field name="firstName" type="text" placeholder="First Name" />
-          <Field name="lastName" type="text" placeholder="Last Name" />
-          <Field name="email" type="email" placeholder="email" />
-          {touched.email && errors.email && <Error>{errors.email}</Error>}
-          <Field name="password" type="password" placeholder="password" />
-          {touched.password && errors.password && (
-            <Error>{errors.password}</Error>
-          )}
+          <InputWrapper>
+            <Field name="username" type="text" placeholder="username" />
+            {touched.username && errors.username && (
+              <Error>{errors.username}</Error>
+            )}
+          </InputWrapper>
+          <InputWrapper>
+            <Field name="firstName" type="text" placeholder="First Name" />
+          </InputWrapper>
+          <InputWrapper>
+            <Field name="lastName" type="text" placeholder="Last Name" />
+          </InputWrapper>
+          <InputWrapper>
+            <Field name="email" type="email" placeholder="email" />
+            {touched.email && errors.email && <Error>{errors.email}</Error>}
+          </InputWrapper>
+          <InputWrapper>
+            <Field name="password" type="password" placeholder="password" />
+            {touched.password && errors.password && (
+              <Error>{errors.password}</Error>
+            )}
+          </InputWrapper>
           <Text small>Lorem Ipsum, terms and conditions, blah blah blah.</Text>
           <Button small primary type="submit">
             Register
@@ -68,7 +78,7 @@ const FormikWithEmailForm = withFormik({
 export default FormikWithEmailForm;
 
 const Root = styled.div`
-  height: 90vh;
+  height: 95vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -82,8 +92,8 @@ const FormArea = styled(Form)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  height: 450px;
+  justify-content: space-center;
+  height: 420px;
 
   input {
     padding: 0.5rem;
@@ -100,7 +110,20 @@ const FormArea = styled(Form)`
   }
 `;
 
+const InputWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-bottom: 30px;
+`;
+
 const Error = styled.p`
   margin: 0;
+  font-size: 14px;
+  position: absolute;
+  bottom: 10%;
+  left: 7.5%;
   color: #e29273;
 `;

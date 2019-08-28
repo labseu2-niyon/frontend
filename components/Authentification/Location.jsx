@@ -21,8 +21,10 @@ const Location = ({ errors, touched }) => {
           <option value="carnivore">City2</option>
           <option value="omnivore">City3</option>
         </Field>
-        <Field name="city" type="text" placeholder="City"></Field>
-        {touched.city && errors.city && <Error>{errors.city}</Error>}
+        <InputWrapper>
+          <Field name="city" type="text" placeholder="City"></Field>
+          {touched.city && errors.city && <Error>{errors.city}</Error>}
+        </InputWrapper>
         <Button small primary type="submit">
           Next
         </Button>
@@ -112,7 +114,20 @@ const FormArea = styled(Form)`
   }
 `;
 
+const InputWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-bottom: 30px;
+`;
+
 const Error = styled.p`
   margin: 0;
+  font-size: 14px;
+  position: absolute;
+  bottom: 10%;
+  left: 7.5%;
   color: #e29273;
 `;
