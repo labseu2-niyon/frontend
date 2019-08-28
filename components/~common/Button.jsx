@@ -158,7 +158,7 @@ function Button(props) {
   }
 
   return (
-    <B type="button" themeColor={color} width={width}>
+    <B type="button" themeColor={color} width={width} {...props}>
       {loading ? (
         <PacmanLoader
           loading={true}

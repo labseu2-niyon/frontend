@@ -9,7 +9,7 @@ const Location = ({ errors, touched }) => {
     <Root>
       <Steps stepNumber="2" />
       <Heading2>Location Info</Heading2>
-      <IconT className="fas fa-user-tie"></IconT>
+      <IconT className="fas fa-globe-europe"></IconT>
       <Text small>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nisl
         nisl, aliquam nec erat et, efficitur mollis metus.

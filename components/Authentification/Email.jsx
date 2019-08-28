@@ -69,7 +69,7 @@ const FormikWithEmailForm = withFormik({
       .min(3, 'Password must be at least 3 characters')
       .required('Password is required')
   }),
-  handleSubmit(values) {
+  handleSubmit(values, { setStatus }) {
     console.log(values);
     Router.push('/auth/location');
   }

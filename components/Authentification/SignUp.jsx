@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Text, Button } from '../~common/index';
-//import { primary, secondary } from '../lib/theme';
 import Link from 'next/link';
 import Router from 'next/router';
 
@@ -21,15 +20,8 @@ const SignUp = () => {
         <Button large warning>
           Facebook
         </Button>
-        <Button
-          large
-          outline
-          primary
-          onClick={() => {
-            Router.push('/auth/email');
-          }}
-        >
-          Email
+        <Button large outline primary>
+          <Link href="/auth/email">Email</Link>
         </Button>
       </ButtonArea>
       <Text small>
