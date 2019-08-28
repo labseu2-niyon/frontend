@@ -4,6 +4,8 @@ import Steps from './StepsComp';
 import { Heading2, Button, Text } from '../~common/index';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
+import Flip from 'react-reveal/Flip';
+import { theme } from '../../lib/theme';
 
 const JobTitle = ({ touched, errors, values }) => {
   const [mentorPressed, setMentorPressed] = useState(false);
@@ -11,42 +13,53 @@ const JobTitle = ({ touched, errors, values }) => {
   const mentor = () => {
     return (
       <div>
-        <h1>Mentor info</h1>
+        <M>
+          <Flip top>
+            <Text small>What kind of help are you looking for ?</Text>
+            <Label>
+              <Field type="checkbox" name="preparation" />
+              Job Preparation
+            </Label>
+            <Label>
+              <Field type="checkbox" name="development" />
+              Skils Development
+            </Label>
+            <Label>
+              <Field type="checkbox" name="coaching" />
+              Life Coaching
+            </Label>
+            <Label>
+              <Field type="checkbox" name="networking" />
+              Networking
+            </Label>
+          </Flip>
+        </M>
       </div>
     );
   };
   const mentee = () => {
     return (
-      <div>
-        <Text small>What kind of help are you looking for ?</Text>
-        <Label>
-          <Field type="checkbox" name="preparation" />
-          Job Preparation
-        </Label>
-        <Label>
-          <Field type="checkbox" name="development" />
-          Skils Development
-        </Label>
-
-        {/* <Label>
-          <Field
-            type="checkbox"
-            name="preparation"
-            checked={values.preparation}
-          />
-          Job Preparation
-          <span />
-        </Label>
-        <Label>
-          <Field
-            type="checkbox"
-            name="development"
-            checked={values.development}
-          />
-          Skils Development
-          <span />
-        </Label> */}
-      </div>
+      <M>
+        <Flip top>
+          <Text small>What kind of help are you provide?</Text>
+          <Label>
+            <Field type="checkbox" name="preparation" />
+            Job Preparation
+          </Label>
+          <Label>
+            <Field type="checkbox" name="development" />
+            Skils Development
+          </Label>
+          <Label>
+            <Field type="checkbox" name="coaching" />
+            Life Coaching
+          </Label>
+          <Label>
+            <Field type="checkbox" name="networking" />
+            Networking
+          </Label>
+        </Flip>
+      </M>
     );
   };
   return (
@@ -63,6 +76,8 @@ const JobTitle = ({ touched, errors, values }) => {
         <Costum>
           <i
             className="fas fa-user-graduate fa-6x"
+            style={{ color: menteeePresed && theme.primary }}
+            menteeePresed
             onClick={() => {
               setMenteePressed(true);
               setMentorPressed(false);
@@ -76,6 +91,7 @@ const JobTitle = ({ touched, errors, values }) => {
         <Costum>
           <i
             className="fas fa-user-cog fa-6x"
+            style={{ color: mentorPressed && theme.primary }}
             onClick={() => {
               setMenteePressed(false);
               setMentorPressed(true);
@@ -108,11 +124,13 @@ const JobTitle = ({ touched, errors, values }) => {
 };
 
 const FormikWithJobTitleForm = withFormik({
-  mapPropsToValues({ job, preparation, development }) {
+  mapPropsToValues({ job, preparation, development, coaching, networking }) {
     return {
       job: job || '',
       preparation: preparation || false,
-      development: development || false
+      development: development || false,
+      coaching: coaching || false,
+      networking: networking || false
     };
   },
   validationSchema: Yup.object().shape({
@@ -159,7 +177,9 @@ const MentorIcons = styled.div`
 const Costum = styled.div`
   display: flex;
   flex-direction: column;
-
+  i {
+    transition: all 0.2s ease-in;
+  }
   p {
     margin: 0;
     font-size: 14px;
@@ -258,10 +278,15 @@ const Error = styled.p`
 const Label = styled.label`
   display: flex;
   align-items: center;
-
+  margin-left: 30px;
   input {
     width: 5px;
     height: 5px;
     padding: 12px;
+    margin-right: 12px;
   }
+`;
+
+const M = styled.div`
+  margin-bottom: 20px;
 `;
