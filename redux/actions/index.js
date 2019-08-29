@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { actionTypes } from '../constants';
 
-const _BASE_URL = 'https://niyonapp.com';
+const _BASE_URL = 'https://niyon-dev.herokuapp.com/';
 
 export const incrementCount = () => ({ type: actionTypes.INCREMENT });
 export const decrementCount = () => ({ type: actionTypes.DECREMENT });
@@ -11,7 +11,7 @@ export const registerUser = (newUser) => (dispatch) => {
   dispatch({ type: actionTypes.REGISTER_USER_REQUEST });
   // spinner
   axios
-    .post(`${_BASE_URL}/auth/signup`, newUser)
+    .post(`${_BASE_URL}/signup`, newUser)
     .then((res) => {
       dispatch({
         type: actionTypes.REGISTER_USER_SUCCESS,
@@ -33,7 +33,7 @@ export const logInUser = (existingUser) => (dispatch) => {
   dispatch({ type: actionTypes.LOG_IN_USER_REQUEST });
   // spinner
   axios
-    .post(`${_BASE_URL}/auth/login`, existingUser)
+    .post(`${_BASE_URL}/login`, existingUser)
     .then((res) => {
       dispatch({
         type: actionTypes.LOG_IN_USER_SUCCESS,
@@ -57,7 +57,7 @@ export const resetPassword = (email) => (dispatch) => {
   dispatch({ type: actionTypes.RESET_PASSWORD_REQUEST });
   // spinner
   axios
-    .post(`${_BASE_URL}/auth/reset-password`, email)
+    .post(`${_BASE_URL}/resetpassword`, email)
     .then((res) => {
       dispatch({
         type: actionTypes.RESET_PASSWORD_SUCCESS,
@@ -77,7 +77,7 @@ export const updateUserProfile = (username, existingUser) => (dispatch) => {
   dispatch({ type: actionTypes.UPDATE_USER_PROFILE_REQUEST });
   // spinner
   axios
-    .patch(`${_BASE_URL}/user/${username}`, existingUser)
+    .patch(`${_BASE_URL}/${username}/profile`, existingUser)
     .then((res) => {
       dispatch({
         type: actionTypes.UPDATE_USER_PROFILE_SUCCESS,
@@ -97,7 +97,7 @@ export const updatePassword = (password) => (dispatch) => {
   dispatch({ type: actionTypes.UPDATE_PASSWORD_REQUEST });
   // spinner
   axios
-    .patch(`${_BASE_URL}/auth/new-password`, password)
+    .patch(`${_BASE_URL}/newpassword`, password)
     .then((res) => {
       dispatch({
         type: actionTypes.UPDATE_PASSWORD_SUCCESS,
@@ -117,7 +117,7 @@ export const uploadUserImage = (username, file) => (dispatch) => {
   dispatch({ type: actionTypes.UPLOAD_USER_IMAGE_REQUEST });
   // spinner
   axios
-    .patch(`${_BASE_URL}/user/${username}/upload/image`, file)
+    .patch(`${_BASE_URL}/${username}/image/upload`, file)
     .then((res) => {
       dispatch({
         type: actionTypes.UPLOAD_USER_IMAGE_SUCCESS,
@@ -156,7 +156,7 @@ export const checkUserProfile = (username) => (dispatch) => {
   dispatch({ type: actionTypes.CHECK_USER_PROFILE_REQUEST });
   // spinner
   axios
-    .get(`${_BASE_URL}/users/${username}`)
+    .get(`${_BASE_URL}/${username}`)
     .then((res) => {
       dispatch({
         type: actionTypes.CHECK_USER_PROFILE_SUCCESS,
