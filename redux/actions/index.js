@@ -83,7 +83,7 @@ export const updateUserProfile = (username, existingUser) => (dispatch) => {
   dispatch({ type: actionTypes.UPDATE_USER_PROFILE_REQUEST });
   console.log('updating user profile...');
   axios
-    .put(`${_BASE_URL}user/${username}`, existingUser)
+    .patch(`${_BASE_URL}user/${username}`, existingUser)
     .then((res) => {
       dispatch({ type: actionTypes.UPDATE_USER_PROFILE_SUCCESS, payload: res.data });
       // console.log(res.data);
