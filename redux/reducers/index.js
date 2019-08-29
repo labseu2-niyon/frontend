@@ -48,6 +48,23 @@ export default (state, action) => {
         error: action.payload,
       };
 
+    case actionTypes.RESET_PASSWORD_REQUEST:
+      return {
+        ...state,
+        queryingDatabase: true,
+      };
+    case actionTypes.RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        queryingDatabase: false,
+      };
+    case actionTypes.RESET_PASSWORD_FAILURE:
+      return {
+        ...state,
+        queryingDatabase: false,
+        errorMessage: action.payload,
+      };
+
     default:
       return state;
   }

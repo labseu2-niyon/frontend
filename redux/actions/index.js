@@ -55,3 +55,24 @@ export const logInUser = (existingUser) => (dispatch) => {
       console.log(error.message);
     });
 };
+
+export const resetPassword = (email) => (dispatch) => {
+  dispatch({ type: actionTypes.RESET_PASSWORD_REQUEST });
+  console.log('registering user...');
+  axios
+    .post('https://niyonapp.com/auth/reset-password', email)
+    .then((res) => {
+      dispatch({
+        type: actionTypes.RESET_PASSWORD_SUCCESS,
+      });
+      console.log(res);
+      // window.location = '/auth/email-sent';
+    })
+    .catch((error) => {
+      dispatch({
+        type: actionTypes.RESET_PASSWORD_FAILURE,
+        payload: error.message,
+      });
+      console.log(error.message);
+    });
+};
