@@ -69,7 +69,7 @@ const Nav = styled.div`
   background: white;
   box-shadow: ${({ theme }) => theme.boxShadow};
   box-sizing: border-box;
-  padding: 40px 0;
+  padding: 2.5rem 0;
   height: 100vh;
   width: 250px;
   position: fixed;
@@ -129,6 +129,11 @@ const Links = styled.div`
     a {
       text-decoration: none;
       color: ${({ theme }) => theme.black};
+
+      &:hover {
+        color: ${({ theme }) => theme.primary};
+        transition: color 1s ease;
+      }
     }
 
     &:hover {

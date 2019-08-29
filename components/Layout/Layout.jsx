@@ -24,8 +24,9 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.div`
-  margin-left: 270px;
-  margin-right: 20px;
+  margin-left: 300px;
+  margin-right: 40px;
+  width: 100%;
 
   @media (max-width: 500px) {
     margin-left: 60px;
