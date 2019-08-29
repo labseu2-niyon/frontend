@@ -26,7 +26,7 @@ const Navigation = () => {
             <a className="desktop">Home</a>
           </div>
         </Link>
-        <Link href="/[username]">
+        <Link href="/">
           <div>
             <Icon type="user" className="icon" />
             <a className="desktop">Profile</a>
