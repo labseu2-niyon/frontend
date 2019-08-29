@@ -161,3 +161,23 @@ export const fetchAllUsers = () => (dispatch) => {
       console.log(error.message);
     });
 };
+
+export const checkUserProfile = (username) => (dispatch) => {
+  dispatch({ type: actionTypes.CHECK_USER_PROFILE_REQUEST });
+  // spinner
+  axios
+    .get(`${_BASE_URL}/user/${username}`)
+    .then((res) => {
+      dispatch({
+        type: actionTypes.CHECK_USER_PROFILE_SUCCESS,
+      });
+      console.log(res);
+    })
+    .catch((error) => {
+      dispatch({
+        type: actionTypes.CHECK_USER_PROFILE_FAILURE,
+        payload: error.message,
+      });
+      console.log(error.message);
+    });
+};

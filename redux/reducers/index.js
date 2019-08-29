@@ -136,6 +136,24 @@ export default (state, action) => {
         errorMessage: action.payload,
       };
 
+    case actionTypes.CHECK_USER_PROFILE_REQUEST:
+      return {
+        ...state,
+        queryingDatabase: true,
+      };
+    case actionTypes.CHECK_USER_PROFILE_SUCCESS:
+      return {
+        ...state,
+        queryingDatabase: false,
+        user: [...state.user, action.payload],
+      };
+    case actionTypes.CHECK_USER_PROFILE_FAILURE:
+      return {
+        ...state,
+        checkingUserInfo: false,
+        errorMessage: action.payload,
+      };
+
     default:
       return state;
   }

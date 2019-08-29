@@ -11,6 +11,7 @@ const exampleInitialState = {
   errorMessage: null,
   isLoggedIn: false,
   message: '',
+  user: [],
 };
 
 export function initializeStore(initialState = exampleInitialState) {
