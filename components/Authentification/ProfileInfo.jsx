@@ -5,6 +5,7 @@ import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import Steps from './StepsComp';
 import Router from 'next/router';
+import Link from 'next/link';
 
 const ProfileInfo = ({ status }) => {
   const [image, setImage] = useState('');
@@ -51,7 +52,7 @@ const ProfileInfo = ({ status }) => {
         <Button small primary type="submit">
           Next
         </Button>
-        <Skip />
+        <Skip href="/auth/social-info"></Skip>
       </FormArea>
     </Root>
   );
