@@ -6,6 +6,7 @@ import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import Flip from 'react-reveal/Flip';
 import { theme } from '../../lib/theme';
+import Router from 'next/router';
 
 const JobTitle = ({ touched, errors, values }) => {
   const [mentorPressed, setMentorPressed] = useState(false);
@@ -47,15 +48,23 @@ const JobTitle = ({ touched, errors, values }) => {
             Job Preparation
           </Label>
           <Label>
-            <Field type="checkbox" name="development" />
+            <Field
+              type="checkbox"
+              name="development"
+              checked={values.development}
+            />
             Skils Development
           </Label>
           <Label>
-            <Field type="checkbox" name="coaching" />
+            <Field type="checkbox" name="coaching" checked={values.coaching} />
             Life Coaching
           </Label>
           <Label>
-            <Field type="checkbox" name="networking" />
+            <Field
+              type="checkbox"
+              name="networking"
+              checked={values.networking}
+            />
             Networking
           </Label>
         </Flip>
@@ -77,7 +86,6 @@ const JobTitle = ({ touched, errors, values }) => {
           <i
             className="fas fa-user-graduate fa-6x"
             style={{ color: menteeePresed && theme.primary }}
-            menteeePresed
             onClick={() => {
               setMenteePressed(true);
               setMentorPressed(false);
@@ -138,7 +146,7 @@ const FormikWithJobTitleForm = withFormik({
   }),
   handleSubmit(values) {
     console.log(values);
-    Router.push('/auth/job-title');
+    Router.push('/auth/profile-info');
   }
 })(JobTitle);
 
