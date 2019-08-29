@@ -11,11 +11,11 @@ const Avatar = props => {
 
   let size;
   if (large) {
-    size = '88px';
+    size = '90px';
   } else if (medium) {
-    size = '58px';
+    size = '60px';
   } else if (small) {
-    size = '28px';
+    size = '30px';
   } else if (extraLarge) {
     size = '120px';
   }
