@@ -27,6 +27,27 @@ export default (state, action) => {
         errorMessage: action.payload,
       };
 
+    case actionTypes.LOG_IN_USER_REQUEST:
+      return {
+        ...state,
+        queryingDatabase: true,
+      };
+    case actionTypes.LOG_IN_USER_SUCCESS:
+      return {
+        ...state,
+        queryingDatabase: false,
+        // token: action.payload.token,
+        // message: action.payload.message,
+        // id: action.payload.id,
+        isLoggedIn: true,
+      };
+    case actionTypes.LOG_IN_USER_FAILURE:
+      return {
+        ...state,
+        queryingDatabase: false,
+        error: action.payload,
+      };
+
     default:
       return state;
   }

@@ -9,6 +9,7 @@ const exampleInitialState = {
   queryingDatabase: false,
   token: null,
   errorMessage: null,
+  isLoggedIn: false,
 };
 
 export function initializeStore(initialState = exampleInitialState) {
