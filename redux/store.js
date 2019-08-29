@@ -6,6 +6,8 @@ import reducer from './reducers';
 
 const exampleInitialState = {
   count: 0,
+  queryingDatabase: false,
+  errorMessage: null,
 };
 
 export function initializeStore(initialState = exampleInitialState) {
