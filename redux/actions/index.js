@@ -114,3 +114,24 @@ export const updatePassword = (password) => (dispatch) => {
       console.log(error.message);
     });
 };
+
+export const uploadUserImage = (username, file) => (dispatch) => {
+  dispatch({ type: actionTypes.UPLOAD_USER_IMAGE_REQUEST });
+  console.log('uploading image...');
+  axios
+    .patch(`${_BASE_URL}user/${username}/upload/image`, file)
+    .then((res) => {
+      dispatch({
+        type: actionTypes.UPLOAD_USER_IMAGE_SUCCESS,
+      });
+      console.log(res);
+      // window.location = '/user/profile';
+    })
+    .catch((error) => {
+      dispatch({
+        type: actionTypes.UPLOAD_USER_IMAGE_FAILURE,
+        payload: error.message,
+      });
+      console.log(error.message);
+    });
+};

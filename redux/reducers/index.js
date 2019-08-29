@@ -100,6 +100,25 @@ export default (state, action) => {
         queryingDatabase: false,
         errorMessage: action.payload,
       };
+
+    case actionTypes.UPLOAD_USER_IMAGE_REQUEST:
+      return {
+        ...state,
+        queryingDatabase: true,
+      };
+    case actionTypes.UPLOAD_USER_IMAGE_SUCCESS:
+      return {
+        ...state,
+        queryingDatabase: false,
+        message: action.payload,
+      };
+    case actionTypes.UPLOAD_USER_IMAGE_FAILURE:
+      return {
+        ...state,
+        queryingDatabase: false,
+        errorMessage: action.payload,
+      };
+
     default:
       return state;
   }
