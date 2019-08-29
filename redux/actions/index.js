@@ -60,7 +60,7 @@ export const logInUser = (existingUser) => (dispatch) => {
 
 export const resetPassword = (email) => (dispatch) => {
   dispatch({ type: actionTypes.RESET_PASSWORD_REQUEST });
-  console.log('registering user...');
+  console.log('reseting password...');
   axios
     .post(`${_BASE_URL}auth/reset-password`, email)
     .then((res) => {
@@ -90,6 +90,27 @@ export const updateUserProfile = (username, existingUser) => (dispatch) => {
     })
     .catch((error) => {
       dispatch({ type: actionTypes.UPDATE_USER_PROFILE_FAILURE, payload: error.message });
+      console.log(error.message);
+    });
+};
+
+export const updatePassword = (password) => (dispatch) => {
+  dispatch({ type: actionTypes.UPDATE_PASSWORD_REQUEST });
+  console.log('updating password...');
+  axios
+    .patch(`${_BASE_URL}auth/new-password`, password)
+    .then((res) => {
+      dispatch({
+        type: actionTypes.UPDATE_PASSWORD_SUCCESS,
+      });
+      console.log(res);
+      // window.location = '/user/profile';
+    })
+    .catch((error) => {
+      dispatch({
+        type: actionTypes.UPDATE_PASSWORD_FAILURE,
+        payload: error.message,
+      });
       console.log(error.message);
     });
 };
