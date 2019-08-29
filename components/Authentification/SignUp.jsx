@@ -8,21 +8,26 @@ const SignUp = () => {
     <Root>
       <Text small>Lorem Ipsum, welcome message, blah blah blah.`</Text>
       <ButtonArea>
-        <Button large primary>
-          <Link href="/auth/social">Google</Link>
+        <Button large primary onClick={() => Router.push('/auth/social')}>
+          Google
         </Button>
-        <Button large secondary>
-          <Link href="/auth/social">Github</Link>
+        <Button large secondary onClick={() => Router.push('/auth/social')}>
+          Github
         </Button>
-        <Button large danger>
-          <Link href="/auth/social">Twitter</Link>
+        <Button large danger onClick={() => Router.push('/auth/social')}>
+          Twitter
         </Button>
-        <Button large warning>
-          <Link href="/auth/social">Facebook</Link>
+        <Button large warning onClick={() => Router.push('/auth/social')}>
+          Facebook
         </Button>
 
-        <Button large outline primary>
-          <Link href="/auth/email">Email</Link>
+        <Button
+          large
+          outline
+          primary
+          onClick={() => Router.push('/auth/email')}
+        >
+          Email
         </Button>
       </ButtonArea>
       <Text small>
