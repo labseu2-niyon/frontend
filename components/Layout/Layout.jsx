@@ -1,11 +1,15 @@
 import Navigation from './Navigation';
 import styled from 'styled-components';
+import Header from './Header';
 
 const Layout = ({ children }) => {
   return (
     <Wrapper>
       <Navigation></Navigation>
-      <Main>{children}</Main>
+      <Main>
+        <Header></Header>
+        {children}
+      </Main>
     </Wrapper>
   );
 };

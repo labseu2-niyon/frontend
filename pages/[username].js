@@ -1,5 +1,11 @@
+import Layout from '../components/Layout/Layout';
+
 function Page() {
-  return <div>Profile page!</div>;
+  return (
+    <Layout>
+      <div>Profile Page</div>
+    </Layout>
+  );
 }
 
 export default Page;

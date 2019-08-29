@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import { Avatar, Heading4 } from '../~common/index';
+import { Avatar } from '../~common/index';
 import { Icon } from 'antd';
 
 const dummyUser = {
@@ -17,48 +17,41 @@ const Navigation = () => {
       </div>
 
       <div className="mobile-avatar">
-        {/* <Icon medium className="fas fa-times mobile-icon"></Icon> */}
         <Avatar small source={dummyUser.image}></Avatar>
       </div>
       <Links>
         <Link href="/home">
           <div>
-            {/* <Icon medium className="fas fa-home icon"></Icon> */}
             <Icon type="home" className="icon" />
             <a className="desktop">Home</a>
           </div>
         </Link>
         <Link href="/[username]">
           <div>
-            {/* <Icon medium className="fas fa-user-circle icon"></Icon> */}
             <Icon type="user" className="icon" />
             <a className="desktop">Profile</a>
           </div>
         </Link>
         <Link href="/">
           <div>
-            {/* <Icon medium className="fas fa-users icon"></Icon> */}
             <Icon type="share-alt" className="icon" />
             <a className="desktop">Connections</a>
           </div>
         </Link>
         <Link href="/explore">
           <div>
-            {/* <Icon medium className="fas fa-compass icon"></Icon> */}
             <Icon type="search" className="icon" />
             <a className="desktop">Explore</a>
           </div>
         </Link>
         <Link href="/settings">
           <div>
-            {/* <Icon medium className="fas fa-cog icon"></Icon> */}
             <Icon type="setting" className="icon" />
             <a className="desktop">Settings</a>
           </div>
         </Link>
         <Link href="/">
           <div>
-            {/* <Icon medium className="fas fa-sign-out-alt icon"></Icon> */}
             <Icon type="logout" className="icon" />
             <a className="desktop">Log out</a>
           </div>
@@ -131,6 +124,11 @@ const Links = styled.div`
     display: flex;
     align-items: center;
     cursor: pointer;
+
+    &:hover {
+      color: ${({ theme }) => theme.primary};
+      transition: color 1s ease;
+    }
   }
 
   .icon {
