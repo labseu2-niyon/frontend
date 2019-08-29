@@ -119,6 +119,23 @@ export default (state, action) => {
         errorMessage: action.payload,
       };
 
+    case actionTypes.FETCH_ALL_USERS_REQUEST:
+      return {
+        ...state,
+        queryingDatabase: true,
+      };
+    case actionTypes.FETCH_ALL_USERS_SUCCESS:
+      return {
+        ...state,
+        queryingDatabase: false,
+      };
+    case actionTypes.FETCH_ALL_USERS_FAILURE:
+      return {
+        ...state,
+        queryingDatabase: false,
+        errorMessage: action.payload,
+      };
+
     default:
       return state;
   }

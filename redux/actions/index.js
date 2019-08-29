@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { actionTypes } from '../constants';
 
-const _BASE_URL = 'https://niyonapp.com/';
+const _BASE_URL = 'https://niyonapp.com';
 
 export const incrementCount = () => ({ type: actionTypes.INCREMENT });
 export const decrementCount = () => ({ type: actionTypes.DECREMENT });
@@ -9,9 +9,9 @@ export const resetCount = () => ({ type: actionTypes.RESET });
 
 export const registerUser = (newUser) => (dispatch) => {
   dispatch({ type: actionTypes.REGISTER_USER_REQUEST });
-  console.log('registering user...');
+  // spinner
   axios
-    .post(`${_BASE_URL}auth/signup`, newUser)
+    .post(`${_BASE_URL}/auth/signup`, newUser)
     .then((res) => {
       dispatch({
         type: actionTypes.REGISTER_USER_SUCCESS,
@@ -32,9 +32,9 @@ export const registerUser = (newUser) => (dispatch) => {
 
 export const logInUser = (existingUser) => (dispatch) => {
   dispatch({ type: actionTypes.LOG_IN_USER_REQUEST });
-  console.log('logging in user...');
+  // spinner
   axios
-    .post(`${_BASE_URL}auth/login`, existingUser)
+    .post(`${_BASE_URL}/auth/login`, existingUser)
     .then((res) => {
       dispatch({
         type: actionTypes.LOG_IN_USER_SUCCESS,
@@ -60,9 +60,9 @@ export const logInUser = (existingUser) => (dispatch) => {
 
 export const resetPassword = (email) => (dispatch) => {
   dispatch({ type: actionTypes.RESET_PASSWORD_REQUEST });
-  console.log('reseting password...');
+  // spinner
   axios
-    .post(`${_BASE_URL}auth/reset-password`, email)
+    .post(`${_BASE_URL}/auth/reset-password`, email)
     .then((res) => {
       dispatch({
         type: actionTypes.RESET_PASSWORD_SUCCESS,
@@ -81,24 +81,30 @@ export const resetPassword = (email) => (dispatch) => {
 
 export const updateUserProfile = (username, existingUser) => (dispatch) => {
   dispatch({ type: actionTypes.UPDATE_USER_PROFILE_REQUEST });
-  console.log('updating user profile...');
+  // spinner
   axios
-    .patch(`${_BASE_URL}user/${username}`, existingUser)
+    .patch(`${_BASE_URL}/user/${username}`, existingUser)
     .then((res) => {
-      dispatch({ type: actionTypes.UPDATE_USER_PROFILE_SUCCESS, payload: res.data });
+      dispatch({
+        type: actionTypes.UPDATE_USER_PROFILE_SUCCESS,
+        payload: res.data,
+      });
       // console.log(res.data);
     })
     .catch((error) => {
-      dispatch({ type: actionTypes.UPDATE_USER_PROFILE_FAILURE, payload: error.message });
+      dispatch({
+        type: actionTypes.UPDATE_USER_PROFILE_FAILURE,
+        payload: error.message,
+      });
       console.log(error.message);
     });
 };
 
 export const updatePassword = (password) => (dispatch) => {
   dispatch({ type: actionTypes.UPDATE_PASSWORD_REQUEST });
-  console.log('updating password...');
+  // spinner
   axios
-    .patch(`${_BASE_URL}auth/new-password`, password)
+    .patch(`${_BASE_URL}/auth/new-password`, password)
     .then((res) => {
       dispatch({
         type: actionTypes.UPDATE_PASSWORD_SUCCESS,
@@ -117,9 +123,9 @@ export const updatePassword = (password) => (dispatch) => {
 
 export const uploadUserImage = (username, file) => (dispatch) => {
   dispatch({ type: actionTypes.UPLOAD_USER_IMAGE_REQUEST });
-  console.log('uploading image...');
+  // spinner
   axios
-    .patch(`${_BASE_URL}user/${username}/upload/image`, file)
+    .patch(`${_BASE_URL}/user/${username}/upload/image`, file)
     .then((res) => {
       dispatch({
         type: actionTypes.UPLOAD_USER_IMAGE_SUCCESS,
@@ -130,6 +136,26 @@ export const uploadUserImage = (username, file) => (dispatch) => {
     .catch((error) => {
       dispatch({
         type: actionTypes.UPLOAD_USER_IMAGE_FAILURE,
+        payload: error.message,
+      });
+      console.log(error.message);
+    });
+};
+
+export const fetchAllUsers = () => (dispatch) => {
+  dispatch({ type: actionTypes.FETCH_ALL_USERS_REQUEST });
+  // spinner
+  axios
+    .get(`${_BASE_URL}/users`)
+    .then((res) => {
+      dispatch({
+        type: actionTypes.FETCH_ALL_USERS_SUCCESS,
+      });
+      console.log(res);
+    })
+    .catch((error) => {
+      dispatch({
+        type: actionTypes.FETCH_ALL_USERS_FAILURE,
         payload: error.message,
       });
       console.log(error.message);
