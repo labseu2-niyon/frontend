@@ -18,7 +18,7 @@ export default (state, action) => {
       return {
         ...state,
         queryingDatabase: false,
-        // token: action.payload,
+        user: [...state.user, action.payload],
       };
     case actionTypes.REGISTER_USER_FAILURE:
       return {
@@ -37,9 +37,7 @@ export default (state, action) => {
         ...state,
         queryingDatabase: false,
         // token: action.payload.token,
-        // message: action.payload.message,
-        // id: action.payload.id,
-        isLoggedIn: true,
+        message: action.payload.message,
       };
     case actionTypes.LOG_IN_USER_FAILURE:
       return {
@@ -57,6 +55,7 @@ export default (state, action) => {
       return {
         ...state,
         queryingDatabase: false,
+        message: action.payload,
       };
     case actionTypes.RESET_PASSWORD_FAILURE:
       return {
@@ -74,7 +73,8 @@ export default (state, action) => {
       return {
         ...state,
         queryingDatabase: false,
-        message: action.payload,
+        user: [...state.user, action.payload],
+        // message: action.payload,
       };
     case actionTypes.UPDATE_USER_PROFILE_FAILURE:
       return {
@@ -110,7 +110,7 @@ export default (state, action) => {
       return {
         ...state,
         queryingDatabase: false,
-        message: action.payload,
+        user: [...state.user, action.payload],
       };
     case actionTypes.UPLOAD_USER_IMAGE_FAILURE:
       return {
@@ -128,6 +128,7 @@ export default (state, action) => {
       return {
         ...state,
         queryingDatabase: false,
+        usersAll: [...state.usersAll, action.payload],
       };
     case actionTypes.FETCH_ALL_USERS_FAILURE:
       return {

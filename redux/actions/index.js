@@ -154,9 +154,10 @@ export const checkUserProfile = (username) => (dispatch) => {
   // spinner
   axios
     .get(`${_BASE_URL}/users/${username}`)
-    .then(() => {
+    .then((res) => {
       dispatch({
         type: actionTypes.CHECK_USER_PROFILE_SUCCESS,
+        payload: res.data,
       });
     })
     .catch((error) => {
