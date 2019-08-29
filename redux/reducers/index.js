@@ -65,6 +65,24 @@ export default (state, action) => {
         errorMessage: action.payload,
       };
 
+    case actionTypes.UPDATE_USER_PROFILE_REQUEST:
+      return {
+        ...state,
+        queryingDatabase: true,
+      };
+    case actionTypes.UPDATE_USER_PROFILE_SUCCESS:
+      return {
+        ...state,
+        queryingDatabase: false,
+        message: action.payload,
+      };
+    case actionTypes.UPDATE_USER_PROFILE_FAILURE:
+      return {
+        ...state,
+        queryingDatabase: false,
+        errorMessage: action.payload,
+      };
+
     default:
       return state;
   }

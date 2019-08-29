@@ -10,6 +10,7 @@ const exampleInitialState = {
   token: null,
   errorMessage: null,
   isLoggedIn: false,
+  message: '',
 };
 
 export function initializeStore(initialState = exampleInitialState) {
