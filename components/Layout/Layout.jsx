@@ -33,4 +33,5 @@ const Main = styled.div`
     margin-right: 20px;
   }
 `;
+
 export default Layout;

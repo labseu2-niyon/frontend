@@ -1,5 +1,5 @@
-import Layout from '../components/layout/Layout';
-import withAuth from '../lib/withAuth';
+import Layout from '../../components/layout/Layout';
+import withAuth from '../../lib/withAuth';
 
 function Page() {
   return (
