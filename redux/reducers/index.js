@@ -36,7 +36,7 @@ export default (state, action) => {
       return {
         ...state,
         queryingDatabase: false,
-        // token: action.payload.token,
+        token: action.payload.token,
         message: action.payload.message,
       };
     case actionTypes.LOG_IN_USER_FAILURE:

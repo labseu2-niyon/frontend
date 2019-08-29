@@ -12,9 +12,10 @@ export const registerUser = (newUser) => (dispatch) => {
   // spinner
   axios
     .post(`${_BASE_URL}/auth/signup`, newUser)
-    .then(() => {
+    .then((res) => {
       dispatch({
         type: actionTypes.REGISTER_USER_SUCCESS,
+        payload: res.data,
         // payload: res.data.token,
       });
       // window.localStorage.setItem('token', res.data.token);
@@ -37,13 +38,11 @@ export const logInUser = (existingUser) => (dispatch) => {
       dispatch({
         type: actionTypes.LOG_IN_USER_SUCCESS,
         payload: {
-          // token: res.data.token,
+          token: res.data.token,
           message: res.data.message,
-          // id: res.data.id,
         },
       });
       // window.localStorage.setItem('user', JSON.stringify(res.data));
-      // console.log(res.data.token);
       // window.location = '/user/dashboard';
     })
     .catch((error) => {
@@ -59,9 +58,10 @@ export const resetPassword = (email) => (dispatch) => {
   // spinner
   axios
     .post(`${_BASE_URL}/auth/reset-password`, email)
-    .then(() => {
+    .then((res) => {
       dispatch({
         type: actionTypes.RESET_PASSWORD_SUCCESS,
+        payload: res.data,
       });
       // window.location = '/auth/email-sent';
     })
@@ -98,9 +98,10 @@ export const updatePassword = (password) => (dispatch) => {
   // spinner
   axios
     .patch(`${_BASE_URL}/auth/new-password`, password)
-    .then(() => {
+    .then((res) => {
       dispatch({
         type: actionTypes.UPDATE_PASSWORD_SUCCESS,
+        payload: res.data,
       });
       // window.location = '/user/profile';
     })
@@ -117,9 +118,10 @@ export const uploadUserImage = (username, file) => (dispatch) => {
   // spinner
   axios
     .patch(`${_BASE_URL}/user/${username}/upload/image`, file)
-    .then(() => {
+    .then((res) => {
       dispatch({
         type: actionTypes.UPLOAD_USER_IMAGE_SUCCESS,
+        payload: res.data,
       });
       // window.location = '/user/profile';
     })
@@ -136,9 +138,10 @@ export const fetchAllUsers = () => (dispatch) => {
   // spinner
   axios
     .get(`${_BASE_URL}/users`)
-    .then(() => {
+    .then((res) => {
       dispatch({
         type: actionTypes.FETCH_ALL_USERS_SUCCESS,
+        payload: res.data,
       });
     })
     .catch((error) => {
