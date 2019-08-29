@@ -20,7 +20,7 @@ const Navigation = () => {
         <Avatar small source={dummyUser.image}></Avatar>
       </div>
       <Links>
-        <Link href="/home">
+        <Link href="/">
           <div>
             <Icon type="home" className="icon" />
             <a className="desktop">Home</a>
@@ -32,7 +32,7 @@ const Navigation = () => {
             <a className="desktop">Profile</a>
           </div>
         </Link>
-        <Link href="/">
+        <Link href="/connections">
           <div>
             <Icon type="share-alt" className="icon" />
             <a className="desktop">Connections</a>
@@ -50,12 +50,13 @@ const Navigation = () => {
             <a className="desktop">Settings</a>
           </div>
         </Link>
-        <Link href="/">
-          <div>
-            <Icon type="logout" className="icon" />
-            <a className="desktop">Log out</a>
-          </div>
-        </Link>
+        {/* Log out should redirect person to marketing site (external link) */}
+        <div>
+          <Icon type="logout" className="icon" />
+          <a href="#" className="desktop">
+            Log out
+          </a>
+        </div>
       </Links>
     </Nav>
   );
@@ -124,6 +125,11 @@ const Links = styled.div`
     display: flex;
     align-items: center;
     cursor: pointer;
+
+    a {
+      text-decoration: none;
+      color: ${({ theme }) => theme.black};
+    }
 
     &:hover {
       color: ${({ theme }) => theme.primary};
