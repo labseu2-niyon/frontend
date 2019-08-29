@@ -25,12 +25,12 @@ const Wrapper = styled.div`
 
 const Main = styled.div`
   margin-left: 300px;
-  margin-right: 40px;
+  margin-right: 50px;
   width: 100%;
 
   @media (max-width: 500px) {
-    margin-left: 60px;
-    margin-right: 10px;
+    margin-left: 70px;
+    margin-right: 20px;
   }
 `;
 export default Layout;

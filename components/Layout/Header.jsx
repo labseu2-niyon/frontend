@@ -8,7 +8,7 @@ const Header = ({ pageName }) => {
       <H>
         <Heading3>{pageName}</Heading3>
         <div>
-          <Logo></Logo>
+          <Logo className="mobile-logo"></Logo>
         </div>
       </H>
     </header>
@@ -25,6 +25,15 @@ const H = styled.div`
     font-weight: 500;
     margin: 0;
     text-transform: uppercase;
+  }
+
+  @media (max-width: 500px) {
+    margin: 2rem 0;
+
+    .mobile-logo {
+      width: 20px;
+      height: 20px;
+    }
   }
 `;
 
