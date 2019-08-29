@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import Link from 'next/link';
 
-function Skip() {
+function Skip({ href }) {
   return (
     <S>
-      <p>Skip</p>
+      <Link href={href}>Skip</Link>
       <div className="dash" />
     </S>
   );
@@ -17,6 +18,10 @@ const S = styled.div`
 
   p {
     margin-bottom: 4px;
+  }
+
+  a {
+    text-decoration: none;
   }
 
   .dash {

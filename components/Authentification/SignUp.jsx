@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-//import { primary, secondary } from '../lib/theme';
+
+import { Text, Button } from '../~common/index';
+
 import Link from 'next/link';
 import Router from 'next/router';
 import { Text, Button } from '../~common/index';
@@ -8,20 +10,28 @@ const SignUp = () => (
     <Root>
       <Text small>Lorem Ipsum, welcome message, blah blah blah.`</Text>
       <ButtonArea>
-        <Button large primary>
+        <Button large primary onClick={() => Router.push('/auth/social')}>
           Google
         </Button>
-        <Button large secondary>
+        <Button large secondary onClick={() => Router.push('/auth/social')}>
           Github
         </Button>
-        <Button large danger>
+
+       <Button large danger onClick={() => Router.push('/auth/social')}>
           Twitter
-        </Button>
-        <Button large warning>
+          </Button>
+        <Button large warning onClick={() => Router.push('/auth/social')}>
           Facebook
         </Button>
-        <Button large outline primary>
-          <Link href="/auth/email">Email</Link>
+
+        <Button
+          large
+          outline
+          primary
+          onClick={() => Router.push('/auth/email')}
+        >
+          Email
+
         </Button>
       </ButtonArea>
       <Text small>

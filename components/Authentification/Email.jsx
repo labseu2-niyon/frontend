@@ -1,4 +1,4 @@
-import { Heading4, Text, Button } from '../~common/index';
+import { Heading2, Text, Button } from '../~common/index';
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
@@ -11,7 +11,7 @@ const Email = ({ errors, touched }) => {
     <>
       <Root>
         <Steps stepNumber="1" />
-        <Heading4>Email login</Heading4>
+        <Heading2>Email login</Heading2>
         <FormArea>
           <InputWrapper>
             <Field name="username" type="text" placeholder="username" />
@@ -41,7 +41,9 @@ const Email = ({ errors, touched }) => {
           </Button>
         </FormArea>
         <Text small>
-          <Link href="/auth/signup">Login with Social Media</Link>
+          <Link href="/auth/signup">
+            <a>Login with Social Media</a>
+          </Link>
         </Text>
       </Root>
     </>
@@ -69,7 +71,7 @@ const FormikWithEmailForm = withFormik({
       .min(3, 'Password must be at least 3 characters')
       .required('Password is required')
   }),
-  handleSubmit(values) {
+  handleSubmit(values, { setStatus }) {
     console.log(values);
     Router.push('/auth/location');
   }
