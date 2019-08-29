@@ -1,11 +1,12 @@
 import Layout from '../components/Layout/Layout';
+import withAuth from '../lib/withAuth';
 
 function Page() {
   return (
-    <Layout>
+    <Layout pageName="Profile">
       <div>Profile Page</div>
     </Layout>
   );
 }
 
-export default Page;
+export default withAuth(Page);

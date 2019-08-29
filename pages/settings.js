@@ -1,11 +1,8 @@
 import Layout from '../components/Layout/Layout';
+import withAuth from '../lib/withAuth';
 
 function Page() {
-  return (
-    <Layout>
-      <div>Edit Profile Page!</div>
-    </Layout>
-  );
+  return <Layout pageName="Settings" />;
 }
 
-export default Page;
+export default withAuth(Page);
