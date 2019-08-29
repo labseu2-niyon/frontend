@@ -108,6 +108,10 @@ const FormArea = styled(Form)`
   justify-content: space-between;
   height: 470px;
 
+  @media (min-width: 500px) {
+    width: 50%;
+  }
+
   textarea {
     padding: 0.5rem;
     font-size: 16px;

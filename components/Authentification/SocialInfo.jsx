@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Text, Button, Heading2, Skip } from '../~common/index';
+import { Button, Heading2, Skip } from '../~common/index';
 import styled from 'styled-components';
-import { Form, Field, withFormik } from 'formik';
-import * as Yup from 'yup';
 import Steps from './StepsComp';
 import Router from 'next/router';
 
@@ -15,6 +13,7 @@ const SocialInfo = () => {
   const handleSubmit = e => {
     e.preventDefault();
     console.log(twitter, google, gitHub, facebook);
+    Router.push('/');
   };
   return (
     <Root>
@@ -64,6 +63,7 @@ const SocialInfo = () => {
         <Button small primary type="submit">
           Next
         </Button>
+        <Skip href="/"></Skip>
       </FormArea>
     </Root>
   );
@@ -86,6 +86,10 @@ const FormArea = styled.form`
   align-items: center;
   justify-content: space-between;
   height: 320px;
+
+  @media (min-width: 500px) {
+    width: 50%;
+  }
 
   input {
     padding: 0.5rem;

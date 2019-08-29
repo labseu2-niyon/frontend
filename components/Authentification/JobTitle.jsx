@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Steps from './StepsComp';
 import { Heading2, Button, Text } from '../~common/index';
@@ -8,9 +8,18 @@ import Flip from 'react-reveal/Flip';
 import { theme } from '../../lib/theme';
 import Router from 'next/router';
 
-const JobTitle = ({ touched, errors, values }) => {
+const JobTitle = ({ touched, errors, values, status }) => {
   const [mentorPressed, setMentorPressed] = useState(false);
   const [menteeePresed, setMenteePressed] = useState(false);
+  const [mentorError, setMentorError] = useState(true);
+
+  useEffect(() => {
+    if (mentorPressed || menteeePresed) {
+      setMentorError(false);
+      Router.push('/auth/profile-info');
+    }
+  }, [status]);
+
   const mentor = () => {
     return (
       <div>
@@ -127,6 +136,11 @@ const JobTitle = ({ touched, errors, values }) => {
           Next
         </Button>
       </FormArea>
+      {mentorError && (
+        <Text small style={{ color: 'red' }}>
+          Menthorship type is required*
+        </Text>
+      )}
     </Root>
   );
 };
@@ -144,9 +158,9 @@ const FormikWithJobTitleForm = withFormik({
   validationSchema: Yup.object().shape({
     job: Yup.string().required('Job Type is required')
   }),
-  handleSubmit(values) {
+  handleSubmit(values, { setStatus }) {
     console.log(values);
-    Router.push('/auth/profile-info');
+    setStatus(values);
   }
 })(JobTitle);
 
@@ -169,6 +183,10 @@ const Header = styled.div`
   p {
     padding: 0 20px;
     text-align: center;
+
+    @media (min-width: 500px) {
+      width: 50%;
+    }
   }
 `;
 
@@ -177,6 +195,10 @@ const MentorIcons = styled.div`
   display: flex;
   justify-content: space-around;
   position: relative;
+
+  @media (min-width: 500px) {
+    width: 50%;
+  }
   i {
     color: grey;
   }
@@ -214,6 +236,9 @@ const FormArea = styled(Form)`
   justify-content: space-between;
   height: auto;
   padding: 30px 0;
+  @media (min-width: 500px) {
+    width: 50%;
+  }
 
   button {
     margin-top: 30px;
@@ -279,7 +304,7 @@ const Error = styled.p`
   font-size: 14px;
   position: absolute;
   bottom: 10%;
-  left: 7.5%;
+  left: 12%;
   color: #e29273;
 `;
 

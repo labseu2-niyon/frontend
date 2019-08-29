@@ -66,6 +66,9 @@ const Root = styled.div`
   p {
     text-align: center;
     padding: 0 20px;
+    @media (min-width: 500px) {
+      width: 50%;
+    }
   }
 `;
 

@@ -20,6 +20,7 @@ const SignUp = () => {
         <Button large warning>
           <Link href="/auth/social">Facebook</Link>
         </Button>
+
         <Button large outline primary>
           <Link href="/auth/email">Email</Link>
         </Button>
