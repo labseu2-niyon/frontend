@@ -1,5 +1,5 @@
-import { Heading3 } from '../~common/index';
-import Logo from '../svgs/Logo';
+import { Heading3 } from './~common/index';
+import Logo from './svgs/Logo';
 import styled from 'styled-components';
 
 const Header = ({ pageName }) => {

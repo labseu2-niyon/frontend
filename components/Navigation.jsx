@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import { Avatar } from '../~common/index';
+import { Avatar } from './~common/index';
 import { Icon } from 'antd';
 
 const dummyUser = {
