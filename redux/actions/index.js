@@ -12,12 +12,11 @@ export const registerUser = (newUser) => (dispatch) => {
   // spinner
   axios
     .post(`${_BASE_URL}/auth/signup`, newUser)
-    .then((res) => {
+    .then(() => {
       dispatch({
         type: actionTypes.REGISTER_USER_SUCCESS,
         // payload: res.data.token,
       });
-      console.log(res);
       // window.localStorage.setItem('token', res.data.token);
       // window.location = '/user/dashboard';
     })
@@ -26,7 +25,6 @@ export const registerUser = (newUser) => (dispatch) => {
         type: actionTypes.REGISTER_USER_FAILURE,
         payload: error.message,
       });
-      console.log(error.message);
     });
 };
 
@@ -46,7 +44,6 @@ export const logInUser = (existingUser) => (dispatch) => {
       });
       // window.localStorage.setItem('user', JSON.stringify(res.data));
       // console.log(res.data.token);
-      console.log(res.data.message);
       // window.location = '/user/dashboard';
     })
     .catch((error) => {
@@ -54,7 +51,6 @@ export const logInUser = (existingUser) => (dispatch) => {
         type: actionTypes.LOG_IN_USER_FAILURE,
         payload: error.message,
       });
-      console.log(error.message);
     });
 };
 
@@ -63,11 +59,10 @@ export const resetPassword = (email) => (dispatch) => {
   // spinner
   axios
     .post(`${_BASE_URL}/auth/reset-password`, email)
-    .then((res) => {
+    .then(() => {
       dispatch({
         type: actionTypes.RESET_PASSWORD_SUCCESS,
       });
-      console.log(res);
       // window.location = '/auth/email-sent';
     })
     .catch((error) => {
@@ -75,7 +70,6 @@ export const resetPassword = (email) => (dispatch) => {
         type: actionTypes.RESET_PASSWORD_FAILURE,
         payload: error.message,
       });
-      console.log(error.message);
     });
 };
 
@@ -96,7 +90,6 @@ export const updateUserProfile = (username, existingUser) => (dispatch) => {
         type: actionTypes.UPDATE_USER_PROFILE_FAILURE,
         payload: error.message,
       });
-      console.log(error.message);
     });
 };
 
@@ -105,11 +98,10 @@ export const updatePassword = (password) => (dispatch) => {
   // spinner
   axios
     .patch(`${_BASE_URL}/auth/new-password`, password)
-    .then((res) => {
+    .then(() => {
       dispatch({
         type: actionTypes.UPDATE_PASSWORD_SUCCESS,
       });
-      console.log(res);
       // window.location = '/user/profile';
     })
     .catch((error) => {
@@ -117,7 +109,6 @@ export const updatePassword = (password) => (dispatch) => {
         type: actionTypes.UPDATE_PASSWORD_FAILURE,
         payload: error.message,
       });
-      console.log(error.message);
     });
 };
 
@@ -126,11 +117,10 @@ export const uploadUserImage = (username, file) => (dispatch) => {
   // spinner
   axios
     .patch(`${_BASE_URL}/user/${username}/upload/image`, file)
-    .then((res) => {
+    .then(() => {
       dispatch({
         type: actionTypes.UPLOAD_USER_IMAGE_SUCCESS,
       });
-      console.log(res);
       // window.location = '/user/profile';
     })
     .catch((error) => {
@@ -138,7 +128,6 @@ export const uploadUserImage = (username, file) => (dispatch) => {
         type: actionTypes.UPLOAD_USER_IMAGE_FAILURE,
         payload: error.message,
       });
-      console.log(error.message);
     });
 };
 
@@ -147,18 +136,16 @@ export const fetchAllUsers = () => (dispatch) => {
   // spinner
   axios
     .get(`${_BASE_URL}/users`)
-    .then((res) => {
+    .then(() => {
       dispatch({
         type: actionTypes.FETCH_ALL_USERS_SUCCESS,
       });
-      console.log(res);
     })
     .catch((error) => {
       dispatch({
         type: actionTypes.FETCH_ALL_USERS_FAILURE,
         payload: error.message,
       });
-      console.log(error.message);
     });
 };
 
@@ -166,18 +153,16 @@ export const checkUserProfile = (username) => (dispatch) => {
   dispatch({ type: actionTypes.CHECK_USER_PROFILE_REQUEST });
   // spinner
   axios
-    .get(`${_BASE_URL}/user/${username}`)
-    .then((res) => {
+    .get(`${_BASE_URL}/users/${username}`)
+    .then(() => {
       dispatch({
         type: actionTypes.CHECK_USER_PROFILE_SUCCESS,
       });
-      console.log(res);
     })
     .catch((error) => {
       dispatch({
         type: actionTypes.CHECK_USER_PROFILE_FAILURE,
         payload: error.message,
       });
-      console.log(error.message);
     });
 };
