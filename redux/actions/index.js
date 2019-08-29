@@ -9,7 +9,7 @@ export const registerUser = (newUser) => (dispatch) => {
   dispatch({ type: actionTypes.REGISTER_USER_REQUEST });
   console.log('registering user...');
   axios
-    .post('https://niyonapp.com/signup', newUser)
+    .post('https://niyonapp.com/auth/signup', newUser)
     .then((res) => {
       dispatch({
         type: actionTypes.REGISTER_USER_SUCCESS,
@@ -32,7 +32,7 @@ export const logInUser = (existingUser) => (dispatch) => {
   dispatch({ type: actionTypes.LOG_IN_USER_REQUEST });
   console.log('logging in user...');
   axios
-    .post('https://niyonapp.com/login', existingUser)
+    .post('https://niyonapp.com/auth/login', existingUser)
     .then((res) => {
       dispatch({
         type: actionTypes.LOG_IN_USER_SUCCESS,
@@ -48,7 +48,10 @@ export const logInUser = (existingUser) => (dispatch) => {
       // window.location = '/user/dashboard';
     })
     .catch((error) => {
-      dispatch({ type: actionTypes.LOG_IN_USER_FAILURE, payload: error.message });
+      dispatch({
+        type: actionTypes.LOG_IN_USER_FAILURE,
+        payload: error.message,
+      });
       console.log(error.message);
     });
 };
