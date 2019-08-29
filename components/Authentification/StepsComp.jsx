@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { GridLoader } from 'react-spinners';
+import { theme } from '../../lib/theme';
 
 const StepsComp = ({ stepNumber, childrens }) => {
   if (stepNumber === '1') {
     return (
       <Root>
         <Step>
-          <GridLoader color={'green'} sizeUnit={'px'} size={7} />
+          <GridLoader color={theme.secondary} sizeUnit={'px'} size={7} />
         </Step>
         <Divider />
         <Step>
@@ -34,7 +35,7 @@ const StepsComp = ({ stepNumber, childrens }) => {
         </Step>
         <Divider />
         <Step>
-          <GridLoader color={'green'} sizeUnit={'px'} size={7} />
+          <GridLoader color={theme.secondary} sizeUnit={'px'} size={7} />
         </Step>
         <Divider />
         <Step>
@@ -62,7 +63,7 @@ const StepsComp = ({ stepNumber, childrens }) => {
         </Step>
         <Divider />
         <Step>
-          <GridLoader color={'green'} sizeUnit={'px'} size={7} />
+          <GridLoader color={theme.secondary} sizeUnit={'px'} size={7} />
         </Step>
         <Divider />
         <Step>
@@ -104,15 +105,19 @@ const StepsComp = ({ stepNumber, childrens }) => {
         <Step>
           <i className="far fa-envelope fa-4x"></i>
         </Step>
+        <Divider />
         <Step>
           <i className="fas fa-compass fa-4x"></i>
         </Step>
+        <Divider />
         <Step>
           <i className="fas fa-chalkboard-teacher fa-4x"></i>
         </Step>
+        <Divider />
         <Step>
           <i className="far fa-smile-beam fa-4x"></i>
         </Step>
+        <Divider />
         <Step>
           <GridLoader color={'green'} sizeUnit={'px'} size={7} />
         </Step>
