@@ -1,26 +1,30 @@
-import { Text, Button } from '../~common/index';
+import { Text, Button, Heading2 } from '../~common/index';
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import Steps from './StepsComp';
+import Router from 'next/router';
 
 const Location = ({ errors, touched }) => {
   return (
     <Root>
       <Steps stepNumber="2" />
-      <h1>Location Info</h1>
-      <IconT className="fas fa-user-tie"></IconT>
+      <Heading2>Location Info</Heading2>
+      <IconT className="fas fa-globe-europe"></IconT>
       <Text small>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nisl
         nisl, aliquam nec erat et, efficitur mollis metus.
       </Text>
       <FormArea>
-        <Field component="select" name="food">
-          <option>Country</option>
-          <option value="City1">City name</option>
-          <option value="City2">City2</option>
-          <option value="City3">City3</option>
-        </Field>
+        <InputWrapper>
+          <Field component="select" name="country">
+            <option>Country</option>
+            <option value="City1">City name</option>
+            <option value="City2">City2</option>
+            <option value="City3">City3</option>
+          </Field>
+          {touched.country && errors.country && <Error>{errors.country}</Error>}
+        </InputWrapper>
         <InputWrapper>
           <Field name="city" type="text" placeholder="City"></Field>
           {touched.city && errors.city && <Error>{errors.city}</Error>}
@@ -34,16 +38,19 @@ const Location = ({ errors, touched }) => {
 };
 
 const FormikWithLocationForm = withFormik({
-  mapPropsToValues({ city }) {
+  mapPropsToValues({ city, country }) {
     return {
-      city: city || ''
+      city: city || '',
+      country: country || ''
     };
   },
   validationSchema: Yup.object().shape({
-    city: Yup.string().required('City name is required')
+    city: Yup.string().required('City name is required'),
+    country: Yup.string().required('Country name is required')
   }),
   handleSubmit(values) {
     console.log(values);
+    Router.push('/auth/job-title');
   }
 })(Location);
 
@@ -59,6 +66,9 @@ const Root = styled.div`
   p {
     text-align: center;
     padding: 0 20px;
+    @media (min-width: 500px) {
+      width: 50%;
+    }
   }
 `;
 

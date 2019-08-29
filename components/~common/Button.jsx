@@ -124,7 +124,7 @@ function Button(props) {
 
   if (outline) {
     return (
-      <BOutline type="button" themeColor={color} width={width}>
+      <BOutline type="button" themeColor={color} width={width} {...props}>
         {loading ? (
           <PacmanLoader
             loading={true}
@@ -141,7 +141,7 @@ function Button(props) {
   }
   if (raised) {
     return (
-      <BRaised type="button" themeColor={color} width={width}>
+      <BRaised type="button" themeColor={color} width={width} {...props}>
         {loading ? (
           <PacmanLoader
             loading={true}
@@ -158,7 +158,7 @@ function Button(props) {
   }
 
   return (
-    <B type="button" themeColor={color} width={width}>
+    <B type="button" themeColor={color} width={width} {...props}>
       {loading ? (
         <PacmanLoader
           loading={true}
