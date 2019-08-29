@@ -1,11 +1,10 @@
 import styled from 'styled-components';
-import { Text, Button } from '../~common/index';
 //import { primary, secondary } from '../lib/theme';
 import Link from 'next/link';
 import Router from 'next/router';
+import { Text, Button } from '../~common/index';
 
-const SignUp = () => {
-  return (
+const SignUp = () => (
     <Root>
       <Text small>Lorem Ipsum, welcome message, blah blah blah.`</Text>
       <ButtonArea>
@@ -15,21 +14,14 @@ const SignUp = () => {
         <Button large secondary>
           Github
         </Button>
-        <Button large style={{ background: 'darkred' }}>
+        <Button large danger>
           Twitter
         </Button>
-        <Button large style={{ background: 'green' }}>
+        <Button large warning>
           Facebook
         </Button>
-        <Button
-          large
-          outline
-          primary
-          onClick={() => {
-            Router.push('/auth/email');
-          }}
-        >
-          Email
+        <Button large outline primary>
+          <Link href="/auth/email">Email</Link>
         </Button>
       </ButtonArea>
       <Text small>
@@ -37,7 +29,6 @@ const SignUp = () => {
       </Text>
     </Root>
   );
-};
 
 export default SignUp;
 
