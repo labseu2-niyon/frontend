@@ -8,23 +8,25 @@ export default (state, action) => {
       return { ...state, count: state.count - 1 };
     case actionTypes.RESET:
       return { ...state, count: 0 };
-    case actionTypes.SUCCESS:
+
+    case actionTypes.REGISTER_USER_REQUEST:
+      return {
+        ...state,
+        queryingDatabase: true,
+      };
+    case actionTypes.REGISTER_USER_SUCCESS:
       return {
         ...state,
         queryingDatabase: false,
-        token: action.payload,
+        // token: action.payload,
       };
-    case actionTypes.FAILURE:
+    case actionTypes.REGISTER_USER_FAILURE:
       return {
         ...state,
         queryingDatabase: false,
         errorMessage: action.payload,
       };
-    case actionTypes.REGISTERING_USER:
-      return {
-        ...state,
-        queryingDatabase: true,
-      };
+
     default:
       return state;
   }
