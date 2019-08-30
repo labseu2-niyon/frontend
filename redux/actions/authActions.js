@@ -47,3 +47,74 @@ export const setClientState = (clientState) => ({
   type: types.SET_CLIENT_STATE,
   payload: clientState,
 });
+
+// import axios from 'axios';
+// import { actionTypes } from '../constants';
+
+// const _BASE_URL = 'https://niyon-dev.herokuapp.com/';
+
+// export const registerUser = newUser => dispatch => {
+//   dispatch({ type: actionTypes.REGISTER_USER_REQUEST });
+//   // spinner
+//   axios
+//     .post(`${_BASE_URL}/signup`, newUser)
+//     .then(res => {
+//       dispatch({
+//         type: actionTypes.REGISTER_USER_SUCCESS,
+//         payload: res.data,
+//         // payload: res.data.token,
+//       });
+//       // window.localStorage.setItem('token', res.data.token);
+//       // window.location = '/user/dashboard';
+//     })
+//     .catch(error => {
+//       dispatch({
+//         type: actionTypes.REGISTER_USER_FAILURE,
+//         payload: error.message,
+//       });
+//     });
+// };
+
+// export const logInUser = existingUser => dispatch => {
+//   dispatch({ type: actionTypes.LOG_IN_USER_REQUEST });
+//   // spinner
+//   axios
+//     .post(`${_BASE_URL}/login`, existingUser)
+//     .then(res => {
+//       dispatch({
+//         type: actionTypes.LOG_IN_USER_SUCCESS,
+//         payload: {
+//           token: res.data.token,
+//           message: res.data.message,
+//         },
+//       });
+//       // window.localStorage.setItem('user', JSON.stringify(res.data));
+//       // window.location = '/user/dashboard';
+//     })
+//     .catch(error => {
+//       dispatch({
+//         type: actionTypes.LOG_IN_USER_FAILURE,
+//         payload: error.message,
+//       });
+//     });
+// };
+
+// export const resetPassword = email => dispatch => {
+//   dispatch({ type: actionTypes.RESET_PASSWORD_REQUEST });
+//   // spinner
+//   axios
+//     .post(`${_BASE_URL}/resetpassword`, email)
+//     .then(res => {
+//       dispatch({
+//         type: actionTypes.RESET_PASSWORD_SUCCESS,
+//         payload: res.data,
+//       });
+//       // window.location = '/auth/email-sent';
+//     })
+//     .catch(error => {
+//       dispatch({
+//         type: actionTypes.RESET_PASSWORD_FAILURE,
+//         payload: error.message,
+//       });
+//     });
+// };

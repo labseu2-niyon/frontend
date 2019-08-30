@@ -1,7 +1,5 @@
-
-
 import axios from 'axios';
-import { actionTypes } from '../constants';
+import { actionTypes } from '../userConstants';
 
 const _BASE_URL = 'https://niyon-dev.herokuapp.com/';
 
