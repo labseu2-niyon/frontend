@@ -10,6 +10,8 @@
   "rules": {
     "react/jsx-one-expression-per-line": "off",
     "no-underscore-dangle": "off",
+    "max-len": ["error", 1000],
+    "no-param-reassign": "off",
     "prefer-destructuring": [
       "error",
       {

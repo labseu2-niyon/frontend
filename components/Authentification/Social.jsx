@@ -1,11 +1,18 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import StepsComp from './StepsComp';
 import { Heading2, Text, Button } from '../~common/index';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import Router from 'next/router';
+import { connect } from 'react-redux';
+import { setClientState } from '../../redux/actions/authActions';
 
-const Social = ({ errors, touched }) => {
+const Social = ({ errors, touched, setClientState, status }) => {
+  useEffect(() => {
+    console.log('alabala: ', status);
+    setClientState(status);
+  }, [status]);
   return (
     <Root>
       <StepsComp stepNumber="1" />
@@ -52,12 +59,24 @@ const FormikWithSocialForm = withFormik({
     username: Yup.string().required('Username is required')
   }),
   handleSubmit(values, { setStatus }) {
-    console.log('Values: ', values);
+    //console.log('Values: ', values);
     Router.push('/auth/location');
+    setStatus(values);
   }
 })(Social);
 
-export default FormikWithSocialForm;
+const mapStateToProps = state => {
+  return {};
+};
+
+const mapDispatchToProps = {
+  setClientState
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FormikWithSocialForm);
 
 const Root = styled.div`
   height: 96vh;
