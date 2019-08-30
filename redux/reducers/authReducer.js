@@ -4,15 +4,32 @@ const initialState = {
   userInfo: null,
   loading: false,
   error: null,
-  fromClient: [],
+  emailData: [],
+  locationData: [],
+  profileData: [],
+  userTypeData: [],
+  socialData: [],
 };
 
 export const authReducer = (state = initialState, { type, payload }) => {
-  if (type === types.SET_CLIENT_STATE) {
+  if (type === types.SET_EMAIL_DATA) {
     return {
       ...state,
-      fromClient: payload,
+      emailData: payload,
     };
   }
+  if (type === types.SET_LOCATION_DATA) {
+    return {
+      ...state,
+      locationData: payload,
+    };
+  }
+  if (type === types.SET_PROFILE_DATA) {
+    return {
+      ...state,
+      profileData: [],
+    };
+  }
+
   return state;
 };

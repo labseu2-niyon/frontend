@@ -7,11 +7,11 @@ import Link from 'next/link';
 import Router from 'next/router';
 import Steps from './StepsComp';
 import { connect } from 'react-redux';
-import { setClientState } from '../../redux/actions/authActions';
+import { emailSignup } from '../../redux/actions/authActions';
 
-const Email = ({ errors, touched, values, setClientState }) => {
+const Email = ({ errors, touched, values, emailSignup }) => {
   useEffect(() => {
-    setClientState(values);
+    emailSignup(values);
   }, [values]);
   return (
     <>
@@ -86,7 +86,7 @@ const FormikWithEmailForm = withFormik({
 
 export default connect(
   state => state,
-  { setClientState }
+  { emailSignup }
 )(FormikWithEmailForm);
 
 const Root = styled.div`

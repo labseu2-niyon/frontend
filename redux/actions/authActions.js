@@ -43,7 +43,12 @@ export const emailSignUp = () => (dispatch) => {
   dispatch(stopLoading());
 };
 
-export const setClientState = (clientState) => ({
-  type: types.SET_CLIENT_STATE,
-  payload: clientState,
+export const emailSignup = (data) => ({
+  type: types.SET_EMAIL_DATA,
+  payload: data,
+});
+
+export const locationData = (data) => ({
+  type: types.SET_LOCATION_DATA,
+  payload: data,
 });
