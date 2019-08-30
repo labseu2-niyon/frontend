@@ -1,4 +1,4 @@
-import ProfileInfo from '../../components/Authentification/ProfileInfo';
+import ProfileInfo from '../../components/auth/ProfileInfo';
 
 const profile = () => (
   <div>

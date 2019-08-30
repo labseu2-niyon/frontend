@@ -1,4 +1,4 @@
-import EmailSent from '../../components/Authentification/EmailSent';
+import EmailSent from '../../components/auth/EmailSent';
 
 const emailSent = () => (
   <div>
