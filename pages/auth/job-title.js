@@ -1,4 +1,4 @@
-import JobTitle from '../../components/Authentification/JobTitle';
+import JobTitle from '../../components/auth/JobTitle';
 
 const job = () => (
   <div>
