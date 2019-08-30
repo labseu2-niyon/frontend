@@ -20,7 +20,7 @@ const ProfileInfo = ({ status, profileData }) => {
     console.log('Statusss', status);
     if (status) {
       status.image = handleImageUpload(image);
-      console.log(status);
+      // console.log(status);
       profileData(status);
     }
   }, [status]);

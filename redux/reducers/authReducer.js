@@ -38,5 +38,12 @@ export const authReducer = (state = initialState, { type, payload }) => {
     };
   }
 
+  if (type === types.SET_SOCIAL_MEDIA_DATA) {
+    return {
+      ...state,
+      socialData: payload,
+    };
+  }
+
   return state;
 };

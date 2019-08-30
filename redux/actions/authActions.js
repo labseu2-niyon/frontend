@@ -62,3 +62,8 @@ export const profileData = (data) => ({
   type: types.SET_PROFILE_DATA,
   payload: data,
 });
+
+export const socialData = (data) => ({
+  type: types.SET_SOCIAL_MEDIA_DATA,
+  payload: data,
+});

@@ -3,8 +3,10 @@ import { Button, Heading2, Skip } from '../~common/index';
 import styled from 'styled-components';
 import Steps from './StepsComp';
 import Router from 'next/router';
+import { connect } from 'react-redux';
+import { socialData } from '../../redux/actions/authActions';
 
-const SocialInfo = () => {
+const SocialInfo = ({ socialData }) => {
   const [twitter, setTweeter] = useState('');
   const [google, setGoogle] = useState('');
   const [gitHub, setGitHub] = useState('');
@@ -12,7 +14,13 @@ const SocialInfo = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(twitter, google, gitHub, facebook);
+    const data = {
+      twitter,
+      google,
+      gitHub,
+      facebook
+    };
+    socialData(data);
     Router.push('/');
   };
   return (
@@ -69,7 +77,10 @@ const SocialInfo = () => {
   );
 };
 
-export default SocialInfo;
+export default connect(
+  state => state,
+  { socialData }
+)(SocialInfo);
 
 const Root = styled.div`
   height: 80vh;
