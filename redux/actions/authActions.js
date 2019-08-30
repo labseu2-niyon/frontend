@@ -57,3 +57,8 @@ export const userType = (data) => ({
   type: types.SET_USER_TYPE,
   payload: data,
 });
+
+export const profileData = (data) => ({
+  type: types.SET_PROFILE_DATA,
+  payload: data,
+});

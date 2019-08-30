@@ -9,9 +9,11 @@ import { connect } from 'react-redux';
 import { locationData } from '../../redux/actions/authActions';
 
 const Location = ({ errors, touched, locationData, values }) => {
+
   useEffect(() => {
     locationData(values);
   }, [values]);
+  
   return (
     <Root>
       <Steps stepNumber="2" />

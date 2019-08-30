@@ -34,7 +34,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
   if (type === types.SET_PROFILE_DATA) {
     return {
       ...state,
-      profileData: [],
+      profileData: payload,
     };
   }
 
