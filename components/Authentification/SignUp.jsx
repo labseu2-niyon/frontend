@@ -1,44 +1,35 @@
 import styled from 'styled-components';
-
-import { Text, Button } from '../~common/index';
-
 import Link from 'next/link';
 import Router from 'next/router';
 import { Text, Button } from '../~common/index';
 
 const SignUp = () => (
-    <Root>
-      <Text small>Lorem Ipsum, welcome message, blah blah blah.`</Text>
-      <ButtonArea>
-        <Button large primary onClick={() => Router.push('/auth/social')}>
-          Google
-        </Button>
-        <Button large secondary onClick={() => Router.push('/auth/social')}>
-          Github
-        </Button>
+  <Root>
+    <Text small>Lorem Ipsum, welcome message, blah blah blah.`</Text>
+    <ButtonArea>
+      <Button large primary onClick={() => Router.push('/auth/social')}>
+        Google
+      </Button>
+      <Button large secondary onClick={() => Router.push('/auth/social')}>
+        Github
+      </Button>
 
-       <Button large danger onClick={() => Router.push('/auth/social')}>
-          Twitter
-          </Button>
-        <Button large warning onClick={() => Router.push('/auth/social')}>
-          Facebook
-        </Button>
+      <Button large danger onClick={() => Router.push('/auth/social')}>
+        Twitter
+      </Button>
+      <Button large warning onClick={() => Router.push('/auth/social')}>
+        Facebook
+      </Button>
 
-        <Button
-          large
-          outline
-          primary
-          onClick={() => Router.push('/auth/email')}
-        >
-          Email
-
-        </Button>
-      </ButtonArea>
-      <Text small>
-        Already a member? <Link href="/auth/login">Login IN</Link>{' '}
-      </Text>
-    </Root>
-  );
+      <Button large outline primary onClick={() => Router.push('/auth/email')}>
+        Email
+      </Button>
+    </ButtonArea>
+    <Text small>
+      Already a member? <Link href="/auth/login">Login IN</Link>{' '}
+    </Text>
+  </Root>
+);
 
 export default SignUp;
 
