@@ -5,28 +5,41 @@ const initialState = {
   loading: false,
   error: null,
   fromClient: [],
+  token: null,
+  message: '',
 };
 
 export const authReducer = (state = initialState, { type, payload }) => {
-  if (type === types.SET_CLIENT_STATE) {
-    return {
-      ...state,
-      fromClient: payload,
-    };
+  switch (type) {
+    case types.SET_CLIENT_STATE:
+      return {
+        ...state,
+        fromClient: payload,
+      };
+    case types.LOG_IN_USER_REQUEST:
+      return {
+        ...state,
+      };
+    case types.LOG_IN_USER_SUCCESS:
+      return {
+        ...state,
+        token: payload.token,
+        message: payload.message,
+      };
+    case types.LOG_IN_USER_FAILURE:
+      return {
+        ...state,
+        error: payload,
+      };
+    default:
+      return state;
   }
-  return state;
 };
 
 // Pascal's Reducers
 
 // export default (state, action) => {
 //   switch (action.type) {
-//     case actionTypes.INCREMENT:
-//       return { ...state, count: state.count + 1 };
-//     case actionTypes.DECREMENT:
-//       return { ...state, count: state.count - 1 };
-//     case actionTypes.RESET:
-//       return { ...state, count: 0 };
 
 //     case actionTypes.REGISTER_USER_REQUEST:
 //       return {
@@ -44,25 +57,6 @@ export const authReducer = (state = initialState, { type, payload }) => {
 //         ...state,
 //         queryingDatabase: false,
 //         errorMessage: action.payload
-//       };
-
-//     case actionTypes.LOG_IN_USER_REQUEST:
-//       return {
-//         ...state,
-//         queryingDatabase: true
-//       };
-//     case actionTypes.LOG_IN_USER_SUCCESS:
-//       return {
-//         ...state,
-//         queryingDatabase: false,
-//         token: action.payload.token,
-//         message: action.payload.message
-//       };
-//     case actionTypes.LOG_IN_USER_FAILURE:
-//       return {
-//         ...state,
-//         queryingDatabase: false,
-//         error: action.payload
 //       };
 
 //     case actionTypes.RESET_PASSWORD_REQUEST:
