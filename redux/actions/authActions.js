@@ -1,4 +1,7 @@
+import axios from 'axios';
 import { types } from '../authConstants';
+
+const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
 
 const startLoading = () => ({
   type: types.START_LOADING,
@@ -48,10 +51,33 @@ export const setClientState = (clientState) => ({
   payload: clientState,
 });
 
+export const logInUser = ({ email, password }) => (dispatch) => {
+  dispatch({ type: types.LOG_IN_USER_REQUEST });
+  // spinner
+  console.log({ email, password });
+  axios
+    .post(`${_BASE_URL}/user/login`, { email, password })
+    .then((res) => {
+      console.log(res.data);
+      dispatch({
+        type: types.LOG_IN_USER_SUCCESS,
+        payload: {
+          token: res.data.token,
+          message: res.data.message,
+        },
+      });
+      localStorage.setItem('user', JSON.stringify(res.data));
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.LOG_IN_USER_FAILURE,
+        payload: error.message,
+      });
+    });
+};
+
 // import axios from 'axios';
 // import { actionTypes } from '../constants';
-
-// const _BASE_URL = 'https://niyon-dev.herokuapp.com/';
 
 // export const registerUser = newUser => dispatch => {
 //   dispatch({ type: actionTypes.REGISTER_USER_REQUEST });
@@ -70,30 +96,6 @@ export const setClientState = (clientState) => ({
 //     .catch(error => {
 //       dispatch({
 //         type: actionTypes.REGISTER_USER_FAILURE,
-//         payload: error.message,
-//       });
-//     });
-// };
-
-// export const logInUser = existingUser => dispatch => {
-//   dispatch({ type: actionTypes.LOG_IN_USER_REQUEST });
-//   // spinner
-//   axios
-//     .post(`${_BASE_URL}/login`, existingUser)
-//     .then(res => {
-//       dispatch({
-//         type: actionTypes.LOG_IN_USER_SUCCESS,
-//         payload: {
-//           token: res.data.token,
-//           message: res.data.message,
-//         },
-//       });
-//       // window.localStorage.setItem('user', JSON.stringify(res.data));
-//       // window.location = '/user/dashboard';
-//     })
-//     .catch(error => {
-//       dispatch({
-//         type: actionTypes.LOG_IN_USER_FAILURE,
 //         payload: error.message,
 //       });
 //     });
