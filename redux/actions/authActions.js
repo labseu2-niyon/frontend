@@ -52,3 +52,8 @@ export const locationData = (data) => ({
   type: types.SET_LOCATION_DATA,
   payload: data,
 });
+
+export const userType = (data) => ({
+  type: types.SET_USER_TYPE,
+  payload: data,
+});

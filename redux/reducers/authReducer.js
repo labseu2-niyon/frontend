@@ -24,6 +24,13 @@ export const authReducer = (state = initialState, { type, payload }) => {
       locationData: payload,
     };
   }
+
+  if (type === types.SET_USER_TYPE) {
+    return {
+      ...state,
+      userTypeData: payload,
+    };
+  }
   if (type === types.SET_PROFILE_DATA) {
     return {
       ...state,
