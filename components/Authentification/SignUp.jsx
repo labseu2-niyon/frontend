@@ -13,12 +13,14 @@ const SignUp = () => (
       <Button large secondary onClick={() => Router.push('/auth/social')}>
         Github
       </Button>
+
       <Button large danger onClick={() => Router.push('/auth/social')}>
         Twitter
       </Button>
       <Button large warning onClick={() => Router.push('/auth/social')}>
         Facebook
       </Button>
+
       <Button large outline primary onClick={() => Router.push('/auth/email')}>
         Email
       </Button>
