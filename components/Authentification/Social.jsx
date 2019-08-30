@@ -10,7 +10,6 @@ import { setClientState } from '../../redux/actions/authActions';
 
 const Social = ({ errors, touched, setClientState, status }) => {
   useEffect(() => {
-    console.log('alabala: ', status);
     setClientState(status);
   }, [status]);
   return (
