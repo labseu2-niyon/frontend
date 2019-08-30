@@ -4,9 +4,6 @@
 
 // import reducer from './reducers';
 
-// const exampleInitialState = {
-//   count: 0
-// };
 
 // export function initializeStore(initialState = exampleInitialState) {
 //   return createStore(
