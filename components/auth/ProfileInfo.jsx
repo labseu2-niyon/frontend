@@ -17,7 +17,6 @@ const ProfileInfo = ({ status }) => {
 
   useEffect(() => {
     if (status) {
-      console.log('Info', status.bio, image);
     }
   }, [status]);
 

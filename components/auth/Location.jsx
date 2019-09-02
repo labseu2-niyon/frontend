@@ -49,7 +49,6 @@ const FormikWithLocationForm = withFormik({
     country: Yup.string().required('Country name is required')
   }),
   handleSubmit(values) {
-    console.log(values);
     Router.push('/auth/job-title');
   }
 })(Location);

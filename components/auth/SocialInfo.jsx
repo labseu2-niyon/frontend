@@ -12,7 +12,6 @@ const SocialInfo = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(twitter, google, gitHub, facebook);
     Router.push('/');
   };
   return (

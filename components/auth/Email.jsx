@@ -72,7 +72,6 @@ const FormikWithEmailForm = withFormik({
       .required('Password is required')
   }),
   handleSubmit(values, { setStatus }) {
-    console.log(values);
     Router.push('/auth/location');
   }
 })(Email);
