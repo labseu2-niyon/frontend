@@ -1,66 +1,65 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import { Avatar } from './~common/index';
 import { Icon } from 'antd';
+import { connect } from 'react-redux';
+import { Avatar } from './~common/index';
 
 const dummyUser = {
   image: 'https://milan.serverlessdays.io/speakers/guillermo-rauch.jpg',
-  name: 'Guillermo Rauch'
+  name: 'Guillermo Rauch',
 };
 
-const Navigation = () => {
-  return (
-    <Nav>
-      <div className="desktop">
-        <Avatar extraLarge source={dummyUser.image}></Avatar>
-        <p className="desktop name">{dummyUser.name}</p>
-      </div>
+const Navigation = () => (
+  <Nav>
+    <div className="desktop">
+      <Avatar extraLarge source={dummyUser.image} />
+      <p className="desktop name">{dummyUser.name}</p>
+    </div>
 
-      <div className="mobile-avatar">
-        <Avatar small source={dummyUser.image}></Avatar>
-      </div>
-      <Links>
-        <Link href="/">
-          <div>
-            <Icon type="home" className="icon" />
-            <a className="desktop">Home</a>
-          </div>
-        </Link>
-        <Link href="/">
-          <div>
-            <Icon type="user" className="icon" />
-            <a className="desktop">Profile</a>
-          </div>
-        </Link>
-        <Link href="/connections">
-          <div>
-            <Icon type="share-alt" className="icon" />
-            <a className="desktop">Connections</a>
-          </div>
-        </Link>
-        <Link href="/explore">
-          <div>
-            <Icon type="search" className="icon" />
-            <a className="desktop">Explore</a>
-          </div>
-        </Link>
-        <Link href="/settings">
-          <div>
-            <Icon type="setting" className="icon" />
-            <a className="desktop">Settings</a>
-          </div>
-        </Link>
-        {/* Log out should redirect person to marketing site (external link) */}
+    <div className="mobile-avatar">
+      <Avatar small source={dummyUser.image} />
+    </div>
+    <Links>
+      <Link href="/">
         <div>
-          <Icon type="logout" className="icon" />
-          <a href="#" className="desktop">
-            Log out
-          </a>
+          <Icon type="home" className="icon" />
+          <a className="desktop">Home</a>
         </div>
-      </Links>
-    </Nav>
-  );
-};
+      </Link>
+      <Link href="/">
+        <div>
+          <Icon type="user" className="icon" />
+          <a className="desktop">Profile</a>
+        </div>
+      </Link>
+      <Link href="/connections">
+        <div>
+          <Icon type="share-alt" className="icon" />
+          <a className="desktop">Connections</a>
+        </div>
+      </Link>
+      <Link href="/explore">
+        <div>
+          <Icon type="search" className="icon" />
+          <a className="desktop">Explore</a>
+        </div>
+      </Link>
+      <Link href="/settings">
+        <div>
+          <Icon type="setting" className="icon" />
+          <a className="desktop">Settings</a>
+        </div>
+      </Link>
+      {/* Log out should redirect person to marketing site (external link) */}
+      <div>
+        <Icon type="logout" className="icon" />
+        <a href="#" className="desktop">
+          Log out
+        </a>
+      </div>
+    </Links>
+  </Nav>
+);
 
 const Nav = styled.div`
   display: flex;
@@ -148,4 +147,7 @@ const Links = styled.div`
   }
 `;
 
-export default Navigation;
+export default connect(
+  (state) => state,
+  { logOutUser },
+)(Navigation);

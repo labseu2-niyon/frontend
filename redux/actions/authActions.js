@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Router from 'next/router';
+import nookies from 'nookies';
 import { types } from '../authConstants';
 
 const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
@@ -98,6 +99,7 @@ export const logInUser = ({ email, password }) => (dispatch) => {
 
 export const logOutUser = () => (dispatch) => {
   dispatch({ type: types.LOG_OUT_USER_REQUEST });
+  nookies.destroy({}, 'token');
   Router.push('/');
 };
 
