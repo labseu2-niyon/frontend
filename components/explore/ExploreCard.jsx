@@ -6,7 +6,7 @@ import { Heading3 } from '../~common';
 
 const Wrapper = styled.div`
     box-sizing: border-box;
-    width: 45%;
+    width: 48%;
     padding: 1rem 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
