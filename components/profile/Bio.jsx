@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Icon } from 'antd';
+import { Heading2 } from '../~common';
 
 const Wrapper = styled.div`
     position: relative;
@@ -13,7 +14,7 @@ const Wrapper = styled.div`
 
 const BioSection = styled.div`
     position: absolute;
-    top: -50px;
+    top: -40px;
     box-sizing: border-box;
     width: 650px;
     max-width: 90%;
@@ -73,7 +74,7 @@ const Social = styled.div`
     }
 `;
 
-function Bio({ position = 'Mentor', location = 'Freetown SA', text = ['hello', 'here we go'] }) {
+function Bio({ position, location, text }) {
   return (
     <Wrapper>
       <BioSection>
@@ -81,6 +82,7 @@ function Bio({ position = 'Mentor', location = 'Freetown SA', text = ['hello', '
           <div><Icon type="book" />{position}</div>
           <div><Icon type="global" />{location}</div>
         </Location>
+        <Heading2>Bio</Heading2>
         {text.map((line) => <p>{line}</p>)}
         <Social>
           <button type="button">

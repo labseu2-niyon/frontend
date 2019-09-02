@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Heading2, Button } from '../~common';
+import { Heading, Button } from '../~common';
 
 const Wrapper = styled.section`
     width: 100%;
-    height: 250px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 2rem 0;
+    padding: 4rem 0;
     border-top: 1px solid #eaeaea;
     border-bottom: 1px solid #eaeaea;
 `;
@@ -44,7 +43,7 @@ const ButtonWrapper = styled.div`
     align-items: center;
 `;
 
-function PhotoSection({ user = 'Person Pearson', job = 'Developer', src = 'https://milan.serverlessdays.io/speakers/guillermo-rauch.jpg' }) {
+function PhotoSection({ user, job, src }) {
   return (
     <Wrapper>
       <PhotoWrapper>
@@ -53,7 +52,7 @@ function PhotoSection({ user = 'Person Pearson', job = 'Developer', src = 'https
         </Photo>
       </PhotoWrapper>
       <TextWrapper>
-        <Heading2>{user}</Heading2>
+        <Heading>{user}</Heading>
         <p>{job}</p>
       </TextWrapper>
       <ButtonWrapper>
