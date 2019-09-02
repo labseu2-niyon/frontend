@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PhotoSection from './PhotoSection';
 
 const Container = styled.main`
     width: 100%;
@@ -11,7 +12,7 @@ const Container = styled.main`
 function Profile() {
   return (
     <Container>
-        hello
+      <PhotoSection />
     </Container>
   );
 }
