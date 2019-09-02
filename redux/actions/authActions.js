@@ -1,4 +1,7 @@
+import axios from 'axios';
 import { types } from '../authConstants';
+
+const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
 
 const startLoading = () => ({
   type: types.START_LOADING,
@@ -67,3 +70,73 @@ export const socialData = (data) => ({
   type: types.SET_SOCIAL_MEDIA_DATA,
   payload: data,
 });
+
+export const logInUser = ({ email, password }) => (dispatch) => {
+  dispatch({ type: types.LOG_IN_USER_REQUEST });
+  // spinner
+  console.log({ email, password });
+  axios
+    .post(`${_BASE_URL}/user/login`, { email, password })
+    .then((res) => {
+      console.log(res.data);
+      dispatch({
+        type: types.LOG_IN_USER_SUCCESS,
+        payload: {
+          token: res.data.token,
+          message: res.data.message,
+        },
+      });
+      localStorage.setItem('user', JSON.stringify(res.data));
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.LOG_IN_USER_FAILURE,
+        payload: error.message,
+      });
+    });
+};
+
+// import axios from 'axios';
+// import { actionTypes } from '../constants';
+
+// export const registerUser = newUser => dispatch => {
+//   dispatch({ type: actionTypes.REGISTER_USER_REQUEST });
+//   // spinner
+//   axios
+//     .post(`${_BASE_URL}/signup`, newUser)
+//     .then(res => {
+//       dispatch({
+//         type: actionTypes.REGISTER_USER_SUCCESS,
+//         payload: res.data,
+//         // payload: res.data.token,
+//       });
+//       // window.localStorage.setItem('token', res.data.token);
+//       // window.location = '/user/dashboard';
+//     })
+//     .catch(error => {
+//       dispatch({
+//         type: actionTypes.REGISTER_USER_FAILURE,
+//         payload: error.message,
+//       });
+//     });
+// };
+
+// export const resetPassword = email => dispatch => {
+//   dispatch({ type: actionTypes.RESET_PASSWORD_REQUEST });
+//   // spinner
+//   axios
+//     .post(`${_BASE_URL}/resetpassword`, email)
+//     .then(res => {
+//       dispatch({
+//         type: actionTypes.RESET_PASSWORD_SUCCESS,
+//         payload: res.data,
+//       });
+//       // window.location = '/auth/email-sent';
+//     })
+//     .catch(error => {
+//       dispatch({
+//         type: actionTypes.RESET_PASSWORD_FAILURE,
+//         payload: error.message,
+//       });
+//     });
+// };
