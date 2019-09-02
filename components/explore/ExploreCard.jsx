@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Icon } from 'antd';
 import { Heading3 } from '../~common';
@@ -13,6 +14,7 @@ const Wrapper = styled.div`
     @media (max-width: 600px) {
         width: 100%;
         padding: 0.5rem 1rem;
+        margin: 1rem 0;
     }
 `;
 
@@ -83,5 +85,14 @@ function ExploreCard({
     </Wrapper>
   );
 }
+
+ExploreCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  field: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
+  position: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
+};
 
 export default ExploreCard;
