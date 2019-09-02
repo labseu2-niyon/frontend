@@ -74,11 +74,10 @@ export const socialData = (data) => ({
 export const logInUser = ({ email, password }) => (dispatch) => {
   dispatch({ type: types.LOG_IN_USER_REQUEST });
   // spinner
-  console.log({ email, password });
+
   axios
     .post(`${_BASE_URL}/user/login`, { email, password })
     .then((res) => {
-      console.log(res.data);
       dispatch({
         type: types.LOG_IN_USER_SUCCESS,
         payload: {
