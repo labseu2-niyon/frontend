@@ -4,18 +4,47 @@ const initialState = {
   userInfo: null,
   loading: false,
   error: null,
-  fromClient: [],
+  emailData: [],
+  locationData: [],
+  profileData: [],
+  userTypeData: [],
+  socialData: [],
   token: null,
   message: '',
 };
 
 export const authReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case types.SET_CLIENT_STATE:
+    case types.SET_EMAIL_DATA:
       return {
         ...state,
-        fromClient: payload,
+        emailData: payload,
       };
+
+    case types.SET_LOCATION_DATA:
+      return {
+        ...state,
+        locationData: payload,
+      };
+
+    case types.SET_USER_TYPE:
+      return {
+        ...state,
+        userTypeData: payload,
+      };
+
+    case types.SET_PROFILE_DATA:
+      return {
+        ...state,
+        profileData: payload,
+      };
+
+    case types.SET_SOCIAL_MEDIA_DATA:
+      return {
+        ...state,
+        socialData: payload,
+      };
+
     case types.LOG_IN_USER_REQUEST:
       return {
         ...state,
@@ -30,6 +59,12 @@ export const authReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         error: payload,
+      };
+
+    case types.LOG_OUT_USER:
+      return {
+        ...state,
+        token: null,
       };
     default:
       return state;
