@@ -154,7 +154,7 @@ const FormArea = styled(Form)`
   width: 100%;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   @media (min-width: 500px) {
-    width: 60%;
+    width: 50%;
   }
 
   input {
@@ -171,7 +171,7 @@ const FormArea = styled(Form)`
     }
 
     @media (min-width: 500px) {
-      width: 60%;
+      width: 40%;
     }
   }
 `;
