@@ -35,6 +35,7 @@ const Photo = styled.div`
     height: 100px;
     background: #eaeaea;
     border-radius: 50%;
+    overflow: hidden;
 `;
 
 const Text = styled.div`
