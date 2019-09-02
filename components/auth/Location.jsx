@@ -12,7 +12,7 @@ const Location = ({ errors, touched }) => {
   return (
     <Root>
       <Steps stepNumber="2" />
-      <Heading2>Location Info</Heading2>
+      <Heading2 primary>Location Info</Heading2>
       <IconT className="fas fa-globe-europe"></IconT>
       <Text small>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nisl

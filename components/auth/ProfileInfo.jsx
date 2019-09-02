@@ -26,7 +26,7 @@ const ProfileInfo = ({ profileData, values, loading, error }) => {
   return (
     <Root>
       <Steps stepNumber="4" />
-      <Heading2>Show Us your face</Heading2>
+      <Heading2 primary>Show Us your face</Heading2>
       <FormArea>
         <RoundIcon>
           <Input

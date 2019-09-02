@@ -28,7 +28,7 @@ const SocialInfo = ({ socialData }) => {
   return (
     <Root>
       <Steps stepNumber="5" />
-      <Heading2>Add Social Media</Heading2>
+      <Heading2 primary>Add Social Media</Heading2>
       <FormArea onSubmit={handleSubmit}>
         <InputWrapper>
           <input

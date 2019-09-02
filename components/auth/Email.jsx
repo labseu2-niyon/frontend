@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Heading2, Text, Button } from '../~common/index';
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
@@ -8,14 +7,14 @@ import Router from 'next/router';
 import Steps from './StepsComp';
 import { connect } from 'react-redux';
 import { emailSignup } from '../../redux/actions/authActions';
-import Bounce from 'react-reveal/Bounce';
+import { theme } from '../../lib/theme';
 
 const Email = ({ errors, touched, loading, error }) => {
   console.log(loading, error);
   return (
     <Root>
       <Steps stepNumber="1" />
-      <Heading2>Email login</Heading2>
+      <Heading2 primary>Email login</Heading2>
       <FormArea>
         <InputWrapper>
           <Field name="username" type="text" placeholder="username" />
