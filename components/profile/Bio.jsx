@@ -7,9 +7,9 @@ import { Heading2 } from '../~common';
 const Wrapper = styled.div`
     position: relative;
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
-    background: pink;
 `;
 
 const BioSection = styled.div`
@@ -22,6 +22,7 @@ const BioSection = styled.div`
     border-radius: 8px;
     padding: 1rem 2rem;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 50px;
 `;
 
 const Location = styled.div`
