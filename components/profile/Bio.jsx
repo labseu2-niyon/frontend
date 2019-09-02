@@ -17,7 +17,7 @@ const BioSection = styled.div`
     top: -40px;
     box-sizing: border-box;
     width: 650px;
-    max-width: 90%;
+    max-width: 100%;
     background: #fff;
     border-radius: 8px;
     padding: 1rem 2rem;
