@@ -1,4 +1,4 @@
-import SocialInfo from '../../components/Authentification/SocialInfo';
+import SocialInfo from '../../components/auth/SocialInfo';
 
 const socialinfo = () => (
   <div>

@@ -1,4 +1,4 @@
-import Social from '../../components/Authentification/Social';
+import Social from '../../components/auth/Social';
 
 const social = () => (
   <div>

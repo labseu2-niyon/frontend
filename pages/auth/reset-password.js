@@ -1,4 +1,4 @@
-import ResetPassword from '../../components/Authentification/ResetPassword';
+import ResetPassword from '../../components/auth/ResetPassword';
 
 const resetPassword = () => (
   <div>
