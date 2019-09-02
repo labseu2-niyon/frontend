@@ -8,6 +8,7 @@ import Router from 'next/router';
 import Steps from './StepsComp';
 import { connect } from 'react-redux';
 import { emailSignup } from '../../redux/actions/authActions';
+import Bounce from 'react-reveal/Bounce';
 
 const Email = ({ errors, touched, loading, error }) => {
   console.log(loading, error);
@@ -22,6 +23,7 @@ const Email = ({ errors, touched, loading, error }) => {
             <Error>{errors.username}</Error>
           )}
         </InputWrapper>
+
         <InputWrapper>
           <Field name="firstName" type="text" placeholder="First Name" />
           {touched.firstName && errors.firstName && (
@@ -50,6 +52,7 @@ const Email = ({ errors, touched, loading, error }) => {
         </Button>
         {/* {error && <Error style={{ textAlign: 'center' }}>{error}</Error>} */}
       </FormArea>
+
       <Text small>
         <Link href="/auth/signup">
           <a>Login with Social Media</a>
@@ -77,7 +80,7 @@ const FormikWithEmailForm = withFormik({
       .email('Email is invalid')
       .required('Email is required'),
     password: Yup.string()
-      .min(3, 'Password must be at least 8 characters')
+      .min(8, 'Password must be at least 8 characters')
       .required('Password is required')
   }),
   handleSubmit(values, { props }) {

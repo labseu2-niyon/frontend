@@ -126,8 +126,6 @@ const JobTitle = ({ touched, errors, values, status, userType }) => {
         </Costum>
       </MentorIcons>
       <FormArea>
-        {menteeePresed && mentee()}
-        {mentorPressed && mentor()}
         <InputWrapper>
           <Field component="select" name="job">
             <option>Job Title</option>
@@ -137,6 +135,8 @@ const JobTitle = ({ touched, errors, values, status, userType }) => {
           </Field>
           {touched.job && errors.job && <Error>{errors.job}</Error>}
         </InputWrapper>
+        {menteeePresed && mentee()}
+        {mentorPressed && mentor()}
         <Button small primary type="submit">
           Next
         </Button>
