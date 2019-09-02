@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { emailSignup } from '../../redux/actions/authActions';
 
 const Email = ({ errors, touched, loading, status }) => {
-  console.log(loading, status);
+  //console.log(loading, status);
   return (
     <Root>
       <Steps stepNumber="1" />
@@ -83,8 +83,26 @@ const FormikWithEmailForm = withFormik({
   },
   validationSchema: Yup.object().shape({
     username: Yup.string().required('Username is required'),
-    firstName: Yup.string().required('First Name is required'),
-    lastName: Yup.string().required('Last Name is required'),
+    firstName: Yup.string()
+      .matches(/^[A-Z]/, {
+        message: 'Name must start with a capital letter',
+        excludeEmptyString: true
+      })
+      .matches(/^([^0-9]*)$/, {
+        message: 'Must contain only letters',
+        excludeEmptyString: true
+      })
+      .required('Name is requried.'),
+    lastName: Yup.string()
+      .matches(/^[A-Z]/, {
+        message: 'Name must start with a capital letter',
+        excludeEmptyString: true
+      })
+      .matches(/^([^0-9]*)$/, {
+        message: 'Must contain only letters',
+        excludeEmptyString: true
+      })
+      .required('Name is requried.'),
     email: Yup.string()
       .email('Email is invalid')
       .required('Email is required'),
