@@ -25,7 +25,16 @@ const Navigation = () => (
           <a className="desktop">Home</a>
         </div>
       </Link>
-      <Link href={{ pathname: '/profile', query: { userId: 'abc123', user: 'Guillermo Rauch', jobTitle: 'Web Developer' } }}>
+      <Link href={{
+        pathname: '/profile',
+        query: {
+          userId: 'abc123',
+          user: 'Guillermo Rauch',
+          jobTitle: 'Web Developer',
+          src: 'https://milan.serverlessdays.io/speakers/guillermo-rauch.jpg',
+        },
+      }}
+      >
         <div>
           <Icon type="user" className="icon" />
           <a className="desktop">Profile</a>
