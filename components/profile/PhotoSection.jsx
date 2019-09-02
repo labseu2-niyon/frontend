@@ -9,6 +9,9 @@ const Wrapper = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 2rem 0;
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
 `;
 
 const PhotoWrapper = styled.div`
