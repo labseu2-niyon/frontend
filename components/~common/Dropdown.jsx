@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import { Icon } from 'antd';
 
-function Dropdown({ title, list, grabOption, icon }) {
+function Dropdown({
+  title, list, grabOption, icon, width,
+}) {
   const [showOptions, setOptions] = useState(false);
   const [currentTitle, setTitle] = useState(title);
 
   function toggle() {
-    setOptions(showOptions === false ? true : false);
+    setOptions(!showOptions);
   }
 
   function chooseOption(option) {
@@ -17,14 +20,15 @@ function Dropdown({ title, list, grabOption, icon }) {
 
   return (
     <div>
-      <Title onClick={toggle}>
+      <Title onClick={toggle} width={width}>
         <p>{currentTitle}</p>
-        <i className={icon}>🐷</i>
+        {/* <i className={icon}><span role="img" aria-label="pig">🐷</span></i> */}
+        <Icon type="arrow-up" style={{ transform: !showOptions ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
       </Title>
 
       {showOptions ? (
-        <Options>
-          {list.map(option => (
+        <Options width={width}>
+          {list.map((option) => (
             <div key={option.value}>
               <div className="label" onClick={() => chooseOption(option)}>
                 {option.label}
@@ -42,6 +46,7 @@ const Title = styled.div`
   line-height: 0.75rem;
   padding: 0px 10px;
   width: ${({ width }) => width || '200px'};
+  max-width: 100%;
   color: black;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.07);
@@ -49,17 +54,22 @@ const Title = styled.div`
   justify-content: space-between;
   align-items: center;
   user-select: none;
+  border: 1px solid #eaeaea;
 `;
 
 const Options = styled.div`
   cursor: pointer;
+  position: absolute;
+  background: #fff;
   line-height: 1.5rem;
   margin-top: 10px;
   padding: 10px 10px;
   width: ${({ width }) => width || '200px'};
+  max-width: 100%;
   color: #bfc1c4;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.07);
+  border: 1px solid #eaeaea;
 
   .label {
     &:hover {
