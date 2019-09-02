@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Heading2 } from '../~common';
 import ExploreCard from './ExploreCard';
@@ -18,32 +19,20 @@ const Profiles = styled.div`
   justify-content: space-between;
 `;
 
-const profiles = [{
-  name: 'Andy',
-  field: 'Whaler',
-  description: 'I\'m andy the whaler',
-  src: '',
-  position: 'Whaley Whaler',
-  location: 'Japan',
-},
-{
-  name: 'Bob',
-  field: 'Porker',
-  description: 'I\'m andy the whaler',
-  src: '',
-  position: 'Whaley Whaler',
-  location: 'Japan',
-}];
 
-function ProfileList() {
+function ProfileList({ users }) {
   return (
     <Wrapper>
       <Heading2>Suggested Users</Heading2>
       <Profiles>
-        { profiles.map((profile) => <ExploreCard {...profile} />) }
+        { users.map((profile) => <ExploreCard {...profile} />) }
       </Profiles>
     </Wrapper>
   );
 }
+
+ProfileList.propTypes = {
+  users: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+};
 
 export default ProfileList;
