@@ -95,6 +95,27 @@ export const logInUser = ({ email, password }) => (dispatch) => {
     });
 };
 
+export const logOutUser = () => (dispatch) => {
+  dispatch({ type: types.LOG_OUT_USER_REQUEST });
+  // spinner
+  axios
+    .post(`${_BASE_URL}/user/logout`)
+    .then((res) => {
+      dispatch({
+        type: types.LOG_OUT_USER_SUCCESS,
+        payload: {
+          message: res.data.message,
+        },
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.LOG_OUT_USER_FAILURE,
+        payload: error.message,
+      });
+    });
+};
+
 // export const registerUser = newUser => dispatch => {
 //   dispatch({ type: actionTypes.REGISTER_USER_REQUEST });
 //   // spinner
