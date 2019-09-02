@@ -25,7 +25,12 @@ function ProfileList({ users }) {
     <Wrapper>
       <Heading2>Suggested Users</Heading2>
       <Profiles>
-        { users.map((profile) => <ExploreCard {...profile} />) }
+        { users.map((profile) => {
+          if (profile.display) {
+            return <ExploreCard {...profile} />;
+          }
+          return null;
+        }) }
       </Profiles>
     </Wrapper>
   );
