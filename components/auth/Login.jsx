@@ -8,14 +8,11 @@ import { connect } from 'react-redux';
 import { Heading4, Text, Button } from '../~common/index';
 import { logInUser } from '../../redux/actions/authActions';
 
-const Login = ({
- errors, touched, values, logInUser 
-}) => {
-  // console.log(handleSubmit);
-  const handleSubmit = (event) => {
+const Login = ({ errors, touched, values, logInUser, authReducer }) => {
+  const handleSubmit = event => {
     event.preventDefault();
     logInUser(values);
-    if (localStorage.getItem('user')) {
+    if (authReducer.token) {
       Router.push('/');
     }
   };
@@ -57,20 +54,24 @@ const FormikLoginForm = withFormik({
   mapPropsToValues({ email, password }) {
     return {
       email: email || '',
-      password: password || '',
+      password: password || ''
     };
   },
   validationSchema: Yup.object().shape({
     email: Yup.string()
       .email('Email is invalid')
       .required('Email is required'),
-    password: Yup.string().required('Password is required'),
-  }),
+    password: Yup.string().required('Password is required')
+  })
 })(Login);
 
+function mapStateToProps(state) {
+  return { authReducer: state.authReducer };
+}
+
 export default connect(
-  (state) => state,
-  { logInUser },
+  mapStateToProps,
+  { logInUser }
 )(FormikLoginForm);
 
 const Root = styled.div`
