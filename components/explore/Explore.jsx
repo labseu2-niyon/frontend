@@ -8,11 +8,13 @@ const Wrapper = styled.main`
     width: 100%;
 `;
 
+const jobTitles = [{ value: 'hello', label: 'hi' }, { value: 'Bonjour', label: 'salut' }];
+
 function Explore() {
   return (
     <Wrapper>
       <TopSection />
-      <SearchBox />
+      <SearchBox jobTitles={jobTitles} />
       <ProfileList />
     </Wrapper>
   );
