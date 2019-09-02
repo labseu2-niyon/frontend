@@ -8,8 +8,6 @@ const Container = styled.main`
 `;
 
 const photoData = {
-  user: 'Person Pearson',
-  job: 'Web Developer',
   src: 'https://milan.serverlessdays.io/speakers/guillermo-rauch.jpg',
 };
 
@@ -19,10 +17,10 @@ const bioData = {
   text: ['Lorem ipsum dolor sit amet consectetur adipisicing elit.', 'Veniam aliquam similique ipsa omnis commodi, consequuntur assumenda quos porro eligendi, in odio mollitia optio doloremque laborum vitae, obcaecati quo ratione culpa.'],
 };
 
-function Profile() {
+function Profile(props) {
   return (
     <Container>
-      <PhotoSection {...photoData} />
+      <PhotoSection {...photoData} {...props} />
       <Bio {...bioData} />
     </Container>
   );
