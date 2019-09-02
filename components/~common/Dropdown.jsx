@@ -46,7 +46,7 @@ const Title = styled.div`
   line-height: 0.75rem;
   padding: 0px 10px;
   width: ${({ width }) => width || '200px'};
-  max-width: 100%;
+  max-width: 90%;
   color: black;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.07);
@@ -65,7 +65,7 @@ const Options = styled.div`
   margin-top: 10px;
   padding: 10px 10px;
   width: ${({ width }) => width || '200px'};
-  max-width: 100%;
+  max-width: 90%;
   color: #bfc1c4;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.07);
