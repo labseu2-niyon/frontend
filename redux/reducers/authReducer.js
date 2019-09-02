@@ -14,11 +14,46 @@ const initialState = {
 };
 
 export const authReducer = (state = initialState, { type, payload }) => {
+  // ========================REGISTER USER WITH EMAIL==================
   switch (type) {
+    case types.REGISTER_USER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
     case types.SET_EMAIL_DATA:
       return {
         ...state,
         emailData: payload,
+        error: null,
+        loading: false,
+      };
+    case types.REGISTER_USER_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+      };
+    //= =======================ADDED USER INFORMATION======================
+    case types.USER_INFO_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case types.USER_INFO_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        // payload here
+        error: null,
+      };
+    case types.USER_INFO_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: payload,
       };
 
     case types.SET_LOCATION_DATA:

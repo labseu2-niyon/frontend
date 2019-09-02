@@ -6,9 +6,9 @@ import * as Yup from 'yup';
 import Steps from './StepsComp';
 import Router from 'next/router';
 import { connect } from 'react-redux';
-import { profileData } from '../../redux/actions/authActions';
+import { profileData, userProfileInfo } from '../../redux/actions/authActions';
 
-const ProfileInfo = ({ status, profileData }) => {
+const ProfileInfo = ({ profileData, values, loading, error }) => {
   const [image, setImage] = useState('');
   const handleImageUpload = () => {
     const data = new FormData();
@@ -17,18 +17,16 @@ const ProfileInfo = ({ status, profileData }) => {
   };
 
   useEffect(() => {
-    console.log('Statusss', status);
-    if (status) {
-      status.image = handleImageUpload(image);
-      // console.log(status);
-      profileData(status);
+    if (values) {
+      values.image = handleImageUpload(image);
+      profileData(values);
     }
-  }, [status]);
+  }, [values]);
 
   return (
     <Root>
       <Steps stepNumber="4" />
-      <Heading2>Show Us your face</Heading2>
+      <Heading2 primary>Show Us your face</Heading2>
       <FormArea>
         <RoundIcon>
           <Input
@@ -53,10 +51,11 @@ const ProfileInfo = ({ status, profileData }) => {
           name="bio"
           placeholder="Biography"
         />
-        <Button small primary type="submit">
+        <Button small primary type="submit" loading={loading}>
           Next
         </Button>
         <Skip href="/auth/social-info"></Skip>
+        {/* {error && <p>{error}</p>} */}
       </FormArea>
     </Root>
   );
@@ -69,15 +68,35 @@ const FormikWithProfileInfoForm = withFormik({
     };
   },
   validationSchema: Yup.object().shape({}),
-  handleSubmit(values, { setStatus }) {
+  handleSubmit(values, { setStatus, props }) {
     setStatus(values);
-    Router.push('/auth/social-info');
+    const data = {
+      fistName: props.userInfo.emailData.firstName,
+      lastName: props.userInfo.emailData.lastName,
+      bio: props.userInfo.profileData.bio,
+      countryName: props.userInfo.locationData.country,
+      cityName: props.userInfo.locationData.city
+    };
+    const username = props.userInfo.emailData.username;
+    props.userProfileInfo(data, username).then(res => {
+      if (res === 200) {
+        Router.push('/auth/social-info');
+      }
+    });
   }
 })(ProfileInfo);
 
+const mapPropsToProps = state => {
+  return {
+    userInfo: state.authReducer,
+    loading: state.authReducer.loading,
+    error: state.authReducer.error
+  };
+};
+
 export default connect(
-  state => state,
-  { profileData }
+  mapPropsToProps,
+  { profileData, userProfileInfo }
 )(FormikWithProfileInfoForm);
 
 const Root = styled.div`

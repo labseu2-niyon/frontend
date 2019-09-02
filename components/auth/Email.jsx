@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Heading2, Text, Button } from '../~common/index';
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
@@ -8,55 +7,57 @@ import Router from 'next/router';
 import Steps from './StepsComp';
 import { connect } from 'react-redux';
 import { emailSignup } from '../../redux/actions/authActions';
+import { theme } from '../../lib/theme';
 
-const Email = ({ errors, touched, values, emailSignup, handleSubmit }) => {
-  // useEffect(() => {}, [values]);
-
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   //emailSignup(values);
-  //   console.log('walala: ', values);
-  // };
+const Email = ({ errors, touched, loading, error }) => {
+  console.log(loading, error);
   return (
-    <>
-      <Root>
-        <Steps stepNumber="1" />
-        <Heading2>Email login</Heading2>
-        <FormArea>
-          <InputWrapper>
-            <Field name="username" type="text" placeholder="username" />
-            {touched.username && errors.username && (
-              <Error>{errors.username}</Error>
-            )}
-          </InputWrapper>
-          <InputWrapper>
-            <Field name="firstName" type="text" placeholder="First Name" />
-          </InputWrapper>
-          <InputWrapper>
-            <Field name="lastName" type="text" placeholder="Last Name" />
-          </InputWrapper>
-          <InputWrapper>
-            <Field name="email" type="email" placeholder="email" />
-            {touched.email && errors.email && <Error>{errors.email}</Error>}
-          </InputWrapper>
-          <InputWrapper>
-            <Field name="password" type="password" placeholder="password" />
-            {touched.password && errors.password && (
-              <Error>{errors.password}</Error>
-            )}
-          </InputWrapper>
-          <Text small>Lorem Ipsum, terms and conditions, blah blah blah.</Text>
-          <Button small primary type="submit">
-            Register
-          </Button>
-        </FormArea>
-        <Text small>
-          <Link href="/auth/signup">
-            <a>Login with Social Media</a>
-          </Link>
-        </Text>
-      </Root>
-    </>
+    <Root>
+      <Steps stepNumber="1" />
+      <Heading2 primary>Email login</Heading2>
+      <FormArea>
+        <InputWrapper>
+          <Field name="username" type="text" placeholder="username" />
+          {touched.username && errors.username && (
+            <Error>{errors.username}</Error>
+          )}
+        </InputWrapper>
+
+        <InputWrapper>
+          <Field name="firstName" type="text" placeholder="First Name" />
+          {touched.firstName && errors.firstName && (
+            <Error>{errors.firstName}</Error>
+          )}
+        </InputWrapper>
+        <InputWrapper>
+          <Field name="lastName" type="text" placeholder="Last Name" />
+          {touched.lastName && errors.lastName && (
+            <Error>{errors.lastName}</Error>
+          )}
+        </InputWrapper>
+        <InputWrapper>
+          <Field name="email" type="email" placeholder="email" />
+          {touched.email && errors.email && <Error>{errors.email}</Error>}
+        </InputWrapper>
+        <InputWrapper>
+          <Field name="password" type="password" placeholder="password" />
+          {touched.password && errors.password && (
+            <Error>{errors.password}</Error>
+          )}
+        </InputWrapper>
+        <Text small>Lorem Ipsum, terms and conditions, blah blah blah.</Text>
+        <Button small primary type="submit" loadingB={loading}>
+          Register
+        </Button>
+        {/* {error && <Error style={{ textAlign: 'center' }}>{error}</Error>} */}
+      </FormArea>
+
+      <Text small>
+        <Link href="/auth/signup">
+          <a>Login with Social Media</a>
+        </Link>
+      </Text>
+    </Root>
   );
 };
 
@@ -72,25 +73,33 @@ const FormikWithEmailForm = withFormik({
   },
   validationSchema: Yup.object().shape({
     username: Yup.string().required('Username is required'),
-    firstName: Yup.string(),
-    lastName: Yup.string(),
+    firstName: Yup.string().required('First Name is required'),
+    lastName: Yup.string().required('Last Name is required'),
     email: Yup.string()
       .email('Email is invalid')
       .required('Email is required'),
     password: Yup.string()
-      .min(3, 'Password must be at least 3 characters')
+      .min(8, 'Password must be at least 8 characters')
       .required('Password is required')
   }),
-  handleSubmit(values, { setStatus, props, setSubmitting }) {
-    Router.push('/auth/location');
-    setStatus(values);
-    props.emailSignup(values);
-    //setSubmitting(false);
+  handleSubmit(values, { props }) {
+    props.emailSignup(values).then(res => {
+      if (res === 201) {
+        Router.push('/auth/location');
+      }
+    });
   }
 })(Email);
 
+const mapStateToProps = state => {
+  return {
+    loading: state.authReducer.loading,
+    error: state.authReducer.error
+  };
+};
+
 export default connect(
-  state => state,
+  mapStateToProps,
   { emailSignup }
 )(FormikWithEmailForm);
 
