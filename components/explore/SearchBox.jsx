@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Heading2, Dropdown, Checkbox } from '../~common';
@@ -48,7 +48,9 @@ const Selector = styled.div`
     }
 `;
 
-function SearchBox({ jobTitles }) {
+function SearchBox({ jobTitles, filter }) {
+  const [mentor, setMentor] = useState(true);
+  const [mentee, setMentee] = useState(true);
   return (
     <Wrapper>
       <Box>
@@ -57,8 +59,20 @@ function SearchBox({ jobTitles }) {
           <Dropdown width="300px" icon="arrow-down" title="Job Title" list={jobTitles} />
         </DropWrapper>
         <Selector>
-          <Checkbox /><small>Mentors</small>
-          <Checkbox /><small>Mentees</small>
+          <Checkbox
+            checked={mentor}
+            onChange={() => {
+              filter(!mentor, mentee);
+              setMentor(!mentor);
+            }}
+          /><small>Mentors</small>
+          <Checkbox
+            checked={mentee}
+            onChange={() => {
+              filter(mentor, !mentee);
+              setMentee(!mentee);
+            }}
+          /><small>Mentees</small>
         </Selector>
       </Box>
     </Wrapper>
@@ -67,6 +81,7 @@ function SearchBox({ jobTitles }) {
 
 SearchBox.propTypes = {
   jobTitles: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  filter: PropTypes.func.isRequired,
 };
 
 export default SearchBox;
