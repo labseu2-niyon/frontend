@@ -8,7 +8,7 @@ import Router from 'next/router';
 import { connect } from 'react-redux';
 import { profileData, userProfileInfo } from '../../redux/actions/authActions';
 
-const ProfileInfo = ({ status, profileData, values }) => {
+const ProfileInfo = ({ profileData, values, loading, error }) => {
   const [image, setImage] = useState('');
   const handleImageUpload = () => {
     const data = new FormData();
@@ -51,10 +51,11 @@ const ProfileInfo = ({ status, profileData, values }) => {
           name="bio"
           placeholder="Biography"
         />
-        <Button small primary type="submit">
+        <Button small primary type="submit" loading={loading}>
           Next
         </Button>
         <Skip href="/auth/social-info"></Skip>
+        {/* {error && <p>{error}</p>} */}
       </FormArea>
     </Root>
   );
@@ -69,7 +70,6 @@ const FormikWithProfileInfoForm = withFormik({
   validationSchema: Yup.object().shape({}),
   handleSubmit(values, { setStatus, props }) {
     setStatus(values);
-    console.log(props.userInfo, values);
     const data = {
       fistName: props.userInfo.emailData.firstName,
       lastName: props.userInfo.emailData.lastName,
@@ -78,14 +78,19 @@ const FormikWithProfileInfoForm = withFormik({
       cityName: props.userInfo.locationData.city
     };
     const username = props.userInfo.emailData.username;
-    props.userProfileInfo(data, username);
-    Router.push('/auth/social-info');
+    props.userProfileInfo(data, username).then(res => {
+      if (res === 200) {
+        Router.push('/auth/social-info');
+      }
+    });
   }
 })(ProfileInfo);
 
 const mapPropsToProps = state => {
   return {
-    userInfo: state.authReducer
+    userInfo: state.authReducer,
+    loading: state.authReducer.loading,
+    error: state.authReducer.error
   };
 };
 

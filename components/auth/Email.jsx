@@ -10,8 +10,7 @@ import { connect } from 'react-redux';
 import { emailSignup } from '../../redux/actions/authActions';
 
 const Email = ({ errors, touched, loading, error }) => {
-  // console.log(loading);
-  // const err = error.password[0];
+  console.log(loading, error);
   return (
     <Root>
       <Steps stepNumber="1" />
@@ -46,10 +45,10 @@ const Email = ({ errors, touched, loading, error }) => {
           )}
         </InputWrapper>
         <Text small>Lorem Ipsum, terms and conditions, blah blah blah.</Text>
-        <Button small primary type="submit" loading={loading}>
+        <Button small primary type="submit" loadingB={loading}>
           Register
         </Button>
-        {/* {!err && <Error>{err}</Error>} */}
+        {/* {error && <Error style={{ textAlign: 'center' }}>{error}</Error>} */}
       </FormArea>
       <Text small>
         <Link href="/auth/signup">
@@ -81,24 +80,12 @@ const FormikWithEmailForm = withFormik({
       .min(3, 'Password must be at least 8 characters')
       .required('Password is required')
   }),
-  handleSubmit(values, { props, setValues }) {
-    //setStatus(values);
-    setValues({ loading: false });
-
+  handleSubmit(values, { props }) {
     props.emailSignup(values).then(res => {
-      //debugger;
-      setValues({ loading: true });
-
       if (res === 201) {
-        setValues({ loading: false });
         Router.push('/auth/location');
-      } else if (res === 400) {
-        //debugger;
-        setValues({ loading: false });
       }
     });
-
-    //setSubmitting(false);
   }
 })(Email);
 

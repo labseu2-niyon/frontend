@@ -90,17 +90,20 @@ export const emailSignup = (data) => (dispatch) => {
 export const userProfileInfo = (data, user) => (dispatch) => {
   console.log(data, user);
   dispatch({ type: types.USER_INFO_REQUEST });
-  axios
+  return axios
     .post(`${_BASE_URL}/user/${user}/profile`, data)
     .then((res) => {
       console.log(res.data);
       dispatch({ type: types.USER_INFO_SUCCESS, payload: res.data });
+      // return status code in case of success
+      return res.data.status;
     })
     .catch((err) => {
       dispatch({
         type: types.USER_INFO_FAIL,
         payload: err.response.data.message,
       });
+      return err.response.status;
     });
 };
 

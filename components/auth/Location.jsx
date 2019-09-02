@@ -8,11 +8,7 @@ import Router from 'next/router';
 import { connect } from 'react-redux';
 import { locationData } from '../../redux/actions/authActions';
 
-const Location = ({ errors, touched, locationData, values }) => {
-  useEffect(() => {
-    locationData(values);
-  }, [values]);
-
+const Location = ({ errors, touched }) => {
   return (
     <Root>
       <Steps stepNumber="2" />
@@ -55,8 +51,9 @@ const FormikWithLocationForm = withFormik({
     city: Yup.string().required('City name is required'),
     country: Yup.string().required('Country name is required')
   }),
-  handleSubmit(values, { setStatus }) {
+  handleSubmit(values, { setStatus, props }) {
     //console.log(values);
+    props.locationData(values);
     setStatus(values);
     Router.push('/auth/job-title');
   }
