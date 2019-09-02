@@ -97,8 +97,10 @@ export const userProfileInfo = (data, user) => (dispatch) => {
       dispatch({ type: types.USER_INFO_SUCCESS, payload: res.data });
     })
     .catch((err) => {
-      console.log(err);
-      dispatch({ type: types.USER_INFO_FAIL, payload: err });
+      dispatch({
+        type: types.USER_INFO_FAIL,
+        payload: err.response.data.message,
+      });
     });
 };
 
