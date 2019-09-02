@@ -8,13 +8,10 @@ import { connect } from 'react-redux';
 import { Heading4, Text, Button } from '../~common/index';
 import { logInUser } from '../../redux/actions/authActions';
 
-const Login = ({ errors, touched, values, logInUser, authReducer }) => {
+const Login = ({ errors, touched, values, logInUser }) => {
   const handleSubmit = event => {
     event.preventDefault();
     logInUser(values);
-    if (authReducer.token) {
-      Router.push('/');
-    }
   };
   return (
     <>

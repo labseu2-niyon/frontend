@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Router from 'next/router';
 import { types } from '../authConstants';
 
 const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
@@ -62,6 +63,7 @@ export const logInUser = ({ email, password }) => (dispatch) => {
           message: res.data.data.message,
         },
       });
+      Router.push('/');
     })
     .catch((error) => {
       dispatch({
