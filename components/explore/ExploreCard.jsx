@@ -53,12 +53,18 @@ const Location = styled.div`
         display: flex;
         align-items: center;
     }
+`;
 
-    i {
-        padding-top: 3px;
-        margin-right: 10px;
-        color: #484848;
-    }
+const L = styled.div`
+  color: #484848;
+ 
+  small {
+    margin: 0 10px;
+  }
+
+  i {
+    padding-top: 3px;
+  }
 `;
 
 function ExploreCard({
@@ -79,8 +85,8 @@ function ExploreCard({
         </Text>
       </Contents>
       <Location>
-        <small><Icon type="book" />{position}</small>
-        <small><Icon type="global" />{location}</small>
+        <L><Icon type="book" /><small>{position}</small></L>
+        <L><Icon type="global" /><small>{location}</small></L>
       </Location>
     </Wrapper>
   );
