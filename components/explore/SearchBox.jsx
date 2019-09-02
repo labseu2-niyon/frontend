@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Heading2, Dropdown } from '../~common';
+import { Heading2, Dropdown, Checkbox } from '../~common';
 
 const Wrapper = styled.section`
     position: relative;
@@ -9,7 +9,7 @@ const Wrapper = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 120px;
+    height: 200px;
 `;
 
 const Box = styled.div`
@@ -33,20 +33,40 @@ const DropWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-
 `;
 
-function SearchBox() {
+const Selector = styled.div`
+    width: 100%;
+    height: 50px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    small {
+      margin: 0 10px;
+    }
+`;
+
+function SearchBox({ jobTitles }) {
   return (
     <Wrapper>
       <Box>
         <Heading2>Search</Heading2>
         <DropWrapper>
-          <Dropdown width="300px" icon="arrow-down" title="Job Title" list={[{ value: 'hello', label: 'hi' }, { value: 'hello', label: 'hi' }]} />
+          <Dropdown width="300px" icon="arrow-down" title="Job Title" list={jobTitles} />
         </DropWrapper>
+        <Selector>
+          <Checkbox /><small>Mentors</small>
+          <Checkbox /><small>Mentees</small>
+        </Selector>
       </Box>
     </Wrapper>
   );
 }
+
+SearchBox.propTypes = {
+  jobTitles: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+};
 
 export default SearchBox;
