@@ -45,9 +45,29 @@ export const emailSignUp = () => (dispatch) => {
   dispatch(stopLoading());
 };
 
-export const setClientState = (clientState) => ({
-  type: types.SET_CLIENT_STATE,
-  payload: clientState,
+export const emailSignup = (data) => ({
+  type: types.SET_EMAIL_DATA,
+  payload: data,
+});
+
+export const locationData = (data) => ({
+  type: types.SET_LOCATION_DATA,
+  payload: data,
+});
+
+export const userType = (data) => ({
+  type: types.SET_USER_TYPE,
+  payload: data,
+});
+
+export const profileData = (data) => ({
+  type: types.SET_PROFILE_DATA,
+  payload: data,
+});
+
+export const socialData = (data) => ({
+  type: types.SET_SOCIAL_MEDIA_DATA,
+  payload: data,
 });
 
 export const logInUser = ({ email, password }) => (dispatch) => {
@@ -77,8 +97,11 @@ export const logInUser = ({ email, password }) => (dispatch) => {
     });
 };
 
-// import axios from 'axios';
-// import { actionTypes } from '../constants';
+export const logOutUser = () => (dispatch) => {
+  dispatch({ type: types.LOG_OUT_USER });
+  nookies.destroy({}, 'token');
+  Router.push('/auth/login');
+};
 
 // export const registerUser = newUser => dispatch => {
 //   dispatch({ type: actionTypes.REGISTER_USER_REQUEST });
