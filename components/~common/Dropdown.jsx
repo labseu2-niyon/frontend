@@ -42,11 +42,12 @@ function Dropdown({
 }
 
 const Title = styled.div`
+  box-sizing: border-box;
   cursor: pointer;
   line-height: 0.75rem;
   padding: 0px 10px;
   width: ${({ width }) => width || '200px'};
-  max-width: 90%;
+  max-width: 100%;
   color: black;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.07);
@@ -58,6 +59,7 @@ const Title = styled.div`
 `;
 
 const Options = styled.div`
+  box-sizing: border-box;
   cursor: pointer;
   position: absolute;
   background: #fff;
@@ -65,7 +67,7 @@ const Options = styled.div`
   margin-top: 10px;
   padding: 10px 10px;
   width: ${({ width }) => width || '200px'};
-  max-width: 90%;
+  max-width: 100%;
   color: #bfc1c4;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.07);
