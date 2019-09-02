@@ -10,11 +10,11 @@ const Wrapper = styled.div`
     padding: 1rem 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin: 1rem 0;
 
     @media (max-width: 600px) {
         width: 100%;
         padding: 0.5rem 1rem;
-        margin: 1rem 0;
     }
 `;
 
