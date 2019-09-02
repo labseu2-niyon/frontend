@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+
 import { Heading2, Text, Button } from '../~common/index';
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
@@ -10,13 +10,6 @@ import { connect } from 'react-redux';
 import { emailSignup } from '../../redux/actions/authActions';
 
 const Email = ({ errors, touched, values, emailSignup, handleSubmit }) => {
-  // useEffect(() => {}, [values]);
-
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   //emailSignup(values);
-  //   console.log('walala: ', values);
-  // };
   return (
     <>
       <Root>
@@ -31,9 +24,15 @@ const Email = ({ errors, touched, values, emailSignup, handleSubmit }) => {
           </InputWrapper>
           <InputWrapper>
             <Field name="firstName" type="text" placeholder="First Name" />
+            {touched.firstName && errors.firstName && (
+              <Error>{errors.firstName}</Error>
+            )}
           </InputWrapper>
           <InputWrapper>
             <Field name="lastName" type="text" placeholder="Last Name" />
+            {touched.lastName && errors.lastName && (
+              <Error>{errors.lastName}</Error>
+            )}
           </InputWrapper>
           <InputWrapper>
             <Field name="email" type="email" placeholder="email" />
@@ -72,8 +71,8 @@ const FormikWithEmailForm = withFormik({
   },
   validationSchema: Yup.object().shape({
     username: Yup.string().required('Username is required'),
-    firstName: Yup.string(),
-    lastName: Yup.string(),
+    firstName: Yup.string().required('First Name is required'),
+    lastName: Yup.string().required('Last Name is required'),
     email: Yup.string()
       .email('Email is invalid')
       .required('Email is required'),
@@ -82,9 +81,13 @@ const FormikWithEmailForm = withFormik({
       .required('Password is required')
   }),
   handleSubmit(values, { setStatus, props, setSubmitting }) {
-    Router.push('/auth/location');
-    setStatus(values);
-    props.emailSignup(values);
+    //setStatus(values);
+    props.emailSignup(values).then(res => {
+      console.log(res);
+      if (res.status === 201) {
+        Router.push('/auth/location');
+      }
+    });
     //setSubmitting(false);
   }
 })(Email);

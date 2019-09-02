@@ -46,11 +46,6 @@ export const emailSignUp = () => (dispatch) => {
   dispatch(stopLoading());
 };
 
-export const emailSignup = (data) => ({
-  type: types.SET_EMAIL_DATA,
-  payload: data,
-});
-
 export const locationData = (data) => ({
   type: types.SET_LOCATION_DATA,
   payload: data,
@@ -70,6 +65,23 @@ export const socialData = (data) => ({
   type: types.SET_SOCIAL_MEDIA_DATA,
   payload: data,
 });
+
+export const emailSignup = (data) => (dispatch) => {
+  dispatch({ type: types.REGISTER_USER_REQUEST });
+  console.log('SignUp data: ', data);
+  return axios
+    .post(`${_BASE_URL}/user/signup`, data)
+    .then((res) => {
+      console.log(res.data);
+      return res;
+    })
+    .catch((status) => {
+      console.log(status);
+      return status;
+    });
+  // type: types.SET_EMAIL_DATA,
+  // payload: data
+};
 
 export const logInUser = ({ email, password }) => (dispatch) => {
   dispatch({ type: types.LOG_IN_USER_REQUEST });
