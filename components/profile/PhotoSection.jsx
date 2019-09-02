@@ -38,6 +38,7 @@ const TextWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 `;
 
 const ButtonWrapper = styled.div`
@@ -47,7 +48,7 @@ const ButtonWrapper = styled.div`
     align-items: center;
 `;
 
-function PhotoSection({ user, job, src }) {
+function PhotoSection({ user, jobTitle, src }) {
   return (
     <Wrapper>
       <PhotoWrapper>
@@ -57,7 +58,7 @@ function PhotoSection({ user, job, src }) {
       </PhotoWrapper>
       <TextWrapper>
         <Heading>{user}</Heading>
-        <p>{job}</p>
+        <p>{jobTitle}</p>
       </TextWrapper>
       <ButtonWrapper>
         <Button small primary>Connect</Button>
@@ -67,7 +68,7 @@ function PhotoSection({ user, job, src }) {
 }
 
 PhotoSection.propTypes = {
-  job: PropTypes.string.isRequired,
+  jobTitle: PropTypes.string.isRequired,
   user: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
 };
