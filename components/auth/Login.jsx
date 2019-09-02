@@ -2,23 +2,13 @@ import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link';
-import Router from 'next/router';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Heading4, Text, Button } from '../~common/index';
 import { logInUser } from '../../redux/actions/authActions';
+import Router from 'next/router';
 
-const Login = ({
- errors, touched, values, logInUser 
-}) => {
-  // console.log(handleSubmit);
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    logInUser(values);
-    if (localStorage.getItem('user')) {
-      Router.push('/');
-    }
-  };
+const Login = ({ errors, touched }) => {
   return (
     <>
       <Root>
@@ -27,7 +17,7 @@ const Login = ({
           Do not miss your next opportunity. Sign in to stay updated on your
           professional world.
         </Text>
-        <FormArea onSubmit={handleSubmit}>
+        <FormArea>
           <InputWrapper>
             <Field name="email" type="email" placeholder="email" />
             {touched.email && errors.email && <Error>{errors.email}</Error>}
@@ -57,20 +47,31 @@ const FormikLoginForm = withFormik({
   mapPropsToValues({ email, password }) {
     return {
       email: email || '',
-      password: password || '',
+      password: password || ''
     };
   },
   validationSchema: Yup.object().shape({
     email: Yup.string()
       .email('Email is invalid')
       .required('Email is required'),
-    password: Yup.string().required('Password is required'),
+    password: Yup.string().required('Password is required')
   }),
+  handleSubmit(values, { props }) {
+    props.logInUser(values).then(res => {
+      if (res === 201) {
+        Router.push('/');
+      }
+    });
+  }
 })(Login);
 
+function mapStateToProps(state) {
+  return { authReducer: state.authReducer };
+}
+
 export default connect(
-  (state) => state,
-  { logInUser },
+  mapStateToProps,
+  { logInUser }
 )(FormikLoginForm);
 
 const Root = styled.div`
