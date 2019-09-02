@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Router from 'next/router';
 import { types } from '../authConstants';
 
 const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
@@ -97,23 +98,7 @@ export const logInUser = ({ email, password }) => (dispatch) => {
 
 export const logOutUser = () => (dispatch) => {
   dispatch({ type: types.LOG_OUT_USER_REQUEST });
-  // spinner
-  axios
-    .post(`${_BASE_URL}/user/logout`)
-    .then((res) => {
-      dispatch({
-        type: types.LOG_OUT_USER_SUCCESS,
-        payload: {
-          message: res.data.message,
-        },
-      });
-    })
-    .catch((error) => {
-      dispatch({
-        type: types.LOG_OUT_USER_FAILURE,
-        payload: error.message,
-      });
-    });
+  Router.push('/');
 };
 
 // export const registerUser = newUser => dispatch => {

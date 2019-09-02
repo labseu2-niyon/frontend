@@ -61,22 +61,11 @@ export const authReducer = (state = initialState, { type, payload }) => {
         error: payload,
       };
 
-    case types.LOG_OUT_USER_REQUEST:
-      return {
-        ...state,
-      };
-    case types.LOG_OUT_USER_SUCCESS:
+    case types.LOG_OUT_USER:
       return {
         ...state,
         token: null,
-        message: payload.message,
       };
-    case types.LOG_OUT_USER_FAILURE:
-      return {
-        ...state,
-        error: payload,
-      };
-
     default:
       return state;
   }
