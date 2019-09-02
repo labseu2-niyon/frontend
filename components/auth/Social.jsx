@@ -6,12 +6,11 @@ import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import Router from 'next/router';
 import { connect } from 'react-redux';
-import { setClientState } from '../../redux/actions/authActions';
+import { socialData } from '../../redux/actions/authActions';
 
-const Social = ({ errors, touched, setClientState, status }) => {
+const Social = ({ errors, touched, socialData, status }) => {
   useEffect(() => {
-    console.log('alabala: ', status);
-    setClientState(status);
+    socialData(status);
   }, [status]);
   return (
     <Root>
@@ -70,7 +69,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  setClientState
+  socialData
 };
 
 export default connect(

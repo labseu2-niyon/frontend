@@ -46,19 +46,38 @@ export const emailSignUp = () => (dispatch) => {
   dispatch(stopLoading());
 };
 
-export const setClientState = (clientState) => ({
-  type: types.SET_CLIENT_STATE,
-  payload: clientState,
+export const emailSignup = (data) => ({
+  type: types.SET_EMAIL_DATA,
+  payload: data,
+});
+
+export const locationData = (data) => ({
+  type: types.SET_LOCATION_DATA,
+  payload: data,
+});
+
+export const userType = (data) => ({
+  type: types.SET_USER_TYPE,
+  payload: data,
+});
+
+export const profileData = (data) => ({
+  type: types.SET_PROFILE_DATA,
+  payload: data,
+});
+
+export const socialData = (data) => ({
+  type: types.SET_SOCIAL_MEDIA_DATA,
+  payload: data,
 });
 
 export const logInUser = ({ email, password }) => (dispatch) => {
   dispatch({ type: types.LOG_IN_USER_REQUEST });
   // spinner
-  console.log({ email, password });
+
   axios
     .post(`${_BASE_URL}/user/login`, { email, password })
     .then((res) => {
-      console.log(res.data);
       dispatch({
         type: types.LOG_IN_USER_SUCCESS,
         payload: {

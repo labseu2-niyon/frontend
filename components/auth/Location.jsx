@@ -1,11 +1,19 @@
+import { useEffect } from 'react';
 import { Text, Button, Heading2 } from '../~common/index';
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import Steps from './StepsComp';
 import Router from 'next/router';
+import { connect } from 'react-redux';
+import { locationData } from '../../redux/actions/authActions';
 
-const Location = ({ errors, touched }) => {
+const Location = ({ errors, touched, locationData, values }) => {
+
+  useEffect(() => {
+    locationData(values);
+  }, [values]);
+  
   return (
     <Root>
       <Steps stepNumber="2" />
@@ -48,13 +56,17 @@ const FormikWithLocationForm = withFormik({
     city: Yup.string().required('City name is required'),
     country: Yup.string().required('Country name is required')
   }),
-  handleSubmit(values) {
-    console.log(values);
+  handleSubmit(values, { setStatus }) {
+    //console.log(values);
+    setStatus(values);
     Router.push('/auth/job-title');
   }
 })(Location);
 
-export default FormikWithLocationForm;
+export default connect(
+  state => state,
+  { locationData }
+)(FormikWithLocationForm);
 
 const Root = styled.div`
   height: 90vh;

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Heading2, Text, Button } from '../~common/index';
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
@@ -5,8 +6,17 @@ import * as Yup from 'yup';
 import Link from 'next/link';
 import Router from 'next/router';
 import Steps from './StepsComp';
+import { connect } from 'react-redux';
+import { emailSignup } from '../../redux/actions/authActions';
 
-const Email = ({ errors, touched }) => {
+const Email = ({ errors, touched, values, emailSignup, handleSubmit }) => {
+  // useEffect(() => {}, [values]);
+
+  // handleSubmit = e => {
+  //   e.preventDefault();
+  //   //emailSignup(values);
+  //   console.log('walala: ', values);
+  // };
   return (
     <>
       <Root>
@@ -71,13 +81,18 @@ const FormikWithEmailForm = withFormik({
       .min(3, 'Password must be at least 3 characters')
       .required('Password is required')
   }),
-  handleSubmit(values, { setStatus }) {
-    console.log(values);
+  handleSubmit(values, { setStatus, props, setSubmitting }) {
     Router.push('/auth/location');
+    setStatus(values);
+    props.emailSignup(values);
+    //setSubmitting(false);
   }
 })(Email);
 
-export default FormikWithEmailForm;
+export default connect(
+  state => state,
+  { emailSignup }
+)(FormikWithEmailForm);
 
 const Root = styled.div`
   height: 95vh;
