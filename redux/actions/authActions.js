@@ -100,7 +100,6 @@ export const logInUser = ({ email, password }) => (dispatch) => {
 export const logOutUser = () => (dispatch) => {
   dispatch({ type: types.LOG_OUT_USER });
   nookies.destroy({}, 'token');
-  Router.push('/auth/login');
 };
 
 // export const registerUser = newUser => dispatch => {
