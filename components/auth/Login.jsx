@@ -6,12 +6,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Heading4, Text, Button } from '../~common/index';
 import { logInUser } from '../../redux/actions/authActions';
+import Router from 'next/router';
 
-const Login = ({ errors, touched, values, logInUser }) => {
-  const handleSubmit = event => {
-    event.preventDefault();
-    logInUser(values);
-  };
+const Login = ({ errors, touched }) => {
   return (
     <>
       <Root>
@@ -20,7 +17,7 @@ const Login = ({ errors, touched, values, logInUser }) => {
           Do not miss your next opportunity. Sign in to stay updated on your
           professional world.
         </Text>
-        <FormArea onSubmit={handleSubmit}>
+        <FormArea>
           <InputWrapper>
             <Field name="email" type="email" placeholder="email" />
             {touched.email && errors.email && <Error>{errors.email}</Error>}
@@ -58,7 +55,14 @@ const FormikLoginForm = withFormik({
       .email('Email is invalid')
       .required('Email is required'),
     password: Yup.string().required('Password is required')
-  })
+  }),
+  handleSubmit(values, { props }) {
+    props.logInUser(values).then(res => {
+      if (res === 201) {
+        Router.push('/');
+      }
+    });
+  }
 })(Login);
 
 function mapStateToProps(state) {

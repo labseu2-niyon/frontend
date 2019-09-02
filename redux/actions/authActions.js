@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Router from 'next/router';
 import nookies from 'nookies';
 import { types } from '../authConstants';
 
@@ -53,7 +52,7 @@ export const setClientState = (clientState) => ({
 
 export const logInUser = ({ email, password }) => (dispatch) => {
   dispatch({ type: types.LOG_IN_USER_REQUEST });
-  axios
+  return axios
     .post(`${_BASE_URL}/user/login`, { email, password })
     .then((res) => {
       dispatch({
@@ -67,7 +66,8 @@ export const logInUser = ({ email, password }) => (dispatch) => {
         maxAge: 60 * 60 * 24 * 30,
         path: '/',
       });
-      Router.push('/');
+
+      return res.data.status;
     })
     .catch((error) => {
       dispatch({
