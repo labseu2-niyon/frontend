@@ -9,10 +9,14 @@ import Steps from './StepsComp';
 import { connect } from 'react-redux';
 import { emailSignup } from '../../redux/actions/authActions';
 
-const Email = ({ errors, touched, values, emailSignup }) => {
-  useEffect(() => {
-    emailSignup(values);
-  }, [values]);
+const Email = ({ errors, touched, values, emailSignup, handleSubmit }) => {
+  // useEffect(() => {}, [values]);
+
+  // handleSubmit = e => {
+  //   e.preventDefault();
+  //   //emailSignup(values);
+  //   console.log('walala: ', values);
+  // };
   return (
     <>
       <Root>
@@ -77,10 +81,11 @@ const FormikWithEmailForm = withFormik({
       .min(3, 'Password must be at least 3 characters')
       .required('Password is required')
   }),
-  handleSubmit(values, { setStatus }) {
+  handleSubmit(values, { setStatus, props, setSubmitting }) {
     Router.push('/auth/location');
-
     setStatus(values);
+    props.emailSignup(values);
+    //setSubmitting(false);
   }
 })(Email);
 
