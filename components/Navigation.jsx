@@ -1,23 +1,30 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import { Avatar } from './~common/index';
 import { Icon } from 'antd';
+import { connect } from 'react-redux';
+import { Avatar } from './~common/index';
+import { logOutUser } from '../redux/actions/authActions';
 
 const dummyUser = {
   image: 'https://milan.serverlessdays.io/speakers/guillermo-rauch.jpg',
-  name: 'Guillermo Rauch'
+  name: 'Guillermo Rauch',
 };
 
-const Navigation = () => {
+const Navigation = ({ logOutUser }) => {
+  console.log(logOutUser);
+  const handleClick = (event) => {
+    event.preventDefault();
+    logOutUser();
+  };
   return (
     <Nav>
       <div className="desktop">
-        <Avatar extraLarge source={dummyUser.image}></Avatar>
+        <Avatar extraLarge source={dummyUser.image} />
         <p className="desktop name">{dummyUser.name}</p>
       </div>
 
       <div className="mobile-avatar">
-        <Avatar small source={dummyUser.image}></Avatar>
+        <Avatar small source={dummyUser.image} />
       </div>
       <Links>
         <Link href="/">
@@ -53,9 +60,9 @@ const Navigation = () => {
         {/* Log out should redirect person to marketing site (external link) */}
         <div>
           <Icon type="logout" className="icon" />
-          <a href="#" className="desktop">
+          <p className="desktop" onClick={handleClick}>
             Log out
-          </a>
+          </p>
         </div>
       </Links>
     </Nav>
@@ -148,4 +155,7 @@ const Links = styled.div`
   }
 `;
 
-export default Navigation;
+export default connect(
+  (state) => state,
+  { logOutUser },
+)(Navigation);

@@ -20,6 +20,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
         ...state,
         emailData: payload,
       };
+
     case types.SET_LOCATION_DATA:
       return {
         ...state,
@@ -44,11 +45,6 @@ export const authReducer = (state = initialState, { type, payload }) => {
         socialData: payload,
       };
 
-    case types.SET_CLIENT_STATE:
-      return {
-        ...state,
-        fromClient: payload,
-      };
     case types.LOG_IN_USER_REQUEST:
       return {
         ...state,
@@ -63,6 +59,12 @@ export const authReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         error: payload,
+      };
+
+    case types.LOG_OUT_USER:
+      return {
+        ...state,
+        token: null,
       };
     default:
       return state;
