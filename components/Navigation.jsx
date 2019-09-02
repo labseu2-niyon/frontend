@@ -1,23 +1,22 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import { Avatar } from './~common/index';
 import { Icon } from 'antd';
+import { Avatar } from './~common/index';
 
 const dummyUser = {
   image: 'https://milan.serverlessdays.io/speakers/guillermo-rauch.jpg',
-  name: 'Guillermo Rauch'
+  name: 'Guillermo Rauch',
 };
 
-const Navigation = () => {
-  return (
-    <Nav>
+const Navigation = () => (
+  <Nav>
       <div className="desktop">
-        <Avatar extraLarge source={dummyUser.image}></Avatar>
+        <Avatar extraLarge source={dummyUser.image} />
         <p className="desktop name">{dummyUser.name}</p>
       </div>
 
       <div className="mobile-avatar">
-        <Avatar small source={dummyUser.image}></Avatar>
+        <Avatar small source={dummyUser.image} />
       </div>
       <Links>
         <Link href="/">
@@ -26,7 +25,7 @@ const Navigation = () => {
             <a className="desktop">Home</a>
           </div>
         </Link>
-        <Link href="/">
+        <Link href="/profile">
           <div>
             <Icon type="user" className="icon" />
             <a className="desktop">Profile</a>
@@ -59,8 +58,7 @@ const Navigation = () => {
         </div>
       </Links>
     </Nav>
-  );
-};
+);
 
 const Nav = styled.div`
   display: flex;
@@ -145,6 +143,10 @@ const Links = styled.div`
   .icon {
     width: 40px;
     text-align: center;
+  }
+
+  i {
+    margin-top: 4px;
   }
 `;
 
