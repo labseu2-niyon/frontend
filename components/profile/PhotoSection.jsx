@@ -11,6 +11,10 @@ const Wrapper = styled.section`
     padding: 4rem 0;
     border-top: 1px solid #eaeaea;
     border-bottom: 1px solid #eaeaea;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+    }
 `;
 
 const PhotoWrapper = styled.div`
