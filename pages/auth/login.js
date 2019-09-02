@@ -11,7 +11,7 @@ function Page() {
   );
 }
 
-// Redirects user to dashboard if already logged in
+// Redirects user to dashboard if they are already logged in
 Page.getInitialProps = (ctx) => {
   const cookies = nookies.get(ctx);
   if (cookies.token) {
