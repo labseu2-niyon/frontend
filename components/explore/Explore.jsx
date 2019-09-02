@@ -66,6 +66,10 @@ function Explore() {
         return { ...user, display: false };
       }
 
+      if (!mentor && !mentee) {
+        return { ...user, display: false };
+      }
+
       return user;
     });
 
