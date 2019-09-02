@@ -74,20 +74,31 @@ export const emailSignup = (data) => (dispatch) => {
     .then((res) => {
       console.log(res.data.data);
       dispatch({ type: types.SET_EMAIL_DATA, payload: data });
-      return res;
+      return res.data.status;
     })
     .catch((err) => {
       dispatch({ type: types.REGISTER_USER_FAILURE, payload: err });
       console.log(err);
-      return err;
+      return err.response.status;
     });
   // type: types.SET_EMAIL_DATA -instead of- type.REGISTE_USER_SUCCESS
   // payload: data
 };
 
-// export const userProfileInfo = (data) => (dispatch) => {
-//   dispatch();
-// };
+export const userProfileInfo = (data, user) => (dispatch) => {
+  console.log(data, user);
+  dispatch({ type: types.USER_INFO_REQUEST });
+  axios
+    .post(`${_BASE_URL}/user/${user}/profile`, data)
+    .then((res) => {
+      console.log(res.data);
+      dispatch({ type: types.USER_INFO_SUCCESS, payload: res.data });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({ type: types.USER_INFO_FAIL, payload: err });
+    });
+};
 
 export const logInUser = ({ email, password }) => (dispatch) => {
   dispatch({ type: types.LOG_IN_USER_REQUEST });

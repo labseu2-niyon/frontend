@@ -10,6 +10,9 @@ import { connect } from 'react-redux';
 import { emailSignup } from '../../redux/actions/authActions';
 
 const Email = ({ errors, touched, status }) => {
+  // let load = false;
+  // load = status && Object.values(status)[0];
+  // console.log(load);
   return (
     <Root>
       <Steps stepNumber="1" />
@@ -83,11 +86,14 @@ const FormikWithEmailForm = withFormik({
     setStatus({ loading: false });
 
     props.emailSignup(values).then(res => {
-      console.log(res);
-      if (res.status === 201) {
-        setStatus({ loading: true });
+      //debugger;
+      setStatus({ loading: true });
+
+      if (res === 201) {
+        setStatus({ loading: false });
         Router.push('/auth/location');
-      } else if (res.name === 'Error') {
+      } else if (res === 400) {
+        //debugger;
         setStatus({ loading: false });
       }
     });

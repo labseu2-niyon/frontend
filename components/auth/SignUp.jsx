@@ -2,9 +2,11 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import Router from 'next/router';
 import { Text, Button } from '../~common/index';
+import Logo from '../svgs/Logo';
 
 const SignUp = () => (
   <Root>
+    <Logo className="mobile-logo"></Logo>
     <Text small>Lorem Ipsum, welcome message, blah blah blah.`</Text>
     <ButtonArea>
       <Button large primary onClick={() => Router.push('/auth/social')}>

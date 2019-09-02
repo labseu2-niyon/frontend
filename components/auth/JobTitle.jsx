@@ -18,7 +18,7 @@ const JobTitle = ({ touched, errors, values, status, userType }) => {
   useEffect(() => {
     if (mentorPressed || menteeePresed) {
       values.user = menteeePresed ? 'mentee' : 'mentor';
-      console.log(status);
+      //console.log(status);
       userType(status);
       setMentorError(false);
       Router.push('/auth/profile-info');
