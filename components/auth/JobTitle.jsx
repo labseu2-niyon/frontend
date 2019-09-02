@@ -164,7 +164,6 @@ const FormikWithJobTitleForm = withFormik({
     job: Yup.string().required('Job Type is required')
   }),
   handleSubmit(values, { setStatus }) {
-    //console.log(values);
     setStatus(values);
   }
 })(JobTitle);

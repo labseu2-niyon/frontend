@@ -1,4 +1,5 @@
 import axios from 'axios';
+import nookies from 'nookies';
 import { types } from '../authConstants';
 
 const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
@@ -7,9 +8,7 @@ const startLoading = () => ({
   type: types.START_LOADING,
 });
 
-const stopLoading = () => ({
-  type: types.STOP_LOADING,
-});
+const stopLoading = () => ({ type: types.STOP_LOADING });
 
 export const googleSignup = () => (dispatch) => {
   dispatch(startLoading());
@@ -109,19 +108,22 @@ export const userProfileInfo = (data, user) => (dispatch) => {
 
 export const logInUser = ({ email, password }) => (dispatch) => {
   dispatch({ type: types.LOG_IN_USER_REQUEST });
-  // spinner
-
-  axios
+  return axios
     .post(`${_BASE_URL}/user/login`, { email, password })
     .then((res) => {
       dispatch({
         type: types.LOG_IN_USER_SUCCESS,
         payload: {
-          token: res.data.token,
-          message: res.data.message,
+          token: res.data.data.token,
+          message: res.data.data.message,
         },
       });
-      localStorage.setItem('user', JSON.stringify(res.data));
+      nookies.set({}, 'token', res.data.data.token, {
+        maxAge: 60 * 60 * 24 * 30,
+        path: '/',
+      });
+
+      return res.data.status;
     })
     .catch((error) => {
       dispatch({
@@ -131,8 +133,11 @@ export const logInUser = ({ email, password }) => (dispatch) => {
     });
 };
 
-// import axios from 'axios';
-// import { actionTypes } from '../constants';
+export const logOutUser = () => (dispatch) => {
+  dispatch({ type: types.LOG_OUT_USER });
+  nookies.destroy({}, 'token');
+  Router.push('/auth/login');
+};
 
 // export const registerUser = newUser => dispatch => {
 //   dispatch({ type: actionTypes.REGISTER_USER_REQUEST });

@@ -55,6 +55,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
         loading: false,
         error: payload,
       };
+
     case types.SET_LOCATION_DATA:
       return {
         ...state,
@@ -93,6 +94,12 @@ export const authReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         error: payload,
+      };
+
+    case types.LOG_OUT_USER:
+      return {
+        ...state,
+        token: null,
       };
     default:
       return state;

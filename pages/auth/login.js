@@ -1,10 +1,24 @@
+import nookies from 'nookies';
 import Login from '../../components/auth/Login';
+import redirect from '../../lib/redirect';
 
-const login = () => (
-  <div>
-    <p>Navbar from Marketing</p>
-    <Login />
-  </div>
-);
+function Page() {
+  return (
+    <div>
+      <p>Navbar from Marketing</p>
+      <Login />
+    </div>
+  );
+}
 
-export default login;
+// Redirects user to dashboard if they are already logged in
+Page.getInitialProps = (ctx) => {
+  const cookies = nookies.get(ctx);
+  if (cookies.token) {
+    redirect(ctx, '/');
+  }
+
+  return {};
+};
+
+export default Page;

@@ -58,7 +58,6 @@ const FormikWithSocialForm = withFormik({
     username: Yup.string().required('Username is required')
   }),
   handleSubmit(values, { setStatus }) {
-    //console.log('Values: ', values);
     Router.push('/auth/location');
     setStatus(values);
   }
