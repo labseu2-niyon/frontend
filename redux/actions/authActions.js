@@ -95,9 +95,6 @@ export const logInUser = ({ email, password }) => (dispatch) => {
     });
 };
 
-// import axios from 'axios';
-// import { actionTypes } from '../constants';
-
 // export const registerUser = newUser => dispatch => {
 //   dispatch({ type: actionTypes.REGISTER_USER_REQUEST });
 //   // spinner
