@@ -65,6 +65,7 @@ export const logInUser = ({ email, password }) => (dispatch) => {
       });
       nookies.set({}, 'token', res.data.data.token, {
         maxAge: 60 * 60 * 24 * 30,
+        path: '/',
       });
       Router.push('/');
     })
