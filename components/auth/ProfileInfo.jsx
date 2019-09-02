@@ -5,19 +5,23 @@ import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import Steps from './StepsComp';
 import Router from 'next/router';
-import Link from 'next/link';
+import { connect } from 'react-redux';
+import { profileData } from '../../redux/actions/authActions';
 
-const ProfileInfo = ({ status }) => {
+const ProfileInfo = ({ status, profileData }) => {
   const [image, setImage] = useState('');
   const handleImageUpload = () => {
     const data = new FormData();
-    //data.append('file', image);
+    data.append('file', image);
     return data;
   };
 
   useEffect(() => {
+    console.log('Statusss', status);
     if (status) {
-      console.log('Info', status.bio, image);
+      status.image = handleImageUpload(image);
+      // console.log(status);
+      profileData(status);
     }
   }, [status]);
 
@@ -71,7 +75,10 @@ const FormikWithProfileInfoForm = withFormik({
   }
 })(ProfileInfo);
 
-export default FormikWithProfileInfoForm;
+export default connect(
+  state => state,
+  { profileData }
+)(FormikWithProfileInfoForm);
 
 const Root = styled.div`
   height: 97vh;

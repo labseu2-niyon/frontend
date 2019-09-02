@@ -44,7 +44,6 @@ const FormikResetPasswordForm = withFormik({
       .required('Email is required')
   }),
   handleSubmit(values) {
-    console.log(values);
     Router.push('/auth/email-sent');
   }
 })(ResetPassword);

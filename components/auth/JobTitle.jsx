@@ -7,14 +7,19 @@ import * as Yup from 'yup';
 import Flip from 'react-reveal/Flip';
 import { theme } from '../../lib/theme';
 import Router from 'next/router';
+import { connect } from 'react-redux';
+import { userType } from '../../redux/actions/authActions';
 
-const JobTitle = ({ touched, errors, values, status }) => {
+const JobTitle = ({ touched, errors, values, status, userType }) => {
   const [mentorPressed, setMentorPressed] = useState(false);
   const [menteeePresed, setMenteePressed] = useState(false);
   const [mentorError, setMentorError] = useState(true);
 
   useEffect(() => {
     if (mentorPressed || menteeePresed) {
+      values.user = menteeePresed ? 'mentee' : 'mentor';
+      console.log(status);
+      userType(status);
       setMentorError(false);
       Router.push('/auth/profile-info');
     }
@@ -159,12 +164,14 @@ const FormikWithJobTitleForm = withFormik({
     job: Yup.string().required('Job Type is required')
   }),
   handleSubmit(values, { setStatus }) {
-    //console.log(values);
     setStatus(values);
   }
 })(JobTitle);
 
-export default FormikWithJobTitleForm;
+export default connect(
+  state => state,
+  { userType }
+)(FormikWithJobTitleForm);
 
 const Root = styled.div`
   height: 100%;

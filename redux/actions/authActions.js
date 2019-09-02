@@ -1,4 +1,5 @@
 import axios from 'axios';
+import nookies from 'nookies';
 import { types } from '../authConstants';
 
 const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
@@ -7,9 +8,7 @@ const startLoading = () => ({
   type: types.START_LOADING,
 });
 
-const stopLoading = () => ({
-  type: types.STOP_LOADING,
-});
+const stopLoading = () => ({ type: types.STOP_LOADING });
 
 export const googleSignup = () => (dispatch) => {
   dispatch(startLoading());
@@ -46,27 +45,49 @@ export const emailSignUp = () => (dispatch) => {
   dispatch(stopLoading());
 };
 
-export const setClientState = (clientState) => ({
-  type: types.SET_CLIENT_STATE,
-  payload: clientState,
+export const emailSignup = (data) => ({
+  type: types.SET_EMAIL_DATA,
+  payload: data,
+});
+
+export const locationData = (data) => ({
+  type: types.SET_LOCATION_DATA,
+  payload: data,
+});
+
+export const userType = (data) => ({
+  type: types.SET_USER_TYPE,
+  payload: data,
+});
+
+export const profileData = (data) => ({
+  type: types.SET_PROFILE_DATA,
+  payload: data,
+});
+
+export const socialData = (data) => ({
+  type: types.SET_SOCIAL_MEDIA_DATA,
+  payload: data,
 });
 
 export const logInUser = ({ email, password }) => (dispatch) => {
   dispatch({ type: types.LOG_IN_USER_REQUEST });
-  // spinner
-  console.log({ email, password });
-  axios
+  return axios
     .post(`${_BASE_URL}/user/login`, { email, password })
     .then((res) => {
-      console.log(res.data);
       dispatch({
         type: types.LOG_IN_USER_SUCCESS,
         payload: {
-          token: res.data.token,
-          message: res.data.message,
+          token: res.data.data.token,
+          message: res.data.data.message,
         },
       });
-      localStorage.setItem('user', JSON.stringify(res.data));
+      nookies.set({}, 'token', res.data.data.token, {
+        maxAge: 60 * 60 * 24 * 30,
+        path: '/',
+      });
+
+      return res.data.status;
     })
     .catch((error) => {
       dispatch({
@@ -76,8 +97,11 @@ export const logInUser = ({ email, password }) => (dispatch) => {
     });
 };
 
-// import axios from 'axios';
-// import { actionTypes } from '../constants';
+export const logOutUser = () => (dispatch) => {
+  dispatch({ type: types.LOG_OUT_USER });
+  nookies.destroy({}, 'token');
+  Router.push('/auth/login');
+};
 
 // export const registerUser = newUser => dispatch => {
 //   dispatch({ type: actionTypes.REGISTER_USER_REQUEST });
