@@ -1,5 +1,6 @@
 import axios from 'axios';
 import nookies from 'nookies';
+import Router from 'next/router';
 import { types } from '../authConstants';
 
 const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
@@ -80,7 +81,7 @@ export const emailSignup = (data) => (dispatch) => {
         type: types.REGISTER_USER_FAILURE,
         payload: err.response.data.message,
       });
-      return err.response.status;
+      return err.response.data.message;
     });
   // type: types.SET_EMAIL_DATA -instead of- type.REGISTE_USER_SUCCESS
   // payload: data

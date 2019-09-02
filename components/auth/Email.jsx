@@ -7,10 +7,9 @@ import Router from 'next/router';
 import Steps from './StepsComp';
 import { connect } from 'react-redux';
 import { emailSignup } from '../../redux/actions/authActions';
-import { theme } from '../../lib/theme';
 
-const Email = ({ errors, touched, loading, error }) => {
-  console.log(loading, error);
+const Email = ({ errors, touched, loading, status }) => {
+  console.log(loading, status);
   return (
     <Root>
       <Steps stepNumber="1" />
@@ -45,13 +44,24 @@ const Email = ({ errors, touched, loading, error }) => {
             <Error>{errors.password}</Error>
           )}
         </InputWrapper>
-        <Text small>Lorem Ipsum, terms and conditions, blah blah blah.</Text>
+
         <Button small primary type="submit" loadingB={loading}>
           Register
         </Button>
         {/* {error && <Error style={{ textAlign: 'center' }}>{error}</Error>} */}
       </FormArea>
-
+      {status && (
+        <p
+          style={{
+            margin: '5px 10px',
+            textAlign: 'center',
+            fontSize: '14px',
+            color: 'red'
+          }}
+        >
+          {status}
+        </p>
+      )}
       <Text small>
         <Link href="/auth/signup">
           <a>Login with Social Media</a>
@@ -82,10 +92,13 @@ const FormikWithEmailForm = withFormik({
       .min(8, 'Password must be at least 8 characters')
       .required('Password is required')
   }),
-  handleSubmit(values, { props }) {
+  handleSubmit(values, { props, setStatus }) {
     props.emailSignup(values).then(res => {
       if (res === 201) {
         Router.push('/auth/location');
+      } else {
+        console.log('RESS', res);
+        setStatus(res);
       }
     });
   }
@@ -118,8 +131,9 @@ const FormArea = styled(Form)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-center;
+  justify-content: center;
   height: 420px;
+  width: 100%;
 
   input {
     padding: 0.5rem;
