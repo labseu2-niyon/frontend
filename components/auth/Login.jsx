@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link';
-import Router from 'next/router';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Heading4, Text, Button } from '../~common/index';
