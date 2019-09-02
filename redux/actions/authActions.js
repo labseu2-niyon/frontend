@@ -77,8 +77,10 @@ export const emailSignup = (data) => (dispatch) => {
       return res.data.status;
     })
     .catch((err) => {
-      dispatch({ type: types.REGISTER_USER_FAILURE, payload: err });
-      console.log(err);
+      dispatch({
+        type: types.REGISTER_USER_FAILURE,
+        payload: err.response.data.message,
+      });
       return err.response.status;
     });
   // type: types.SET_EMAIL_DATA -instead of- type.REGISTE_USER_SUCCESS

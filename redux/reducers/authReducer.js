@@ -15,10 +15,25 @@ const initialState = {
 
 export const authReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case types.REGISTER_USER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+
     case types.SET_EMAIL_DATA:
       return {
         ...state,
         emailData: payload,
+        error: null,
+        loading: false,
+      };
+    case types.REGISTER_USER_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: payload,
       };
     case types.SET_LOCATION_DATA:
       return {
@@ -44,11 +59,6 @@ export const authReducer = (state = initialState, { type, payload }) => {
         socialData: payload,
       };
 
-    case types.SET_CLIENT_STATE:
-      return {
-        ...state,
-        fromClient: payload,
-      };
     case types.LOG_IN_USER_REQUEST:
       return {
         ...state,

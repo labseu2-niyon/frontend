@@ -9,10 +9,9 @@ import Steps from './StepsComp';
 import { connect } from 'react-redux';
 import { emailSignup } from '../../redux/actions/authActions';
 
-const Email = ({ errors, touched, status }) => {
-  // let load = false;
-  // load = status && Object.values(status)[0];
-  // console.log(load);
+const Email = ({ errors, touched, loading, error }) => {
+  // console.log(loading);
+  // const err = error.password[0];
   return (
     <Root>
       <Steps stepNumber="1" />
@@ -47,9 +46,10 @@ const Email = ({ errors, touched, status }) => {
           )}
         </InputWrapper>
         <Text small>Lorem Ipsum, terms and conditions, blah blah blah.</Text>
-        <Button small primary type="submit" loading={status}>
+        <Button small primary type="submit" loading={loading}>
           Register
         </Button>
+        {/* {!err && <Error>{err}</Error>} */}
       </FormArea>
       <Text small>
         <Link href="/auth/signup">
@@ -78,23 +78,23 @@ const FormikWithEmailForm = withFormik({
       .email('Email is invalid')
       .required('Email is required'),
     password: Yup.string()
-      .min(3, 'Password must be at least 3 characters')
+      .min(3, 'Password must be at least 8 characters')
       .required('Password is required')
   }),
-  handleSubmit(values, { props, setStatus }) {
+  handleSubmit(values, { props, setValues }) {
     //setStatus(values);
-    setStatus({ loading: false });
+    setValues({ loading: false });
 
     props.emailSignup(values).then(res => {
       //debugger;
-      setStatus({ loading: true });
+      setValues({ loading: true });
 
       if (res === 201) {
-        setStatus({ loading: false });
+        setValues({ loading: false });
         Router.push('/auth/location');
       } else if (res === 400) {
         //debugger;
-        setStatus({ loading: false });
+        setValues({ loading: false });
       }
     });
 
@@ -102,8 +102,15 @@ const FormikWithEmailForm = withFormik({
   }
 })(Email);
 
+const mapStateToProps = state => {
+  return {
+    loading: state.authReducer.loading,
+    error: state.authReducer.error
+  };
+};
+
 export default connect(
-  state => state,
+  mapStateToProps,
   { emailSignup }
 )(FormikWithEmailForm);
 
