@@ -51,7 +51,7 @@ const ProfileInfo = ({ profileData, values, loading, error }) => {
           name="bio"
           placeholder="Biography"
         />
-        <Button small primary type="submit" loading={loading}>
+        <Button small primary type="submit" loadingB={loading}>
           Next
         </Button>
         <Skip href="/auth/social-info"></Skip>

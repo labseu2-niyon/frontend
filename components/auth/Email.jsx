@@ -152,6 +152,10 @@ const FormArea = styled(Form)`
   justify-content: center;
   height: 420px;
   width: 100%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  @media (min-width: 500px) {
+    width: 60%;
+  }
 
   input {
     padding: 0.5rem;
@@ -164,6 +168,10 @@ const FormArea = styled(Form)`
     ::placeholder {
       color: grey;
       opacity: 0.4;
+    }
+
+    @media (min-width: 500px) {
+      width: 60%;
     }
   }
 `;

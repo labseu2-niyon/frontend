@@ -8,10 +8,7 @@ import Router from 'next/router';
 import { connect } from 'react-redux';
 import { socialData } from '../../redux/actions/authActions';
 
-const Social = ({ errors, touched, socialData, status }) => {
-  useEffect(() => {
-    socialData(status);
-  }, [status]);
+const Social = ({ errors, touched }) => {
   return (
     <Root>
       <StepsComp stepNumber="1" />
@@ -57,7 +54,8 @@ const FormikWithSocialForm = withFormik({
   validationSchema: Yup.object().shape({
     username: Yup.string().required('Username is required')
   }),
-  handleSubmit(values, { setStatus }) {
+  handleSubmit(values, { props, setStatus }) {
+    props.socialData(values);
     Router.push('/auth/location');
     setStatus(values);
   }
