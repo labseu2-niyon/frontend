@@ -68,20 +68,26 @@ export const socialData = (data) => ({
 
 export const emailSignup = (data) => (dispatch) => {
   dispatch({ type: types.REGISTER_USER_REQUEST });
-  console.log('SignUp data: ', data);
+  // console.log('SignUp data: ', data);
   return axios
     .post(`${_BASE_URL}/user/signup`, data)
     .then((res) => {
-      console.log(res.data);
+      console.log(res.data.data);
+      dispatch({ type: types.SET_EMAIL_DATA, payload: data });
       return res;
     })
-    .catch((status) => {
-      console.log(status);
-      return status;
+    .catch((err) => {
+      dispatch({ type: types.REGISTER_USER_FAILURE, payload: err });
+      console.log(err);
+      return err;
     });
-  // type: types.SET_EMAIL_DATA,
+  // type: types.SET_EMAIL_DATA -instead of- type.REGISTE_USER_SUCCESS
   // payload: data
 };
+
+// export const userProfileInfo = (data) => (dispatch) => {
+//   dispatch();
+// };
 
 export const logInUser = ({ email, password }) => (dispatch) => {
   dispatch({ type: types.LOG_IN_USER_REQUEST });

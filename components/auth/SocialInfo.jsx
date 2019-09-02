@@ -6,11 +6,13 @@ import Router from 'next/router';
 import { connect } from 'react-redux';
 import { socialData } from '../../redux/actions/authActions';
 
-const SocialInfo = ({ socialData }) => {
+const SocialInfo = ({ socialData, userInfo }) => {
   const [twitter, setTweeter] = useState('');
   const [google, setGoogle] = useState('');
   const [gitHub, setGitHub] = useState('');
   const [facebook, setFacebook] = useState('');
+
+  console.log(userInfo.emailData);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -77,8 +79,14 @@ const SocialInfo = ({ socialData }) => {
   );
 };
 
+const mapStateToProps = state => {
+  return {
+    userInfo: state.authReducer
+  };
+};
+
 export default connect(
-  state => state,
+  mapStateToProps,
   { socialData }
 )(SocialInfo);
 

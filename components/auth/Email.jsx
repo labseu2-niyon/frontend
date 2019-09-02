@@ -1,4 +1,4 @@
-
+import { useState } from 'react';
 import { Heading2, Text, Button } from '../~common/index';
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
@@ -9,53 +9,51 @@ import Steps from './StepsComp';
 import { connect } from 'react-redux';
 import { emailSignup } from '../../redux/actions/authActions';
 
-const Email = ({ errors, touched, values, emailSignup, handleSubmit }) => {
+const Email = ({ errors, touched, status }) => {
   return (
-    <>
-      <Root>
-        <Steps stepNumber="1" />
-        <Heading2>Email login</Heading2>
-        <FormArea>
-          <InputWrapper>
-            <Field name="username" type="text" placeholder="username" />
-            {touched.username && errors.username && (
-              <Error>{errors.username}</Error>
-            )}
-          </InputWrapper>
-          <InputWrapper>
-            <Field name="firstName" type="text" placeholder="First Name" />
-            {touched.firstName && errors.firstName && (
-              <Error>{errors.firstName}</Error>
-            )}
-          </InputWrapper>
-          <InputWrapper>
-            <Field name="lastName" type="text" placeholder="Last Name" />
-            {touched.lastName && errors.lastName && (
-              <Error>{errors.lastName}</Error>
-            )}
-          </InputWrapper>
-          <InputWrapper>
-            <Field name="email" type="email" placeholder="email" />
-            {touched.email && errors.email && <Error>{errors.email}</Error>}
-          </InputWrapper>
-          <InputWrapper>
-            <Field name="password" type="password" placeholder="password" />
-            {touched.password && errors.password && (
-              <Error>{errors.password}</Error>
-            )}
-          </InputWrapper>
-          <Text small>Lorem Ipsum, terms and conditions, blah blah blah.</Text>
-          <Button small primary type="submit">
-            Register
-          </Button>
-        </FormArea>
-        <Text small>
-          <Link href="/auth/signup">
-            <a>Login with Social Media</a>
-          </Link>
-        </Text>
-      </Root>
-    </>
+    <Root>
+      <Steps stepNumber="1" />
+      <Heading2>Email login</Heading2>
+      <FormArea>
+        <InputWrapper>
+          <Field name="username" type="text" placeholder="username" />
+          {touched.username && errors.username && (
+            <Error>{errors.username}</Error>
+          )}
+        </InputWrapper>
+        <InputWrapper>
+          <Field name="firstName" type="text" placeholder="First Name" />
+          {touched.firstName && errors.firstName && (
+            <Error>{errors.firstName}</Error>
+          )}
+        </InputWrapper>
+        <InputWrapper>
+          <Field name="lastName" type="text" placeholder="Last Name" />
+          {touched.lastName && errors.lastName && (
+            <Error>{errors.lastName}</Error>
+          )}
+        </InputWrapper>
+        <InputWrapper>
+          <Field name="email" type="email" placeholder="email" />
+          {touched.email && errors.email && <Error>{errors.email}</Error>}
+        </InputWrapper>
+        <InputWrapper>
+          <Field name="password" type="password" placeholder="password" />
+          {touched.password && errors.password && (
+            <Error>{errors.password}</Error>
+          )}
+        </InputWrapper>
+        <Text small>Lorem Ipsum, terms and conditions, blah blah blah.</Text>
+        <Button small primary type="submit" loading={status}>
+          Register
+        </Button>
+      </FormArea>
+      <Text small>
+        <Link href="/auth/signup">
+          <a>Login with Social Media</a>
+        </Link>
+      </Text>
+    </Root>
   );
 };
 
@@ -80,14 +78,20 @@ const FormikWithEmailForm = withFormik({
       .min(3, 'Password must be at least 3 characters')
       .required('Password is required')
   }),
-  handleSubmit(values, { setStatus, props, setSubmitting }) {
+  handleSubmit(values, { props, setStatus }) {
     //setStatus(values);
+    setStatus({ loading: false });
+
     props.emailSignup(values).then(res => {
       console.log(res);
       if (res.status === 201) {
+        setStatus({ loading: true });
         Router.push('/auth/location');
+      } else if (res.name === 'Error') {
+        setStatus({ loading: false });
       }
     });
+
     //setSubmitting(false);
   }
 })(Email);
