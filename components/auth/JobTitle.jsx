@@ -18,7 +18,7 @@ const JobTitle = ({ touched, errors, values, status, userType }) => {
   useEffect(() => {
     if (mentorPressed || menteeePresed) {
       values.user = menteeePresed ? 'mentee' : 'mentor';
-      console.log(status);
+      //console.log(status);
       userType(status);
       setMentorError(false);
       Router.push('/auth/profile-info');
@@ -89,7 +89,7 @@ const JobTitle = ({ touched, errors, values, status, userType }) => {
     <Root>
       <Steps stepNumber="3" />
       <Header>
-        <Heading2>Mentorship Info</Heading2>
+        <Heading2 primary>Mentorship Info</Heading2>
         <Text small>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nisl
           nisl, aliquam nec erat et, efficitur mollis metus.
@@ -126,8 +126,6 @@ const JobTitle = ({ touched, errors, values, status, userType }) => {
         </Costum>
       </MentorIcons>
       <FormArea>
-        {menteeePresed && mentee()}
-        {mentorPressed && mentor()}
         <InputWrapper>
           <Field component="select" name="job">
             <option>Job Title</option>
@@ -137,6 +135,8 @@ const JobTitle = ({ touched, errors, values, status, userType }) => {
           </Field>
           {touched.job && errors.job && <Error>{errors.job}</Error>}
         </InputWrapper>
+        {menteeePresed && mentee()}
+        {mentorPressed && mentor()}
         <Button small primary type="submit">
           Next
         </Button>

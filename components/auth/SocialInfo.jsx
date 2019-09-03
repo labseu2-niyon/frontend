@@ -12,6 +12,8 @@ const SocialInfo = ({ socialData }) => {
   const [gitHub, setGitHub] = useState('');
   const [facebook, setFacebook] = useState('');
 
+  //console.log(userInfo.emailData);
+
   const handleSubmit = e => {
     e.preventDefault();
     const data = {
@@ -26,7 +28,7 @@ const SocialInfo = ({ socialData }) => {
   return (
     <Root>
       <Steps stepNumber="5" />
-      <Heading2>Add Social Media</Heading2>
+      <Heading2 primary>Add Social Media</Heading2>
       <FormArea onSubmit={handleSubmit}>
         <InputWrapper>
           <input
@@ -77,8 +79,14 @@ const SocialInfo = ({ socialData }) => {
   );
 };
 
+const mapStateToProps = state => {
+  return {
+    userInfo: state.authReducer
+  };
+};
+
 export default connect(
-  state => state,
+  mapStateToProps,
   { socialData }
 )(SocialInfo);
 

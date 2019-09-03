@@ -15,7 +15,7 @@ const Social = ({ errors, touched, socialData, status }) => {
   return (
     <Root>
       <StepsComp stepNumber="1" />
-      <Heading2>Welcome</Heading2>
+      <Heading2 primary>Welcome</Heading2>
       <IconT className="far fa-user" />
       <FormArea>
         <InputWrapper>

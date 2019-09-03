@@ -6,6 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import withRedux from 'next-redux-wrapper';
 import { makeStore } from '../lib/withReduxStore';
 import { theme } from '../lib/theme';
+import Loading from '../components/~common/Loading';
 
 // class MyApp extends App {
 //   render() {
@@ -36,7 +37,7 @@ export default withRedux(makeStore, { debug: true })(
           <Provider store={store}>
             <PersistGate
               persistor={store.__persistor}
-              loading={<div>Loading</div>}
+              loading={<Loading />}
             >
               <ThemeProvider theme={theme}>
                 <Component {...pageProps} />
