@@ -4,7 +4,7 @@ import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
 import Router from 'next/router';
-import { Button } from '../~common/index';
+import { Button, Text } from '../~common/index';
 import { updatePassword } from '../../redux/actions/userActions';
 
 const Container = styled.main`
@@ -14,29 +14,31 @@ const Container = styled.main`
 const Settings = () => (
   <Container>
     <FormArea>
+      <Text small>
+        Type your email below. A link to change your password will be sent.
+      </Text>
       <InputWrapper>
-        <Field name="password" type="password" placeholder="new password" />
+        <Field name="email" type="email" placeholder="email" />
       </InputWrapper>
       <Button small primary type="submit">
-        Update Password
+        Send Link
       </Button>
     </FormArea>
   </Container>
 );
 
 const FormikLoginForm = withFormik({
-  mapPropsToValues({ password }) {
+  mapPropsToValues({ email }) {
     return {
-      password: password || '',
+      email: email || '',
     };
   },
   validationSchema: Yup.object().shape({
-    password: Yup.string().required('Password is required'),
+    email: Yup.email().required('Email is required'),
   }),
   handleSubmit(values, { props }) {
-    const { password } = values;
-    const { token } = props.authReducer;
-    props.updatePassword({ password, token });
+    const { email } = values;
+    props.updatePassword({ email });
     Router.push('/settings');
   },
 })(Settings);
