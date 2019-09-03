@@ -1,33 +1,51 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Text, Button, Heading2, Skip } from '../~common/index';
 import styled from 'styled-components';
-import { Form, Field, withFormik } from 'formik';
+import { withFormik } from 'formik';
 import * as Yup from 'yup';
 import Steps from './StepsComp';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import { profileData, userProfileInfo } from '../../redux/actions/authActions';
 
-const ProfileInfo = ({ profileData, values, loading, error }) => {
+const ProfileInfo = props => {
   const [image, setImage] = useState('');
+  const [bio, setBio] = useState('');
+
   const handleImageUpload = () => {
     const data = new FormData();
     data.append('file', image);
     return data;
   };
 
-  useEffect(() => {
-    if (values) {
-      values.image = handleImageUpload(image);
-      profileData(values);
-    }
-  }, [values]);
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log(bio);
+    const data = {
+      fistName: props.userInfo.emailData.firstName,
+      lastName: props.userInfo.emailData.lastName,
+      bio: bio,
+      countryName: props.userInfo.locationData.country,
+      cityName: props.userInfo.locationData.city
+    };
+    const username = props.userInfo.emailData.username;
+    props.userProfileInfo(data, username).then(res => {
+      if (res === 200) {
+        Router.push('/auth/social-info');
+      }
+    });
+  };
+
+  // const sendImage = e => {
+  //   e.preventDefault();
+  //   console.log('Send Image');
+  // };
 
   return (
     <Root>
       <Steps stepNumber="4" />
       <Heading2 primary>Show Us your face</Heading2>
-      <FormArea>
+      <FormArea onSubmit={handleSubmit}>
         <RoundIcon>
           <Input
             accept="image/*"
@@ -45,13 +63,12 @@ const ProfileInfo = ({ profileData, values, loading, error }) => {
         <Text small>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </Text>
-        <Field
-          component="textarea"
+        <textarea
           type="text"
-          name="bio"
           placeholder="Biography"
+          onChange={e => setBio(e.target.value)}
         />
-        <Button small primary type="submit" loadingB={loading}>
+        <Button small primary type="submit" loadingB={props.loading}>
           Next
         </Button>
         <Skip href="/auth/social-info"></Skip>
@@ -67,23 +84,7 @@ const FormikWithProfileInfoForm = withFormik({
       bio: bio || ''
     };
   },
-  validationSchema: Yup.object().shape({}),
-  handleSubmit(values, { setStatus, props }) {
-    setStatus(values);
-    const data = {
-      fistName: props.userInfo.emailData.firstName,
-      lastName: props.userInfo.emailData.lastName,
-      bio: props.userInfo.profileData.bio,
-      countryName: props.userInfo.locationData.country,
-      cityName: props.userInfo.locationData.city
-    };
-    const username = props.userInfo.emailData.username;
-    props.userProfileInfo(data, username).then(res => {
-      if (res === 200) {
-        Router.push('/auth/social-info');
-      }
-    });
-  }
+  validationSchema: Yup.object().shape({})
 })(ProfileInfo);
 
 const mapPropsToProps = state => {
@@ -126,7 +127,7 @@ const RoundIcon = styled.div`
   }
 `;
 
-const FormArea = styled(Form)`
+const FormArea = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
