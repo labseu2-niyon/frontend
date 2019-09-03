@@ -45,11 +45,6 @@ export const emailSignUp = () => (dispatch) => {
   dispatch(stopLoading());
 };
 
-export const emailSignup = (data) => ({
-  type: types.SET_EMAIL_DATA,
-  payload: data,
-});
-
 export const locationData = (data) => ({
   type: types.SET_LOCATION_DATA,
   payload: data,
@@ -69,6 +64,47 @@ export const socialData = (data) => ({
   type: types.SET_SOCIAL_MEDIA_DATA,
   payload: data,
 });
+
+export const emailSignup = (data) => (dispatch) => {
+  dispatch({ type: types.REGISTER_USER_REQUEST });
+  // console.log('SignUp data: ', data);
+  return axios
+    .post(`${_BASE_URL}/user/signup`, data)
+    .then((res) => {
+      console.log(res.data.data);
+      dispatch({ type: types.SET_EMAIL_DATA, payload: data });
+      return res.data.status;
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.REGISTER_USER_FAILURE,
+        payload: err.response.data.message,
+      });
+      return err.response.status;
+    });
+  // type: types.SET_EMAIL_DATA -instead of- type.REGISTE_USER_SUCCESS
+  // payload: data
+};
+
+export const userProfileInfo = (data, user) => (dispatch) => {
+  console.log(data, user);
+  dispatch({ type: types.USER_INFO_REQUEST });
+  return axios
+    .post(`${_BASE_URL}/user/${user}/profile`, data)
+    .then((res) => {
+      console.log(res.data);
+      dispatch({ type: types.USER_INFO_SUCCESS, payload: res.data });
+      // return status code in case of success
+      return res.data.status;
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.USER_INFO_FAIL,
+        payload: err.response.data.message,
+      });
+      return err.response.status;
+    });
+};
 
 export const logInUser = ({ email, password }) => (dispatch) => {
   dispatch({ type: types.LOG_IN_USER_REQUEST });
