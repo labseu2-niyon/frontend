@@ -34,35 +34,6 @@ const Navigation = ({ logOutUser }) => {
             <a className="desktop">Home</a>
           </div>
         </Link>
-        <Link href="/">
-          <div>
-            <Icon type="user" className="icon" />
-            <a className="desktop">Profile</a>
-          </div>
-        </Link>
-        <Link href="/connections">
-          <div>
-            <Icon type="share-alt" className="icon" />
-            <a className="desktop">Connections</a>
-          </div>
-        </Link>
-        <Link href="/explore">
-          <div>
-            <Icon type="search" className="icon" />
-            <a className="desktop">Explore</a>
-          </div>
-        </Link>
-        <Link href="/settings">
-          <div>
-            <Icon type="setting" className="icon" />
-            <a className="desktop">Settings</a>
-          </div>
-        </Link>
-        {/* Log out should redirect person to marketing site (external link) */}
-        <div onClick={handleClick}>
-          <Icon type="logout" className="icon" />
-          <div className="desktop">Log out</div>
-        </div>
         <Link
           href={{
             pathname: '/profile',
@@ -98,12 +69,10 @@ const Navigation = ({ logOutUser }) => {
             <a className="desktop">Settings</a>
           </div>
         </Link>
-        {/* Log out should redirect person to marketing site (external link) */}
-        <div>
+
+        <div onClick={handleClick}>
           <Icon type="logout" className="icon" />
-          <a href="#" className="desktop">
-            Log out
-          </a>
+          <div className="desktop">Log out</div>
         </div>
       </Links>
     </Nav>
