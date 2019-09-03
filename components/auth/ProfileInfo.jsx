@@ -1,33 +1,61 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Text, Button, Heading2, Skip } from '../~common/index';
 import styled from 'styled-components';
-import { Form, Field, withFormik } from 'formik';
+import { withFormik } from 'formik';
 import * as Yup from 'yup';
 import Steps from './StepsComp';
 import Router from 'next/router';
 import { connect } from 'react-redux';
-import { profileData, userProfileInfo } from '../../redux/actions/authActions';
+import {
+  profileData,
+  userProfileInfo,
+  imageUpload
+} from '../../redux/actions/authActions';
 
-const ProfileInfo = ({ profileData, values, loading, error }) => {
+const ProfileInfo = props => {
   const [image, setImage] = useState('');
-  const handleImageUpload = () => {
-    const data = new FormData();
-    data.append('file', image);
-    return data;
+  const [bio, setBio] = useState('');
+
+  // const handleImageUpload = () => {
+  //   const data = new FormData();
+  //   data.append('image', image);
+  //   return data;
+  // };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const data = {
+      firstName: props.userInfo.socialData.firstName,
+      lastName: props.userInfo.socialData.lastName,
+      bio: bio,
+      countryName: props.userInfo.locationData.country,
+      cityName: props.userInfo.locationData.city
+    };
+    const username = props.userInfo.emailData.username;
+
+    const imgData = new FormData();
+    imgData.append('image', image);
+    console.log('Image Upload Data ', ImageData, username);
+    props.imageUpload(imgData, username);
+
+    
+    props.userProfileInfo(data, username).then(res => {
+      if (res === 200) {
+        Router.push('/auth/social-info');
+      }
+    });
   };
 
-  useEffect(() => {
-    if (values) {
-      values.image = handleImageUpload(image);
-      profileData(values);
-    }
-  }, [values]);
+  // const sendImage = e => {
+  //   e.preventDefault();
+  //   console.log('Send Image');
+  // };
 
   return (
     <Root>
       <Steps stepNumber="4" />
       <Heading2 primary>Show Us your face</Heading2>
-      <FormArea>
+      <FormArea onSubmit={handleSubmit}>
         <RoundIcon>
           <Input
             accept="image/*"
@@ -45,13 +73,12 @@ const ProfileInfo = ({ profileData, values, loading, error }) => {
         <Text small>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </Text>
-        <Field
-          component="textarea"
+        <textarea
           type="text"
-          name="bio"
           placeholder="Biography"
+          onChange={e => setBio(e.target.value)}
         />
-        <Button small primary type="submit" loading={loading}>
+        <Button small primary type="submit" loadingB={props.loading}>
           Next
         </Button>
         <Skip href="/auth/social-info"></Skip>
@@ -60,31 +87,6 @@ const ProfileInfo = ({ profileData, values, loading, error }) => {
     </Root>
   );
 };
-
-const FormikWithProfileInfoForm = withFormik({
-  mapPropsToValues({ bio }) {
-    return {
-      bio: bio || ''
-    };
-  },
-  validationSchema: Yup.object().shape({}),
-  handleSubmit(values, { setStatus, props }) {
-    setStatus(values);
-    const data = {
-      fistName: props.userInfo.emailData.firstName,
-      lastName: props.userInfo.emailData.lastName,
-      bio: props.userInfo.profileData.bio,
-      countryName: props.userInfo.locationData.country,
-      cityName: props.userInfo.locationData.city
-    };
-    const username = props.userInfo.emailData.username;
-    props.userProfileInfo(data, username).then(res => {
-      if (res === 200) {
-        Router.push('/auth/social-info');
-      }
-    });
-  }
-})(ProfileInfo);
 
 const mapPropsToProps = state => {
   return {
@@ -96,8 +98,8 @@ const mapPropsToProps = state => {
 
 export default connect(
   mapPropsToProps,
-  { profileData, userProfileInfo }
-)(FormikWithProfileInfoForm);
+  { profileData, userProfileInfo, imageUpload }
+)(ProfileInfo);
 
 const Root = styled.div`
   height: 97vh;
@@ -126,7 +128,7 @@ const RoundIcon = styled.div`
   }
 `;
 
-const FormArea = styled(Form)`
+const FormArea = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;

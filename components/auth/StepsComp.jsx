@@ -7,7 +7,7 @@ const StepsComp = ({ stepNumber, childrens }) => {
     return (
       <Root>
         <Step>
-          <GridLoader color={theme.secondary} sizeUnit={'px'} size={7} />
+          <GridLoader color={theme.primary} sizeUnit={'px'} size={7} />
         </Step>
         <Divider />
         <Step>
@@ -35,7 +35,7 @@ const StepsComp = ({ stepNumber, childrens }) => {
         </Step>
         <Divider />
         <Step>
-          <GridLoader color={theme.secondary} sizeUnit={'px'} size={7} />
+          <GridLoader color={theme.primary} sizeUnit={'px'} size={7} />
         </Step>
         <Divider />
         <Step>
@@ -63,7 +63,7 @@ const StepsComp = ({ stepNumber, childrens }) => {
         </Step>
         <Divider />
         <Step>
-          <GridLoader color={theme.secondary} sizeUnit={'px'} size={7} />
+          <GridLoader color={theme.primary} sizeUnit={'px'} size={7} />
         </Step>
         <Divider />
         <Step>
@@ -91,7 +91,7 @@ const StepsComp = ({ stepNumber, childrens }) => {
         </Step>
         <Divider />
         <Step>
-          <GridLoader color={'green'} sizeUnit={'px'} size={7} />
+          <GridLoader color={theme.primary} sizeUnit={'px'} size={7} />
         </Step>
         <Divider />
         <Step>
@@ -119,7 +119,7 @@ const StepsComp = ({ stepNumber, childrens }) => {
         </Step>
         <Divider />
         <Step>
-          <GridLoader color={'green'} sizeUnit={'px'} size={7} />
+          <GridLoader color={theme.primary} sizeUnit={'px'} size={7} />
         </Step>
       </Root>
     );
@@ -144,7 +144,7 @@ const Step = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-
+  color: ${theme.secondary};
   background-color: ${props => props.color};
 `;
 
