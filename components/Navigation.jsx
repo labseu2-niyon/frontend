@@ -2,6 +2,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { Icon } from 'antd';
 import { connect } from 'react-redux';
+import Router from 'next/router';
 import { Avatar } from './~common/index';
 import { logOutUser } from '../redux/actions/authActions';
 
@@ -11,10 +12,11 @@ const dummyUser = {
 };
 
 const Navigation = ({ logOutUser }) => {
-  const handleClick = (event) => {
-    event.preventDefault();
+  const handleClick = () => {
     logOutUser();
+    Router.push('/auth/login');
   };
+
   return (
     <Nav>
       <div className="desktop">
@@ -57,11 +59,9 @@ const Navigation = ({ logOutUser }) => {
           </div>
         </Link>
         {/* Log out should redirect person to marketing site (external link) */}
-        <div>
+        <div onClick={handleClick}>
           <Icon type="logout" className="icon" />
-          <p className="desktop" onClick={handleClick}>
-            Log out
-          </p>
+          <div className="desktop">Log out</div>
         </div>
         <Link
           href={{
