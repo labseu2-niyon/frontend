@@ -16,6 +16,7 @@ const Navigation = ({ logOutUser }) => {
     logOutUser();
     Router.push('/auth/login');
   };
+
   return (
     <Nav>
       <div className="desktop">
@@ -58,11 +59,9 @@ const Navigation = ({ logOutUser }) => {
           </div>
         </Link>
         {/* Log out should redirect person to marketing site (external link) */}
-        <div>
+        <div onClick={handleClick}>
           <Icon type="logout" className="icon" />
-          <p className="desktop" onClick={handleClick}>
-            Log out
-          </p>
+          <div className="desktop">Log out</div>
         </div>
       </Links>
     </Nav>
