@@ -3,10 +3,10 @@ import { types } from '../userConstants';
 
 const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
 
-export const updatePassword = ({ password, token }) => (dispatch) => {
+export const updatePassword = (props) => (dispatch) => {
   dispatch({ type: types.UPDATE_PASSWORD_REQUEST });
   axios
-    .patch(`${_BASE_URL}/user/newpassword/token?${token}`, password)
+    .patch(`${_BASE_URL}/user/newpassword/token?${props.token}`, props.password)
     .then((res) => {
       dispatch({
         type: types.UPDATE_PASSWORD_SUCCESS,

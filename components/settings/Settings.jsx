@@ -34,18 +34,14 @@ const FormikLoginForm = withFormik({
     password: Yup.string().required('Password is required'),
   }),
   handleSubmit(values, { props }) {
-    const password = values;
-    const { token } = props;
-    props.updatePassword(password, token).then((res) => {
-      if (res === 201) {
-        Router.push('/settings');
-      }
-    });
+    const { password } = values;
+    const { token } = props.authReducer;
+    props.updatePassword({ password, token });
   },
 })(Settings);
 
 function mapStateToProps(state) {
-  return { authReducer: state.authReducer, token: state.token };
+  return { authReducer: state.authReducer };
 }
 
 export default connect(
