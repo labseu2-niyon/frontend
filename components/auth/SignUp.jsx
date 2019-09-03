@@ -4,8 +4,10 @@ import Router from 'next/router';
 import { Text, Button } from '../~common/index';
 import Flip from 'react-reveal/Flip';
 import { theme } from '../../lib/theme';
+import { connect } from 'react-redux';
+import { linkedinSignup, githubSignup } from '../../redux/actions/authActions';
 
-const SignUp = () => (
+const SignUp = ({ linkedinSignup, githubSignup }) => (
   <Root>
     <Flip left>
       <Logo>
@@ -22,13 +24,27 @@ const SignUp = () => (
     <Text small>Lorem Ipsum, welcome message, blah blah blah.`</Text>
     <ButtonArea>
       <Flip top>
-        <Button large primary onClick={() => Router.push('/auth/social')}>
-          Google
+        <Button
+          large
+          primary
+          onClick={() => {
+            linkedinSignup();
+            Router.push('/auth/social');
+          }}
+        >
+          Linkedin
         </Button>
       </Flip>
 
       <Flip top>
-        <Button large secondary onClick={() => Router.push('/auth/social')}>
+        <Button
+          large
+          secondary
+          onClick={() => {
+            githubSignup();
+            Router.push('/auth/social');
+          }}
+        >
           Github
         </Button>
       </Flip>
@@ -62,7 +78,10 @@ const SignUp = () => (
   </Root>
 );
 
-export default SignUp;
+export default connect(
+  state => state,
+  { linkedinSignup, githubSignup }
+)(SignUp);
 
 const Root = styled.div`
   height: 90vh;

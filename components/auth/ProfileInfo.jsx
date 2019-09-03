@@ -22,13 +22,14 @@ const ProfileInfo = props => {
     e.preventDefault();
     console.log(bio);
     const data = {
-      fistName: props.userInfo.emailData.firstName,
-      lastName: props.userInfo.emailData.lastName,
+      fistName: props.userInfo.socialData.firstName,
+      lastName: props.userInfo.socialData.lastName,
       bio: bio,
       countryName: props.userInfo.locationData.country,
       cityName: props.userInfo.locationData.city
     };
     const username = props.userInfo.emailData.username;
+    console.log(data, username);
     props.userProfileInfo(data, username).then(res => {
       if (res === 200) {
         Router.push('/auth/social-info');
@@ -78,15 +79,6 @@ const ProfileInfo = props => {
   );
 };
 
-const FormikWithProfileInfoForm = withFormik({
-  mapPropsToValues({ bio }) {
-    return {
-      bio: bio || ''
-    };
-  },
-  validationSchema: Yup.object().shape({})
-})(ProfileInfo);
-
 const mapPropsToProps = state => {
   return {
     userInfo: state.authReducer,
@@ -98,7 +90,7 @@ const mapPropsToProps = state => {
 export default connect(
   mapPropsToProps,
   { profileData, userProfileInfo }
-)(FormikWithProfileInfoForm);
+)(ProfileInfo);
 
 const Root = styled.div`
   height: 97vh;

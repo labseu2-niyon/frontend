@@ -25,7 +25,8 @@ export const authReducer = (state = initialState, { type, payload }) => {
     case types.SET_EMAIL_DATA:
       return {
         ...state,
-        emailData: payload,
+        emailData: payload.data,
+        token: payload.token,
         error: null,
         loading: false,
       };
@@ -39,7 +40,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
     case types.USER_INFO_REQUEST:
       return {
         ...state,
-        loading: true,
+        loading: false, // just for testing the endpoint
         error: null,
       };
     case types.USER_INFO_SUCCESS:
@@ -55,31 +56,31 @@ export const authReducer = (state = initialState, { type, payload }) => {
         loading: false,
         error: payload,
       };
-
+    //= ==============================perist Location data from the User======
     case types.SET_LOCATION_DATA:
       return {
         ...state,
         locationData: payload,
       };
-
+    //= ==============================perist User Type data===================
     case types.SET_USER_TYPE:
       return {
         ...state,
         userTypeData: payload,
       };
-
+    //= ==============================perist Profile data===================
     case types.SET_PROFILE_DATA:
       return {
         ...state,
         profileData: payload,
       };
-
+    //= ==============================perist Social Media data===================
     case types.SET_SOCIAL_MEDIA_DATA:
       return {
         ...state,
         socialData: payload,
       };
-
+    //= ==============================LOGIN ACTION TYPES===================
     case types.LOG_IN_USER_REQUEST:
       return {
         ...state,

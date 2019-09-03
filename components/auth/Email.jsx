@@ -45,7 +45,7 @@ const Email = ({ errors, touched, loading, status }) => {
         </Button>
         {/* {error && <Error style={{ textAlign: 'center' }}>{error}</Error>} */}
       </FormArea>
-      {/* {status && (
+      {status && (
         <p
           style={{
             margin: '5px 10px',
@@ -56,7 +56,7 @@ const Email = ({ errors, touched, loading, status }) => {
         >
           {status}
         </p>
-      )} */}
+      )}
       <Text small>
         <Link href="/auth/signup">
           <a>Login with Social Media</a>
@@ -98,7 +98,7 @@ const FormikWithEmailForm = withFormik({
     };
     props.emailSignup(data).then(res => {
       if (res === 201) {
-        Router.push('/auth/location');
+        Router.push('/auth/social');
       } else {
         //still need to check the new error for already existing user
         console.log('RESS', res);

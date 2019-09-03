@@ -2,6 +2,7 @@ import axios from 'axios';
 import nookies from 'nookies';
 import Router from 'next/router';
 import { types } from '../authConstants';
+import axiosWithToken from '../axios';
 
 const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
 
@@ -11,10 +12,14 @@ const startLoading = () => ({
 
 const stopLoading = () => ({ type: types.STOP_LOADING });
 
-export const googleSignup = () => (dispatch) => {
+export const linkedinSignup = () => (dispatch) => {
   dispatch(startLoading());
-
-  // console.log('Google endpoint request');
+  console.log('Linkedin endpoint request');
+  dispatch(stopLoading());
+};
+export const githubSignup = () => (dispatch) => {
+  dispatch(startLoading());
+  console.log('Github endpoint request');
   dispatch(stopLoading());
 };
 
@@ -29,13 +34,6 @@ export const twitterSignup = () => (dispatch) => {
   dispatch(startLoading());
 
   // console.log('Twitter endpoint request');
-  dispatch(stopLoading());
-};
-
-export const githubSignup = () => (dispatch) => {
-  dispatch(startLoading());
-
-  // console.log('Github endpoint request');
   dispatch(stopLoading());
 };
 
@@ -72,7 +70,17 @@ export const emailSignup = (data) => (dispatch) => {
   return axios
     .post(`${_BASE_URL}/user/signup`, data)
     .then((res) => {
-      dispatch({ type: types.SET_EMAIL_DATA, payload: data });
+      dispatch({
+        type: types.SET_EMAIL_DATA,
+        payload: {
+          token: res.data.data.token,
+          data: res.data.data.user,
+        },
+      });
+      nookies.set({}, 'token', res.data.data.token, {
+        maxAge: 60 * 60 * 24 * 30,
+        path: '/',
+      });
       return res.data.status;
     })
     .catch((err) => {
@@ -80,6 +88,7 @@ export const emailSignup = (data) => (dispatch) => {
         type: types.REGISTER_USER_FAILURE,
         payload: err.response.data.message,
       });
+
       return err.response.data.message;
     });
   // type: types.SET_EMAIL_DATA -instead of- type.REGISTE_USER_SUCCESS
@@ -89,12 +98,11 @@ export const emailSignup = (data) => (dispatch) => {
 export const userProfileInfo = (data, user) => (dispatch) => {
   // console.log(data, user);
   dispatch({ type: types.USER_INFO_REQUEST });
-  return axios
+  return axiosWithToken()
     .post(`${_BASE_URL}/user/${user}/profile`, data)
     .then((res) => {
       dispatch({ type: types.USER_INFO_SUCCESS, payload: res.data });
       // return status code in case of success
-
       return res.data.status;
     })
     .catch((err) => {
