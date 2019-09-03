@@ -6,7 +6,6 @@ function Page() {
   return (
     <Layout pageName="Settings">
       <Wrapper />
-      Hello World!
     </Layout>
   );
 }
