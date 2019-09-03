@@ -83,23 +83,44 @@ export const authReducer = (state = initialState, { type, payload }) => {
     case types.LOG_IN_USER_REQUEST:
       return {
         ...state,
+        loading: true,
       };
     case types.LOG_IN_USER_SUCCESS:
       return {
         ...state,
         token: payload.token,
         message: payload.message,
+        loading: false,
       };
     case types.LOG_IN_USER_FAILURE:
       return {
         ...state,
         error: payload,
+        loading: false,
       };
 
     case types.LOG_OUT_USER:
       return {
         ...state,
         token: null,
+      };
+
+    case types.UPDATE_PASSWORD_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.UPDATE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: payload,
+      };
+    case types.UPDATE_PASSWORD_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        errorMessage: payload,
       };
     default:
       return state;
@@ -109,79 +130,43 @@ export const authReducer = (state = initialState, { type, payload }) => {
 // Pascal's Reducers
 
 // export default (state, action) => {
-//   switch (action.type) {
+//   switch (type) {
 
-//     case actionTypes.REGISTER_USER_REQUEST:
+//     case types.RESET_PASSWORD_REQUEST:
 //       return {
 //         ...state,
-//         queryingDatabase: true
+//         loading: true
 //       };
-//     case actionTypes.REGISTER_USER_SUCCESS:
+//     case types.RESET_PASSWORD_SUCCESS:
 //       return {
 //         ...state,
-//         queryingDatabase: false,
-//         user: [...state.user, action.payload]
+//         loading: false,
+//         message: payload
 //       };
-//     case actionTypes.REGISTER_USER_FAILURE:
+//     case types.RESET_PASSWORD_FAILURE:
 //       return {
 //         ...state,
-//         queryingDatabase: false,
-//         errorMessage: action.payload
-//       };
-
-//     case actionTypes.RESET_PASSWORD_REQUEST:
-//       return {
-//         ...state,
-//         queryingDatabase: true
-//       };
-//     case actionTypes.RESET_PASSWORD_SUCCESS:
-//       return {
-//         ...state,
-//         queryingDatabase: false,
-//         message: action.payload
-//       };
-//     case actionTypes.RESET_PASSWORD_FAILURE:
-//       return {
-//         ...state,
-//         queryingDatabase: false,
-//         errorMessage: action.payload
+//         loading: false,
+//         errorMessage: payload
 //       };
 
-//     case actionTypes.UPDATE_USER_PROFILE_REQUEST:
+//     case types.UPDATE_USER_PROFILE_REQUEST:
 //       return {
 //         ...state,
-//         queryingDatabase: true
+//         loading: true
 //       };
-//     case actionTypes.UPDATE_USER_PROFILE_SUCCESS:
+//     case types.UPDATE_USER_PROFILE_SUCCESS:
 //       return {
 //         ...state,
-//         queryingDatabase: false,
-//         user: [...state.user, action.payload]
-//         // message: action.payload,
+//         loading: false,
+//         user: [...state.user, payload]
+//         // message: payload,
 //       };
-//     case actionTypes.UPDATE_USER_PROFILE_FAILURE:
+//     case types.UPDATE_USER_PROFILE_FAILURE:
 //       return {
 //         ...state,
-//         queryingDatabase: false,
-//         errorMessage: action.payload
-//       };
-
-//     case actionTypes.UPDATE_PASSWORD_REQUEST:
-//       return {
-//         ...state,
-//         queryingDatabase: true
-//       };
-//     case actionTypes.UPDATE_PASSWORD_SUCCESS:
-//       return {
-//         ...state,
-//         queryingDatabase: false,
-//         message: action.payload
-//       };
-//     case actionTypes.UPDATE_PASSWORD_FAILURE:
-//       return {
-//         ...state,
-//         queryingDatabase: false,
-//         errorMessage: action.payload
+//         loading: false,
+//         errorMessage: payload
 //       };
 //   }
 // };
