@@ -100,7 +100,16 @@ export const authReducer = (state = initialState, { type, payload }) => {
     case types.LOG_OUT_USER:
       return {
         ...state,
+        userInfo: null,
+        loading: false,
+        error: null,
+        emailData: [],
+        locationData: [],
+        profileData: [],
+        userTypeData: [],
+        socialData: [],
         token: null,
+        message: '',
       };
     default:
       return state;
