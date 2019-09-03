@@ -94,7 +94,7 @@ function Button(props) {
     raised,
     small,
     large,
-    loading
+    loadingB
   } = props;
 
   // Setting the color
@@ -125,7 +125,7 @@ function Button(props) {
   if (outline) {
     return (
       <BOutline type="button" themeColor={color} width={width} {...props}>
-        {loading ? (
+        {loadingB ? (
           <PacmanLoader
             loading={true}
             color={theme.white}
@@ -142,7 +142,7 @@ function Button(props) {
   if (raised) {
     return (
       <BRaised type="button" themeColor={color} width={width} {...props}>
-        {loading ? (
+        {loadingB ? (
           <PacmanLoader
             loading={true}
             color={theme.white}
@@ -159,7 +159,7 @@ function Button(props) {
 
   return (
     <B type="button" themeColor={color} width={width} {...props}>
-      {loading ? (
+      {loadingB ? (
         <PacmanLoader
           loading={true}
           color={theme.white}

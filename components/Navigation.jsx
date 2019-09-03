@@ -63,10 +63,50 @@ const Navigation = ({ logOutUser }) => {
           <Icon type="logout" className="icon" />
           <div className="desktop">Log out</div>
         </div>
-      </Links>
-    </Nav>
-  );
-};
+      </Link>
+      <Link href={{
+        pathname: '/profile',
+        query: {
+          userId: 'abc123',
+          user: 'Guillermo Rauch',
+          jobTitle: 'Web Developer',
+          src: 'https://milan.serverlessdays.io/speakers/guillermo-rauch.jpg',
+        },
+      }}
+      >
+        <div>
+          <Icon type="user" className="icon" />
+          <a className="desktop">Profile</a>
+        </div>
+      </Link>
+      <Link href="/connections">
+        <div>
+          <Icon type="share-alt" className="icon" />
+          <a className="desktop">Connections</a>
+        </div>
+      </Link>
+      <Link href="/explore">
+        <div>
+          <Icon type="search" className="icon" />
+          <a className="desktop">Explore</a>
+        </div>
+      </Link>
+      <Link href="/settings">
+        <div>
+          <Icon type="setting" className="icon" />
+          <a className="desktop">Settings</a>
+        </div>
+      </Link>
+      {/* Log out should redirect person to marketing site (external link) */}
+      <div>
+        <Icon type="logout" className="icon" />
+        <a href="#" className="desktop">
+            Log out
+        </a>
+      </div>
+    </Links>
+  </Nav>
+);
 
 const Nav = styled.div`
   display: flex;
@@ -151,6 +191,10 @@ const Links = styled.div`
   .icon {
     width: 40px;
     text-align: center;
+  }
+
+  i {
+    margin-top: 4px;
   }
 `;
 
