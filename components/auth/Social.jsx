@@ -8,7 +8,7 @@ import Router from 'next/router';
 import { connect } from 'react-redux';
 import { socialData } from '../../redux/actions/authActions';
 
-const Social = ({ errors, touched }) => {
+const Social = ({ errors, touched, username }) => {
   return (
     <Root>
       <StepsComp stepNumber="1" />
@@ -20,10 +20,13 @@ const Social = ({ errors, touched }) => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
             nisl nisl, aliquam nec erat et, efficitur mollis metus.
           </Text>
-          <Field name="username" type="text" placeholder="username" />
-          {touched.username && errors.username && (
-            <Error>{errors.username}</Error>
-          )}
+          <Field
+            name="username"
+            type="text"
+            placeholder="username"
+            value={username}
+            disabled
+          />
         </InputWrapper>
         <InputWrapper>
           <Field name="firstName" type="text" placeholder="FirstName" />
@@ -46,15 +49,38 @@ const Social = ({ errors, touched }) => {
 };
 
 const FormikWithSocialForm = withFormik({
-  mapPropsToValues({ username }) {
+  mapPropsToValues({ username, firstName, lastName }) {
     return {
-      username: username || ''
+      username: username || '',
+      firstName: firstName || '',
+      lastName: lastName || ''
     };
   },
   validationSchema: Yup.object().shape({
-    username: Yup.string().required('Username is required')
+    username: Yup.string(),
+    firstName: Yup.string()
+      .matches(/^[A-Z]/, {
+        message: 'Name must start with a capital letter',
+        excludeEmptyString: true
+      })
+      .matches(/^([^0-9]*)$/, {
+        message: 'Must contain only letters',
+        excludeEmptyString: true
+      })
+      .required('First Name is requried.'),
+    lastName: Yup.string()
+      .matches(/^[A-Z]/, {
+        message: 'Name must start with a capital letter',
+        excludeEmptyString: true
+      })
+      .matches(/^([^0-9]*)$/, {
+        message: 'Must contain only letters',
+        excludeEmptyString: true
+      })
+      .required('Last Name is requried.')
   }),
   handleSubmit(values, { props, setStatus }) {
+    debugger;
     props.socialData(values);
     Router.push('/auth/location');
     setStatus(values);
@@ -62,9 +88,10 @@ const FormikWithSocialForm = withFormik({
 })(Social);
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    username: state.authReducer.emailData.username
+  };
 };
-
 const mapDispatchToProps = {
   socialData
 };

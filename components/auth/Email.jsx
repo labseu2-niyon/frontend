@@ -21,19 +21,6 @@ const Email = ({ errors, touched, loading, status }) => {
             <Error>{errors.username}</Error>
           )}
         </InputWrapper>
-
-        <InputWrapper>
-          <Field name="firstName" type="text" placeholder="First Name" />
-          {touched.firstName && errors.firstName && (
-            <Error>{errors.firstName}</Error>
-          )}
-        </InputWrapper>
-        <InputWrapper>
-          <Field name="lastName" type="text" placeholder="Last Name" />
-          {touched.lastName && errors.lastName && (
-            <Error>{errors.lastName}</Error>
-          )}
-        </InputWrapper>
         <InputWrapper>
           <Field name="email" type="email" placeholder="email" />
           {touched.email && errors.email && <Error>{errors.email}</Error>}
@@ -44,13 +31,21 @@ const Email = ({ errors, touched, loading, status }) => {
             <Error>{errors.password}</Error>
           )}
         </InputWrapper>
+        <InputWrapper>
+          <Field
+            name="confirm"
+            type="password"
+            placeholder="confirm password"
+          />
+          {touched.confirm && errors.confirm && <Error>{errors.confirm}</Error>}
+        </InputWrapper>
 
         <Button small primary type="submit" loadingB={loading}>
           Register
         </Button>
         {/* {error && <Error style={{ textAlign: 'center' }}>{error}</Error>} */}
       </FormArea>
-      {status && (
+      {/* {status && (
         <p
           style={{
             margin: '5px 10px',
@@ -61,7 +56,7 @@ const Email = ({ errors, touched, loading, status }) => {
         >
           {status}
         </p>
-      )}
+      )} */}
       <Text small>
         <Link href="/auth/signup">
           <a>Login with Social Media</a>
@@ -72,49 +67,40 @@ const Email = ({ errors, touched, loading, status }) => {
 };
 
 const FormikWithEmailForm = withFormik({
-  mapPropsToValues({ username, firstName, lastName, email, password }) {
+  mapPropsToValues({ username, email, password, confirm }) {
     return {
       username: username || '',
-      firstName: firstName || '',
-      lastName: lastName || '',
       email: email || '',
-      password: password || ''
+      password: password || '',
+      confirm: confirm || ''
     };
   },
   validationSchema: Yup.object().shape({
     username: Yup.string().required('Username is required'),
-    firstName: Yup.string()
-      .matches(/^[A-Z]/, {
-        message: 'Name must start with a capital letter',
-        excludeEmptyString: true
-      })
-      .matches(/^([^0-9]*)$/, {
-        message: 'Must contain only letters',
-        excludeEmptyString: true
-      })
-      .required('Name is requried.'),
-    lastName: Yup.string()
-      .matches(/^[A-Z]/, {
-        message: 'Name must start with a capital letter',
-        excludeEmptyString: true
-      })
-      .matches(/^([^0-9]*)$/, {
-        message: 'Must contain only letters',
-        excludeEmptyString: true
-      })
-      .required('Name is requried.'),
     email: Yup.string()
       .email('Email is invalid')
       .required('Email is required'),
     password: Yup.string()
       .min(8, 'Password must be at least 8 characters')
-      .required('Password is required')
+      .required('Password is required'),
+    confirm: Yup.string()
+      .required()
+      .label('Confirm password')
+      .test('passwords-match', 'Passwords must match ya fool', function(value) {
+        return this.parent.password === value;
+      })
   }),
   handleSubmit(values, { props, setStatus }) {
-    props.emailSignup(values).then(res => {
+    const data = {
+      username: values.username,
+      email: values.email,
+      password: values.password
+    };
+    props.emailSignup(data).then(res => {
       if (res === 201) {
         Router.push('/auth/location');
       } else {
+        //still need to check the new error for already existing user
         console.log('RESS', res);
         setStatus(res);
       }
@@ -150,7 +136,7 @@ const FormArea = styled(Form)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 420px;
+  height: 320px;
   width: 100%;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   @media (min-width: 500px) {

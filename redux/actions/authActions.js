@@ -72,7 +72,6 @@ export const emailSignup = (data) => (dispatch) => {
   return axios
     .post(`${_BASE_URL}/user/signup`, data)
     .then((res) => {
-      console.log(res.data.data);
       dispatch({ type: types.SET_EMAIL_DATA, payload: data });
       return res.data.status;
     })
@@ -88,14 +87,14 @@ export const emailSignup = (data) => (dispatch) => {
 };
 
 export const userProfileInfo = (data, user) => (dispatch) => {
-  console.log(data, user);
+  // console.log(data, user);
   dispatch({ type: types.USER_INFO_REQUEST });
   return axios
     .post(`${_BASE_URL}/user/${user}/profile`, data)
     .then((res) => {
-      console.log(res.data);
       dispatch({ type: types.USER_INFO_SUCCESS, payload: res.data });
       // return status code in case of success
+
       return res.data.status;
     })
     .catch((err) => {
