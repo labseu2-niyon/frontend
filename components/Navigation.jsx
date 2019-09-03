@@ -4,18 +4,19 @@ import { Icon } from 'antd';
 import { connect } from 'react-redux';
 import { Avatar } from './~common/index';
 import { logOutUser } from '../redux/actions/authActions';
+import Router from 'next/router';
 
 const dummyUser = {
   image: 'https://milan.serverlessdays.io/speakers/guillermo-rauch.jpg',
-  name: 'Guillermo Rauch',
+  name: 'Guillermo Rauch'
 };
 
 const Navigation = ({ logOutUser }) => {
-  console.log(logOutUser);
-  const handleClick = (event) => {
-    event.preventDefault();
+  const handleClick = () => {
     logOutUser();
+    Router.push('/auth/login');
   };
+
   return (
     <Nav>
       <div className="desktop">
@@ -58,11 +59,9 @@ const Navigation = ({ logOutUser }) => {
           </div>
         </Link>
         {/* Log out should redirect person to marketing site (external link) */}
-        <div>
+        <div onClick={handleClick}>
           <Icon type="logout" className="icon" />
-          <p className="desktop" onClick={handleClick}>
-            Log out
-          </p>
+          <div className="desktop">Log out</div>
         </div>
       </Link>
       <Link href={{
@@ -200,6 +199,6 @@ const Links = styled.div`
 `;
 
 export default connect(
-  (state) => state,
-  { logOutUser },
+  state => state,
+  { logOutUser }
 )(Navigation);
