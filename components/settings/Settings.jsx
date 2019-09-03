@@ -37,6 +37,7 @@ const FormikLoginForm = withFormik({
     const { password } = values;
     const { token } = props.authReducer;
     props.updatePassword({ password, token });
+    Router.push('/settings');
   },
 })(Settings);
 
