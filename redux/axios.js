@@ -1,14 +1,14 @@
 import axios from 'axios';
-// import nookies from 'nookies';
+import nookies from 'nookies';
 
 export default function () {
-  const token = localStorage.getItem('token');
-  // const cookies = nookies.get(ctx);
+  const cookies = nookies.get({});
 
   const instance = axios.create({
     headers: {
       'Content-Type': 'application/json',
-      token,
+      'Access-Control-Allow-Origin': '*',
+      token: cookies.token,
     },
   });
   return instance;

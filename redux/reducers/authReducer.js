@@ -40,7 +40,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
     case types.USER_INFO_REQUEST:
       return {
         ...state,
-        loading: false, // just for testing the endpoint
+        loading: true, // just for testing the endpoint
         error: null,
       };
     case types.USER_INFO_SUCCESS:

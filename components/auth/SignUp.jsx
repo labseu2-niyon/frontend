@@ -41,7 +41,7 @@ const SignUp = ({ linkedinSignup, githubSignup }) => (
           large
           secondary
           onClick={() => {
-            githubSignup();
+            //githubSignup();
             Router.push('/auth/social');
           }}
         >

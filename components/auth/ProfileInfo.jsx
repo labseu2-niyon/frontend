@@ -6,30 +6,39 @@ import * as Yup from 'yup';
 import Steps from './StepsComp';
 import Router from 'next/router';
 import { connect } from 'react-redux';
-import { profileData, userProfileInfo } from '../../redux/actions/authActions';
+import {
+  profileData,
+  userProfileInfo,
+  imageUpload
+} from '../../redux/actions/authActions';
 
 const ProfileInfo = props => {
   const [image, setImage] = useState('');
   const [bio, setBio] = useState('');
 
-  const handleImageUpload = () => {
-    const data = new FormData();
-    data.append('file', image);
-    return data;
-  };
+  // const handleImageUpload = () => {
+  //   const data = new FormData();
+  //   data.append('image', image);
+  //   return data;
+  // };
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(bio);
     const data = {
-      fistName: props.userInfo.socialData.firstName,
+      firstName: props.userInfo.socialData.firstName,
       lastName: props.userInfo.socialData.lastName,
       bio: bio,
       countryName: props.userInfo.locationData.country,
       cityName: props.userInfo.locationData.city
     };
     const username = props.userInfo.emailData.username;
-    console.log(data, username);
+
+    const imgData = new FormData();
+    imgData.append('image', image);
+    console.log('Image Upload Data ', ImageData, username);
+    props.imageUpload(imgData, username);
+
+    
     props.userProfileInfo(data, username).then(res => {
       if (res === 200) {
         Router.push('/auth/social-info');
@@ -89,7 +98,7 @@ const mapPropsToProps = state => {
 
 export default connect(
   mapPropsToProps,
-  { profileData, userProfileInfo }
+  { profileData, userProfileInfo, imageUpload }
 )(ProfileInfo);
 
 const Root = styled.div`

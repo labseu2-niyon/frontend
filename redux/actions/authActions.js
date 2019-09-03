@@ -14,13 +14,22 @@ const stopLoading = () => ({ type: types.STOP_LOADING });
 
 export const linkedinSignup = () => (dispatch) => {
   dispatch(startLoading());
-  console.log('Linkedin endpoint request');
+  // console.log('Linkedin endpoint request');
   dispatch(stopLoading());
 };
 export const githubSignup = () => (dispatch) => {
   dispatch(startLoading());
-  console.log('Github endpoint request');
-  dispatch(stopLoading());
+  // console.log('Github endpoint request');
+  // axiosWithToken()
+  //   .get(`${_BASE_URL}/user/auth/github`)
+  //   .then((res) => {
+  //     debugger;
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     debugger;
+  //   });
+  // dispatch(stopLoading());
 };
 
 export const facebookSignup = () => (dispatch) => {
@@ -91,15 +100,14 @@ export const emailSignup = (data) => (dispatch) => {
 
       return err.response.data.message;
     });
-  // type: types.SET_EMAIL_DATA -instead of- type.REGISTE_USER_SUCCESS
-  // payload: data
+  // changed !! type: types.SET_EMAIL_DATA -instead of- type.REGISTE_USER_SUCCESS
 };
 
 export const userProfileInfo = (data, user) => (dispatch) => {
   // console.log(data, user);
   dispatch({ type: types.USER_INFO_REQUEST });
   return axiosWithToken()
-    .post(`${_BASE_URL}/user/${user}/profile`, data)
+    .patch(`${_BASE_URL}/user/${user}/profile`, data)
     .then((res) => {
       dispatch({ type: types.USER_INFO_SUCCESS, payload: res.data });
       // return status code in case of success
@@ -111,6 +119,18 @@ export const userProfileInfo = (data, user) => (dispatch) => {
         payload: err.response.data.message,
       });
       return err.response.status;
+    });
+};
+
+export const imageUpload = (data, user) => (dispatch) => {
+  dispatch(startLoading());
+  axiosWithToken()
+    .patch(`${_BASE_URL}/user/${user}/image/upload`, data)
+    .then(() => {
+      // debugger;
+    })
+    .catch(() => {
+      // debugger;
     });
 };
 
