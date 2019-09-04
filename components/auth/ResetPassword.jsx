@@ -3,7 +3,9 @@ import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link';
 import Router from 'next/router';
+import { connect } from 'react-redux';
 import { Heading4, Text, Button } from '../~common/index';
+import { updatePassword } from '../../redux/actions/userActions';
 
 const ResetPassword = ({ errors, touched }) => (
   <>
@@ -35,20 +37,29 @@ const ResetPassword = ({ errors, touched }) => (
 const FormikResetPasswordForm = withFormik({
   mapPropsToValues({ email }) {
     return {
-      email: email || ''
+      email: email || '',
     };
   },
   validationSchema: Yup.object().shape({
     email: Yup.string()
       .email('Email is invalid')
-      .required('Email is required')
+      .required('Email is required'),
   }),
-  handleSubmit(values) {
+  handleSubmit(values, { props }) {
+    const { email } = values;
+    props.updatePassword({ email });
     Router.push('/auth/email-sent');
-  }
+  },
 })(ResetPassword);
 
-export default FormikResetPasswordForm;
+function mapStateToProps(state) {
+  return { authReducer: state.authReducer };
+}
+
+export default connect(
+  mapStateToProps,
+  { updatePassword },
+)(FormikResetPasswordForm);
 
 const Root = styled.div`
   height: 85vh;
