@@ -6,13 +6,11 @@ import Router from 'next/router';
 import { connect } from 'react-redux';
 import { socialData } from '../../redux/actions/authActions';
 
-const SocialInfo = ({ socialData }) => {
+const SocialInfo = ({ socialData, username, loading }) => {
   const [facebook, setFacebook] = useState('');
   const [linkedin, setLinkedin] = useState('');
   const [twitter, setTweeter] = useState('');
   const [gitHub, setGitHub] = useState('');
-
-  //console.log(userInfo.emailData);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -21,8 +19,11 @@ const SocialInfo = ({ socialData }) => {
       linkedin,
       twitter
     };
-    socialData(data);
-    Router.push('/');
+    socialData(data, username).then(res => {
+      if (res === 201) {
+        Router.push('/');
+      }
+    });
   };
   return (
     <Root>
@@ -70,7 +71,7 @@ const SocialInfo = ({ socialData }) => {
           <i className="fab fa-github fa-lg"></i>
         </InputWrapper>
 
-        <Button small primary type="submit">
+        <Button small primary type="submit" loadingB={loading}>
           Next
         </Button>
         <Skip href="/"></Skip>
@@ -81,7 +82,8 @@ const SocialInfo = ({ socialData }) => {
 
 const mapStateToProps = state => {
   return {
-    userInfo: state.authReducer
+    username: state.authReducer.emailData.username,
+    loading: state.authReducer.loading
   };
 };
 

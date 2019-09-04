@@ -153,10 +153,18 @@ export const imageUpload = (data, user) => (dispatch) => {
 
 // Action Creator for adding social media handlers
 // data: {user_id:integer, facebook: String, linkedin: String, twitter: String}
-export const socialData = (data) => ({
-  type: types.SET_SOCIAL_MEDIA_DATA,
-  payload: data,
-});
+export const socialData = (data, username) => (dispatch) => {
+  dispatch({ type: types.START_LOADING });
+  return axiosWithToken()
+    .post(`${_BASE_URL}/user/${username}/socialmedia`, data)
+    .then((res) => {
+      dispatch({ type: types.SET_SOCIAL_MEDIA_DATA, payload: data });
+      return res.data.status;
+    })
+    .catch(() => {
+      dispatch({ type: types.STOP_LOADING });
+    });
+};
 
 export const logInUser = ({ email, password }) => (dispatch) => {
   dispatch({ type: types.LOG_IN_USER_REQUEST });

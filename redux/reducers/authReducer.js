@@ -92,6 +92,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         socialData: payload,
+        loading: false,
       };
     //= ==============================LOGIN ACTION TYPES===================
     case types.LOG_IN_USER_REQUEST:
