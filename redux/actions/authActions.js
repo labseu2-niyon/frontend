@@ -198,28 +198,6 @@ export const logOutUser = () => (dispatch) => {
   nookies.destroy({}, 'token', { path: '/' });
 };
 
-// export const registerUser = newUser => dispatch => {
-//   dispatch({ type: actionTypes.REGISTER_USER_REQUEST });
-//   // spinner
-//   axios
-//     .post(`${_BASE_URL}/signup`, newUser)
-//     .then(res => {
-//       dispatch({
-//         type: actionTypes.REGISTER_USER_SUCCESS,
-//         payload: res.data,
-//         // payload: res.data.token,
-//       });
-//       // window.localStorage.setItem('token', res.data.token);
-//       // window.location = '/user/dashboard';
-//     })
-//     .catch(error => {
-//       dispatch({
-//         type: actionTypes.REGISTER_USER_FAILURE,
-//         payload: error.message,
-//       });
-//     });
-// };
-
 // export const resetPassword = email => dispatch => {
 //   dispatch({ type: actionTypes.RESET_PASSWORD_REQUEST });
 //   // spinner

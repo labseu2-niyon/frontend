@@ -6,7 +6,7 @@ import Router from 'next/router';
 import { connect } from 'react-redux';
 import { socialData } from '../../redux/actions/authActions';
 
-const SocialInfo = ({ socialData, username, loading }) => {
+const SocialInfo = ({ socialData, username, loading, usernameId }) => {
   const [facebook, setFacebook] = useState('');
   const [linkedin, setLinkedin] = useState('');
   const [twitter, setTweeter] = useState('');
@@ -15,6 +15,7 @@ const SocialInfo = ({ socialData, username, loading }) => {
   const handleSubmit = e => {
     e.preventDefault();
     const data = {
+      user_id: usernameId,
       facebook,
       linkedin,
       twitter
@@ -83,7 +84,8 @@ const SocialInfo = ({ socialData, username, loading }) => {
 const mapStateToProps = state => {
   return {
     username: state.authReducer.emailData.username,
-    loading: state.authReducer.loading
+    loading: state.authReducer.loading,
+    usernameId: state.authReducer.emailData.id
   };
 };
 
