@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Text, Button, Heading2 } from '../~common/index';
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
@@ -6,9 +6,20 @@ import * as Yup from 'yup';
 import Steps from './StepsComp';
 import Router from 'next/router';
 import { connect } from 'react-redux';
-import { locationData } from '../../redux/actions/authActions';
+import { locationData, locationRequest } from '../../redux/actions/authActions';
+// import { Dropdown } from '../~common/index';
 
-const Location = ({ errors, touched }) => {
+const Location = ({ errors, touched, values, locationRequest }) => {
+  const [city, setCity] = useState('');
+  const [country, setCountry] = useState('');
+  // const [grabOp, grabOp] = useState('');
+  const [list, setList] = useState('');
+  useEffect(() => {
+    locationRequest(values.city).then(res => {
+      console.log(res);
+      setList(res);
+    });
+  }, [values]);
   return (
     <Root>
       <Steps stepNumber="2" />
@@ -20,20 +31,18 @@ const Location = ({ errors, touched }) => {
       </Text>
       <FormArea>
         <InputWrapper>
-          <Field name="country" type="text" placeholder="country"></Field>
-
-          {/* <Field component="select" name="country">
-            <option>Country</option>
-            <option value="City1">City name</option>
-            <option value="City2">City2</option>
-            <option value="City3">City3</option>
-          </Field> */}
-          {touched.country && errors.country && <Error>{errors.country}</Error>}
-        </InputWrapper>
-        <InputWrapper>
           <Field name="city" type="text" placeholder="City"></Field>
           {touched.city && errors.city && <Error>{errors.city}</Error>}
         </InputWrapper>
+
+        {list && (
+          <Field component="select" name="information">
+            <option>Chose Location</option>
+            {list.map(op => {
+              return <option value={op}>{op}</option>;
+            })}
+          </Field>
+        )}
         <Button small primary type="submit">
           Next
         </Button>
@@ -43,27 +52,28 @@ const Location = ({ errors, touched }) => {
 };
 
 const FormikWithLocationForm = withFormik({
-  mapPropsToValues({ city, country }) {
+  mapPropsToValues({ city, information }) {
     return {
       city: city || '',
-      country: country || ''
+      information: information || ''
     };
   },
   validationSchema: Yup.object().shape({
-    city: Yup.string().required('City name is required'),
-    country: Yup.string().required('Country name is required')
+    city: Yup.string().required('City name is required')
   }),
   handleSubmit(values, { setStatus, props }) {
-    //console.log(values);
     props.locationData(values);
+    const inwork = values.information.split(',');
+    console.log('City', inwork[0].trim());
+    console.log('Country', inwork[1].trim());
     setStatus(values);
-    Router.push('/auth/job-title');
+    //Router.push('/auth/job-title');
   }
 })(Location);
 
 export default connect(
   state => state,
-  { locationData }
+  { locationData, locationRequest }
 )(FormikWithLocationForm);
 
 const Root = styled.div`

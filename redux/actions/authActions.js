@@ -119,6 +119,17 @@ export const userTypeHandler = (data, username, type, status) => (dispatch) => {
     });
 };
 
+// Action Creator for getting Location Data from the Server based on the City
+// data: city:String  => City and Country
+export const locationRequest = (data) => (dispatch) => {
+  dispatch({ type: types.START_LOADING });
+
+  return axios
+    .get(`${_BASE_URL}/autocomplete/${data}`)
+    .then((res) => res.data.data)
+    .catch(() => {});
+};
+
 // Action Creator for updating/patch user information gather from the steps
 // data: {firstName: String, lastName: String, country: String, city: String, bio: String}
 // user : username

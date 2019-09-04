@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import { socialData } from '../../redux/actions/authActions';
+import { AutoComplete } from 'antd';
 
 const Social = ({ errors, touched, username }) => {
   return (
