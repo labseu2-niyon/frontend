@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
-import Link from 'next/link';
 import { connect } from 'react-redux';
 import { Heading4, Text, Button } from '../~common/index';
 import { changePassword } from '../../redux/actions/authActions';
@@ -9,24 +8,18 @@ import { changePassword } from '../../redux/actions/authActions';
 const ResetPassword = ({ errors, touched }) => (
   <>
     <Root>
-      <Heading4>Let us find your account</Heading4>
-      <Text small>Please enter your email</Text>
+      <Heading4>Here you can change your password</Heading4>
       <FormArea>
         <InputWrapper>
-          <Field name="email" type="email" placeholder="email" />
-          {touched.email && errors.email && <Error>{errors.email}</Error>}
+          <Field name="password" type="password" placeholder="new password" />
+          {touched.password && errors.password && (
+            <Error>{errors.password}</Error>
+          )}
         </InputWrapper>
         <ButtonArea>
           <Button large primary type="submit">
-            Find Account
+            Change Password
           </Button>
-          <Link href="/auth/login">
-            <a>
-              <Button large secondary>
-                Cancel
-              </Button>
-            </a>
-          </Link>
         </ButtonArea>
       </FormArea>
     </Root>
@@ -34,13 +27,13 @@ const ResetPassword = ({ errors, touched }) => (
 );
 
 const FormikResetPasswordForm = withFormik({
-  mapPropsToValues({ email }) {
+  mapPropsToValues({ password }) {
     return {
-      email: email || '',
+      password: password || '',
     };
   },
   validationSchema: Yup.object().shape({
-    email: Yup.string()
+    password: Yup.string()
       .email('Email is invalid')
       .required('Email is required'),
   }),
