@@ -11,6 +11,7 @@ const startLoading = () => ({
 
 const stopLoading = () => ({ type: types.STOP_LOADING });
 
+// Action Creator for Social Media Signup
 export const linkedinSignup = () => (dispatch) => {
   dispatch(startLoading());
   // console.log('Linkedin endpoint request');
@@ -52,21 +53,20 @@ export const emailSignUp = () => (dispatch) => {
   dispatch(stopLoading());
 };
 
+// Action creator for persisting location data
 export const locationData = (data) => ({
   type: types.SET_LOCATION_DATA,
   payload: data,
 });
 
+// Action creator for persisting profile data
 export const profileData = (data) => ({
   type: types.SET_PROFILE_DATA,
   payload: data,
 });
 
-export const socialData = (data) => ({
-  type: types.SET_SOCIAL_MEDIA_DATA,
-  payload: data,
-});
-
+// Action Creator for Singup a user with email
+// body {username, email, password}
 export const emailSignup = (data) => (dispatch) => {
   dispatch({ type: types.REGISTER_USER_REQUEST });
   // console.log('SignUp data: ', data);
@@ -97,6 +97,10 @@ export const emailSignup = (data) => (dispatch) => {
   // changed !! type: types.SET_EMAIL_DATA -instead of- type.REGISTE_USER_SUCCESS
 };
 
+// Action Creator for making a user a mentor/mentee {type: mentor/mentee}
+// data: {locationId: String, industryId: String}
+// username
+// status - data that will persist in redux-resist store
 export const userTypeHandler = (data, username, type, status) => (dispatch) => {
   dispatch({ type: types.START_LOADING });
   return axiosWithToken()
@@ -110,6 +114,9 @@ export const userTypeHandler = (data, username, type, status) => (dispatch) => {
     });
 };
 
+// Action Creator for updating/patch user information gather from the steps
+// data: {firstName: String, lastName: String, country: String, city: String, bio: String}
+// user : username
 export const userProfileInfo = (data, user) => (dispatch) => {
   // console.log(data, user);
   dispatch({ type: types.USER_INFO_REQUEST });
@@ -129,6 +136,9 @@ export const userProfileInfo = (data, user) => (dispatch) => {
     });
 };
 
+// Action Creator for upload user image to cloudinary API
+// data: image in FormatData object
+// user : username
 export const imageUpload = (data, user) => (dispatch) => {
   dispatch(startLoading());
   axiosWithToken()
@@ -140,6 +150,13 @@ export const imageUpload = (data, user) => (dispatch) => {
       // debugger;
     });
 };
+
+// Action Creator for adding social media handlers
+// data: {user_id:integer, facebook: String, linkedin: String, twitter: String}
+export const socialData = (data) => ({
+  type: types.SET_SOCIAL_MEDIA_DATA,
+  payload: data,
+});
 
 export const logInUser = ({ email, password }) => (dispatch) => {
   dispatch({ type: types.LOG_IN_USER_REQUEST });

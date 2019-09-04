@@ -7,20 +7,19 @@ import { connect } from 'react-redux';
 import { socialData } from '../../redux/actions/authActions';
 
 const SocialInfo = ({ socialData }) => {
-  const [twitter, setTweeter] = useState('');
-  const [google, setGoogle] = useState('');
-  const [gitHub, setGitHub] = useState('');
   const [facebook, setFacebook] = useState('');
+  const [linkedin, setLinkedin] = useState('');
+  const [twitter, setTweeter] = useState('');
+  const [gitHub, setGitHub] = useState('');
 
   //console.log(userInfo.emailData);
 
   const handleSubmit = e => {
     e.preventDefault();
     const data = {
-      twitter,
-      google,
-      gitHub,
-      facebook
+      facebook,
+      linkedin,
+      twitter
     };
     socialData(data);
     Router.push('/');
@@ -30,16 +29,6 @@ const SocialInfo = ({ socialData }) => {
       <Steps stepNumber="5" />
       <Heading2 primary>Add Social Media</Heading2>
       <FormArea onSubmit={handleSubmit}>
-        <InputWrapper>
-          <input
-            type="text"
-            placeholder="tweeter handler"
-            onChange={e => {
-              setTweeter(e.target.value);
-            }}
-          />
-          <i className="fab fa-twitter fa-lg"></i>
-        </InputWrapper>
         <InputWrapper>
           <input
             type="text"
@@ -53,6 +42,26 @@ const SocialInfo = ({ socialData }) => {
         <InputWrapper>
           <input
             type="text"
+            placeholder="linkedin handler"
+            onChange={e => {
+              setLinkedin(e.target.value);
+            }}
+          />
+          <i className="fab fa-linkedin fa-lg"></i>
+        </InputWrapper>
+        <InputWrapper>
+          <input
+            type="text"
+            placeholder="tweeter handler"
+            onChange={e => {
+              setTweeter(e.target.value);
+            }}
+          />
+          <i className="fab fa-twitter fa-lg"></i>
+        </InputWrapper>
+        <InputWrapper>
+          <input
+            type="text"
             placeholder="github handler"
             onChange={e => {
               setGitHub(e.target.value);
@@ -60,16 +69,7 @@ const SocialInfo = ({ socialData }) => {
           />
           <i className="fab fa-github fa-lg"></i>
         </InputWrapper>
-        <InputWrapper>
-          <input
-            type="text"
-            placeholder="google handler"
-            onChange={e => {
-              setGoogle(e.target.value);
-            }}
-          />
-          <i className="fab fa-google fa-lg"></i>
-        </InputWrapper>
+
         <Button small primary type="submit">
           Next
         </Button>
