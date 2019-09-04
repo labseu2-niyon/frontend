@@ -8,7 +8,7 @@ import { changePassword } from '../../redux/actions/authActions';
 const ChangePassword = ({ errors, touched }) => (
   <>
     <Root>
-      <Heading4>Here you can change your password</Heading4>
+      <Heading4>Please enter your new password.</Heading4>
       <FormArea>
         <InputWrapper>
           <Field name="password" type="password" placeholder="new password" />
@@ -18,7 +18,7 @@ const ChangePassword = ({ errors, touched }) => (
         </InputWrapper>
         <ButtonArea>
           <Button large primary type="submit">
-            Change Password
+            Change my password
           </Button>
         </ButtonArea>
       </FormArea>

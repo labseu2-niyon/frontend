@@ -5,8 +5,11 @@ import { Heading4, Text, Button } from '../~common/index';
 const EmailSent = () => (
   <>
     <Root>
-      <Heading4>We have just emailed you a link</Heading4>
-      <Text small>Please check your email and click the secure link</Text>
+      <Heading4>We have just emailed you a link.</Heading4>
+      <Text small>
+        Please check your email and click the secure link. You will then be able
+        to change your password.
+      </Text>
 
       <ButtonArea>
         {/* <Link>

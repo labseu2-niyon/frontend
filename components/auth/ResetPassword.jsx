@@ -9,8 +9,8 @@ import { resetPassword } from '../../redux/actions/authActions';
 const ResetPassword = ({ errors, touched }) => (
   <>
     <Root>
-      <Heading4>Let us find your account</Heading4>
-      <Text small>Please enter your email</Text>
+      <Heading4>Let us find your account.</Heading4>
+      <Text small>Please enter your email.</Text>
       <FormArea>
         <InputWrapper>
           <Field name="email" type="email" placeholder="email" />
