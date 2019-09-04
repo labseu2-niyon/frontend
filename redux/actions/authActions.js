@@ -1,5 +1,6 @@
 import axios from 'axios';
 import nookies from 'nookies';
+import Router from 'next/router';
 import { types } from '../authConstants';
 import axiosWithToken from '../axios';
 
@@ -174,6 +175,7 @@ export const resetPassword = (email) => (dispatch) => {
         type: types.RESET_PASSWORD_SUCCESS,
         payload: res.data.data.message,
       });
+      Router.push('/auth/email-sent');
     })
     .catch((error) => {
       dispatch({
