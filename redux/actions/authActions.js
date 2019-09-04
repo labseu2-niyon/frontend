@@ -187,9 +187,10 @@ export const resetPassword = (email) => (dispatch) => {
 
 export const changePassword = (props) => (dispatch) => {
   dispatch({ type: types.CHANGE_PASSWORD_REQUEST });
-  console.log(props);
   axios
-    .patch(`${_BASE_URL}/user/newpassword?token=${props.token}`, props.password)
+    .patch(`${_BASE_URL}/user/newpassword?token=${props.token}`, {
+      password: props.password,
+    })
     .then((res) => {
       dispatch({
         type: types.CHANGE_PASSWORD_SUCCESS,
