@@ -132,6 +132,24 @@ export const authReducer = (state = initialState, { type, payload }) => {
         loading: false,
         error: payload,
       };
+    // ========================CHANGE PASSWORD ACTION TYPES==================
+    case types.CHANGE_PASSWORD_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.CHANGE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: payload,
+      };
+    case types.CHANGE_PASSWORD_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+      };
     default:
       return state;
   }

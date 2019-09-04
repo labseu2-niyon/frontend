@@ -184,3 +184,22 @@ export const resetPassword = (email) => (dispatch) => {
       });
     });
 };
+
+export const changePassword = (password) => (dispatch) => {
+  dispatch({ type: types.CHANGE_PASSWORD_REQUEST });
+  axios
+    .post(`${_BASE_URL}/user/newpassword`, password)
+    .then((res) => {
+      dispatch({
+        type: types.CHANGE_PASSWORD_SUCCESS,
+        payload: res.data.data.message,
+      });
+      Router.push('/auth/login');
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.CHANGE_PASSWORD_FAILURE,
+        payload: error.message,
+      });
+    });
+};

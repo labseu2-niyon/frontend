@@ -8,23 +8,7 @@
 
 // export const userReducer = (state = initialState, { type, payload }) => {
 //   switch (type) {
-//     case types.UPDATE_PASSWORD_REQUEST:
-//       return {
-//         ...state,
-//         loading: true,
-//       };
-//     case types.UPDATE_PASSWORD_SUCCESS:
-//       return {
-//         ...state,
-//         loading: false,
-//         message: payload,
-//       };
-//     case types.UPDATE_PASSWORD_FAILURE:
-//       return {
-//         ...state,
-//         loading: false,
-//         error: payload,
-//       };
+
 
 //     default:
 //       return state;
