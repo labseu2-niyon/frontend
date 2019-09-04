@@ -99,7 +99,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
         error: payload,
         loading: false,
       };
-
+    // ========================LOG OUT ACTION TYPES==================
     case types.LOG_OUT_USER:
       return {
         ...state,
@@ -114,23 +114,23 @@ export const authReducer = (state = initialState, { type, payload }) => {
         token: null,
         message: '',
       };
-
-    case types.UPDATE_PASSWORD_REQUEST:
+    // ========================RESET PASSWORD ACTION TYPES==================
+    case types.RESET_PASSWORD_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case types.UPDATE_PASSWORD_SUCCESS:
+    case types.RESET_PASSWORD_SUCCESS:
       return {
         ...state,
         loading: false,
         message: payload,
       };
-    case types.UPDATE_PASSWORD_FAILURE:
+    case types.RESET_PASSWORD_FAILURE:
       return {
         ...state,
         loading: false,
-        errorMessage: payload,
+        error: payload,
       };
     default:
       return state;
