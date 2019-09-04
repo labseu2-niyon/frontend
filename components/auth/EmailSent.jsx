@@ -9,11 +9,11 @@ const EmailSent = () => (
       <Text small>Please check your email and click the secure link</Text>
 
       <ButtonArea>
-        <Link>
+        {/* <Link>
           <Button large primary type="submit">
             Resend link
           </Button>
-        </Link>
+        </Link> */}
         <Link href="/auth/reset-password">
           <a>
             <Button large secondary>

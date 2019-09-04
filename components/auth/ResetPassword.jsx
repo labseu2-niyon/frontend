@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import { Heading4, Text, Button } from '../~common/index';
-import { updatePassword } from '../../redux/actions/userActions';
+import { resetPassword } from '../../redux/actions/authActions';
 
 const ResetPassword = ({ errors, touched }) => (
   <>
@@ -47,7 +47,7 @@ const FormikResetPasswordForm = withFormik({
   }),
   handleSubmit(values, { props }) {
     const { email } = values;
-    props.updatePassword({ email });
+    props.resetPassword({ email });
     Router.push('/auth/email-sent');
   },
 })(ResetPassword);
@@ -58,7 +58,7 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { updatePassword },
+  { resetPassword },
 )(FormikResetPasswordForm);
 
 const Root = styled.div`
