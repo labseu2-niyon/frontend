@@ -1,9 +1,8 @@
 import axios from 'axios';
 import nookies from 'nookies';
 
-export default function () {
-  const cookies = nookies.get({});
-
+export default function (ctx = {}) {
+  const cookies = nookies.get(ctx);
   const instance = axios.create({
     headers: {
       'Content-Type': 'application/json',
