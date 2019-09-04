@@ -1,6 +1,8 @@
 import axios from 'axios';
 import nookies from 'nookies';
+import Router from 'next/router';
 import { types } from '../authConstants';
+import axiosWithToken from '../axios';
 
 const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
 
@@ -10,11 +12,24 @@ const startLoading = () => ({
 
 const stopLoading = () => ({ type: types.STOP_LOADING });
 
-export const googleSignup = () => (dispatch) => {
+export const linkedinSignup = () => (dispatch) => {
   dispatch(startLoading());
-
-  // console.log('Google endpoint request');
+  // console.log('Linkedin endpoint request');
   dispatch(stopLoading());
+};
+export const githubSignup = () => (dispatch) => {
+  dispatch(startLoading());
+  // console.log('Github endpoint request');
+  // axiosWithToken()
+  //   .get(`${_BASE_URL}/user/auth/github`)
+  //   .then((res) => {
+  //     debugger;
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     debugger;
+  //   });
+  // dispatch(stopLoading());
 };
 
 export const facebookSignup = () => (dispatch) => {
@@ -28,13 +43,6 @@ export const twitterSignup = () => (dispatch) => {
   dispatch(startLoading());
 
   // console.log('Twitter endpoint request');
-  dispatch(stopLoading());
-};
-
-export const githubSignup = () => (dispatch) => {
-  dispatch(startLoading());
-
-  // console.log('Github endpoint request');
   dispatch(stopLoading());
 };
 
@@ -71,8 +79,17 @@ export const emailSignup = (data) => (dispatch) => {
   return axios
     .post(`${_BASE_URL}/user/signup`, data)
     .then((res) => {
-      console.log(res.data.data);
-      dispatch({ type: types.SET_EMAIL_DATA, payload: data });
+      dispatch({
+        type: types.SET_EMAIL_DATA,
+        payload: {
+          token: res.data.data.token,
+          data: res.data.data.user,
+        },
+      });
+      nookies.set({}, 'token', res.data.data.token, {
+        maxAge: 60 * 60 * 24 * 30,
+        path: '/',
+      });
       return res.data.status;
     })
     .catch((err) => {
@@ -80,19 +97,18 @@ export const emailSignup = (data) => (dispatch) => {
         type: types.REGISTER_USER_FAILURE,
         payload: err.response.data.message,
       });
-      return err.response.status;
+
+      return err.response.data.message;
     });
-  // type: types.SET_EMAIL_DATA -instead of- type.REGISTE_USER_SUCCESS
-  // payload: data
+  // changed !! type: types.SET_EMAIL_DATA -instead of- type.REGISTE_USER_SUCCESS
 };
 
 export const userProfileInfo = (data, user) => (dispatch) => {
-  console.log(data, user);
+  // console.log(data, user);
   dispatch({ type: types.USER_INFO_REQUEST });
-  return axios
-    .post(`${_BASE_URL}/user/${user}/profile`, data)
+  return axiosWithToken()
+    .patch(`${_BASE_URL}/user/${user}/profile`, data)
     .then((res) => {
-      console.log(res.data);
       dispatch({ type: types.USER_INFO_SUCCESS, payload: res.data });
       // return status code in case of success
       return res.data.status;
@@ -103,6 +119,18 @@ export const userProfileInfo = (data, user) => (dispatch) => {
         payload: err.response.data.message,
       });
       return err.response.status;
+    });
+};
+
+export const imageUpload = (data, user) => (dispatch) => {
+  dispatch(startLoading());
+  axiosWithToken()
+    .patch(`${_BASE_URL}/user/${user}/image/upload`, data)
+    .then(() => {
+      // debugger;
+    })
+    .catch(() => {
+      // debugger;
     });
 };
 
@@ -138,44 +166,40 @@ export const logOutUser = () => (dispatch) => {
   nookies.destroy({}, 'token', { path: '/' });
 };
 
-// export const registerUser = newUser => dispatch => {
-//   dispatch({ type: actionTypes.REGISTER_USER_REQUEST });
-//   // spinner
-//   axios
-//     .post(`${_BASE_URL}/signup`, newUser)
-//     .then(res => {
-//       dispatch({
-//         type: actionTypes.REGISTER_USER_SUCCESS,
-//         payload: res.data,
-//         // payload: res.data.token,
-//       });
-//       // window.localStorage.setItem('token', res.data.token);
-//       // window.location = '/user/dashboard';
-//     })
-//     .catch(error => {
-//       dispatch({
-//         type: actionTypes.REGISTER_USER_FAILURE,
-//         payload: error.message,
-//       });
-//     });
-// };
+export const resetPassword = (email) => (dispatch) => {
+  dispatch({ type: types.RESET_PASSWORD_REQUEST });
+  axios
+    .post(`${_BASE_URL}/user/resetpassword`, email)
+    .then((res) => {
+      dispatch({
+        type: types.RESET_PASSWORD_SUCCESS,
+        payload: res.data.data.message,
+      });
+      Router.push('/auth/email-sent');
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.RESET_PASSWORD_FAILURE,
+        payload: error.message,
+      });
+    });
+};
 
-// export const resetPassword = email => dispatch => {
-//   dispatch({ type: actionTypes.RESET_PASSWORD_REQUEST });
-//   // spinner
-//   axios
-//     .post(`${_BASE_URL}/resetpassword`, email)
-//     .then(res => {
-//       dispatch({
-//         type: actionTypes.RESET_PASSWORD_SUCCESS,
-//         payload: res.data,
-//       });
-//       // window.location = '/auth/email-sent';
-//     })
-//     .catch(error => {
-//       dispatch({
-//         type: actionTypes.RESET_PASSWORD_FAILURE,
-//         payload: error.message,
-//       });
-//     });
-// };
+export const changePassword = (password) => (dispatch) => {
+  dispatch({ type: types.CHANGE_PASSWORD_REQUEST });
+  axios
+    .post(`${_BASE_URL}/user/newpassword`, password)
+    .then((res) => {
+      dispatch({
+        type: types.CHANGE_PASSWORD_SUCCESS,
+        payload: res.data.data.message,
+      });
+      Router.push('/auth/login');
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.CHANGE_PASSWORD_FAILURE,
+        payload: error.message,
+      });
+    });
+};

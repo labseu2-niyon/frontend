@@ -1,4 +1,4 @@
-import App, { Container } from 'next/app';
+import App from 'next/app';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
@@ -33,18 +33,15 @@ export default withRedux(makeStore, { debug: true })(
     render() {
       const { Component, pageProps, store } = this.props;
       return (
-        <Container>
+        <>
           <Provider store={store}>
-            <PersistGate
-              persistor={store.__persistor}
-              loading={<Loading />}
-            >
+            <PersistGate persistor={store.__persistor} loading={<Loading />}>
               <ThemeProvider theme={theme}>
                 <Component {...pageProps} />
               </ThemeProvider>
             </PersistGate>
           </Provider>
-        </Container>
+        </>
       );
     }
   },

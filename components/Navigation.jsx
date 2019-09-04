@@ -2,13 +2,13 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { Icon } from 'antd';
 import { connect } from 'react-redux';
+import Router from 'next/router';
 import { Avatar } from './~common/index';
 import { logOutUser } from '../redux/actions/authActions';
-import Router from 'next/router';
 
 const dummyUser = {
   image: 'https://milan.serverlessdays.io/speakers/guillermo-rauch.jpg',
-  name: 'Guillermo Rauch'
+  name: 'Guillermo Rauch',
 };
 
 const Navigation = ({ logOutUser }) => {
@@ -42,8 +42,8 @@ const Navigation = ({ logOutUser }) => {
               user: 'Guillermo Rauch',
               jobTitle: 'Web Developer',
               src:
-                'https://milan.serverlessdays.io/speakers/guillermo-rauch.jpg'
-            }
+                'https://milan.serverlessdays.io/speakers/guillermo-rauch.jpg',
+            },
           }}
         >
           <div>
@@ -170,6 +170,6 @@ const Links = styled.div`
 `;
 
 export default connect(
-  state => state,
-  { logOutUser }
+  (state) => state,
+  { logOutUser },
 )(Navigation);

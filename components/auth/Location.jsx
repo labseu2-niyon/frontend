@@ -20,12 +20,14 @@ const Location = ({ errors, touched }) => {
       </Text>
       <FormArea>
         <InputWrapper>
-          <Field component="select" name="country">
+          <Field name="country" type="text" placeholder="country"></Field>
+
+          {/* <Field component="select" name="country">
             <option>Country</option>
             <option value="City1">City name</option>
             <option value="City2">City2</option>
             <option value="City3">City3</option>
-          </Field>
+          </Field> */}
           {touched.country && errors.country && <Error>{errors.country}</Error>}
         </InputWrapper>
         <InputWrapper>
