@@ -63,10 +63,23 @@ export const authReducer = (state = initialState, { type, payload }) => {
         locationData: payload,
       };
     //= ==============================perist User Type data===================
+    case types.START_LOADING:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
     case types.SET_USER_TYPE:
       return {
         ...state,
         userTypeData: payload,
+        loading: false,
+      };
+    case types.STOP_LOADING:
+      return {
+        ...state,
+        loading: false,
+        error: null,
       };
     //= ==============================perist Profile data===================
     case types.SET_PROFILE_DATA:

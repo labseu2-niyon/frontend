@@ -8,20 +8,38 @@ import Flip from 'react-reveal/Flip';
 import { theme } from '../../lib/theme';
 import Router from 'next/router';
 import { connect } from 'react-redux';
-import { userType } from '../../redux/actions/authActions';
+import { userTypeHandler } from '../../redux/actions/authActions';
 
-const JobTitle = ({ touched, errors, values, status, userType }) => {
+const JobTitle = ({
+  touched,
+  errors,
+  values,
+  status,
+  userTypeHandler,
+  username,
+  loading
+}) => {
   const [mentorPressed, setMentorPressed] = useState(false);
   const [menteeePresed, setMenteePressed] = useState(false);
   const [mentorError, setMentorError] = useState(true);
+
+  console.log(loading);
 
   useEffect(() => {
     if (mentorPressed || menteeePresed) {
       values.user = menteeePresed ? 'mentee' : 'mentor';
       //console.log(status);
-      userType(status);
-      setMentorError(false);
-      Router.push('/auth/profile-info');
+      const data = {
+        locationId: '1',
+        industryId: '1'
+      };
+      const type = status.user;
+      userTypeHandler(data, username, type, status).then(status => {
+        if (status === 201) {
+          setMentorError(false);
+          Router.push('/auth/profile-info');
+        }
+      });
     }
   }, [status]);
 
@@ -137,7 +155,7 @@ const JobTitle = ({ touched, errors, values, status, userType }) => {
         </InputWrapper>
         {menteeePresed && mentee()}
         {mentorPressed && mentor()}
-        <Button small primary type="submit">
+        <Button small primary type="submit" loadingB={loading}>
           Next
         </Button>
       </FormArea>
@@ -168,9 +186,19 @@ const FormikWithJobTitleForm = withFormik({
   }
 })(JobTitle);
 
+const mapStateToProps = state => {
+  return {
+    username: state.authReducer.emailData.username,
+    loading: state.authReducer.loading
+  };
+};
+const mapDispatchToProps = {
+  userTypeHandler
+};
+
 export default connect(
-  state => state,
-  { userType }
+  mapStateToProps,
+  mapDispatchToProps
 )(FormikWithJobTitleForm);
 
 const Root = styled.div`

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import nookies from 'nookies';
-import Router from 'next/router';
 import { types } from '../authConstants';
 import axiosWithToken from '../axios';
 
@@ -58,11 +57,6 @@ export const locationData = (data) => ({
   payload: data,
 });
 
-export const userType = (data) => ({
-  type: types.SET_USER_TYPE,
-  payload: data,
-});
-
 export const profileData = (data) => ({
   type: types.SET_PROFILE_DATA,
   payload: data,
@@ -101,6 +95,19 @@ export const emailSignup = (data) => (dispatch) => {
       return err.response.data.message;
     });
   // changed !! type: types.SET_EMAIL_DATA -instead of- type.REGISTE_USER_SUCCESS
+};
+
+export const userTypeHandler = (data, username, type, status) => (dispatch) => {
+  dispatch({ type: types.START_LOADING });
+  return axiosWithToken()
+    .post(`${_BASE_URL}/${type}/${username}/${type}`, data)
+    .then((res) => {
+      dispatch({ type: types.SET_USER_TYPE, payload: status });
+      return res.data.status;
+    })
+    .catch(() => {
+      dispatch({ type: types.STOP_LOADING });
+    });
 };
 
 export const userProfileInfo = (data, user) => (dispatch) => {
