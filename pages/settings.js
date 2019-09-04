@@ -1,5 +1,6 @@
 import nookies from 'nookies';
 import jwt from 'jsonwebtoken';
+import PropTypes from 'prop-types';
 import Layout from '../components/Layout';
 import withAuth from '../lib/withAuth';
 import Wrapper from '../components/settings/Wrapper';
@@ -25,6 +26,10 @@ Page.getInitialProps = async (ctx) => {
   );
 
   return { user: res.data.data };
+};
+
+Page.propTypes = {
+  user: PropTypes.shape().isRequired,
 };
 
 export default withAuth(Page);
