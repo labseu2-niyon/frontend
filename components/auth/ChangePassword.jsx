@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
-import { Heading4, Text, Button } from '../~common/index';
+import { Heading4, Button } from '../~common/index';
 import { changePassword } from '../../redux/actions/authActions';
 
-const ResetPassword = ({ errors, touched }) => (
+const ChangePassword = ({ errors, touched }) => (
   <>
     <Root>
       <Heading4>Here you can change your password</Heading4>
@@ -26,22 +26,20 @@ const ResetPassword = ({ errors, touched }) => (
   </>
 );
 
-const FormikResetPasswordForm = withFormik({
+const FormikChangePasswordForm = withFormik({
   mapPropsToValues({ password }) {
     return {
       password: password || '',
     };
   },
   validationSchema: Yup.object().shape({
-    password: Yup.string()
-      .email('Email is invalid')
-      .required('Email is required'),
+    password: Yup.string().required('Password is required'),
   }),
   handleSubmit(values, { props }) {
-    const { email } = values;
-    props.resetPassword({ email });
+    const { password } = values;
+    props.changePassword({ password });
   },
-})(ResetPassword);
+})(ChangePassword);
 
 function mapStateToProps(state) {
   return { authReducer: state.authReducer };
@@ -49,8 +47,8 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { resetPassword },
-)(FormikResetPasswordForm);
+  { changePassword },
+)(FormikChangePasswordForm);
 
 const Root = styled.div`
   height: 85vh;
