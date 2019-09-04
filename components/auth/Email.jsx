@@ -7,10 +7,9 @@ import Router from 'next/router';
 import Steps from './StepsComp';
 import { connect } from 'react-redux';
 import { emailSignup } from '../../redux/actions/authActions';
-import { theme } from '../../lib/theme';
 
-const Email = ({ errors, touched, loading, error }) => {
-  console.log(loading, error);
+const Email = ({ errors, touched, loading, status }) => {
+  //console.log(loading, status);
   return (
     <Root>
       <Steps stepNumber="1" />
@@ -20,19 +19,6 @@ const Email = ({ errors, touched, loading, error }) => {
           <Field name="username" type="text" placeholder="username" />
           {touched.username && errors.username && (
             <Error>{errors.username}</Error>
-          )}
-        </InputWrapper>
-
-        <InputWrapper>
-          <Field name="firstName" type="text" placeholder="First Name" />
-          {touched.firstName && errors.firstName && (
-            <Error>{errors.firstName}</Error>
-          )}
-        </InputWrapper>
-        <InputWrapper>
-          <Field name="lastName" type="text" placeholder="Last Name" />
-          {touched.lastName && errors.lastName && (
-            <Error>{errors.lastName}</Error>
           )}
         </InputWrapper>
         <InputWrapper>
@@ -45,13 +31,32 @@ const Email = ({ errors, touched, loading, error }) => {
             <Error>{errors.password}</Error>
           )}
         </InputWrapper>
-        <Text small>Lorem Ipsum, terms and conditions, blah blah blah.</Text>
+        <InputWrapper>
+          <Field
+            name="confirm"
+            type="password"
+            placeholder="confirm password"
+          />
+          {touched.confirm && errors.confirm && <Error>{errors.confirm}</Error>}
+        </InputWrapper>
+
         <Button small primary type="submit" loadingB={loading}>
           Register
         </Button>
         {/* {error && <Error style={{ textAlign: 'center' }}>{error}</Error>} */}
       </FormArea>
-
+      {status && (
+        <p
+          style={{
+            margin: '5px 10px',
+            textAlign: 'center',
+            fontSize: '14px',
+            color: 'red'
+          }}
+        >
+          {status}
+        </p>
+      )}
       <Text small>
         <Link href="/auth/signup">
           <a>Login with Social Media</a>
@@ -62,30 +67,42 @@ const Email = ({ errors, touched, loading, error }) => {
 };
 
 const FormikWithEmailForm = withFormik({
-  mapPropsToValues({ username, firstName, lastName, email, password }) {
+  mapPropsToValues({ username, email, password, confirm }) {
     return {
       username: username || '',
-      firstName: firstName || '',
-      lastName: lastName || '',
       email: email || '',
-      password: password || ''
+      password: password || '',
+      confirm: confirm || ''
     };
   },
   validationSchema: Yup.object().shape({
     username: Yup.string().required('Username is required'),
-    firstName: Yup.string().required('First Name is required'),
-    lastName: Yup.string().required('Last Name is required'),
     email: Yup.string()
       .email('Email is invalid')
       .required('Email is required'),
     password: Yup.string()
       .min(8, 'Password must be at least 8 characters')
-      .required('Password is required')
+      .required('Password is required'),
+    confirm: Yup.string()
+      .required()
+      .label('Confirm password')
+      .test('passwords-match', 'Passwords must match ya fool', function(value) {
+        return this.parent.password === value;
+      })
   }),
-  handleSubmit(values, { props }) {
-    props.emailSignup(values).then(res => {
+  handleSubmit(values, { props, setStatus }) {
+    const data = {
+      username: values.username,
+      email: values.email,
+      password: values.password
+    };
+    props.emailSignup(data).then(res => {
       if (res === 201) {
-        Router.push('/auth/location');
+        Router.push('/auth/social');
+      } else {
+        //still need to check the new error for already existing user
+        console.log('RESS', res);
+        setStatus(res);
       }
     });
   }
@@ -118,8 +135,13 @@ const FormArea = styled(Form)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-center;
-  height: 420px;
+  justify-content: center;
+  height: 320px;
+  width: 100%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  @media (min-width: 500px) {
+    width: 50%;
+  }
 
   input {
     padding: 0.5rem;
@@ -132,6 +154,10 @@ const FormArea = styled(Form)`
     ::placeholder {
       color: grey;
       opacity: 0.4;
+    }
+
+    @media (min-width: 500px) {
+      width: 40%;
     }
   }
 `;
