@@ -11,14 +11,15 @@ const Wrapper = styled.section`
 `;
 
 const Profiles = styled.div`
+  box-sizing: border-box;
   margin-top: 2rem;
   margin-bottom: 4rem;
+  padding: 0 0.5rem;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 `;
-
 
 function ProfileList({ users }) {
   return (
