@@ -65,6 +65,11 @@ export const profileData = (data) => ({
   payload: data,
 });
 
+export const socialData = (data) => ({
+  type: types.SET_USER_NAME,
+  payload: data,
+});
+
 // Action Creator for Singup a user with email
 // body {username, email, password}
 export const emailSignup = (data) => (dispatch) => {
@@ -118,7 +123,7 @@ export const userTypeHandler = (data, username, type, status) => (dispatch) => {
 // data: {firstName: String, lastName: String, country: String, city: String, bio: String}
 // user : username
 export const userProfileInfo = (data, user) => (dispatch) => {
-  // console.log(data, user);
+  console.log(data, user);
   dispatch({ type: types.USER_INFO_REQUEST });
   return axiosWithToken()
     .patch(`${_BASE_URL}/user/${user}/profile`, data)
@@ -153,7 +158,7 @@ export const imageUpload = (data, user) => (dispatch) => {
 
 // Action Creator for adding social media handlers
 // data: {user_id:integer, facebook: String, linkedin: String, twitter: String}
-export const socialData = (data, username) => (dispatch) => {
+export const socialDataHandler = (data, username) => (dispatch) => {
   dispatch({ type: types.START_LOADING });
   return axiosWithToken()
     .post(`${_BASE_URL}/user/${username}/socialmedia`, data)

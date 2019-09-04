@@ -9,6 +9,7 @@ const initialState = {
   profileData: [],
   userTypeData: [],
   socialData: [],
+  userNameData: [],
   token: null,
   message: '',
 };
@@ -61,6 +62,12 @@ export const authReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         locationData: payload,
+      };
+
+    case types.SET_USER_NAME:
+      return {
+        ...state,
+        userNameData: payload,
       };
     //= ==============================perist User Type data===================
     case types.START_LOADING:
@@ -123,6 +130,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
         userTypeData: [],
         socialData: [],
         token: null,
+        userNameData: [],
         message: '',
       };
     default:

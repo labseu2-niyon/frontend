@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import Steps from './StepsComp';
 import Router from 'next/router';
 import { connect } from 'react-redux';
-import { socialData } from '../../redux/actions/authActions';
+import { socialDataHandler } from '../../redux/actions/authActions';
 
-const SocialInfo = ({ socialData, username, loading, usernameId }) => {
+const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
   const [facebook, setFacebook] = useState('');
   const [linkedin, setLinkedin] = useState('');
   const [twitter, setTweeter] = useState('');
@@ -20,7 +20,7 @@ const SocialInfo = ({ socialData, username, loading, usernameId }) => {
       linkedin,
       twitter
     };
-    socialData(data, username).then(res => {
+    socialDataHandler(data, username).then(res => {
       if (res === 201) {
         Router.push('/');
       }
@@ -91,7 +91,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { socialData }
+  { socialDataHandler }
 )(SocialInfo);
 
 const Root = styled.div`
