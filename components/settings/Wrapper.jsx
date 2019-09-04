@@ -1,6 +1,5 @@
 import Tab from './Tab';
 import styled from 'styled-components';
-import { useState } from 'react';
 
 const Wrapper = ({ children }) => {
   return (
@@ -18,7 +17,7 @@ const Main = styled.div`
   box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: ${({ theme }) => theme.borderRadius};
   max-width: 650px;
-  margin: 0 auto;
+  margin: 2rem auto;
   padding: 1rem 2rem;
 `;
 
