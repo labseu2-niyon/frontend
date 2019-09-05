@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import {
- Form, Field, withFormik, ErrorMessage 
-} from 'formik';
+import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link';
 import { connect } from 'react-redux';
@@ -49,12 +47,9 @@ const FormikResetPasswordForm = withFormik({
   }),
   handleSubmit(values, { props, setStatus }) {
     const { email } = values;
-    let test = '';
-    try {
-      props.resetPassword({ email });
-    } catch {}
-    test = props.authReducer.message;
-    if (test) {
+    props.resetPassword({ email, props });
+    console.log(props.authReducer.error);
+    if (props.authReducer.error) {
       setStatus({ msg: 'This email does not exist' });
     }
   },
