@@ -5,10 +5,12 @@ const initialState = {
   loading: false,
   error: null,
   emailData: [],
-  locationData: [],
+  locationId: null,
   profileData: [],
   userTypeData: [],
   socialData: [],
+  userNameData: [],
+  allJobs: [],
   token: null,
   message: '',
 };
@@ -60,13 +62,33 @@ export const authReducer = (state = initialState, { type, payload }) => {
     case types.SET_LOCATION_DATA:
       return {
         ...state,
-        locationData: payload,
+        locationId: payload,
+        loading: false,
+      };
+
+    case types.SET_USER_NAME:
+      return {
+        ...state,
+        userNameData: payload,
       };
     //= ==============================perist User Type data===================
+    case types.START_LOADING:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
     case types.SET_USER_TYPE:
       return {
         ...state,
         userTypeData: payload,
+        loading: false,
+      };
+    case types.STOP_LOADING:
+      return {
+        ...state,
+        loading: false,
+        error: null,
       };
     //= ==============================perist Profile data===================
     case types.SET_PROFILE_DATA:
@@ -74,11 +96,18 @@ export const authReducer = (state = initialState, { type, payload }) => {
         ...state,
         profileData: payload,
       };
+    //= ===============================Get All JOBS==========================
+    case types.GET_ALL_JOBS:
+      return {
+        ...state,
+        allJobs: payload,
+      };
     //= ==============================perist Social Media data===================
     case types.SET_SOCIAL_MEDIA_DATA:
       return {
         ...state,
         socialData: payload,
+        loading: false,
       };
     //= ==============================LOGIN ACTION TYPES===================
     case types.LOG_IN_USER_REQUEST:
@@ -107,11 +136,13 @@ export const authReducer = (state = initialState, { type, payload }) => {
         loading: false,
         error: null,
         emailData: [],
-        locationData: [],
+        locationId: null,
         profileData: [],
         userTypeData: [],
         socialData: [],
         token: null,
+        userNameData: [],
+        allJobs: [],
         message: '',
       };
     // ========================RESET PASSWORD ACTION TYPES==================

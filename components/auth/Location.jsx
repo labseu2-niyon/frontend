@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Text, Button, Heading2 } from '../~common/index';
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
@@ -6,34 +6,47 @@ import * as Yup from 'yup';
 import Steps from './StepsComp';
 import Router from 'next/router';
 import { connect } from 'react-redux';
-import { locationData } from '../../redux/actions/authActions';
+import { locationData, locationRequest } from '../../redux/actions/authActions';
+import { Icon } from 'antd';
 
-const Location = ({ errors, touched }) => {
+const Location = ({ errors, touched, values, locationRequest }) => {
+  const [list, setList] = useState('');
+  useEffect(() => {
+    locationRequest(values.city).then(res => {
+      //console.log(res);
+      if (res) {
+        setList(res);
+      }
+    });
+  }, [values]);
   return (
     <Root>
       <Steps stepNumber="2" />
       <Heading2 primary>Location Info</Heading2>
       <IconT className="fas fa-globe-europe"></IconT>
+      {/* <Icon type="pushpin" theme="twoTone" /> */}
       <Text small>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nisl
         nisl, aliquam nec erat et, efficitur mollis metus.
       </Text>
       <FormArea>
         <InputWrapper>
-          <Field name="country" type="text" placeholder="country"></Field>
-
-          {/* <Field component="select" name="country">
-            <option>Country</option>
-            <option value="City1">City name</option>
-            <option value="City2">City2</option>
-            <option value="City3">City3</option>
-          </Field> */}
-          {touched.country && errors.country && <Error>{errors.country}</Error>}
-        </InputWrapper>
-        <InputWrapper>
           <Field name="city" type="text" placeholder="City"></Field>
           {touched.city && errors.city && <Error>{errors.city}</Error>}
         </InputWrapper>
+
+        {list && (
+          <DropDown component="select" name="information">
+            <option>Chose Location</option>
+            {list.map(op => {
+              return (
+                <option value={op} key={op}>
+                  {op}
+                </option>
+              );
+            })}
+          </DropDown>
+        )}
         <Button small primary type="submit">
           Next
         </Button>
@@ -43,31 +56,38 @@ const Location = ({ errors, touched }) => {
 };
 
 const FormikWithLocationForm = withFormik({
-  mapPropsToValues({ city, country }) {
+  mapPropsToValues({ city, information }) {
     return {
       city: city || '',
-      country: country || ''
+      information: information || ''
     };
   },
   validationSchema: Yup.object().shape({
-    city: Yup.string().required('City name is required'),
-    country: Yup.string().required('Country name is required')
+    city: Yup.string().required('City name is required')
   }),
   handleSubmit(values, { setStatus, props }) {
-    //console.log(values);
-    props.locationData(values);
+    const inwork = values.information.split(',');
     setStatus(values);
-    Router.push('/auth/job-title');
+    props
+      .locationData({
+        cityName: inwork[0].trim(),
+        countryName: inwork[1].trim()
+      })
+      .then(res => {
+        if (res === 201) {
+          Router.push('/auth/job-title');
+        }
+      });
   }
 })(Location);
 
 export default connect(
   state => state,
-  { locationData }
+  { locationData, locationRequest }
 )(FormikWithLocationForm);
 
 const Root = styled.div`
-  height: 90vh;
+  height: 95vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -95,10 +115,6 @@ const FormArea = styled(Form)`
   justify-content: space-between;
   height: 200px;
 
-  @media (min-width: 500px) {
-    width: 50%;
-  }
-
   input {
     padding: 0.5rem;
     font-size: 16px;
@@ -110,6 +126,10 @@ const FormArea = styled(Form)`
     ::placeholder {
       color: grey;
       opacity: 0.4;
+    }
+
+    @media (min-width: 500px) {
+      width: 40%;
     }
   }
 
@@ -132,11 +152,11 @@ const FormArea = styled(Form)`
     background-size: 0.65em auto, 100%;
 
     @media (min-width: 500px) {
-      width: 70%;
+      width: 40%;
     }
     option {
       color: grey;
-      opacity: 0.4;
+      opacity: 0.6;
     }
   }
 `;
@@ -157,4 +177,20 @@ const Error = styled.p`
   bottom: 10%;
   left: 7.5%;
   color: #e29273;
+
+  @media (min-width: 500px) {
+    left: 10%;
+  }
+`;
+
+const DropDown = styled(Field)`
+  cursor: pointer;
+  background: #fff;
+  line-height: 1.5rem;
+  padding: 10px 10px;
+  width: 80%;
+  color: #bfc1c4;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.07);
+  border: 1px solid #eaeaea;
 `;

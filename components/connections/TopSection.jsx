@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { Heading, Button } from '../~common';
@@ -43,7 +42,7 @@ const Image = styled.div`
    }
 `;
 
-function TopSection({ numOfConnections = 0 }) {
+function TopSection() {
   return (
     <Wrapper>
       <div>
@@ -52,7 +51,7 @@ function TopSection({ numOfConnections = 0 }) {
         Niyon is a platform for connecting young professionals<br />
 with mentors in West Africa.
         </p>
-        <Link href="/connections"><Button primary>Connections ({numOfConnections})</Button></Link>
+        <Link href="explore"><Button primary>Explore</Button></Link>
       </div>
       <Image>
         <img src="/static/friends-online.svg" alt="" />
@@ -60,9 +59,4 @@ with mentors in West Africa.
     </Wrapper>
   );
 }
-
-TopSection.propTypes = {
-  numOfConnections: PropTypes.number.isRequired,
-};
-
 export default TopSection;
