@@ -65,11 +65,17 @@ const FormikWithLocationForm = withFormik({
   }),
   handleSubmit(values, { setStatus, props }) {
     const inwork = values.information.split(',');
-    console.log('City', inwork[0]);
-    console.log('Country', inwork[1]);
     setStatus(values);
-    props.locationData({ city: inwork[0].trim(), country: inwork[1].trim() });
-    Router.push('/auth/job-title');
+    props
+      .locationData({
+        cityName: inwork[0].trim(),
+        countryName: inwork[1].trim()
+      })
+      .then(res => {
+        if (res === 201) {
+          Router.push('/auth/job-title');
+        }
+      });
   }
 })(Location);
 

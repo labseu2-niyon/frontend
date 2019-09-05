@@ -54,10 +54,18 @@ export const emailSignUp = () => (dispatch) => {
 };
 
 // Action creator for persisting location data
-export const locationData = (data) => ({
-  type: types.SET_LOCATION_DATA,
-  payload: data,
-});
+export const locationData = (data) => (dispatch) => {
+  dispatch({ type: types.START_LOADING });
+  return axios
+    .post(`${_BASE_URL}/location/getLocation`, data)
+    .then((res) => {
+      dispatch({ type: types.SET_LOCATION_DATA, payload: res.data.data });
+      return res.data.status;
+    })
+    .catch(() => {
+      dispatch({ type: types.STOP_LOADING });
+    });
+};
 
 // Action creator for persisting profile data
 export const profileData = (data) => ({
@@ -121,13 +129,15 @@ export const userTypeHandler = (data, username, type, status) => (dispatch) => {
 
 // Action Creator for getting Location Data from the Server based on the City
 // data: city:String  => City and Country
-// export const locationRequest = (data) => (dispatch) =>
-//   // dispatch({ type: types.START_LOADING });
-//   axios
-//     .get(`${_BASE_URL}/autocomplete/${data}`)
-//     .then((res) => res.data.data)
-//     .catch(() => {})
-// ;
+export const locationRequest = (data) => (dispatch) => {
+  // dispatch({ type: types.START_LOADING });
+  axios
+    .get(`${_BASE_URL}/autocomplete/${data}`)
+    .then((res) => res.data.data)
+    .catch(() => {
+      dispatch({ type: types.STOP_LOADING });
+    });
+};
 
 // Action Creator for getting all the jobs type from database
 export const getJobTitles = () => (dispatch) => {

@@ -5,7 +5,7 @@ const initialState = {
   loading: false,
   error: null,
   emailData: [],
-  locationData: [],
+  locationId: null,
   profileData: [],
   userTypeData: [],
   socialData: [],
@@ -62,7 +62,8 @@ export const authReducer = (state = initialState, { type, payload }) => {
     case types.SET_LOCATION_DATA:
       return {
         ...state,
-        locationData: payload,
+        locationId: payload,
+        loading: false,
       };
 
     case types.SET_USER_NAME:
@@ -132,7 +133,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
         loading: false,
         error: null,
         emailData: [],
-        locationData: [],
+        locationId: null,
         profileData: [],
         userTypeData: [],
         socialData: [],
