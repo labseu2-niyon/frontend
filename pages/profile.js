@@ -14,4 +14,4 @@ function ProfilePage(props) {
   );
 }
 
-export default withAuth(withRouter(ProfilePage));
+export default withRouter(withAuth(ProfilePage));
