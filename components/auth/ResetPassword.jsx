@@ -48,10 +48,12 @@ const FormikResetPasswordForm = withFormik({
   handleSubmit(values, { props, setStatus }) {
     const { email } = values;
     props.resetPassword({ email, props });
-    console.log(props.authReducer.error);
-    if (props.authReducer.error) {
-      setStatus({ msg: 'This email does not exist' });
-    }
+    // console.log(props.authReducer.error);
+    setTimeout(() => {
+      if (props.authReducer.error) {
+        setStatus({ msg: 'This email does not exist' });
+      }
+    }, 2000);
   },
 })(ResetPassword);
 
