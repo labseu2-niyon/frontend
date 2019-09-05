@@ -1,7 +1,24 @@
-// import axios from 'axios';
-// import { types } from '../userConstants';
+import axiosWithToken from '../axios';
+import { types } from '../userConstants';
 
-// const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
+const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
+
+export const fetchUser = (username) => (dispatch) => {
+  axiosWithToken()
+    .get(`${_BASE_URL}/user/${username}/profile`)
+    .then((res) => {
+      dispatch({
+        type: types.FETCH_USER,
+        payload: res.data.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.FETCH_USER_FAIL,
+        payload: error.message,
+      });
+    });
+};
 
 // export const updatePassword = (props) => (dispatch) => {
 //   dispatch({ type: types.UPDATE_PASSWORD_REQUEST });

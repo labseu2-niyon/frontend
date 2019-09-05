@@ -1,19 +1,28 @@
-// import { types } from '../userConstants';
+import { types } from '../userConstants';
 
-// const initialState = {
-//   loading: false,
-//   error: null,
-//   message: '',
-// };
+const initialState = {
+  error: false,
+  message: '',
+  user: null,
+};
 
-// export const userReducer = (state = initialState, { type, payload }) => {
-//   switch (type) {
-
-
-//     default:
-//       return state;
-//   }
-// };
+export const userReducer = (state = initialState, { type, payload }) => {
+  switch (type) {
+    case types.FETCH_USER:
+      return {
+        ...state,
+        user: payload,
+      };
+    case types.FETCH_USER_FAILURE:
+      return {
+        ...state,
+        message: payload,
+        error: true,
+      };
+    default:
+      return state;
+  }
+};
 
 // old reducers
 

@@ -1,13 +1,19 @@
+import PropTypes from 'prop-types';
+import { useEffect } from 'react';
+import { connect } from 'react-redux';
 import nookies from 'nookies';
 import jwt from 'jsonwebtoken';
-import PropTypes from 'prop-types';
 import Layout from '../components/Layout';
 import withAuth from '../lib/withAuth';
 import Wrapper from '../components/settings/Wrapper';
 import EditProfile from '../components/settings/EditProfile';
-import axiosWithToken from '../redux/axios';
+import { fetchUser } from '../redux/actions/userActions';
 
-function Page({ user }) {
+function Page({ user, fetchUser, username }) {
+  useEffect(() => {
+    if (!user) return fetchUser(username);
+  }, []);
+
   return (
     <Layout pageName="Settings">
       <Wrapper>
@@ -17,19 +23,27 @@ function Page({ user }) {
   );
 }
 
+const mapStateToProps = (state) => ({
+  user: state.userReducer.user,
+});
+
+const mapDispatchToProps = {
+  fetchUser,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withAuth(Page));
+
 Page.getInitialProps = async (ctx) => {
   const cookies = nookies.get(ctx);
   const { username } = jwt.decode(cookies.token);
-
-  const res = await axiosWithToken(ctx).get(
-    `https://niyon-dev.herokuapp.com/api/user/${username}/profile`,
-  );
-
-  return { user: res.data.data };
+  return { username };
 };
 
 Page.propTypes = {
   user: PropTypes.shape().isRequired,
+  username: PropTypes.string.isRequired,
+  fetchUser: PropTypes.func.isRequired,
 };
-
-export default withAuth(Page);
