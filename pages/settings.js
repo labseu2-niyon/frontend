@@ -43,7 +43,7 @@ Page.getInitialProps = async (ctx) => {
 };
 
 Page.propTypes = {
-  user: PropTypes.shape().isRequired,
+  user: PropTypes.shape(),
   username: PropTypes.string.isRequired,
   fetchUser: PropTypes.func.isRequired,
 };
