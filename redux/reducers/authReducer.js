@@ -10,6 +10,7 @@ const initialState = {
   userTypeData: [],
   socialData: [],
   userNameData: [],
+  allJobs: [],
   token: null,
   message: '',
 };
@@ -94,6 +95,12 @@ export const authReducer = (state = initialState, { type, payload }) => {
         ...state,
         profileData: payload,
       };
+    //= ===============================Get All JOBS==========================
+    case types.GET_ALL_JOBS:
+      return {
+        ...state,
+        allJobs: payload,
+      };
     //= ==============================perist Social Media data===================
     case types.SET_SOCIAL_MEDIA_DATA:
       return {
@@ -131,6 +138,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
         socialData: [],
         token: null,
         userNameData: [],
+        allJobs: [],
         message: '',
       };
     default:

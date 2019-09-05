@@ -8,7 +8,7 @@ import Flip from 'react-reveal/Flip';
 import { theme } from '../../lib/theme';
 import Router from 'next/router';
 import { connect } from 'react-redux';
-import { userTypeHandler } from '../../redux/actions/authActions';
+import { userTypeHandler, getJobTitles } from '../../redux/actions/authActions';
 
 const JobTitle = ({
   touched,
@@ -17,13 +17,17 @@ const JobTitle = ({
   status,
   userTypeHandler,
   username,
-  loading
+  loading,
+  getJobTitles,
+  allJobs
 }) => {
   const [mentorPressed, setMentorPressed] = useState(false);
   const [menteeePresed, setMenteePressed] = useState(false);
   const [mentorError, setMentorError] = useState(true);
 
-  console.log(loading);
+  useEffect(() => {
+    getJobTitles();
+  }, []);
 
   useEffect(() => {
     if (mentorPressed || menteeePresed) {
@@ -146,10 +150,18 @@ const JobTitle = ({
       <FormArea>
         <InputWrapper>
           <Field component="select" name="job">
-            <option>Job Title</option>
-            <option value="Job1">Web Developer</option>
+            <option>Choose Job Type</option>
+            {allJobs &&
+              allJobs.map(job => {
+                return (
+                  <option value={job.tech_name} key={job.tech_name}>
+                    {job.tech_name}
+                  </option>
+                );
+              })}
+            {/* <option value="Job1">Web Developer</option>
             <option value="Job2">Computer Science</option>
-            <option value="Job3">Data Science</option>
+            <option value="Job3">Data Science</option> */}
           </Field>
           {touched.job && errors.job && <Error>{errors.job}</Error>}
         </InputWrapper>
@@ -189,11 +201,13 @@ const FormikWithJobTitleForm = withFormik({
 const mapStateToProps = state => {
   return {
     username: state.authReducer.emailData.username,
-    loading: state.authReducer.loading
+    loading: state.authReducer.loading,
+    allJobs: state.authReducer.allJobs
   };
 };
 const mapDispatchToProps = {
-  userTypeHandler
+  userTypeHandler,
+  getJobTitles
 };
 
 export default connect(

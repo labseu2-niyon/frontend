@@ -7,16 +7,13 @@ import Steps from './StepsComp';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import { locationData, locationRequest } from '../../redux/actions/authActions';
-// import { Dropdown } from '../~common/index';
+import { Icon } from 'antd';
 
 const Location = ({ errors, touched, values, locationRequest }) => {
-  const [city, setCity] = useState('');
-  const [country, setCountry] = useState('');
-  // const [grabOp, grabOp] = useState('');
   const [list, setList] = useState('');
   useEffect(() => {
     locationRequest(values.city).then(res => {
-      console.log(res);
+      //console.log(res);
       setList(res);
     });
   }, [values]);
@@ -25,6 +22,7 @@ const Location = ({ errors, touched, values, locationRequest }) => {
       <Steps stepNumber="2" />
       <Heading2 primary>Location Info</Heading2>
       <IconT className="fas fa-globe-europe"></IconT>
+      {/* <Icon type="pushpin" theme="twoTone" /> */}
       <Text small>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nisl
         nisl, aliquam nec erat et, efficitur mollis metus.
@@ -36,12 +34,16 @@ const Location = ({ errors, touched, values, locationRequest }) => {
         </InputWrapper>
 
         {list && (
-          <Field component="select" name="information">
+          <DropDown component="select" name="information">
             <option>Chose Location</option>
             {list.map(op => {
-              return <option value={op}>{op}</option>;
+              return (
+                <option value={op} key={op}>
+                  {op}
+                </option>
+              );
             })}
-          </Field>
+          </DropDown>
         )}
         <Button small primary type="submit">
           Next
@@ -62,12 +64,12 @@ const FormikWithLocationForm = withFormik({
     city: Yup.string().required('City name is required')
   }),
   handleSubmit(values, { setStatus, props }) {
-    props.locationData(values);
     const inwork = values.information.split(',');
-    console.log('City', inwork[0].trim());
-    console.log('Country', inwork[1].trim());
+    console.log('City', inwork[0]);
+    console.log('Country', inwork[1]);
     setStatus(values);
-    //Router.push('/auth/job-title');
+    props.locationData({ city: inwork[0].trim(), country: inwork[1].trim() });
+    Router.push('/auth/job-title');
   }
 })(Location);
 
@@ -77,7 +79,7 @@ export default connect(
 )(FormikWithLocationForm);
 
 const Root = styled.div`
-  height: 90vh;
+  height: 95vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -146,7 +148,7 @@ const FormArea = styled(Form)`
     }
     option {
       color: grey;
-      opacity: 0.4;
+      opacity: 0.6;
     }
   }
 `;
@@ -167,4 +169,19 @@ const Error = styled.p`
   bottom: 10%;
   left: 7.5%;
   color: #e29273;
+`;
+
+const DropDown = styled(Field)`
+  box-sizing: border-box;
+  cursor: pointer;
+  position: relative;
+  background: #fff;
+  line-height: 1.5rem;
+  padding: 10px 10px;
+  width: ${({ width }) => width || '200px'};
+  max-width: 100%;
+  color: #bfc1c4;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.07);
+  border: 1px solid #eaeaea;
 `;

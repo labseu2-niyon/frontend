@@ -121,12 +121,21 @@ export const userTypeHandler = (data, username, type, status) => (dispatch) => {
 
 // Action Creator for getting Location Data from the Server based on the City
 // data: city:String  => City and Country
-export const locationRequest = (data) => (dispatch) => {
-  dispatch({ type: types.START_LOADING });
-
-  return axios
+export const locationRequest = (data) => () => {
+  // dispatch({ type: types.START_LOADING });
+  axios
     .get(`${_BASE_URL}/autocomplete/${data}`)
     .then((res) => res.data.data)
+    .catch(() => {});
+};
+
+// Action Creator for getting all the jobs type from database
+export const getJobTitles = () => (dispatch) => {
+  axios
+    .get(`${_BASE_URL}/jobs/all`)
+    .then((res) => {
+      dispatch({ type: types.GET_ALL_JOBS, payload: res.data.data });
+    })
     .catch(() => {});
 };
 
@@ -134,7 +143,6 @@ export const locationRequest = (data) => (dispatch) => {
 // data: {firstName: String, lastName: String, country: String, city: String, bio: String}
 // user : username
 export const userProfileInfo = (data, user) => (dispatch) => {
-  console.log(data, user);
   dispatch({ type: types.USER_INFO_REQUEST });
   return axiosWithToken()
     .patch(`${_BASE_URL}/user/${user}/profile`, data)
