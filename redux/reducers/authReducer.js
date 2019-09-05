@@ -119,6 +119,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: true,
+        message: '',
       };
     case types.RESET_PASSWORD_SUCCESS:
       return {
@@ -131,6 +132,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
         ...state,
         loading: false,
         error: payload,
+        message: 'This email does not exist',
       };
     // ========================CHANGE PASSWORD ACTION TYPES==================
     case types.CHANGE_PASSWORD_REQUEST:

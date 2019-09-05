@@ -166,10 +166,10 @@ export const logOutUser = () => (dispatch) => {
   nookies.destroy({}, 'token', { path: '/' });
 };
 
-export const resetPassword = (email) => (dispatch) => {
+export const resetPassword = (props) => (dispatch) => {
   dispatch({ type: types.RESET_PASSWORD_REQUEST });
   axios
-    .post(`${_BASE_URL}/user/resetpassword`, email)
+    .post(`${_BASE_URL}/user/resetpassword`, { email: props.email })
     .then((res) => {
       dispatch({
         type: types.RESET_PASSWORD_SUCCESS,
