@@ -4,6 +4,7 @@ const initialState = {
   error: false,
   message: '',
   user: null,
+  updatePassword: false,
 };
 
 export const userReducer = (state = initialState, { type, payload }) => {
@@ -18,6 +19,20 @@ export const userReducer = (state = initialState, { type, payload }) => {
         ...state,
         message: payload,
         error: true,
+      };
+    case types.UPDATE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        message: payload,
+        updatePassword: true,
+        error: false,
+      };
+    case types.UPDATE_PASSWORD_FAILURE:
+      return {
+        ...state,
+        error: true,
+        message: payload,
+        updatePassword: false,
       };
     default:
       return state;

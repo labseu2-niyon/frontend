@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { updatePassword } from '../../redux/actions/userActions';
 import { connect } from 'react-redux';
 
-const EditPassword = ({ updatePassword, username }) => {
+const EditPassword = ({ updatePassword, username, updatedPassword }) => {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
@@ -66,6 +66,6 @@ const EditPassword = ({ updatePassword, username }) => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   { updatePassword }
 )(EditPassword);
