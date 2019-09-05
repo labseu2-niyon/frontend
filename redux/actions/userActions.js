@@ -67,7 +67,6 @@ export const fetchAllConnections = (user) => (dispatch) => {
   axiosWithAuth()
     .get(`${_BASE_URL}/user/${user}/users`)
     .then((res) => {
-      console.log(res);
       dispatch({
         type: actionTypes.FETCH_ALL_CONNECTIONS_SUCCESS,
         payload: res.data.data,
@@ -87,14 +86,12 @@ export const fetchAllUsers = (user) => (dispatch) => {
   axiosWithAuth()
     .get(`${_BASE_URL}/user/${user}/users`)
     .then((res) => {
-      console.log(res);
       dispatch({
         type: actionTypes.FETCH_ALL_USERS_SUCCESS,
         payload: res.data.data,
       });
     })
     .catch((error) => {
-      console.log(error);
       dispatch({
         type: actionTypes.FETCH_ALL_USERS_FAILURE,
         payload: error.message,
