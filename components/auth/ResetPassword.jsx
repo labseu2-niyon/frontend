@@ -23,7 +23,7 @@ const ResetPassword = ({ errors, touched }) => (
           <Link href="/auth/login">
             <a>
               <Button large secondary>
-                Cancel
+                Go Back
               </Button>
             </a>
           </Link>

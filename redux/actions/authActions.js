@@ -182,6 +182,7 @@ export const resetPassword = (email) => (dispatch) => {
         type: types.RESET_PASSWORD_FAILURE,
         payload: error.message,
       });
+      console.log(error.message);
     });
 };
 
