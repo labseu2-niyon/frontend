@@ -26,15 +26,15 @@ const withUserData = (Component) => {
       }
     }, []);
 
-    return <Component {...props} users={users} />;
+    return <Component {...props} users={users} setUsers={setUsers} />;
   }
 
   const mapStateToProps = (state) => state.userReducer;
 
-  const mapDispatchToProps = (dispatch) => dispatch({
+  const mapDispatchToProps = {
     fetchUsers: fetchAllUsers,
     fetchConnections: fetchAllConnections,
-  });
+  };
 
   WithUserData.propTypes = {
     usersAll: PropTypes.arrayOf().isRequired,
