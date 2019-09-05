@@ -74,7 +74,7 @@ function TopSection({ numOfConnections = 0 }) {
 with mentors in West Africa.
         </p>
         <ButtonWrapper>
-          <Button primary>Connections ({numOfConnections})</Button>
+          <Link href="/connections"><Button primary>Connections ({numOfConnections})</Button></Link>
           <Link href="/explore"><Button primary>Explore</Button></Link>
         </ButtonWrapper>
       </Content>
