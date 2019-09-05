@@ -1,27 +1,43 @@
+
 import axiosWithAuth from '../axios';
 import { actionTypes } from '../userConstants';
 
+
 const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
 
-// export const updatePassword = (props) => (dispatch) => {
-//   dispatch({ type: types.UPDATE_PASSWORD_REQUEST });
-//   axios
-//     .patch(`${_BASE_URL}/user/newpassword?token=${props.token}`, {
-//       data: { password: props.password },
-//     })
-//     .then((res) => {
-//       dispatch({
-//         type: types.UPDATE_PASSWORD_SUCCESS,
-//         payload: res.data,
-//       });
-//     })
-//     .catch((error) => {
-//       dispatch({
-//         type: types.UPDATE_PASSWORD_FAILURE,
-//         payload: error.message,
-//       });
-//     });
-// };
+export const fetchUser = (username) => (dispatch) => {
+  axiosWithToken()
+    .get(`${_BASE_URL}/user/${username}/profile`)
+    .then((res) => {
+      dispatch({
+        type: types.FETCH_USER,
+        payload: res.data.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.FETCH_USER_FAIL,
+        payload: error.message,
+      });
+    });
+};
+
+export const updatePassword = (username, body) => (dispatch) => {
+  axiosWithToken()
+    .patch(`${_BASE_URL}/user/${username}/password`, body)
+    .then((res) => {
+      dispatch({
+        type: types.UPDATE_PASSWORD_SUCCESS,
+        payload: res.data.status,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.UPDATE_PASSWORD_FAILURE,
+        payload: error.response.status,
+      });
+    });
+};
 
 // export const updateUserProfile = (username, existingUser) => dispatch => {
 //   dispatch({ type: types.UPDATE_USER_PROFILE_REQUEST });
@@ -61,6 +77,7 @@ const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
 //     });
 // };
 
+
 export const fetchAllConnections = (user) => (dispatch) => {
   dispatch({ type: actionTypes.FETCH_ALL_CONNECTIONS_REQUEST });
   // spinner
@@ -79,6 +96,7 @@ export const fetchAllConnections = (user) => (dispatch) => {
       });
     });
 };
+
 
 export const fetchAllUsers = (user) => (dispatch) => {
   dispatch({ type: actionTypes.FETCH_ALL_USERS_REQUEST });

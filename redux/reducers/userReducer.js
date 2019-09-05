@@ -1,109 +1,140 @@
-import { actionTypes } from '../userConstants';
+import { types } from '../userConstants';
 
-export const userReducer = (state = {}, action) => {
-  switch (action.type) {
-    case actionTypes.UPDATE_USER_PROFILE_REQUEST:
+const initialState = {
+  error: false,
+  message: '',
+  user: null,
+  passwordStatus: true,
+  queryingDatabase: false,
+  errorMessage: null
+};
+
+export const userReducer = (state = initialState, { type, payload }) => {
+  switch (type) {
+    case types.FETCH_USER:
+      return {
+        ...state,
+        user: payload,
+      };
+    case types.FETCH_USER_FAILURE:
+      return {
+        ...state,
+        error: true,
+      };
+    case types.UPDATE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        passwordStatus: payload,
+      };
+    case types.UPDATE_PASSWORD_FAILURE:
+      return {
+        ...state,
+        error: true,
+        passwordStatus: payload,
+      };
+    case types.UPDATE_USER_PROFILE_REQUEST:
       return {
         ...state,
         queryingDatabase: true,
       };
-    case actionTypes.UPDATE_USER_PROFILE_SUCCESS:
+    case types.UPDATE_USER_PROFILE_SUCCESS:
       return {
         ...state,
         queryingDatabase: false,
         user: [...state.user, action.payload],
         // message: action.payload,
       };
-    case actionTypes.UPDATE_USER_PROFILE_FAILURE:
+    case types.UPDATE_USER_PROFILE_FAILURE:
       return {
         ...state,
         queryingDatabase: false,
         errorMessage: action.payload,
       };
 
-    case actionTypes.UPDATE_PASSWORD_REQUEST:
+    case types.UPDATE_PASSWORD_REQUEST:
       return {
         ...state,
         queryingDatabase: true,
       };
-    case actionTypes.UPDATE_PASSWORD_SUCCESS:
+    case types.UPDATE_PASSWORD_SUCCESS:
       return {
         ...state,
         queryingDatabase: false,
         message: action.payload,
       };
-    case actionTypes.UPDATE_PASSWORD_FAILURE:
+    case types.UPDATE_PASSWORD_FAILURE:
       return {
         ...state,
         queryingDatabase: false,
         errorMessage: action.payload,
       };
 
-    case actionTypes.UPLOAD_USER_IMAGE_REQUEST:
+    case types.UPLOAD_USER_IMAGE_REQUEST:
       return {
         ...state,
         queryingDatabase: true,
       };
-    case actionTypes.UPLOAD_USER_IMAGE_SUCCESS:
+    case types.UPLOAD_USER_IMAGE_SUCCESS:
       return {
         ...state,
         queryingDatabase: false,
         user: [...state.user, action.payload],
       };
-    case actionTypes.UPLOAD_USER_IMAGE_FAILURE:
+    case types.UPLOAD_USER_IMAGE_FAILURE:
       return {
         ...state,
         queryingDatabase: false,
         errorMessage: action.payload,
       };
 
-    case actionTypes.FETCH_ALL_USERS_REQUEST:
+    case types.FETCH_ALL_USERS_REQUEST:
       return {
         ...state,
         queryingDatabase: true,
       };
-    case actionTypes.FETCH_ALL_USERS_SUCCESS:
+    case types.FETCH_ALL_USERS_SUCCESS:
       return {
         ...state,
         queryingDatabase: false,
         usersAll: action.payload,
       };
-    case actionTypes.FETCH_ALL_USERS_FAILURE:
+    case types.FETCH_ALL_USERS_FAILURE:
       return {
         ...state,
         queryingDatabase: false,
         errorMessage: action.payload,
       };
-    case actionTypes.FETCH_ALL_CONNECTIONS_REQUEST:
+    case types.FETCH_ALL_CONNECTIONS_REQUEST:
       return {
         ...state,
         queryingDatabase: true,
       };
-    case actionTypes.FETCH_ALL_CONNECTIONS_SUCCESS:
+    case types.FETCH_ALL_CONNECTIONS_SUCCESS:
       return {
         ...state,
         queryingDatabase: false,
         connectionsAll: action.payload,
       };
-    case actionTypes.FETCH_ALL_CONNECTIONS_FAILURE:
+    case types.FETCH_ALL_CONNECTIONS_FAILURE:
       return {
         ...state,
         queryingDatabase: false,
         errorMessage: action.payload,
       };
 
-    case actionTypes.CHECK_USER_PROFILE_REQUEST:
+
+    case types.CHECK_USER_PROFILE_REQUEST:
       return {
         ...state,
         queryingDatabase: true,
       };
-    case actionTypes.CHECK_USER_PROFILE_SUCCESS:
+    case types.CHECK_USER_PROFILE_SUCCESS:
       return {
         ...state,
         queryingDatabase: false,
         user: [...state.user, action.payload],
       };
-    case actionTypes.CHECK_USER_PROFILE_FAILURE:
+    case types.CHECK_USER_PROFILE_FAILURE:
       return {
         ...state,
         checkingUserInfo: false,

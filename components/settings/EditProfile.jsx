@@ -6,7 +6,7 @@ const dummyUser = {
   name: 'Guillermo Rauch'
 };
 
-const EditProfile = () => {
+const EditProfile = ({ user }) => {
   return (
     <div>
       <Image>
@@ -16,19 +16,28 @@ const EditProfile = () => {
       <div>
         <div>
           <p>First Name</p>
-          <input type="text"></input>
+          <input type="text" name="firstName" value={user.first_name}></input>
         </div>
         <div>
           <p>Last Name</p>
-          <input type="text"></input>
+          <input type="text" name="lastName" value={user.last_name}></input>
         </div>
         <div>
           <p>Username</p>
-          <input type="text"></input>
+          <input type="text" name="username" value={user.username}></input>
         </div>
         <div>
           <p>Bio</p>
-          <textarea name="message" rows="10" cols="30"></textarea>{' '}
+          <textarea
+            name="message"
+            rows="10"
+            cols="30"
+            value={user.biography}
+          ></textarea>
+        </div>
+        <div>
+          <p>Email</p>
+          <input type="text" name="email" value={user.email}></input>
         </div>
 
         <h3>Location</h3>
