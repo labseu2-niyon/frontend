@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { updatePassword } from '../../redux/actions/userActions';
 import { connect } from 'react-redux';
+import Link from 'next/link';
 
-const EditPassword = ({ updatePassword, username, updatedPassword }) => {
+const EditPassword = ({ updatePassword, username, status }) => {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [error, setError] = useState(false);
+  const [submitted, setSubmit] = useState(false);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -20,12 +22,14 @@ const EditPassword = ({ updatePassword, username, updatedPassword }) => {
       setOldPassword('');
       setNewPassword('');
       setRepeatPassword('');
+      setSubmit(true);
     }
   };
 
   const checkPassword = () => {
     if (newPassword !== repeatPassword) {
       setError(true);
+      setSubmit(false);
     } else {
       setError(false);
     }
@@ -61,8 +65,23 @@ const EditPassword = ({ updatePassword, username, updatedPassword }) => {
         {error ? <p>Please make sure both passwords match</p> : null}
       </div>
       <button onClick={handleSubmit}>Submit</button>
+      {submitted && status === 200 ? <p>Password updated succesfully</p> : null}
+      {submitted && status === 403 ? (
+        <p>
+          Password could not be updated, please check your current password or{' '}
+          <Link href="/reset-password">
+            <a>reset it</a>
+          </Link>
+        </p>
+      ) : null}
     </form>
   );
+};
+
+const mapStateToProps = state => {
+  return {
+    status: state.userReducer.passwordStatus
+  };
 };
 
 export default connect(

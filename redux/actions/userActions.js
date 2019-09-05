@@ -32,7 +32,7 @@ export const updatePassword = (username, body) => (dispatch) => {
     .catch((error) => {
       dispatch({
         type: types.UPDATE_PASSWORD_FAILURE,
-        payload: error.response.message,
+        payload: error.response.status,
       });
     });
 };
