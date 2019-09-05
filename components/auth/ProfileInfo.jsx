@@ -25,20 +25,17 @@ const ProfileInfo = props => {
   const handleSubmit = e => {
     e.preventDefault();
     const data = {
-      firstName: props.userInfo.socialData.firstName,
-      lastName: props.userInfo.socialData.lastName,
+      firstName: props.userInfo.userNameData.firstName,
+      lastName: props.userInfo.userNameData.lastName,
       bio: bio,
-      countryName: props.userInfo.locationData.country,
-      cityName: props.userInfo.locationData.city
+      locationId: props.userInfo.locationId,
+      jobId: props.userInfo.userTypeData.job
     };
     const username = props.userInfo.emailData.username;
-
     const imgData = new FormData();
     imgData.append('image', image);
-    console.log('Image Upload Data ', ImageData, username);
     props.imageUpload(imgData, username);
 
-    
     props.userProfileInfo(data, username).then(res => {
       if (res === 200) {
         Router.push('/auth/social-info');

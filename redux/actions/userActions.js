@@ -1,3 +1,4 @@
+import axios from 'axios';
 import axiosWithToken from '../axios';
 import { types } from '../userConstants';
 
@@ -75,23 +76,43 @@ export const updatePassword = (username, body) => (dispatch) => {
 //     });
 // };
 
-// export const fetchAllUsers = () => dispatch => {
-//   dispatch({ type: types.FETCH_ALL_USERS_REQUEST });
-//   axios
-//     .get(`${_BASE_URL}/users`)
-//     .then(res => {
-//       dispatch({
-//         type: types.FETCH_ALL_USERS_SUCCESS,
-//         payload: res.data
-//       });
-//     })
-//     .catch(error => {
-//       dispatch({
-//         type: types.FETCH_ALL_USERS_FAILURE,
-//         payload: error.message
-//       });
-//     });
-// };
+export const fetchAllConnections = () => (dispatch) => {
+  dispatch({ type: types.FETCH_ALL_CONNECTIONS_REQUEST });
+  // spinner
+  axios
+    .get(`${_BASE_URL}/connections`)
+    .then((res) => {
+      dispatch({
+        type: actionTypes.FETCH_ALL_CONNECTIONS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actionTypes.FETCH_ALL_CONNECTIONS_FAILURE,
+        payload: error.message,
+      });
+    });
+};
+
+export const fetchAllUsers = () => (dispatch) => {
+  dispatch({ type: types.FETCH_ALL_USERS_REQUEST });
+  // spinner
+  axios
+    .get(`${_BASE_URL}/users`)
+    .then((res) => {
+      dispatch({
+        type: actionTypes.FETCH_ALL_USERS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actionTypes.FETCH_ALL_USERS_FAILURE,
+        payload: error.message,
+      });
+    });
+};
 
 // export const checkUserProfile = username => dispatch => {
 //   dispatch({ type: types.CHECK_USER_PROFILE_REQUEST });

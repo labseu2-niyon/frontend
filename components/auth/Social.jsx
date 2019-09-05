@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import { socialData } from '../../redux/actions/authActions';
+import { AutoComplete } from 'antd';
 
 const Social = ({ errors, touched, username }) => {
   return (
@@ -127,6 +128,7 @@ const FormArea = styled(Form)`
   height: 400px;
 
   @media (min-width: 500px) {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     width: 50%;
   }
 
@@ -141,6 +143,10 @@ const FormArea = styled(Form)`
     ::placeholder {
       color: grey;
       opacity: 0.4;
+    }
+
+    @media (min-width: 500px) {
+      width: 50%;
     }
   }
 `;
@@ -161,4 +167,8 @@ const Error = styled.p`
   bottom: 6%;
   left: 3%;
   color: #e29273;
+
+  @media (min-width: 500px) {
+    left: 20%;
+  }
 `;

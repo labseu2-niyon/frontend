@@ -28,7 +28,7 @@ import Loading from '../components/~common/Loading';
 
 // export default withReduxStore(MyApp);
 
-export default withRedux(makeStore, { debug: true })(
+export default withRedux(makeStore, { debug: false })(
   class MyApp extends App {
     render() {
       const { Component, pageProps, store } = this.props;
