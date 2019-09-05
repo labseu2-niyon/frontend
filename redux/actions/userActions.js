@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axiosWithAuth from '../axios';
 import { actionTypes } from '../userConstants';
 
-const _BASE_URL = 'https://niyon-dev.herokuapp.com/';
+const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
 
 // export const updatePassword = (props) => (dispatch) => {
 //   dispatch({ type: types.UPDATE_PASSWORD_REQUEST });
@@ -61,15 +61,16 @@ const _BASE_URL = 'https://niyon-dev.herokuapp.com/';
 //     });
 // };
 
-export const fetchAllConnections = () => (dispatch) => {
+export const fetchAllConnections = (user) => (dispatch) => {
   dispatch({ type: actionTypes.FETCH_ALL_CONNECTIONS_REQUEST });
   // spinner
-  axios
-    .get(`${_BASE_URL}/connections`)
+  axiosWithAuth()
+    .get(`${_BASE_URL}/user/${user}/users`)
     .then((res) => {
+      console.log(res);
       dispatch({
         type: actionTypes.FETCH_ALL_CONNECTIONS_SUCCESS,
-        payload: res.data,
+        payload: res.data.data,
       });
     })
     .catch((error) => {
@@ -80,18 +81,20 @@ export const fetchAllConnections = () => (dispatch) => {
     });
 };
 
-export const fetchAllUsers = () => (dispatch) => {
+export const fetchAllUsers = (user) => (dispatch) => {
   dispatch({ type: actionTypes.FETCH_ALL_USERS_REQUEST });
   // spinner
-  axios
-    .get(`${_BASE_URL}/users`)
+  axiosWithAuth()
+    .get(`${_BASE_URL}/user/${user}/users`)
     .then((res) => {
+      console.log(res);
       dispatch({
         type: actionTypes.FETCH_ALL_USERS_SUCCESS,
-        payload: res.data,
+        payload: res.data.data,
       });
     })
     .catch((error) => {
+      console.log(error);
       dispatch({
         type: actionTypes.FETCH_ALL_USERS_FAILURE,
         payload: error.message,
