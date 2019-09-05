@@ -107,10 +107,6 @@ const FormArea = styled(Form)`
   justify-content: space-between;
   height: 200px;
 
-  @media (min-width: 500px) {
-    width: 50%;
-  }
-
   input {
     padding: 0.5rem;
     font-size: 16px;
@@ -122,6 +118,10 @@ const FormArea = styled(Form)`
     ::placeholder {
       color: grey;
       opacity: 0.4;
+    }
+
+    @media (min-width: 500px) {
+      width: 40%;
     }
   }
 
@@ -144,7 +144,7 @@ const FormArea = styled(Form)`
     background-size: 0.65em auto, 100%;
 
     @media (min-width: 500px) {
-      width: 70%;
+      width: 40%;
     }
     option {
       color: grey;
@@ -169,17 +169,18 @@ const Error = styled.p`
   bottom: 10%;
   left: 7.5%;
   color: #e29273;
+
+  @media (min-width: 500px) {
+    left: 10%;
+  }
 `;
 
 const DropDown = styled(Field)`
-  box-sizing: border-box;
   cursor: pointer;
-  position: relative;
   background: #fff;
   line-height: 1.5rem;
   padding: 10px 10px;
-  width: ${({ width }) => width || '200px'};
-  max-width: 100%;
+  width: 80%;
   color: #bfc1c4;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.07);

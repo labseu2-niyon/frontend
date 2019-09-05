@@ -32,7 +32,7 @@ const JobTitle = ({
   useEffect(() => {
     if (mentorPressed || menteeePresed) {
       values.user = menteeePresed ? 'mentee' : 'mentor';
-      //console.log(status);
+      console.log(status);
       const data = {
         locationId: '1',
         industryId: '1'
@@ -159,9 +159,6 @@ const JobTitle = ({
                   </option>
                 );
               })}
-            {/* <option value="Job1">Web Developer</option>
-            <option value="Job2">Computer Science</option>
-            <option value="Job3">Data Science</option> */}
           </Field>
           {touched.job && errors.job && <Error>{errors.job}</Error>}
         </InputWrapper>
@@ -183,11 +180,7 @@ const JobTitle = ({
 const FormikWithJobTitleForm = withFormik({
   mapPropsToValues({ job, preparation, development, coaching, networking }) {
     return {
-      job: job || '',
-      preparation: preparation || false,
-      development: development || false,
-      coaching: coaching || false,
-      networking: networking || false
+      job: job || ''
     };
   },
   validationSchema: Yup.object().shape({
