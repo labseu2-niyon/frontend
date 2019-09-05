@@ -12,7 +12,7 @@ const Wrapper = styled.section`
 `;
 
 const Profiles = styled.div`
-  max-height: ${({ expanded }) => (!expanded ? '475px' : '1000px')};
+  max-height: ${({ expanded }) => (!expanded ? '470px' : '1000px')};
   margin-top: 2rem;
   margin-bottom: 2rem;
   padding: 0.5rem;
@@ -51,10 +51,12 @@ function UserSuggestions({ title, users }) {
       <Profiles expanded={expanded}>
         { users.map((profile) => <ExploreCard {...profile} />) }
       </Profiles>
+      { users.length > 4 && (
       <ButtonWrapper>
         <Line />
         <Button primary onClick={() => setExpanded(!expanded)}>{!expanded ? 'More' : 'Less'}</Button>
       </ButtonWrapper>
+      )}
     </Wrapper>
   );
 }
