@@ -1,5 +1,6 @@
 {
     "version": 2,
+    "alias": "niyon-app",
     "builds": [
         { "use": "@now/next", "src": "next.config.js" }
     ],
