@@ -1,5 +1,6 @@
 import axios from 'axios';
 import nookies from 'nookies';
+import Router from 'next/router';
 import { types } from '../authConstants';
 import axiosWithToken from '../axios';
 

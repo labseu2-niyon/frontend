@@ -1,11 +1,10 @@
-import axios from 'axios';
-import axiosWithToken from '../axios';
+import axiosWithAuth from '../axios';
 import { types } from '../userConstants';
 
 const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
 
 export const fetchUser = (username) => (dispatch) => {
-  axiosWithToken()
+  axiosWithAuth()
     .get(`${_BASE_URL}/user/${username}/profile`)
     .then((res) => {
       dispatch({
@@ -22,7 +21,7 @@ export const fetchUser = (username) => (dispatch) => {
 };
 
 export const updatePassword = (username, body) => (dispatch) => {
-  axiosWithToken()
+  axiosWithAuth()
     .patch(`${_BASE_URL}/user/${username}/password`, body)
     .then((res) => {
       dispatch({
@@ -76,39 +75,39 @@ export const updatePassword = (username, body) => (dispatch) => {
 //     });
 // };
 
-export const fetchAllConnections = () => (dispatch) => {
+export const fetchAllConnections = (user) => (dispatch) => {
   dispatch({ type: types.FETCH_ALL_CONNECTIONS_REQUEST });
   // spinner
-  axios
-    .get(`${_BASE_URL}/connections`)
+  axiosWithAuth()
+    .get(`${_BASE_URL}/user/${user}/users`)
     .then((res) => {
       dispatch({
-        type: actionTypes.FETCH_ALL_CONNECTIONS_SUCCESS,
-        payload: res.data,
+        type: types.FETCH_ALL_CONNECTIONS_SUCCESS,
+        payload: res.data.data,
       });
     })
     .catch((error) => {
       dispatch({
-        type: actionTypes.FETCH_ALL_CONNECTIONS_FAILURE,
+        type: types.FETCH_ALL_CONNECTIONS_FAILURE,
         payload: error.message,
       });
     });
 };
 
-export const fetchAllUsers = () => (dispatch) => {
+export const fetchAllUsers = (user) => (dispatch) => {
   dispatch({ type: types.FETCH_ALL_USERS_REQUEST });
   // spinner
-  axios
-    .get(`${_BASE_URL}/users`)
+  axiosWithAuth()
+    .get(`${_BASE_URL}/user/${user}/users`)
     .then((res) => {
       dispatch({
-        type: actionTypes.FETCH_ALL_USERS_SUCCESS,
-        payload: res.data,
+        type: types.FETCH_ALL_USERS_SUCCESS,
+        payload: res.data.data,
       });
     })
     .catch((error) => {
       dispatch({
-        type: actionTypes.FETCH_ALL_USERS_FAILURE,
+        type: types.FETCH_ALL_USERS_FAILURE,
         payload: error.message,
       });
     });

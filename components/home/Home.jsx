@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import TopSection from './TopSection';
 import ProfileList from './ProfileList';
-import { fetchAllUsers, fetchAllConnections } from '../../redux/actions/userActions';
+import withUserData from '../containers/withUserData';
 
 const Wrapper = styled.div`
     width: 100%;
@@ -13,16 +12,6 @@ const Wrapper = styled.div`
 `;
 
 function Home(props) {
-  useEffect(() => {
-    if (!props.usersAll) {
-      props.fetchUsers();
-    }
-
-    if (!props.connectionsAll) {
-      props.fetchConnections();
-    }
-  }, []);
-
   return (
     <Wrapper>
       <TopSection numOfConnections={props.connectionsAll.length} />
@@ -36,13 +25,9 @@ function Home(props) {
   );
 }
 
-const mapStateToProps = (state) => state.userReducer;
-
 Home.propTypes = {
-  fetchUsers: PropTypes.func.isRequired,
-  fetchConnections: PropTypes.func.isRequired,
   usersAll: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   connectionsAll: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
-export default connect(mapStateToProps, { fetchUsers: fetchAllUsers, fetchConnections: fetchAllConnections })(Home);
+export default withUserData(Home);
