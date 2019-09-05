@@ -6,8 +6,10 @@ import Link from 'next/link';
 import { Heading3 } from '../~common';
 
 const Wrapper = styled.div`
+    position: relative;
     box-sizing: border-box;
     width: 48%;
+    height: 205px;
     padding: 1rem 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -50,8 +52,11 @@ const Text = styled.div`
 `;
 
 const Location = styled.div`
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 100%;
-    height: 30px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -75,27 +80,34 @@ const L = styled.div`
   }
 `;
 
-function ExploreCard({
-  name, field, description, src, position, location,
-}) {
+function ExploreCard(props) {
   return (
-    <Link href={{ pathname: '/profile', query: { user: name, jobTitle: field, src } }}>
+    <Link href={{
+      pathname: '/profile',
+      query: {
+        user: props.username,
+        // jobTitle: props.job,
+        src: props.profile_picture,
+      },
+    }}
+    >
       <Wrapper>
         <Contents>
           <PhotoWrapper>
             <Photo>
-              <img src={src} alt="" height="100%" />
+              <img src={props.profile_picture} alt="" height="100%" />
             </Photo>
           </PhotoWrapper>
           <Text>
-            <Heading3>{name}</Heading3>
-            <small>Field: {field}</small>
-            <p>{description}</p>
+            <Heading3>{props.first_name} {props.last_name}</Heading3>
+            {/* <small>Field: {props}</small> */}
+            <p>{props.bio}</p>
           </Text>
         </Contents>
+
         <Location>
-          <L><Icon type="book" /><small>{position}</small></L>
-          <L><Icon type="global" /><small>{location}</small></L>
+          <L><Icon type="book" /><small>Mentor</small></L>
+          <L><Icon type="global" /><small>{props.location && props.location.city_name}, {props.location && props.location.country_name}</small></L>
         </Location>
       </Wrapper>
     </Link>
