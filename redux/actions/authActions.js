@@ -254,3 +254,43 @@ export const logOutUser = () => (dispatch) => {
 //       });
 //     });
 // };
+
+export const resetPassword = (email) => (dispatch) => {
+  dispatch({ type: types.RESET_PASSWORD_REQUEST });
+  axios
+    .post(`${_BASE_URL}/user/resetpassword`, email)
+    .then((res) => {
+      dispatch({
+        type: types.RESET_PASSWORD_SUCCESS,
+        payload: res.data.data.message,
+      });
+      Router.push('/auth/email-sent');
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.RESET_PASSWORD_FAILURE,
+        payload: error.message,
+      });
+    });
+};
+
+export const changePassword = (props) => (dispatch) => {
+  dispatch({ type: types.CHANGE_PASSWORD_REQUEST });
+  axios
+    .patch(`${_BASE_URL}/user/newpassword?token=${props.token}`, {
+      password: props.password,
+    })
+    .then((res) => {
+      dispatch({
+        type: types.CHANGE_PASSWORD_SUCCESS,
+        payload: res.data.data.message,
+      });
+      Router.push('/auth/login');
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.CHANGE_PASSWORD_FAILURE,
+        payload: error.message,
+      });
+    });
+};

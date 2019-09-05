@@ -7,6 +7,7 @@ import { Heading, Button } from '../~common';
 const Wrapper = styled.section`
     box-sizing: border-box;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     width: 100%;
     padding: 4rem 0;
@@ -19,7 +20,15 @@ const Wrapper = styled.section`
 
     @media (max-width: 600px) {
       flex-direction: column;
+      flex-direction: column-reverse;
+      
     }
+`;
+
+const Content = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 `;
 
 const Image = styled.div`
@@ -43,19 +52,34 @@ const Image = styled.div`
    }
 `;
 
+const ButtonWrapper = styled.div`
+    width: 350px;
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 600px) {
+        width: 150px;
+        height: 85px;
+        flex-direction: column;
+    }
+`;
+
 function TopSection({ numOfConnections = 0 }) {
   return (
     <Wrapper>
-      <div>
+      <Content>
         <Heading>Connect With Anyone</Heading>
         <p>
         Niyon is a platform for connecting young professionals<br />
 with mentors in West Africa.
         </p>
-        <Link href="/connections"><Button primary>Connections ({numOfConnections})</Button></Link>
-      </div>
+        <ButtonWrapper>
+          <Link href="/connections"><Button primary>Connections ({numOfConnections})</Button></Link>
+          <Link href="/explore"><Button primary>Explore</Button></Link>
+        </ButtonWrapper>
+      </Content>
       <Image>
-        <img src="/static/friends-online.svg" alt="" />
+        <img src="/static/hacker.svg" alt="" />
       </Image>
     </Wrapper>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Heading2 } from '../~common';
-import ExploreCard from './ExploreCard';
+import ExploreCard from '../explore/ExploreCard';
 
 const Wrapper = styled.section`
   width: 100%;
@@ -24,14 +24,9 @@ const Profiles = styled.div`
 function ProfileList({ users }) {
   return (
     <Wrapper>
-      <Heading2>Suggested Users</Heading2>
+      <Heading2>My Connect</Heading2>
       <Profiles>
-        { users.map((profile) => {
-          if (profile.display) {
-            return <ExploreCard {...profile} />;
-          }
-          return null;
-        }) }
+        { users.map((profile) => <ExploreCard {...profile} />) }
       </Profiles>
     </Wrapper>
   );

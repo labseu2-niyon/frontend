@@ -1,51 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import TopSection from './TopSection';
 import SearchBox from './SearchBox';
 import ProfileList from './ProfileList';
+import { fetchAllUsers, fetchAllConnections } from '../../redux/actions/userActions';
 
 const Wrapper = styled.main`
     width: 100%;
 `;
 
 const jobTitles = [
-  { value: 'hello', label: 'hi' },
-  { value: 'Bonjour', label: 'salut' },
+  { value: 'whaler', label: 'Whaler' },
+  { value: 'fisherman', label: 'Fisherman' },
 ];
 
-const profiles = [{
-  name: 'Andy',
-  field: 'Whaler',
-  description: 'I\'m andy the whaler',
-  src: 'https://image.flaticon.com/icons/svg/1167/1167989.svg',
-  position: 'Mentor',
-  location: 'Australia',
-},
-{
-  name: 'Bob',
-  field: 'Banker',
-  description: 'I\'m Bob the Banker',
-  src: 'https://image.flaticon.com/icons/svg/1573/1573412.svg',
-  position: 'Mentor',
-  location: 'Brussels',
-},
-{
-  name: 'Reggie',
-  field: 'Fisherman',
-  description: 'I\'m Reggie the fisherman',
-  src: 'https://image.flaticon.com/icons/svg/307/307911.svg',
-  position: 'Mentee',
-  location: 'France',
-}, {
-  name: 'Alan',
-  field: 'Athlete',
-  description: 'I\'m Alan the athlete',
-  src: 'https://image.flaticon.com/icons/svg/1473/1473225.svg',
-  position: 'Mentee',
-  location: 'France',
-}];
-
-function Explore() {
+function Explore(props) {
   const [users, setUsers] = useState([]);
 
   const mapUsers = (input) => {
@@ -84,16 +55,33 @@ function Explore() {
   };
 
   useEffect(() => {
-    mapUsers(profiles);
+    (async () => {
+      if (!props.usersAll) {
+        await props.fetchUsers();
+      }
+      mapUsers(props.usersAll);
+    })();
+    if (!props.connectionsAll) {
+      props.fetchConnections();
+    }
   }, []);
 
   return (
     <Wrapper>
-      <TopSection />
+      <TopSection numOfConnections={props.connectionsAll.length} />
       <SearchBox jobTitles={jobTitles} filter={filter} />
       <ProfileList users={users} />
     </Wrapper>
   );
 }
 
-export default Explore;
+const mapStateToProps = (state) => state.userReducer;
+
+Explore.propTypes = {
+  fetchUsers: PropTypes.func.isRequired,
+  fetchConnections: PropTypes.func.isRequired,
+  usersAll: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  connectionsAll: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+};
+
+export default connect(mapStateToProps, { fetchUsers: fetchAllUsers, fetchConnections: fetchAllConnections })(Explore);

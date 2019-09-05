@@ -17,7 +17,6 @@ Page.getInitialProps = (ctx) => {
   if (cookies.token) {
     redirect(ctx, '/');
   }
-
   return {};
 };
 
