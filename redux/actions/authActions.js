@@ -130,10 +130,13 @@ export const userTypeHandler = (data, username, type, status) => (dispatch) => {
 // Action Creator for getting Location Data from the Server based on the City
 // data: city:String  => City and Country
 export const locationRequest = (data) => (dispatch) => {
-  // dispatch({ type: types.START_LOADING });
+  dispatch({ type: types.START_LOADING });
   axios
     .get(`${_BASE_URL}/autocomplete/${data}`)
-    .then((res) => res.data.data)
+    .then((res) => {
+      dispatch({ type: types.STOP_LOADING });
+      return res.data.data;
+    })
     .catch(() => {
       dispatch({ type: types.STOP_LOADING });
     });

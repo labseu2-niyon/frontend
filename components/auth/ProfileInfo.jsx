@@ -28,11 +28,10 @@ const ProfileInfo = props => {
       firstName: props.userInfo.userNameData.firstName,
       lastName: props.userInfo.userNameData.lastName,
       bio: bio,
-      countryName: props.userInfo.locationData.country,
-      cityName: props.userInfo.locationData.city
+      locationId: props.userInfo.locationId,
+      jobId: props.userInfo.userTypeData.job
     };
     const username = props.userInfo.emailData.username;
-
     const imgData = new FormData();
     imgData.append('image', image);
     props.imageUpload(imgData, username);

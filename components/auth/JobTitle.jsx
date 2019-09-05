@@ -19,7 +19,8 @@ const JobTitle = ({
   username,
   loading,
   getJobTitles,
-  allJobs
+  allJobs,
+  locationId
 }) => {
   const [mentorPressed, setMentorPressed] = useState(false);
   const [menteeePresed, setMenteePressed] = useState(false);
@@ -34,12 +35,12 @@ const JobTitle = ({
       values.user = menteeePresed ? 'mentee' : 'mentor';
       console.log(status);
       const data = {
-        locationId: '1',
+        locationId: locationId,
         industryId: '1'
       };
       const type = status.user;
-      userTypeHandler(data, username, type, status).then(status => {
-        if (status === 201) {
+      userTypeHandler(data, username, type, status).then(res => {
+        if (res === 201) {
           setMentorError(false);
           Router.push('/auth/profile-info');
         }
@@ -154,7 +155,7 @@ const JobTitle = ({
             {allJobs &&
               allJobs.map(job => {
                 return (
-                  <option value={job.tech_name} key={job.tech_name}>
+                  <option value={job.id} key={job.tech_name}>
                     {job.tech_name}
                   </option>
                 );
@@ -178,7 +179,7 @@ const JobTitle = ({
 };
 
 const FormikWithJobTitleForm = withFormik({
-  mapPropsToValues({ job, preparation, development, coaching, networking }) {
+  mapPropsToValues({ job }) {
     return {
       job: job || ''
     };
@@ -195,7 +196,8 @@ const mapStateToProps = state => {
   return {
     username: state.authReducer.emailData.username,
     loading: state.authReducer.loading,
-    allJobs: state.authReducer.allJobs
+    allJobs: state.authReducer.allJobs,
+    locationId: state.authReducer.locationId
   };
 };
 const mapDispatchToProps = {
