@@ -1,54 +1,47 @@
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
-import Link from 'next/link';
 import { connect } from 'react-redux';
-import { Heading4, Text, Button } from '../~common/index';
-import { resetPassword } from '../../redux/actions/authActions';
+import { Heading4, Button } from '../~common/index';
+import { changePassword } from '../../redux/actions/authActions';
 
-const ResetPassword = ({ errors, touched }) => (
+const ChangePassword = ({ errors, touched }) => (
   <>
     <Root>
-      <Heading4>Let us find your account.</Heading4>
-      <Text small>Please enter your email.</Text>
+      <Heading4>Please enter your new password.</Heading4>
       <FormArea>
         <InputWrapper>
-          <Field name="email" type="email" placeholder="email" />
-          {touched.email && errors.email && <Error>{errors.email}</Error>}
+          <Field name="password" type="password" placeholder="new password" />
+          {touched.password && errors.password && (
+            <Error>{errors.password}</Error>
+          )}
         </InputWrapper>
         <ButtonArea>
           <Button large primary type="submit">
-            Find Account
+            Change my password
           </Button>
-          <Link href="/auth/login">
-            <a>
-              <Button large secondary>
-                Cancel
-              </Button>
-            </a>
-          </Link>
         </ButtonArea>
       </FormArea>
     </Root>
   </>
 );
 
-const FormikResetPasswordForm = withFormik({
-  mapPropsToValues({ email }) {
+const FormikChangePasswordForm = withFormik({
+  mapPropsToValues({ password }) {
     return {
-      email: email || '',
+      password: password || '',
     };
   },
   validationSchema: Yup.object().shape({
-    email: Yup.string()
-      .email('Email is invalid')
-      .required('Email is required'),
+    password: Yup.string().required('Password is required'),
   }),
   handleSubmit(values, { props }) {
-    const { email } = values;
-    props.resetPassword({ email });
+    const { password } = values;
+    const params = new URL(document.location).searchParams;
+    const token = params.get('token');
+    props.changePassword({ password, token });
   },
-})(ResetPassword);
+})(ChangePassword);
 
 function mapStateToProps(state) {
   return { authReducer: state.authReducer };
@@ -56,8 +49,8 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { resetPassword },
-)(FormikResetPasswordForm);
+  { changePassword },
+)(FormikChangePasswordForm);
 
 const Root = styled.div`
   height: 85vh;
