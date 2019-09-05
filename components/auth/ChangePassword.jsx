@@ -37,7 +37,9 @@ const FormikChangePasswordForm = withFormik({
   }),
   handleSubmit(values, { props }) {
     const { password } = values;
-    props.changePassword({ password });
+    const params = new URL(document.location).searchParams;
+    const token = params.get('token');
+    props.changePassword({ password, token });
   },
 })(ChangePassword);
 
