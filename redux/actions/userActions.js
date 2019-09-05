@@ -20,25 +20,22 @@ export const fetchUser = (username) => (dispatch) => {
     });
 };
 
-// export const updatePassword = (props) => (dispatch) => {
-//   dispatch({ type: types.UPDATE_PASSWORD_REQUEST });
-//   axios
-//     .patch(`${_BASE_URL}/user/newpassword?token=${props.token}`, {
-//       data: { password: props.password },
-//     })
-//     .then((res) => {
-//       dispatch({
-//         type: types.UPDATE_PASSWORD_SUCCESS,
-//         payload: res.data,
-//       });
-//     })
-//     .catch((error) => {
-//       dispatch({
-//         type: types.UPDATE_PASSWORD_FAILURE,
-//         payload: error.message,
-//       });
-//     });
-// };
+export const updatePassword = (username, body) => (dispatch) => {
+  axiosWithToken()
+    .patch(`${_BASE_URL}/user/${username}/password`, body)
+    .then((res) => {
+      dispatch({
+        type: types.UPDATE_PASSWORD_SUCCESS,
+        payload: res.data.status,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.UPDATE_PASSWORD_FAILURE,
+        payload: error.response,
+      });
+    });
+};
 
 // export const updateUserProfile = (username, existingUser) => dispatch => {
 //   dispatch({ type: types.UPDATE_USER_PROFILE_REQUEST });
