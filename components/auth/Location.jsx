@@ -14,7 +14,9 @@ const Location = ({ errors, touched, values, locationRequest }) => {
   useEffect(() => {
     locationRequest(values.city).then(res => {
       //console.log(res);
-      setList(res);
+      if (res) {
+        setList(res);
+      }
     });
   }, [values]);
   return (

@@ -131,7 +131,7 @@ export const userTypeHandler = (data, username, type, status) => (dispatch) => {
 // data: city:String  => City and Country
 export const locationRequest = (data) => (dispatch) => {
   dispatch({ type: types.START_LOADING });
-  axios
+  return axios
     .get(`${_BASE_URL}/autocomplete/${data}`)
     .then((res) => {
       dispatch({ type: types.STOP_LOADING });
