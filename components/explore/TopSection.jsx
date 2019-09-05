@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Link from 'next/link';
 import { Heading, Button } from '../~common';
 
 const Wrapper = styled.section`
@@ -51,7 +52,7 @@ function TopSection({ numOfConnections = 0 }) {
         Niyon is a platform for connecting young professionals<br />
 with mentors in West Africa.
         </p>
-        <Button primary>Connections ({numOfConnections})</Button>
+        <Link href="/connections"><Button primary>Connections ({numOfConnections})</Button></Link>
       </div>
       <Image>
         <img src="/static/friends-online.svg" alt="" />
