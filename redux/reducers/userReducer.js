@@ -50,13 +50,11 @@ export const userReducer = (state = initialState, { type, payload }) => {
         queryingDatabase: false,
         errorMessage: payload,
       };
-
     case types.UPDATE_PASSWORD_REQUEST:
       return {
         ...state,
         queryingDatabase: true,
       };
-
     case types.UPLOAD_USER_IMAGE_REQUEST:
       return {
         ...state,

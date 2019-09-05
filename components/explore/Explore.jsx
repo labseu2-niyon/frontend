@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 import TopSection from './TopSection';
 import SearchBox from './SearchBox';
 import ProfileList from './ProfileList';
-import { fetchAllUsers, fetchAllConnections } from '../../redux/actions/userActions';
+import withUserData from '../containers/withUserData';
 
 const Wrapper = styled.main`
     width: 100%;
@@ -17,15 +16,8 @@ const jobTitles = [
 ];
 
 function Explore(props) {
-  const [users, setUsers] = useState([]);
-
-  const mapUsers = (input) => {
-    const withDisplay = input.map((user) => ({ ...user, display: true }));
-    setUsers(withDisplay);
-  };
-
   const filter = (mentor, mentee) => {
-    const filteredUsers = users.map((user) => {
+    const filteredUsers = props.users.map((user) => {
       if (mentor && mentee) {
         return { ...user, display: true };
       }
@@ -51,37 +43,22 @@ function Explore(props) {
       return user;
     });
 
-    setUsers(filteredUsers);
+    props.setUsers(filteredUsers);
   };
-
-  useEffect(() => {
-    (async () => {
-      if (!props.usersAll) {
-        await props.fetchUsers();
-      }
-      mapUsers(props.usersAll);
-    })();
-    if (!props.connectionsAll) {
-      props.fetchConnections();
-    }
-  }, []);
 
   return (
     <Wrapper>
       <TopSection numOfConnections={props.connectionsAll.length} />
       <SearchBox jobTitles={jobTitles} filter={filter} />
-      <ProfileList users={users} />
+      <ProfileList users={props.users} />
     </Wrapper>
   );
 }
 
-const mapStateToProps = (state) => state.userReducer;
-
 Explore.propTypes = {
-  fetchUsers: PropTypes.func.isRequired,
-  fetchConnections: PropTypes.func.isRequired,
-  usersAll: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  users: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  setUsers: PropTypes.func.isRequired,
   connectionsAll: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
-export default connect(mapStateToProps, { fetchUsers: fetchAllUsers, fetchConnections: fetchAllConnections })(Explore);
+export default withUserData(Explore);
