@@ -6,6 +6,7 @@ import ExploreCard from '../explore/ExploreCard';
 
 const Wrapper = styled.section`
   width: 100%;
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
 `;
@@ -24,7 +25,7 @@ const Profiles = styled.div`
 function ProfileList({ users }) {
   return (
     <Wrapper>
-      <Heading2>My Connect</Heading2>
+      <Heading2>My Connections</Heading2>
       <Profiles>
         { users.map((profile) => <ExploreCard {...profile} />) }
       </Profiles>
