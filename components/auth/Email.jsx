@@ -78,7 +78,7 @@ const FormikWithEmailForm = withFormik({
   validationSchema: Yup.object().shape({
     username: Yup.string()
       .matches(/^[a-zA-Z0-9]*$/, {
-        message: 'No Spaces please mate',
+        message: 'No Spaces or weird characters mate',
         excludeEmptyString: true
       })
       .required('Username is required'),
