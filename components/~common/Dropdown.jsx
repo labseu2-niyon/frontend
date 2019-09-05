@@ -2,9 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { Icon } from 'antd';
 
-function Dropdown({
-  title, list, grabOption, icon, width,
-}) {
+function Dropdown({ title, list, grabOption, icon, width }) {
   const [showOptions, setOptions] = useState(false);
   const [currentTitle, setTitle] = useState(title);
 
@@ -23,17 +21,21 @@ function Dropdown({
       <Title onClick={toggle} width={width}>
         <p>{currentTitle}</p>
         {/* <i className={icon}><span role="img" aria-label="pig">🐷</span></i> */}
-        <Icon type="arrow-up" style={{ transform: !showOptions ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
+        <Icon
+          type="arrow-up"
+          style={{
+            transform: !showOptions ? 'rotate(180deg)' : 'rotate(0deg)',
+            transition: 'transform 200ms'
+          }}
+        />
       </Title>
 
       {showOptions ? (
         <Options width={width}>
-          {list.map((option) => (
-            <div key={option.value}>
-              <div className="label" onClick={() => chooseOption(option)}>
-                {option.label}
-              </div>
-            </div>
+          {list.map(option => (
+            <Op onClick={() => chooseOption(option)} key={option}>
+              {option}
+            </Op>
           ))}
         </Options>
       ) : null}
@@ -79,6 +81,11 @@ const Options = styled.div`
       transition: 0.5s;
     }
   }
+`;
+
+const Op = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 export default Dropdown;

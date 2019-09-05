@@ -138,8 +138,9 @@ const FormArea = styled(Form)`
   justify-content: center;
   height: 320px;
   width: 100%;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  padding: 10px 0;
   @media (min-width: 500px) {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     width: 50%;
   }
 
@@ -178,4 +179,8 @@ const Error = styled.p`
   bottom: 10%;
   left: 7.5%;
   color: #e29273;
+
+  @media (min-width: 500px) {
+    left: 28%;
+  }
 `;
