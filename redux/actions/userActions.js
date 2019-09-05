@@ -1,7 +1,7 @@
-// import axios from 'axios';
-// import { actionTypes } from '../constants';
+import axios from 'axios';
+import { actionTypes } from '../userConstants';
 
-// const _BASE_URL = 'https://niyon-dev.herokuapp.com/';
+const _BASE_URL = 'https://niyon-dev.herokuapp.com/';
 
 // export const updateUserProfile = (username, existingUser) => dispatch => {
 //   dispatch({ type: actionTypes.UPDATE_USER_PROFILE_REQUEST });
@@ -63,24 +63,43 @@
 //     });
 // };
 
-// export const fetchAllUsers = () => dispatch => {
-//   dispatch({ type: actionTypes.FETCH_ALL_USERS_REQUEST });
-//   // spinner
-//   axios
-//     .get(`${_BASE_URL}/users`)
-//     .then(res => {
-//       dispatch({
-//         type: actionTypes.FETCH_ALL_USERS_SUCCESS,
-//         payload: res.data
-//       });
-//     })
-//     .catch(error => {
-//       dispatch({
-//         type: actionTypes.FETCH_ALL_USERS_FAILURE,
-//         payload: error.message
-//       });
-//     });
-// };
+export const fetchAllConnections = () => (dispatch) => {
+  dispatch({ type: actionTypes.FETCH_ALL_CONNECTIONS_REQUEST });
+  // spinner
+  axios
+    .get(`${_BASE_URL}/connections`)
+    .then((res) => {
+      dispatch({
+        type: actionTypes.FETCH_ALL_CONNECTIONS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actionTypes.FETCH_ALL_CONNECTIONS_FAILURE,
+        payload: error.message,
+      });
+    });
+};
+
+export const fetchAllUsers = () => (dispatch) => {
+  dispatch({ type: actionTypes.FETCH_ALL_USERS_REQUEST });
+  // spinner
+  axios
+    .get(`${_BASE_URL}/users`)
+    .then((res) => {
+      dispatch({
+        type: actionTypes.FETCH_ALL_USERS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actionTypes.FETCH_ALL_USERS_FAILURE,
+        payload: error.message,
+      });
+    });
+};
 
 // export const checkUserProfile = username => dispatch => {
 //   dispatch({ type: actionTypes.CHECK_USER_PROFILE_REQUEST });
