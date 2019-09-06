@@ -19,13 +19,7 @@ const Social = ({ errors, touched, username }) => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
             nisl nisl, aliquam nec erat et, efficitur mollis metus.
           </Text>
-          <Field
-            name="username"
-            type="text"
-            placeholder="username"
-            value={username}
-            disabled
-          />
+          <input placeholder="username" value={username} disabled />
         </InputWrapper>
         <InputWrapper>
           <Field name="firstName" type="text" placeholder="FirstName" />
