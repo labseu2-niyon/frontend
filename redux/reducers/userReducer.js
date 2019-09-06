@@ -12,8 +12,9 @@ const initialState = {
 };
 
 export const userReducer = (state = initialState, action) => {
+  const { payload } = action;
   switch (action.type) {
-    case actionTypes.UPDATE_USER_PROFILE_REQUEST:
+    case types.UPDATE_USER_PROFILE_REQUEST:
 
       return {
         ...state,
@@ -35,11 +36,7 @@ export const userReducer = (state = initialState, action) => {
         error: true,
         passwordStatus: payload,
       };
-    case types.UPDATE_USER_PROFILE_REQUEST:
-      return {
-        ...state,
-        queryingDatabase: true,
-      };
+
     case types.UPDATE_USER_PROFILE_SUCCESS:
       return {
         ...state,

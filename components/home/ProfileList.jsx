@@ -45,7 +45,6 @@ const Line = styled.div`
 function UserSuggestions({ title, users, expandable }) {
   const [expanded, setExpanded] = useState(false);
   const showButtons = (users.length > 4) && expandable;
-  console.log(showButtons);
 
   return (
     <Wrapper>
