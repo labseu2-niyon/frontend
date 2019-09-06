@@ -6,19 +6,27 @@ import ProfileList from './ProfileList';
 import withUserData from '../containers/withUserData';
 
 const Wrapper = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 function Home(props) {
   return (
     <Wrapper>
-      <TopSection numOfConnections={props.connectionsAll.length} />
+      <TopSection
+        numOfConnections={
+          props.connectionsAll ? props.connectionsAll.length : 0
+        }
+      />
       <ProfileList title="UserSuggestions" users={props.usersAll || []} />
-      <div style={{
-        width: '100%', height: 1, background: '#eaeaea', border: 'none',
-      }}
+      <div
+        style={{
+          width: '100%',
+          height: 1,
+          background: '#eaeaea',
+          border: 'none'
+        }}
       />
       <ProfileList title="My Connections" users={props.connectionsAll || []} />
     </Wrapper>
@@ -27,7 +35,7 @@ function Home(props) {
 
 Home.propTypes = {
   usersAll: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  connectionsAll: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  connectionsAll: PropTypes.arrayOf(PropTypes.shape()).isRequired
 };
 
 export default withUserData(Home);

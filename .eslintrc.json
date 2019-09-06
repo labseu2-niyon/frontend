@@ -10,6 +10,8 @@
   "rules": {
     // "react/prop-types": 0,
     "no-shadow": "off",
+    "arrow-parens": "off",
+    "comma-dangle": "off",
     "no-underscore-dangle": "off",
     "consistent-return": "off",
     "react/require-default-props": "off",
