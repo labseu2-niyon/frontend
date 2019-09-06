@@ -17,7 +17,7 @@ const withUserData = (Component) => {
     useEffect(() => {
       const u = jwt.decode(props.authReducer.token);
       (async () => {
-        if (props.userReducer.usersAll) {
+        if (!props.userReducer.usersAll) {
           await props.fetchUsers(u.username);
         }
         mapUsers(props.userReducer.usersAll);

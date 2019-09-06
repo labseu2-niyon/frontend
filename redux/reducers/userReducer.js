@@ -7,6 +7,7 @@ const initialState = {
   passwordStatus: true,
   queryingDatabase: false,
   errorMessage: null,
+  usersAll: '',
 };
 
 export const userReducer = (state = initialState, { type, payload }) => {
