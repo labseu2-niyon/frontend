@@ -15,13 +15,20 @@ const Wrapper = styled.div`
 function Home(props) {
   return (
     <Wrapper>
-      <TopSection buttons={<HomeButtons numOfConnections={props.connectionsAll.length} />} src="/static/hacker.svg" />
-      <ProfileList title="UserSuggestions" users={props.users || []} />
+      <TopSection
+        buttons={(
+          <HomeButtons
+            numOfConnections={props.connectionsAll.length}
+          />
+        )}
+        src="/static/hacker.svg"
+      />
+      <ProfileList title="UserSuggestions" users={props.users || []} expandable />
       <div style={{
         width: '100%', height: 1, background: '#eaeaea', border: 'none',
       }}
       />
-      <ProfileList title="My Connections" users={props.users || []} />
+      <ProfileList title="My Connections" users={props.users || []} expandable />
     </Wrapper>
   );
 }

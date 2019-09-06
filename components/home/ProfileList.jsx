@@ -42,8 +42,10 @@ const Line = styled.div`
   z-index: -1;
 `;
 
-function UserSuggestions({ title, users }) {
+function UserSuggestions({ title, users, expandable }) {
   const [expanded, setExpanded] = useState(false);
+  const showButtons = (users.length > 4) && expandable;
+  console.log(showButtons);
 
   return (
     <Wrapper>
@@ -56,7 +58,7 @@ function UserSuggestions({ title, users }) {
           return null;
         }) }
       </Profiles>
-      { users.length > 4 && (
+      { showButtons && (
       <ButtonWrapper>
         <Line />
         <Button primary onClick={() => setExpanded(!expanded)}>{!expanded ? 'More' : 'Less'}</Button>
@@ -69,6 +71,7 @@ function UserSuggestions({ title, users }) {
 UserSuggestions.propTypes = {
   title: PropTypes.string.isRequired,
   users: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  expandable: PropTypes.bool.isRequired,
 };
 
 export default UserSuggestions;
