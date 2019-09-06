@@ -220,7 +220,6 @@ export const logInUser = ({ email, password }) => dispatch => {
         maxAge: 60 * 60 * 24 * 30,
         path: '/'
       });
-
       return res.data.status;
     })
     .catch(error => {
@@ -228,6 +227,7 @@ export const logInUser = ({ email, password }) => dispatch => {
         type: types.LOG_IN_USER_FAILURE,
         payload: error.message
       });
+      return error.response.data.message;
     });
 };
 
