@@ -1,73 +1,97 @@
-import { useEffect } from 'react';
-import { Text, Button, Heading2 } from '../~common/index';
+/* eslint-disable */
+import { useState } from 'react';
+import { Text, Heading2, Button } from '../~common/index';
 import styled from 'styled-components';
-import { Form, Field, withFormik } from 'formik';
-import * as Yup from 'yup';
 import Steps from './StepsComp';
 import Router from 'next/router';
+import 'antd/dist/antd.css';
 import { connect } from 'react-redux';
-import { locationData } from '../../redux/actions/authActions';
+import { locationData, locationRequest } from '../../redux/actions/authActions';
+import { Icon, AutoComplete } from 'antd';
 
-const Location = ({ errors, touched }) => {
+const Location = ({ locationRequest, locationData }) => {
+  const [data, setData] = useState([]);
+  const [select, setSelect] = useState({ state: false, data: '' });
+  function getPossibleLocation(place) {
+    locationRequest(place)
+      .then(res => {
+        if (res) {
+          setData(res);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+  function chosen(value) {
+    setSelect({ state: true, data: value });
+  }
+  function handleSubmit() {
+    const inwork = select.data.split(',');
+    select.state && locationData({
+      cityName: inwork[0].trim(),
+      countryName: inwork[1].trim()
+    }).then(res => {
+      if (res === 201) {
+        Router.push('/auth/job-title');
+      }
+    });
+  }
+
   return (
     <Root>
       <Steps stepNumber="2" />
-      <Heading2 primary>Location Info</Heading2>
-      <IconT className="fas fa-globe-europe"></IconT>
-      <Text small>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nisl
-        nisl, aliquam nec erat et, efficitur mollis metus.
-      </Text>
-      <FormArea>
-        <InputWrapper>
-          <Field name="country" type="text" placeholder="country"></Field>
-
-          {/* <Field component="select" name="country">
-            <option>Country</option>
-            <option value="City1">City name</option>
-            <option value="City2">City2</option>
-            <option value="City3">City3</option>
-          </Field> */}
-          {touched.country && errors.country && <Error>{errors.country}</Error>}
-        </InputWrapper>
-        <InputWrapper>
-          <Field name="city" type="text" placeholder="City"></Field>
-          {touched.city && errors.city && <Error>{errors.city}</Error>}
-        </InputWrapper>
-        <Button small primary type="submit">
+      <Section>
+        <Heading2 primary>Location Info</Heading2>
+        <IconT className="fas fa-globe-europe" />
+        {/* <Icon type="pushpin" theme="twoTone" /> */}
+        <Text small>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nisl
+          nisl, aliquam nec erat et, efficitur mollis metus.
+        </Text>
+        <Auto>
+          <AutoComplete
+            onChange={getPossibleLocation}
+            onSelect={chosen}
+            style={{ width: 200 }}
+            dataSource={data}
+            // autoFocus={true}
+            placeholder="Your city name"
+            filterOption={(inputValue, option) =>
+              option.props.children
+                .toUpperCase()
+                .indexOf(inputValue.toUpperCase()) !== -1
+            }
+          />
+          {!select.state ? (
+            <Icon
+              type="loading"
+              style={{ marginLeft: '1em', fontSize: '1.5em' }}
+            />
+          ) : (
+            <Icon
+              type="check-circle"
+              theme="twoTone"
+              twoToneColor="#52c41a"
+              style={{ marginLeft: '1em', fontSize: '1.5em' }}
+            />
+          )}
+        </Auto>
+        <Button primary small onClick={handleSubmit}>
           Next
         </Button>
-      </FormArea>
+      </Section>
     </Root>
   );
 };
 
-const FormikWithLocationForm = withFormik({
-  mapPropsToValues({ city, country }) {
-    return {
-      city: city || '',
-      country: country || ''
-    };
-  },
-  validationSchema: Yup.object().shape({
-    city: Yup.string().required('City name is required'),
-    country: Yup.string().required('Country name is required')
-  }),
-  handleSubmit(values, { setStatus, props }) {
-    //console.log(values);
-    props.locationData(values);
-    setStatus(values);
-    Router.push('/auth/job-title');
-  }
-})(Location);
-
 export default connect(
   state => state,
-  { locationData }
-)(FormikWithLocationForm);
+  { locationData, locationRequest }
+)(Location);
 
 const Root = styled.div`
-  height: 90vh;
+  height: 95vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -81,80 +105,20 @@ const Root = styled.div`
     }
   }
 `;
+const Section = styled.section`
+  padding: 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 80vh;
+`;
 
 const IconT = styled.i`
   font-size: 100px;
   color: green;
 `;
-
-const FormArea = styled(Form)`
-  width: 100%;
+const Auto = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  height: 200px;
-
-  @media (min-width: 500px) {
-    width: 50%;
-  }
-
-  input {
-    padding: 0.5rem;
-    font-size: 16px;
-    width: 70%;
-    display: block;
-    color: #4d2d52;
-    border: 1px solid rgba(77, 45, 82, 0.8);
-    border-radius: 4px;
-    ::placeholder {
-      color: grey;
-      opacity: 0.4;
-    }
-  }
-
-  select {
-    display: block;
-    font-size: 14px;
-    line-height: 1.3;
-    padding: 0.6em 1.4em 0.5em 0.8em;
-    width: 75%;
-    border: 1px solid rgba(77, 45, 82, 0.8);
-    box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-    background-color: #fff;
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
-      linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
-    background-repeat: no-repeat, repeat;
-    background-position: right 0.7em top 50%, 0 0;
-    background-size: 0.65em auto, 100%;
-
-    @media (min-width: 500px) {
-      width: 70%;
-    }
-    option {
-      color: grey;
-      opacity: 0.4;
-    }
-  }
-`;
-
-const InputWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  padding-bottom: 30px;
-`;
-
-const Error = styled.p`
-  margin: 0;
-  font-size: 14px;
-  position: absolute;
-  bottom: 10%;
-  left: 7.5%;
-  color: #e29273;
 `;

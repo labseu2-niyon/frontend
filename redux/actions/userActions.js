@@ -1,27 +1,41 @@
 import axiosWithAuth from '../axios';
-import { actionTypes } from '../userConstants';
+import { types } from '../userConstants';
 
 const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
 
-// export const updatePassword = (props) => (dispatch) => {
-//   dispatch({ type: types.UPDATE_PASSWORD_REQUEST });
-//   axios
-//     .patch(`${_BASE_URL}/user/newpassword?token=${props.token}`, {
-//       data: { password: props.password },
-//     })
-//     .then((res) => {
-//       dispatch({
-//         type: types.UPDATE_PASSWORD_SUCCESS,
-//         payload: res.data,
-//       });
-//     })
-//     .catch((error) => {
-//       dispatch({
-//         type: types.UPDATE_PASSWORD_FAILURE,
-//         payload: error.message,
-//       });
-//     });
-// };
+export const fetchUser = (username) => (dispatch) => {
+  axiosWithAuth()
+    .get(`${_BASE_URL}/user/${username}/profile`)
+    .then((res) => {
+      dispatch({
+        type: types.FETCH_USER,
+        payload: res.data.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.FETCH_USER_FAIL,
+        payload: error.message,
+      });
+    });
+};
+
+export const updatePassword = (username, body) => (dispatch) => {
+  axiosWithAuth()
+    .patch(`${_BASE_URL}/user/${username}/password`, body)
+    .then((res) => {
+      dispatch({
+        type: types.UPDATE_PASSWORD_SUCCESS,
+        payload: res.data.status,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.UPDATE_PASSWORD_FAILURE,
+        payload: error.response.status,
+      });
+    });
+};
 
 // export const updateUserProfile = (username, existingUser) => dispatch => {
 //   dispatch({ type: types.UPDATE_USER_PROFILE_REQUEST });
@@ -62,38 +76,38 @@ const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
 // };
 
 export const fetchAllConnections = (user) => (dispatch) => {
-  dispatch({ type: actionTypes.FETCH_ALL_CONNECTIONS_REQUEST });
+  dispatch({ type: types.FETCH_ALL_CONNECTIONS_REQUEST });
   // spinner
   axiosWithAuth()
     .get(`${_BASE_URL}/user/${user}/users`)
     .then((res) => {
       dispatch({
-        type: actionTypes.FETCH_ALL_CONNECTIONS_SUCCESS,
+        type: types.FETCH_ALL_CONNECTIONS_SUCCESS,
         payload: res.data.data,
       });
     })
     .catch((error) => {
       dispatch({
-        type: actionTypes.FETCH_ALL_CONNECTIONS_FAILURE,
+        type: types.FETCH_ALL_CONNECTIONS_FAILURE,
         payload: error.message,
       });
     });
 };
 
 export const fetchAllUsers = (user) => (dispatch) => {
-  dispatch({ type: actionTypes.FETCH_ALL_USERS_REQUEST });
+  dispatch({ type: types.FETCH_ALL_USERS_REQUEST });
   // spinner
   axiosWithAuth()
     .get(`${_BASE_URL}/user/${user}/users`)
     .then((res) => {
       dispatch({
-        type: actionTypes.FETCH_ALL_USERS_SUCCESS,
+        type: types.FETCH_ALL_USERS_SUCCESS,
         payload: res.data.data,
       });
     })
     .catch((error) => {
       dispatch({
-        type: actionTypes.FETCH_ALL_USERS_FAILURE,
+        type: types.FETCH_ALL_USERS_FAILURE,
         payload: error.message,
       });
     });

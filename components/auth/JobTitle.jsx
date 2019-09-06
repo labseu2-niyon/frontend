@@ -8,20 +8,43 @@ import Flip from 'react-reveal/Flip';
 import { theme } from '../../lib/theme';
 import Router from 'next/router';
 import { connect } from 'react-redux';
-import { userType } from '../../redux/actions/authActions';
+import { userTypeHandler, getJobTitles } from '../../redux/actions/authActions';
 
-const JobTitle = ({ touched, errors, values, status, userType }) => {
+const JobTitle = ({
+  touched,
+  errors,
+  values,
+  status,
+  userTypeHandler,
+  username,
+  loading,
+  getJobTitles,
+  allJobs,
+  locationId
+}) => {
   const [mentorPressed, setMentorPressed] = useState(false);
   const [menteeePresed, setMenteePressed] = useState(false);
   const [mentorError, setMentorError] = useState(true);
 
   useEffect(() => {
+    getJobTitles();
+  }, []);
+
+  useEffect(() => {
     if (mentorPressed || menteeePresed) {
       values.user = menteeePresed ? 'mentee' : 'mentor';
-      //console.log(status);
-      userType(status);
-      setMentorError(false);
-      Router.push('/auth/profile-info');
+      console.log(status);
+      const data = {
+        locationId: locationId,
+        industryId: '1'
+      };
+      const type = status.user;
+      userTypeHandler(data, username, type, status).then(res => {
+        if (res === 201) {
+          setMentorError(false);
+          Router.push('/auth/profile-info');
+        }
+      });
     }
   }, [status]);
 
@@ -128,16 +151,21 @@ const JobTitle = ({ touched, errors, values, status, userType }) => {
       <FormArea>
         <InputWrapper>
           <Field component="select" name="job">
-            <option>Job Title</option>
-            <option value="Job1">Web Developer</option>
-            <option value="Job2">Computer Science</option>
-            <option value="Job3">Data Science</option>
+            <option>Choose Job Type</option>
+            {allJobs &&
+              allJobs.map(job => {
+                return (
+                  <option value={job.id} key={job.tech_name}>
+                    {job.tech_name}
+                  </option>
+                );
+              })}
           </Field>
           {touched.job && errors.job && <Error>{errors.job}</Error>}
         </InputWrapper>
         {menteeePresed && mentee()}
         {mentorPressed && mentor()}
-        <Button small primary type="submit">
+        <Button small primary type="submit" loadingB={loading}>
           Next
         </Button>
       </FormArea>
@@ -151,13 +179,9 @@ const JobTitle = ({ touched, errors, values, status, userType }) => {
 };
 
 const FormikWithJobTitleForm = withFormik({
-  mapPropsToValues({ job, preparation, development, coaching, networking }) {
+  mapPropsToValues({ job }) {
     return {
-      job: job || '',
-      preparation: preparation || false,
-      development: development || false,
-      coaching: coaching || false,
-      networking: networking || false
+      job: job || ''
     };
   },
   validationSchema: Yup.object().shape({
@@ -168,9 +192,22 @@ const FormikWithJobTitleForm = withFormik({
   }
 })(JobTitle);
 
+const mapStateToProps = state => {
+  return {
+    username: state.authReducer.emailData.username,
+    loading: state.authReducer.loading,
+    allJobs: state.authReducer.allJobs,
+    locationId: state.authReducer.locationId
+  };
+};
+const mapDispatchToProps = {
+  userTypeHandler,
+  getJobTitles
+};
+
 export default connect(
-  state => state,
-  { userType }
+  mapStateToProps,
+  mapDispatchToProps
 )(FormikWithJobTitleForm);
 
 const Root = styled.div`

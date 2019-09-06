@@ -9,8 +9,13 @@
   "settings": { "import/core-modules": ["styled-jsx", "styled-jsx/css"] },
   "rules": {
     // "react/prop-types": 0,
-    "react/jsx-one-expression-per-line": "off",
+    "no-shadow": "off",
+    "arrow-parens": "off",
+    "comma-dangle": "off",
     "no-underscore-dangle": "off",
+    "consistent-return": "off",
+    "react/require-default-props": "off",
+    "react/jsx-one-expression-per-line": "off",
     "max-len": ["error", 1000],
     "no-param-reassign": "off",
     "prefer-destructuring": [

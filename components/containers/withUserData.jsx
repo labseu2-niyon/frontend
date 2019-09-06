@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import jwt from 'jsonwebtoken';
-import { fetchAllUsers, fetchAllConnections } from '../../redux/actions/userActions';
+import {
+  fetchAllUsers,
+  fetchAllConnections
+} from '../../redux/actions/userActions';
 
-const withUserData = (Component) => {
+const withUserData = Component => {
   function WithUserData(props) {
     const [users, setUsers] = useState([]);
 
     const mapUsers = (input) => {
       const withDisplay = input.map((user) => ({ ...user, display: true }));
+
       setUsers(withDisplay);
     };
 
@@ -32,13 +36,14 @@ const withUserData = (Component) => {
     }
 
     return <Component {...props.userReducer} users={users} connectionsAll={users} setUsers={setUsers} />;
+
   }
 
-  const mapStateToProps = (state) => state;
+  const mapStateToProps = state => state;
 
   const mapDispatchToProps = {
     fetchUsers: fetchAllUsers,
-    fetchConnections: fetchAllConnections,
+    fetchConnections: fetchAllConnections
   };
 
   WithUserData.propTypes = {
@@ -47,10 +52,13 @@ const withUserData = (Component) => {
     usersAll: PropTypes.arrayOf().isRequired,
     connectionsAll: PropTypes.arrayOf().isRequired,
     fetchUsers: PropTypes.func.isRequired,
-    fetchConnections: PropTypes.func.isRequired,
+    fetchConnections: PropTypes.func.isRequired
   };
 
-  return connect(mapStateToProps, mapDispatchToProps)(WithUserData);
+  return connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(WithUserData);
 };
 
 export default withUserData;

@@ -7,9 +7,9 @@ import withUserData from '../containers/withUserData';
 import HomeButtons from './HomeButtons';
 
 const Wrapper = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 function Home(props) {
@@ -18,6 +18,7 @@ function Home(props) {
   return (
     <Wrapper>
       <TopSection
+
         buttons={(
           <HomeButtons
             numOfConnections={connectionsLength}
@@ -38,6 +39,7 @@ function Home(props) {
 Home.propTypes = {
   users: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   connectionsAll: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+
 };
 
 export default withUserData(Home);
