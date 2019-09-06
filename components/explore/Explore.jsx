@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import TopSection from '../TopSection';
@@ -12,8 +12,8 @@ const Wrapper = styled.main`
 `;
 
 const jobTitles = [
-  { value: 'whaler', label: 'Whaler' },
-  { value: 'fisherman', label: 'Fisherman' },
+  { value: 'designer and developer', label: 'UX Designer & UI Developer' },
+  { value: 'backend developer', label: 'Backend Developer' },
 ];
 
 function Explore(props) {
@@ -48,6 +48,11 @@ function Explore(props) {
 
     props.setUsers(filteredUsers);
   };
+
+  useEffect(() => {
+
+  }, [props.users]);
+
 
   return (
     <Wrapper>
