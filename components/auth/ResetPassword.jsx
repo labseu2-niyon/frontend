@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Heading4, Text, Button } from '../~common/index';
 import { resetPassword } from '../../redux/actions/authActions';
 
-const ResetPassword = ({ errors, touched }) => (
+const ResetPassword = ({ errors, touched, status }) => (
   <>
     <Root>
       <Heading4>Let us find your account.</Heading4>
@@ -15,6 +15,7 @@ const ResetPassword = ({ errors, touched }) => (
         <InputWrapper>
           <Field name="email" type="email" placeholder="email" />
           {touched.email && errors.email && <Error>{errors.email}</Error>}
+          {status && status.msg && <Error>{status.msg}</Error>}
         </InputWrapper>
         <ButtonArea>
           <Button large primary type="submit">
@@ -23,7 +24,7 @@ const ResetPassword = ({ errors, touched }) => (
           <Link href="/auth/login">
             <a>
               <Button large secondary>
-                Cancel
+                Go Back
               </Button>
             </a>
           </Link>
@@ -44,9 +45,15 @@ const FormikResetPasswordForm = withFormik({
       .email('Email is invalid')
       .required('Email is required'),
   }),
-  handleSubmit(values, { props }) {
+  handleSubmit(values, { props, setStatus }) {
     const { email } = values;
-    props.resetPassword({ email });
+    props.resetPassword({ email, props });
+    // console.log(props.authReducer.error);
+    setTimeout(() => {
+      if (props.authReducer.error) {
+        setStatus({ msg: 'This email does not exist' });
+      }
+    }, 2000);
   },
 })(ResetPassword);
 

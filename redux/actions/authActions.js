@@ -236,30 +236,10 @@ export const logOutUser = () => (dispatch) => {
   nookies.destroy({}, 'token', { path: '/' });
 };
 
-// export const resetPassword = email => dispatch => {
-//   dispatch({ type: actionTypes.RESET_PASSWORD_REQUEST });
-//   // spinner
-//   axios
-//     .post(`${_BASE_URL}/resetpassword`, email)
-//     .then(res => {
-//       dispatch({
-//         type: actionTypes.RESET_PASSWORD_SUCCESS,
-//         payload: res.data,
-//       });
-//       // window.location = '/auth/email-sent';
-//     })
-//     .catch(error => {
-//       dispatch({
-//         type: actionTypes.RESET_PASSWORD_FAILURE,
-//         payload: error.message,
-//       });
-//     });
-// };
-
-export const resetPassword = (email) => (dispatch) => {
+export const resetPassword = (props) => (dispatch) => {
   dispatch({ type: types.RESET_PASSWORD_REQUEST });
   axios
-    .post(`${_BASE_URL}/user/resetpassword`, email)
+    .post(`${_BASE_URL}/user/resetpassword`, { email: props.email })
     .then((res) => {
       dispatch({
         type: types.RESET_PASSWORD_SUCCESS,
@@ -272,6 +252,7 @@ export const resetPassword = (email) => (dispatch) => {
         type: types.RESET_PASSWORD_FAILURE,
         payload: error.message,
       });
+      // console.log(error.message);
     });
 };
 
