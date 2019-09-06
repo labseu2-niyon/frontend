@@ -48,15 +48,13 @@ const Social = ({ errors, touched, username }) => {
 };
 
 const FormikWithSocialForm = withFormik({
-  mapPropsToValues({ username, firstName, lastName }) {
+  mapPropsToValues({ firstName, lastName }) {
     return {
-      username: username || '',
       firstName: firstName || '',
       lastName: lastName || ''
     };
   },
   validationSchema: Yup.object().shape({
-    username: Yup.string(),
     firstName: Yup.string()
       .matches(/^([^0-9]*)$/, {
         message: 'Must contain only letters',
