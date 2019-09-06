@@ -238,7 +238,7 @@ export const logOutUser = () => dispatch => {
 
 export const resetPassword = props => dispatch => {
   dispatch({ type: types.RESET_PASSWORD_REQUEST });
-  axios
+  return axios
     .post(`${_BASE_URL}/user/resetpassword`, { email: props.email })
     .then(res => {
       dispatch({
@@ -250,9 +250,9 @@ export const resetPassword = props => dispatch => {
     .catch(error => {
       dispatch({
         type: types.RESET_PASSWORD_FAILURE,
-        payload: error.message
+        payload: error.response.data.message
       });
-      // console.log(error.message);
+      return error.response.data.message;
     });
 };
 
