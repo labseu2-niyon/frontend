@@ -10,8 +10,7 @@ import { theme } from '../../lib/theme';
 
 const ResetPassword = ({
  errors, touched, status, loading 
-}) => {
-  return (
+}) => (
     <>
       <Root>
         <Flip left>
@@ -52,7 +51,6 @@ const ResetPassword = ({
       </Root>
     </>
   );
-};
 
 const FormikResetPasswordForm = withFormik({
   mapPropsToValues({ email }) {
@@ -104,6 +102,10 @@ const FormArea = styled(Form)`
   justify-content: space-center;
   height: 40%;
   width: 100%;
+
+  @media (min-width: 500px) {
+    width: 50%;
+  }
 
   input {
     padding: 0.5rem;

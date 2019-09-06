@@ -116,6 +116,10 @@ const FormArea = styled(Form)`
   height: 25%;
   width: 100%;
 
+  @media (min-width: 500px) {
+    width: 50%;
+  }
+
   input {
     padding: 0.5rem;
     font-size: 16px;
@@ -129,6 +133,7 @@ const FormArea = styled(Form)`
       opacity: 0.4;
     }
   }
+
 `;
 
 const InputWrapper = styled.div`
