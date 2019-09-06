@@ -76,7 +76,12 @@ const FormikWithEmailForm = withFormik({
     };
   },
   validationSchema: Yup.object().shape({
-    username: Yup.string().required('Username is required'),
+    username: Yup.string()
+      .matches(/^[a-zA-Z0-9]*$/, {
+        message: 'No Spaces or weird characters mate',
+        excludeEmptyString: true
+      })
+      .required('Username is required'),
     email: Yup.string()
       .email('Email is invalid')
       .required('Email is required'),
@@ -136,9 +141,8 @@ const FormArea = styled(Form)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 320px;
   width: 100%;
-  padding: 10px 0;
+  padding: 2rem 0;
   @media (min-width: 500px) {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     width: 50%;
