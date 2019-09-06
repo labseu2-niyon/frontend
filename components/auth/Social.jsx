@@ -62,8 +62,6 @@ const FormikWithSocialForm = withFormik({
   }),
   handleSubmit(values, { props }) {
     props.socialData(values);
-    console.log(props.history);
-    Router.push('/auth/location');
   }
 })(Social);
 
