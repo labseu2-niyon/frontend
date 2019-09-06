@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Text, Button, Heading2, Skip } from '../~common/index';
 import styled from 'styled-components';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
-import Steps from './StepsComp';
 import Router from 'next/router';
 import { connect } from 'react-redux';
+import { Text, Button, Heading2, Skip } from '../~common/index';
+import Steps from './StepsComp';
 import {
   profileData,
   userProfileInfo,

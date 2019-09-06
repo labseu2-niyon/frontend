@@ -60,20 +60,12 @@ const FormikWithSocialForm = withFormik({
   validationSchema: Yup.object().shape({
     username: Yup.string(),
     firstName: Yup.string()
-      .matches(/^[A-Z]/, {
-        message: 'Name must start with a capital letter',
-        excludeEmptyString: true
-      })
       .matches(/^([^0-9]*)$/, {
         message: 'Must contain only letters',
         excludeEmptyString: true
       })
       .required('First Name is requried.'),
     lastName: Yup.string()
-      .matches(/^[A-Z]/, {
-        message: 'Name must start with a capital letter',
-        excludeEmptyString: true
-      })
       .matches(/^([^0-9]*)$/, {
         message: 'Must contain only letters',
         excludeEmptyString: true
