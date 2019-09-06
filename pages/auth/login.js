@@ -5,7 +5,6 @@ import redirect from '../../lib/redirect';
 function Page() {
   return (
     <div>
-      <p>Navbar from Marketing</p>
       <Login />
     </div>
   );

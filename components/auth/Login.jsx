@@ -4,12 +4,11 @@ import * as Yup from 'yup';
 import Link from 'next/link';
 import React from 'react';
 import { connect } from 'react-redux';
+import Router from 'next/router';
 import { Heading4, Text, Button } from '../~common/index';
 import { logInUser } from '../../redux/actions/authActions';
-import Router from 'next/router';
 
-const Login = ({ errors, touched }) => {
-  return (
+const Login = ({ errors, touched }) => (
     <>
       <Root>
         <Heading4>Welcome Back</Heading4>
@@ -41,28 +40,27 @@ const Login = ({ errors, touched }) => {
       </Root>
     </>
   );
-};
 
 const FormikLoginForm = withFormik({
   mapPropsToValues({ email, password }) {
     return {
       email: email || '',
-      password: password || ''
+      password: password || '',
     };
   },
   validationSchema: Yup.object().shape({
     email: Yup.string()
       .email('Email is invalid')
       .required('Email is required'),
-    password: Yup.string().required('Password is required')
+    password: Yup.string().required('Password is required'),
   }),
   handleSubmit(values, { props }) {
-    props.logInUser(values).then(res => {
+    props.logInUser(values).then((res) => {
       if (res === 201) {
         Router.push('/');
       }
     });
-  }
+  },
 })(Login);
 
 function mapStateToProps(state) {
@@ -71,7 +69,7 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { logInUser }
+  { logInUser },
 )(FormikLoginForm);
 
 const Root = styled.div`

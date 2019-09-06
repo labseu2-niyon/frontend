@@ -12,17 +12,17 @@ const EmailSent = () => (
       </Text>
 
       <ButtonArea>
-        {/* <Link>
-          <Button large primary type="submit">
-            Resend link
-          </Button>
-        </Link> */}
         <Link href="/auth/reset-password">
           <a>
             <Button large secondary>
               Try a different email
             </Button>
           </a>
+        </Link>
+        <Link href="/auth/login">
+          <Button large primary type="submit">
+            Back to Login
+          </Button>
         </Link>
       </ButtonArea>
 
