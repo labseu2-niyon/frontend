@@ -1,6 +1,12 @@
 import { actionTypes } from '../userConstants';
 
-export const userReducer = (state = {}, action) => {
+const initialState = {
+  queryingDatabase: false,
+  usersAll: [],
+  connectionsAll: [],
+};
+
+export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.UPDATE_USER_PROFILE_REQUEST:
       return {
