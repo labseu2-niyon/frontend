@@ -63,8 +63,8 @@ const FormikWithSocialForm = withFormik({
       .required('Last Name is required.')
   }),
   handleSubmit(values, { props }) {
-    Router.push('/auth/location');
     props.socialData(values);
+    Router.push('/auth/location');
   }
 })(Social);
 
