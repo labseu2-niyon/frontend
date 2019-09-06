@@ -13,12 +13,14 @@ const Wrapper = styled.div`
 `;
 
 function Home(props) {
+  const connectionsLength = props.connectionsAll ? props.connectionsAll.length : 0;
+
   return (
     <Wrapper>
       <TopSection
         buttons={(
           <HomeButtons
-            numOfConnections={props.connectionsAll.length}
+            numOfConnections={connectionsLength}
           />
         )}
         src="/static/hacker.svg"
