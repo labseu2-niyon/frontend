@@ -17,6 +17,8 @@ const jobTitles = [
 ];
 
 function Explore(props) {
+  const connectionsLength = props.connectionsAll ? props.connectionsAll.length : 0;
+
   const filter = (mentor, mentee) => {
     const filteredUsers = props.users.map((user) => {
       if (mentor && mentee) {
@@ -24,14 +26,14 @@ function Explore(props) {
       }
 
       if (mentor && !mentee) {
-        if (user.position === 'Mentor') {
+        if (user.Mentor) {
           return { ...user, display: true };
         }
         return { ...user, display: false };
       }
 
       if (!mentor && mentee) {
-        if (user.position === 'Mentee') {
+        if (!user.Mentor) {
           return { ...user, display: true };
         }
         return { ...user, display: false };
@@ -50,7 +52,7 @@ function Explore(props) {
   return (
     <Wrapper>
       <TopSection
-        buttons={<ExploreButtons numOfConnections={props.connectionsAll.length} />}
+        buttons={<ExploreButtons numOfConnections={connectionsLength} />}
         src="/static/friends-online.svg"
       />
       <SearchBox jobTitles={jobTitles} filter={filter} />
