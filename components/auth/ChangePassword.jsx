@@ -3,7 +3,7 @@ import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
 import Flip from 'react-reveal/Flip';
-import { Heading4, Button } from '../~common/index';
+import { Heading3, Button } from '../~common/index';
 import { changePassword } from '../../redux/actions/authActions';
 import { theme } from '../../lib/theme';
 
@@ -22,7 +22,9 @@ const ChangePassword = ({ errors, touched }) => (
           </Pulse>
         </Logo>
       </Flip>
-      <Heading4>Please enter your new password.</Heading4>
+      <TopWrapper>
+        <Heading3 primary>Please enter your new password.</Heading3>
+      </TopWrapper>
       <FormArea>
         <InputWrapper>
           <Field name="password" type="password" placeholder="new password" />
@@ -43,18 +45,18 @@ const ChangePassword = ({ errors, touched }) => (
 const FormikChangePasswordForm = withFormik({
   mapPropsToValues({ password }) {
     return {
-      password: password || '',
+      password: password || ''
     };
   },
   validationSchema: Yup.object().shape({
-    password: Yup.string().required('Password is required'),
+    password: Yup.string().required('Password is required')
   }),
   handleSubmit(values, { props }) {
     const { password } = values;
     const params = new URL(document.location).searchParams;
     const token = params.get('token');
     props.changePassword({ password, token });
-  },
+  }
 })(ChangePassword);
 
 function mapStateToProps(state) {
@@ -63,7 +65,7 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { changePassword },
+  { changePassword }
 )(FormikChangePasswordForm);
 
 const Root = styled.div`
@@ -82,12 +84,13 @@ const FormArea = styled(Form)`
   flex-direction: column;
   align-items: center;
   justify-content: space-center;
-  height: 420px;
+  height: 50%;
+  width: 100%;
 
   input {
     padding: 0.5rem;
     font-size: 16px;
-    width: 80%;
+    width: 70%;
     display: block;
     color: #4d2d52;
     border: 1px solid rgba(77, 45, 82, 0.8);
@@ -131,21 +134,12 @@ const TopWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  margin-top: 20px;
+  margin-top: 60px;
   margin-bottom: 20px;
 
   p {
     text-align: center;
   }
-`;
-
-const BottomWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  margin-bottom: 20px;
 `;
 
 const Logo = styled.div`
