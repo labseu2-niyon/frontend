@@ -9,58 +9,58 @@ import { Heading4, Text, Button } from '../~common/index';
 import { logInUser } from '../../redux/actions/authActions';
 
 const Login = ({ errors, touched }) => (
-    <>
-      <Root>
-        <Heading4>Welcome Back</Heading4>
-        <Text small>
-          Do not miss your next opportunity. Sign in to stay updated on your
-          professional world.
-        </Text>
-        <FormArea>
-          <InputWrapper>
-            <Field name="email" type="email" placeholder="email" />
-            {touched.email && errors.email && <Error>{errors.email}</Error>}
-          </InputWrapper>
-          <InputWrapper>
-            <Field name="password" type="password" placeholder="password" />
-            {touched.password && errors.password && (
-              <Error>{errors.password}</Error>
-            )}
-          </InputWrapper>
-          <Button small primary type="submit">
-            Log In
-          </Button>
-        </FormArea>
-        <Text small>
-          <Link href="/auth/reset-password">Forgot Password?</Link>
-        </Text>
-        <Text small>
-          <Link href="/auth/signup">New to Niyon? Join now</Link>
-        </Text>
-      </Root>
-    </>
-  );
+  <>
+    <Root>
+      <Heading4>Welcome Back</Heading4>
+      <Text small>
+        Do not miss your next opportunity. Sign in to stay updated on your
+        professional world.
+      </Text>
+      <FormArea>
+        <InputWrapper>
+          <Field name="email" type="email" placeholder="email" />
+          {touched.email && errors.email && <Error>{errors.email}</Error>}
+        </InputWrapper>
+        <InputWrapper>
+          <Field name="password" type="password" placeholder="password" />
+          {touched.password && errors.password && (
+            <Error>{errors.password}</Error>
+          )}
+        </InputWrapper>
+        <Button small primary type="submit">
+          Log In
+        </Button>
+      </FormArea>
+      <Text small>
+        <Link href="/auth/reset-password">Forgot Password?</Link>
+      </Text>
+      <Text small>
+        <Link href="/auth/signup">New to Niyon? Join now</Link>
+      </Text>
+    </Root>
+  </>
+);
 
 const FormikLoginForm = withFormik({
   mapPropsToValues({ email, password }) {
     return {
       email: email || '',
-      password: password || '',
+      password: password || ''
     };
   },
   validationSchema: Yup.object().shape({
     email: Yup.string()
       .email('Email is invalid')
       .required('Email is required'),
-    password: Yup.string().required('Password is required'),
+    password: Yup.string().required('Password is required')
   }),
   handleSubmit(values, { props }) {
-    props.logInUser(values).then((res) => {
-      if (res === 201) {
+    props.logInUser(values).then(res => {
+      if (res === 200) {
         Router.push('/');
       }
     });
-  },
+  }
 })(Login);
 
 function mapStateToProps(state) {
@@ -69,7 +69,7 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { logInUser },
+  { logInUser }
 )(FormikLoginForm);
 
 const Root = styled.div`
