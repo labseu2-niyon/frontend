@@ -13,13 +13,14 @@ const Wrapper = styled.div`
 `;
 
 function Connections(props) {
-  return (
+  const connectionsLength = props.connectionsAll ? props.connectionsAll.length : 0;
 
+  return (
     <Wrapper>
       <TopSection
         buttons={(
           <ConnectionButtons
-            numOfConnections={props.connectionsAll.length}
+            numOfConnections={connectionsLength}
           />
 )}
         src="/static/friends-online.svg"
