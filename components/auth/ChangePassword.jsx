@@ -131,6 +131,7 @@ const TopWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
+  margin-top: 20px;
   margin-bottom: 20px;
 
   p {

@@ -148,20 +148,12 @@ const TopWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
+  margin-top: 20px;
   margin-bottom: 20px;
 
   p {
     text-align: center;
   }
-`;
-
-const BottomWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  margin-bottom: 20px;
 `;
 
 const Logo = styled.div`

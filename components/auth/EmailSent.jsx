@@ -19,12 +19,13 @@ const EmailSent = () => (
           </Pulse>
         </Logo>
       </Flip>
-      <Heading4>We have just emailed you a link.</Heading4>
-      <Text small>
-        Please check your email and click the secure link. You will then be able
-        to change your password.
-      </Text>
-
+      <TopWrapper>
+        <Heading4 primary>We have just emailed you a link.</Heading4>
+        <Text small>
+          Please check your email and click the secure link. You will then be
+          able to change your password.
+        </Text>
+      </TopWrapper>
       <ButtonArea>
         <Link href="/auth/reset-password">
           <a>
@@ -39,10 +40,11 @@ const EmailSent = () => (
           </Button>
         </Link>
       </ButtonArea>
-
-      <Text small>
-        If you do not see our email, please check your spam folder.
-      </Text>
+      <BottomWrapper>
+        <Text small>
+          If you do not see our email, please check your spam folder.
+        </Text>
+      </BottomWrapper>
     </Root>
   </>
 );
@@ -74,6 +76,7 @@ const TopWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
+  margin-top: 20px;
   margin-bottom: 20px;
 
   p {
@@ -88,6 +91,10 @@ const BottomWrapper = styled.div`
   align-items: center;
   position: relative;
   margin-bottom: 20px;
+
+  p {
+    text-align: center;
+  }
 `;
 
 const Logo = styled.div`
