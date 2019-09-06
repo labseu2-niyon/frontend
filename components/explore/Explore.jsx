@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import TopSection from './TopSection';
+import TopSection from '../TopSection';
 import SearchBox from './SearchBox';
 import ProfileList from './ProfileList';
 import withUserData from '../containers/withUserData';
+import ExploreButtons from './ExploreButtons';
 
 const Wrapper = styled.main`
     width: 100%;
 `;
 
 const jobTitles = [
-  { value: 'whaler', label: 'Whaler' },
-  { value: 'fisherman', label: 'Fisherman' },
+  { value: 'designer and developer', label: 'UX Designer & UI Developer' },
+  { value: 'backend developer', label: 'Backend Developer' },
 ];
 
 function Explore(props) {
+  const connectionsLength = props.connectionsAll ? props.connectionsAll.length : 0;
+
   const filter = (mentor, mentee) => {
     const filteredUsers = props.users.map((user) => {
       if (mentor && mentee) {
@@ -23,14 +26,14 @@ function Explore(props) {
       }
 
       if (mentor && !mentee) {
-        if (user.position === 'Mentor') {
+        if (user.Mentor) {
           return { ...user, display: true };
         }
         return { ...user, display: false };
       }
 
       if (!mentor && mentee) {
-        if (user.position === 'Mentee') {
+        if (!user.Mentor) {
           return { ...user, display: true };
         }
         return { ...user, display: false };
@@ -46,9 +49,17 @@ function Explore(props) {
     props.setUsers(filteredUsers);
   };
 
+  useEffect(() => {
+
+  }, [props.users]);
+
+
   return (
     <Wrapper>
-      <TopSection numOfConnections={props.connectionsAll.length} />
+      <TopSection
+        buttons={<ExploreButtons numOfConnections={connectionsLength} />}
+        src="/static/friends-online.svg"
+      />
       <SearchBox jobTitles={jobTitles} filter={filter} />
       <ProfileList users={props.users} />
     </Wrapper>

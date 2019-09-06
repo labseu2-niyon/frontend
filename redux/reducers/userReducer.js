@@ -7,13 +7,15 @@ const initialState = {
   passwordStatus: true,
   queryingDatabase: false,
   errorMessage: null,
-  usersAll: null,
-  connectionsAll: null,
+  usersAll: [],
+  connectionsAll: [],
 };
 
-export const userReducer = (state = initialState, { type, payload }) => {
-  switch (type) {
-    case types.FETCH_USER:
+export const userReducer = (state = initialState, action) => {
+  const { payload } = action;
+  switch (action.type) {
+    case types.UPDATE_USER_PROFILE_REQUEST:
+
       return {
         ...state,
         user: payload,
@@ -34,11 +36,7 @@ export const userReducer = (state = initialState, { type, payload }) => {
         error: true,
         passwordStatus: payload,
       };
-    case types.UPDATE_USER_PROFILE_REQUEST:
-      return {
-        ...state,
-        queryingDatabase: true,
-      };
+
     case types.UPDATE_USER_PROFILE_SUCCESS:
       return {
         ...state,

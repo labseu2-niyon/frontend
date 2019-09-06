@@ -11,28 +11,32 @@ const withUserData = Component => {
   function WithUserData(props) {
     const [users, setUsers] = useState([]);
 
-    const mapUsers = input => {
-      const withDisplay = input.map(user => ({ ...user, display: true }));
+    const mapUsers = (input) => {
+      const withDisplay = input.map((user) => ({ ...user, display: true }));
+
       setUsers(withDisplay);
     };
 
     useEffect(() => {
       const u = jwt.decode(props.authReducer.token);
       (async () => {
-        if (!props.userReducer.usersAll) {
+        if (!props.userReducer.usersAll || !props.userReducer.usersAll.length) {
           await props.fetchUsers(u.username);
         }
         mapUsers(props.userReducer.usersAll);
       })();
 
-      if (!props.userReducer.connectionsAll) {
+      if (!props.userReducer.connectionsAll || !props.userReducer.connectionsAll) {
         props.fetchConnections(u.username);
       }
     }, []);
 
-    return (
-      <Component {...props.userReducer} users={users} setUsers={setUsers} />
-    );
+    if (!users.length) {
+      return null;
+    }
+
+    return <Component {...props.userReducer} users={users} connectionsAll={users} setUsers={setUsers} />;
+
   }
 
   const mapStateToProps = state => state;

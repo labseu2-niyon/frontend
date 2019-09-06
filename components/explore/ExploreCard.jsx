@@ -81,13 +81,18 @@ const L = styled.div`
 `;
 
 function ExploreCard(props) {
+  const position = props.Mentor ? 'Mentor' : 'Mentee';
+  const industry = props[position] ? props[position].industry.industry_name : 'Not listed';
+
   return (
     <Link href={{
       pathname: '/profile',
       query: {
         user: props.username,
-        // jobTitle: props.job,
+        jobTitle: props.job,
+        email: props.email,
         src: props.profile_picture,
+        bio: props.biography,
       },
     }}
     >
@@ -99,14 +104,14 @@ function ExploreCard(props) {
             </Photo>
           </PhotoWrapper>
           <Text>
-            <Heading3>{props.first_name} {props.last_name}</Heading3>
-            {/* <small>Field: {props}</small> */}
-            <p>{props.bio}</p>
+            <Heading3>{props.first_name || 'Not Listed'} {props.last_name}</Heading3>
+            <small>Field: {industry}</small>
+            <p>{props.biography}</p>
           </Text>
         </Contents>
 
         <Location>
-          <L><Icon type="book" /><small>Mentor</small></L>
+          <L><Icon type="book" /><small>{position}</small></L>
           <L><Icon type="global" /><small>{props.location && props.location.city_name}, {props.location && props.location.country_name}</small></L>
         </Location>
       </Wrapper>
@@ -114,13 +119,17 @@ function ExploreCard(props) {
   );
 }
 
+
 ExploreCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  field: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired,
-  position: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
+  Mentor: PropTypes.shape().isRequired,
+  biography: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  first_name: PropTypes.string.isRequired,
+  job: PropTypes.string.isRequired,
+  last_name: PropTypes.string.isRequired,
+  location: PropTypes.shape().isRequired,
+  profile_picture: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
 };
 
 export default ExploreCard;
