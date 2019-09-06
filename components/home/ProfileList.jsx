@@ -49,7 +49,12 @@ function UserSuggestions({ title, users }) {
     <Wrapper>
       <Heading2>{title}</Heading2>
       <Profiles expanded={expanded}>
-        { users.map((profile) => <ExploreCard {...profile} />) }
+        { users.map((profile) => {
+          if (profile.display) {
+            return <ExploreCard {...profile} />;
+          }
+          return null;
+        }) }
       </Profiles>
       { users.length > 4 && (
       <ButtonWrapper>

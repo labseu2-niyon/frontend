@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import TopSection from './TopSection';
+import TopSection from '../TopSection';
 import ProfileList from './ProfileList';
 import withUserData from '../containers/withUserData';
+import ConnectionButtons from './ConnectionsButtons';
 
 const Wrapper = styled.div`
     width: 100%;
@@ -13,8 +14,16 @@ const Wrapper = styled.div`
 
 function Connections(props) {
   return (
+
     <Wrapper>
-      <TopSection numOfConnections={props.connectionsAll.length} />
+      <TopSection
+        buttons={(
+          <ConnectionButtons
+            numOfConnections={props.connectionsAll.length}
+          />
+)}
+        src="/static/friends-online.svg"
+      />
       <ProfileList title="My Connections" users={props.connectionsAll || []} />
     </Wrapper>
   );

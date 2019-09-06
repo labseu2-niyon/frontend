@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import TopSection from './TopSection';
+import TopSection from '../TopSection';
 import SearchBox from './SearchBox';
 import ProfileList from './ProfileList';
 import withUserData from '../containers/withUserData';
+import ExploreButtons from './ExploreButtons';
 
 const Wrapper = styled.main`
     width: 100%;
@@ -48,7 +49,10 @@ function Explore(props) {
 
   return (
     <Wrapper>
-      <TopSection numOfConnections={props.connectionsAll.length} />
+      <TopSection
+        buttons={<ExploreButtons numOfConnections={props.connectionsAll.length} />}
+        src="/static/friends-online.svg"
+      />
       <SearchBox jobTitles={jobTitles} filter={filter} />
       <ProfileList users={props.users} />
     </Wrapper>

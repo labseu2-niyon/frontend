@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Link from 'next/link';
-import { Heading, Button } from '../~common';
+import { Heading } from './~common';
 
 const Wrapper = styled.section`
     box-sizing: border-box;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     width: 100%;
     padding: 4rem 0;
@@ -19,7 +19,15 @@ const Wrapper = styled.section`
 
     @media (max-width: 600px) {
       flex-direction: column;
+      flex-direction: column-reverse;
+      
     }
+`;
+
+const Content = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 `;
 
 const Image = styled.div`
@@ -43,26 +51,27 @@ const Image = styled.div`
    }
 `;
 
-function TopSection({ numOfConnections = 0 }) {
+function TopSection({ buttons, src }) {
   return (
     <Wrapper>
-      <div>
+      <Content>
         <Heading>Connect With Anyone</Heading>
         <p>
         Niyon is a platform for connecting young professionals<br />
-with mentors in West Africa.
+        with mentors in West Africa.
         </p>
-        <Link href="/connections"><Button primary>Connections ({numOfConnections})</Button></Link>
-      </div>
+        {buttons}
+      </Content>
       <Image>
-        <img src="/static/friends-online.svg" alt="" />
+        <img src={src} alt="" />
       </Image>
     </Wrapper>
   );
 }
 
 TopSection.propTypes = {
-  numOfConnections: PropTypes.number.isRequired,
+  buttons: PropTypes.element.isRequired,
+  src: PropTypes.string.isRequired,
 };
 
 export default TopSection;

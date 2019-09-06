@@ -9,7 +9,6 @@ const withUserData = (Component) => {
     const [users, setUsers] = useState([]);
 
     const mapUsers = (input) => {
-      console.log(input);
       const withDisplay = input.map((user) => ({ ...user, display: true }));
       setUsers(withDisplay);
     };
