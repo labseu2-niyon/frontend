@@ -49,19 +49,20 @@ const FormikWithSocialForm = withFormik({
     };
   },
   validationSchema: Yup.object().shape({
-    firstName: Yup.string(),
-    // .matches(/^([^0-9]*)$/, {
-    //   message: 'Must contain only letters',
-    // })
-    // .required('First Name is required.'),
+    firstName: Yup.string()
+      .matches(/^([^0-9]*)$/, {
+        message: 'Must contain only letters'
+      })
+      .required('First Name is required.'),
     lastName: Yup.string()
-    // .matches(/^([^0-9]*)$/, {
-    //   message: 'Must contain only letters',
-    // })
-    // .required('Last Name is required.')
+      .matches(/^([^0-9]*)$/, {
+        message: 'Must contain only letters'
+      })
+      .required('Last Name is required.')
   }),
   handleSubmit(values, { props }) {
     props.socialData(values);
+    alert('hello world');
     Router.push('/auth/location');
   }
 })(Social);
