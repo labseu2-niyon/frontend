@@ -7,10 +7,11 @@ import Steps from './StepsComp';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import { locationData, locationRequest } from '../../redux/actions/authActions';
-import { Icon } from 'antd';
+// import { AutoComplete } from 'antd';
 
 const Location = ({ errors, touched, values, locationRequest }) => {
   const [list, setList] = useState('');
+
   useEffect(() => {
     locationRequest(values.city).then(res => {
       //console.log(res);
@@ -24,7 +25,6 @@ const Location = ({ errors, touched, values, locationRequest }) => {
       <Steps stepNumber="2" />
       <Heading2 primary>Location Info</Heading2>
       <IconT className="fas fa-globe-europe"></IconT>
-      {/* <Icon type="pushpin" theme="twoTone" /> */}
       <Text small>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nisl
         nisl, aliquam nec erat et, efficitur mollis metus.

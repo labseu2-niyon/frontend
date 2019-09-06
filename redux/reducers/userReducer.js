@@ -6,7 +6,7 @@ const initialState = {
   user: null,
   passwordStatus: true,
   queryingDatabase: false,
-  errorMessage: null
+  errorMessage: null,
 };
 
 export const userReducer = (state = initialState, { type, payload }) => {
@@ -41,32 +41,20 @@ export const userReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         queryingDatabase: false,
-        user: [...state.user, action.payload],
+        user: [...state.user, payload],
         // message: action.payload,
       };
     case types.UPDATE_USER_PROFILE_FAILURE:
       return {
         ...state,
         queryingDatabase: false,
-        errorMessage: action.payload,
+        errorMessage: payload,
       };
 
     case types.UPDATE_PASSWORD_REQUEST:
       return {
         ...state,
         queryingDatabase: true,
-      };
-    case types.UPDATE_PASSWORD_SUCCESS:
-      return {
-        ...state,
-        queryingDatabase: false,
-        message: action.payload,
-      };
-    case types.UPDATE_PASSWORD_FAILURE:
-      return {
-        ...state,
-        queryingDatabase: false,
-        errorMessage: action.payload,
       };
 
     case types.UPLOAD_USER_IMAGE_REQUEST:
@@ -78,13 +66,13 @@ export const userReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         queryingDatabase: false,
-        user: [...state.user, action.payload],
+        user: [...state.user, payload],
       };
     case types.UPLOAD_USER_IMAGE_FAILURE:
       return {
         ...state,
         queryingDatabase: false,
-        errorMessage: action.payload,
+        errorMessage: payload,
       };
 
     case types.FETCH_ALL_USERS_REQUEST:
@@ -96,13 +84,13 @@ export const userReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         queryingDatabase: false,
-        usersAll: action.payload,
+        usersAll: payload,
       };
     case types.FETCH_ALL_USERS_FAILURE:
       return {
         ...state,
         queryingDatabase: false,
-        errorMessage: action.payload,
+        errorMessage: payload,
       };
     case types.FETCH_ALL_CONNECTIONS_REQUEST:
       return {
@@ -113,15 +101,14 @@ export const userReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         queryingDatabase: false,
-        connectionsAll: action.payload,
+        connectionsAll: payload,
       };
     case types.FETCH_ALL_CONNECTIONS_FAILURE:
       return {
         ...state,
         queryingDatabase: false,
-        errorMessage: action.payload,
+        errorMessage: payload,
       };
-
 
     case types.CHECK_USER_PROFILE_REQUEST:
       return {
@@ -132,17 +119,16 @@ export const userReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         queryingDatabase: false,
-        user: [...state.user, action.payload],
+        user: [...state.user, payload],
       };
     case types.CHECK_USER_PROFILE_FAILURE:
       return {
         ...state,
         checkingUserInfo: false,
-        errorMessage: action.payload,
+        errorMessage: payload,
       };
 
     default:
       return state;
   }
 };
-

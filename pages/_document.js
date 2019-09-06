@@ -4,6 +4,7 @@ import Document, {
 import { ServerStyleSheet } from 'styled-components';
 import { bodyStyles } from '../lib/globalStyles';
 
+
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet();

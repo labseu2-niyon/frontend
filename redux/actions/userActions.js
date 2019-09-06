@@ -83,13 +83,13 @@ export const fetchAllConnections = () => (dispatch) => {
     .get(`${_BASE_URL}/connections`)
     .then((res) => {
       dispatch({
-        type: actionTypes.FETCH_ALL_CONNECTIONS_SUCCESS,
+        type: types.FETCH_ALL_CONNECTIONS_SUCCESS,
         payload: res.data,
       });
     })
     .catch((error) => {
       dispatch({
-        type: actionTypes.FETCH_ALL_CONNECTIONS_FAILURE,
+        type: types.FETCH_ALL_CONNECTIONS_FAILURE,
         payload: error.message,
       });
     });
@@ -102,13 +102,13 @@ export const fetchAllUsers = () => (dispatch) => {
     .get(`${_BASE_URL}/users`)
     .then((res) => {
       dispatch({
-        type: actionTypes.FETCH_ALL_USERS_SUCCESS,
+        type: types.FETCH_ALL_USERS_SUCCESS,
         payload: res.data,
       });
     })
     .catch((error) => {
       dispatch({
-        type: actionTypes.FETCH_ALL_USERS_FAILURE,
+        type: types.FETCH_ALL_USERS_FAILURE,
         payload: error.message,
       });
     });

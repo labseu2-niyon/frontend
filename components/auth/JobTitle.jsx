@@ -189,6 +189,7 @@ const FormikWithJobTitleForm = withFormik({
   }),
   handleSubmit(values, { setStatus }) {
     setStatus(values);
+    console.log(values);
   }
 })(JobTitle);
 
