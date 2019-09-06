@@ -14,7 +14,11 @@ const Wrapper = styled.div`
 function Home(props) {
   return (
     <Wrapper>
-      <TopSection numOfConnections={props.connectionsAll.length} />
+      <TopSection
+        numOfConnections={
+          props.connectionsAll ? props.connectionsAll.length : 0
+        }
+      />
       <ProfileList title="UserSuggestions" users={props.usersAll || []} />
       <div
         style={{
