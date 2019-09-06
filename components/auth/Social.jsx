@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import styled from 'styled-components';
 import StepsComp from './StepsComp';
 import { Heading2, Text, Button } from '../~common/index';
@@ -7,7 +6,6 @@ import * as Yup from 'yup';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import { socialData } from '../../redux/actions/authActions';
-import { AutoComplete } from 'antd';
 
 const Social = ({ errors, touched, username }) => {
   return (
@@ -64,18 +62,17 @@ const FormikWithSocialForm = withFormik({
         message: 'Must contain only letters',
         excludeEmptyString: true
       })
-      .required('First Name is requried.'),
+      .required('First Name is required.'),
     lastName: Yup.string()
       .matches(/^([^0-9]*)$/, {
         message: 'Must contain only letters',
         excludeEmptyString: true
       })
-      .required('Last Name is requried.')
+      .required('Last Name is required.')
   }),
-  handleSubmit(values, { props, setStatus }) {
-    props.socialData(values);
+  handleSubmit(values, { props }) {
     Router.push('/auth/location');
-    setStatus(values);
+    props.socialData(values);
   }
 })(Social);
 
