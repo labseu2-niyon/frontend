@@ -7,7 +7,7 @@ import { Heading3, Button } from '../~common/index';
 import { changePassword } from '../../redux/actions/authActions';
 import { theme } from '../../lib/theme';
 
-const ChangePassword = ({ errors, touched }) => (
+const ChangePassword = ({ errors, touched, loading }) => (
   <>
     <Root>
       <Flip left>
@@ -33,7 +33,7 @@ const ChangePassword = ({ errors, touched }) => (
           )}
         </InputWrapper>
         <ButtonArea>
-          <Button large primary type="submit">
+          <Button large primary loadingB={loading} type="submit">
             Change my password
           </Button>
         </ButtonArea>
@@ -49,7 +49,9 @@ const FormikChangePasswordForm = withFormik({
     };
   },
   validationSchema: Yup.object().shape({
-    password: Yup.string().required('Password is required')
+    password: Yup.string()
+      .min(8, 'Password must be at least 8 characters')
+      .required('Password is required')
   }),
   handleSubmit(values, { props }) {
     const { password } = values;
@@ -60,7 +62,7 @@ const FormikChangePasswordForm = withFormik({
 })(ChangePassword);
 
 function mapStateToProps(state) {
-  return { authReducer: state.authReducer };
+  return { authReducer: state.authReducer, loading: state.authReducer.loading };
 }
 
 export default connect(
@@ -86,6 +88,10 @@ const FormArea = styled(Form)`
   justify-content: space-center;
   height: 50%;
   width: 100%;
+
+  @media (min-width: 500px) {
+    width: 50%;
+  }
 
   input {
     padding: 0.5rem;
@@ -116,7 +122,7 @@ const Error = styled.p`
   font-size: 14px;
   position: absolute;
   bottom: 10%;
-  left: 7.5%;
+  left: 15%;
   color: #e29273;
 `;
 

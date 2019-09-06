@@ -10,7 +10,9 @@ import { Heading2, Text, Button } from '../~common/index';
 import { logInUser } from '../../redux/actions/authActions';
 import { theme } from '../../lib/theme';
 
-const Login = ({ errors, touched, loading }) => (
+const Login = ({
+ errors, touched, loading, status 
+}) => (
   <>
     <Root>
       <Flip left>
@@ -44,6 +46,7 @@ const Login = ({ errors, touched, loading }) => (
           {touched.password && errors.password && (
             <Error>{errors.password}</Error>
           )}
+          {status && status.msg && <Error>{status.msg}</Error>}
         </InputWrapper>
         <Button small primary type="submit" loadingB={loading}>
           Log In
@@ -74,10 +77,12 @@ const FormikLoginForm = withFormik({
       .required('Email is required'),
     password: Yup.string().required('Password is required')
   }),
-  handleSubmit(values, { props }) {
+  handleSubmit(values, { props, setStatus }) {
     props.logInUser(values).then(res => {
       if (res === 200) {
         Router.push('/');
+      } else {
+        setStatus({ msg: res });
       }
     });
   }
@@ -111,6 +116,10 @@ const FormArea = styled(Form)`
   height: 25%;
   width: 100%;
 
+  @media (min-width: 500px) {
+    width: 50%;
+  }
+
   input {
     padding: 0.5rem;
     font-size: 16px;
@@ -124,6 +133,7 @@ const FormArea = styled(Form)`
       opacity: 0.4;
     }
   }
+
 `;
 
 const InputWrapper = styled.div`
@@ -140,7 +150,7 @@ const Error = styled.p`
   font-size: 14px;
   position: absolute;
   bottom: 10%;
-  left: 7.5%;
+  left: 15%;
   color: #e29273;
 `;
 

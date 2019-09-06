@@ -28,7 +28,7 @@ const Location = ({ locationRequest, locationData }) => {
   }
   function handleSubmit() {
     const inwork = select.data.split(',');
-    locationData({
+    select.state && locationData({
       cityName: inwork[0].trim(),
       countryName: inwork[1].trim()
     }).then(res => {
