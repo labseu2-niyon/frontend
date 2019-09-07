@@ -19,13 +19,7 @@ const Social = ({ errors, touched, username }) => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
             nisl nisl, aliquam nec erat et, efficitur mollis metus.
           </Text>
-          <Field
-            name="username"
-            type="text"
-            placeholder="username"
-            value={username}
-            disabled
-          />
+          <input placeholder="username" value={username} disabled />
         </InputWrapper>
         <InputWrapper>
           <Field name="firstName" type="text" placeholder="FirstName" />
@@ -48,30 +42,25 @@ const Social = ({ errors, touched, username }) => {
 };
 
 const FormikWithSocialForm = withFormik({
-  mapPropsToValues({ username, firstName, lastName }) {
+  mapPropsToValues({ firstName, lastName }) {
     return {
-      username: username || '',
       firstName: firstName || '',
       lastName: lastName || ''
     };
   },
   validationSchema: Yup.object().shape({
-    username: Yup.string(),
     firstName: Yup.string()
       .matches(/^([^0-9]*)$/, {
-        message: 'Must contain only letters',
-        excludeEmptyString: true
+        message: 'Must contain only letters'
       })
       .required('First Name is required.'),
     lastName: Yup.string()
       .matches(/^([^0-9]*)$/, {
-        message: 'Must contain only letters',
-        excludeEmptyString: true
+        message: 'Must contain only letters'
       })
       .required('Last Name is required.')
   }),
   handleSubmit(values, { props }) {
-    Router.push('/auth/location');
     props.socialData(values);
   }
 })(Social);

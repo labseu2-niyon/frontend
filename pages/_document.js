@@ -2,7 +2,6 @@ import Document, {
   Html, Head, Main, NextScript
 } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
-import 'antd/dist/antd.css';
 import { bodyStyles } from '../lib/globalStyles';
 
 export default class MyDocument extends Document {

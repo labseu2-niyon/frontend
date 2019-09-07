@@ -74,10 +74,13 @@ export const profileData = data => ({
   payload: data
 });
 
-export const socialData = data => ({
-  type: types.SET_USER_NAME,
-  payload: data
-});
+export const socialData = data => {
+  Router.push('/auth/location');
+  return {
+    type: types.SET_USER_NAME,
+    payload: data
+  };
+};
 
 // Action Creator for Singup a user with email
 // body {username, email, password}
