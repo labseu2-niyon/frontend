@@ -1,5 +1,6 @@
 import App from 'next/app';
 import React from 'react';
+import 'antd/dist/antd.css';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -44,5 +45,5 @@ export default withRedux(makeStore, { debug: false })(
         </>
       );
     }
-  },
+  }
 );

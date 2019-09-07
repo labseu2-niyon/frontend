@@ -4,7 +4,6 @@ import { Text, Heading2, Button } from '../~common/index';
 import styled from 'styled-components';
 import Steps from './StepsComp';
 import Router from 'next/router';
-import 'antd/dist/antd.css';
 import { connect } from 'react-redux';
 import { locationData, locationRequest } from '../../redux/actions/authActions';
 import { Icon, AutoComplete } from 'antd';
@@ -43,7 +42,7 @@ const Location = ({ locationRequest, locationData }) => {
     <Root>
       <Steps stepNumber="2" />
       <Section>
-        <Heading2 primary>Location Info</Heading2>
+        <Heading2 primary>Location Infooooo</Heading2>
         <IconT className="fas fa-globe-europe" />
         {/* <Icon type="pushpin" theme="twoTone" /> */}
         <Text small>
