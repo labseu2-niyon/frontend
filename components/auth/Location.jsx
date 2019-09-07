@@ -12,7 +12,7 @@ import { Icon, AutoComplete } from 'antd';
 const Location = ({ locationRequest, locationData }) => {
   const [data, setData] = useState([]);
   const [select, setSelect] = useState({ state: false, data: '' });
-  function getPossibleLocation(place) {
+  const getPossibleLocation = place => {
     locationRequest(place)
       .then(res => {
         if (res) {
@@ -22,11 +22,11 @@ const Location = ({ locationRequest, locationData }) => {
       .catch(error => {
         console.log(error);
       });
-  }
-  function chosen(value) {
+  };
+  const chosen = value => {
     setSelect({ state: true, data: value });
-  }
-  function handleSubmit() {
+  };
+  const handleSubmit = () => {
     const inwork = select.data.split(',');
     select.state &&
       locationData({
@@ -37,7 +37,7 @@ const Location = ({ locationRequest, locationData }) => {
           Router.push('/auth/job-title');
         }
       });
-  }
+  };
 
   return (
     <Root>
