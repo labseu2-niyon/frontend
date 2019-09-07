@@ -75,7 +75,7 @@ export const profileData = data => ({
 });
 
 export const socialData = data => {
-  Router.push('/auth/location');
+  Router.push('/auth/profile-info');
   // ss
   return {
     type: types.SET_USER_NAME,
