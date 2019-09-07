@@ -9,26 +9,6 @@ import { makeStore } from '../lib/withReduxStore';
 import { theme } from '../lib/theme';
 import Loading from '../components/~common/Loading';
 
-// class MyApp extends App {
-//   render() {
-//     const { Component, pageProps, reduxStore } = this.props;
-//     return (
-//       <Provider store={reduxStore}>
-//         <PersistGate
-//           persistor={reduxStore.persistor}
-//           loading={<div>Loading</div>}
-//         >
-//           <ThemeProvider theme={theme}>
-//             <Component {...pageProps} />
-//           </ThemeProvider>
-//         </PersistGate>
-//       </Provider>
-//     );
-//   }
-// }
-
-// export default withReduxStore(MyApp);
-
 export default withRedux(makeStore, { debug: false })(
   class MyApp extends App {
     render() {

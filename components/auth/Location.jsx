@@ -42,7 +42,7 @@ const Location = ({ locationRequest, locationData }) => {
     <Root>
       <Steps stepNumber="2" />
       <Section>
-        <Heading2 primary>Location Infooooo</Heading2>
+        <Heading2 primary>Location Info</Heading2>
         <IconT className="fas fa-globe-europe" />
         {/* <Icon type="pushpin" theme="twoTone" /> */}
         <Text small>

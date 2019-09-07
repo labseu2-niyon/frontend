@@ -10,9 +10,7 @@ import { Heading2, Text, Button } from '../~common/index';
 import { logInUser } from '../../redux/actions/authActions';
 import { theme } from '../../lib/theme';
 
-const Login = ({
- errors, touched, loading, status 
-}) => (
+const Login = ({ errors, touched, loading, status }) => (
   <>
     <Root>
       <Flip left>
@@ -133,7 +131,6 @@ const FormArea = styled(Form)`
       opacity: 0.4;
     }
   }
-
 `;
 
 const InputWrapper = styled.div`
