@@ -1,9 +1,9 @@
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import StepsComp from './StepsComp';
 import { Heading2, Text, Button } from '../~common/index';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
-import Router from 'next/router';
 import { connect } from 'react-redux';
 import { socialData } from '../../redux/actions/authActions';
 

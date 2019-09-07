@@ -13,7 +13,7 @@ const Email = ({ errors, touched, loading, status }) => {
   return (
     <Root>
       <Steps stepNumber="1" />
-      <Heading2 primary>Email login</Heading2>
+      <Heading2 primary>Register</Heading2>
       <FormArea>
         <InputWrapper>
           <Field name="username" type="text" placeholder="username" />
