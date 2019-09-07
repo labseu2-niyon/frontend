@@ -25,14 +25,13 @@ const SignUp = ({}) => (
     </Flip>
     <Text small>Lorem Ipsum, welcome message, blah blah blah.`</Text>
     <ButtonArea>
-      {/* <Flip top>
+      <Flip top>
         <Button
           large
           primary
-          onClick={() => {
-            linkedinSignup();
-            Router.push('/auth/social');
-          }}
+          // onClick={() => {
+          //   Router.push('/auth/social');
+          // }}
         >
           Linkedin
         </Button>
@@ -42,15 +41,14 @@ const SignUp = ({}) => (
         <Button
           large
           secondary
-          onClick={() => {
-            //githubSignup();
-            Router.push('/auth/social');
-          }}
+          // onClick={() => {
+          //   Router.push('/auth/social');
+          // }}
         >
           Github
         </Button>
       </Flip>
-
+      {/* 
       <Flip top>
         <Button large danger onClick={() => Router.push('/auth/social')}>
           Twitter
@@ -61,8 +59,8 @@ const SignUp = ({}) => (
         <Button large warning onClick={() => Router.push('/auth/social')}>
           Facebook
         </Button>
-      </Flip> */}
-
+      </Flip>
+        */}
       <Flip top>
         <Button
           large
@@ -103,7 +101,7 @@ const Root = styled.div`
 const ButtonArea = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   height: 290px;
 `;
