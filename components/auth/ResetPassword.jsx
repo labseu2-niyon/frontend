@@ -8,13 +8,12 @@ import { Heading2, Text, Button } from '../~common/index';
 import { resetPassword } from '../../redux/actions/authActions';
 import { theme } from '../../lib/theme';
 
-const ResetPassword = ({
- errors, touched, status, loading 
-}) => (
-    <>
-      <Root>
-        <Flip left>
-          <Logo>
+const ResetPassword = ({ errors, touched, status, loading }) => (
+  <>
+    <Root>
+      <Flip left>
+        <Logo>
+          <a href="https://niyon.now.sh/">
             <Pulse>
               <svg width={50} height={50} viewBox="0 0 147 147" fill="none">
                 <path
@@ -23,34 +22,35 @@ const ResetPassword = ({
                 />
               </svg>
             </Pulse>
-          </Logo>
-        </Flip>
-        <TopWrapper>
-          <Heading2 primary>Let's find your account.</Heading2>
-          <Text small>Please enter your email.</Text>
-        </TopWrapper>
-        <FormArea>
-          <InputWrapper>
-            <Field name="email" type="email" placeholder="email" />
-            {touched.email && errors.email && <Error>{errors.email}</Error>}
-            {status && status.msg && <Error>{status.msg}</Error>}
-          </InputWrapper>
-          <ButtonArea>
-            <Button large primary loadingB={loading} type="submit">
-              Find Account
-            </Button>
-            <Link href="/auth/login">
-              <a>
-                <Button large secondary>
-                  Go Back
-                </Button>
-              </a>
-            </Link>
-          </ButtonArea>
-        </FormArea>
-      </Root>
-    </>
-  );
+          </a>
+        </Logo>
+      </Flip>
+      <TopWrapper>
+        <Heading2 primary>Let's find your account.</Heading2>
+        <Text small>Please enter your email.</Text>
+      </TopWrapper>
+      <FormArea>
+        <InputWrapper>
+          <Field name="email" type="email" placeholder="email" />
+          {touched.email && errors.email && <Error>{errors.email}</Error>}
+          {status && status.msg && <Error>{status.msg}</Error>}
+        </InputWrapper>
+        <ButtonArea>
+          <Button large primary loadingB={loading} type="submit">
+            Find Account
+          </Button>
+          <Link href="/auth/login">
+            <a>
+              <Button large secondary>
+                Go Back
+              </Button>
+            </a>
+          </Link>
+        </ButtonArea>
+      </FormArea>
+    </Root>
+  </>
+);
 
 const FormikResetPasswordForm = withFormik({
   mapPropsToValues({ email }) {

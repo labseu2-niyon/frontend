@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
@@ -11,11 +12,10 @@ import { logInUser } from '../../redux/actions/authActions';
 import { theme } from '../../lib/theme';
 
 const Login = ({ errors, touched, loading, status }) => (
-  <>
-    <Root>
-      <Flip left>
-        {/* <Link href="https://niyon.now.sh/"> */}
-        <Logo>
+  <Root>
+    <Flip left>
+      <Logo>
+        <a href="https://niyon.now.sh/">
           <Pulse>
             <svg width={50} height={50} viewBox="0 0 147 147" fill="none">
               <path
@@ -24,42 +24,42 @@ const Login = ({ errors, touched, loading, status }) => (
               />
             </svg>
           </Pulse>
-        </Logo>
-        {/* </Link> */}
-      </Flip>
-      <TopWrapper>
-        <Heading2 primary>Welcome Back</Heading2>
-        <Text small>
-          Do not miss your next opportunity. Sign in to stay updated on your
-          professional world.
-        </Text>
-      </TopWrapper>
-      <FormArea>
-        <InputWrapper>
-          <Field name="email" type="email" placeholder="email" />
-          {touched.email && errors.email && <Error>{errors.email}</Error>}
-        </InputWrapper>
-        <InputWrapper>
-          <Field name="password" type="password" placeholder="password" />
-          {touched.password && errors.password && (
-            <Error>{errors.password}</Error>
-          )}
-          {status && status.msg && <Error>{status.msg}</Error>}
-        </InputWrapper>
-        <Button small primary type="submit" loadingB={loading}>
-          Log In
-        </Button>
-      </FormArea>
-      <BottomWrapper>
-        <Text small>
-          <Link href="/auth/reset-password">Forgot Password?</Link>
-        </Text>
-        <Text small>
-          <Link href="/auth/signup">New to Niyon? Join now</Link>
-        </Text>
-      </BottomWrapper>
-    </Root>
-  </>
+        </a>
+      </Logo>
+      {/* </Link> */}
+    </Flip>
+    <TopWrapper>
+      <Heading2 primary>Welcome Back</Heading2>
+      <Text small>
+        Do not miss your next opportunity. Sign in to stay updated on your
+        professional world.
+      </Text>
+    </TopWrapper>
+    <FormArea>
+      <InputWrapper>
+        <Field name="email" type="email" placeholder="email" />
+        {touched.email && errors.email && <Error>{errors.email}</Error>}
+      </InputWrapper>
+      <InputWrapper>
+        <Field name="password" type="password" placeholder="password" />
+        {touched.password && errors.password && (
+          <Error>{errors.password}</Error>
+        )}
+        {status && status.msg && <Error>{status.msg}</Error>}
+      </InputWrapper>
+      <Button small primary type="submit" loadingB={loading}>
+        Log In
+      </Button>
+    </FormArea>
+    <BottomWrapper>
+      <Text small>
+        <Link href="/auth/reset-password">Forgot Password?</Link>
+      </Text>
+      <Text small>
+        <Link href="/auth/signup">New to Niyon? Join now</Link>
+      </Text>
+    </BottomWrapper>
+  </Root>
 );
 
 const FormikLoginForm = withFormik({
