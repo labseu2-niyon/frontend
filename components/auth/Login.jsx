@@ -12,7 +12,7 @@ import { logInUser } from '../../redux/actions/authActions';
 import { theme } from '../../lib/theme';
 
 const Login = ({
- errors, touched, loading, status 
+  errors, touched, loading, status
 }) => (
   <Root>
     <Flip left>

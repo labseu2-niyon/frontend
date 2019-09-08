@@ -13,11 +13,8 @@ const dummyUser = {
 };
 
 const Navigation = (state) => {
-  console.log(state);
   const { logOutUser, authReducer } = state;
-
   const userInfo = jwt.decode(authReducer.token);
-  console.log(userInfo);
 
   const handleClick = () => {
     logOutUser();
@@ -28,7 +25,7 @@ const Navigation = (state) => {
     <Nav>
       <div className="desktop">
         <Avatar extraLarge source={dummyUser.image} />
-        <p className="desktop name">{dummyUser.name}</p>
+        <p className="desktop name">{userInfo.username}</p>
       </div>
 
       <div className="mobile-avatar">
