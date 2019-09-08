@@ -4,6 +4,7 @@ import Router from 'next/router';
 import { types } from '../authConstants';
 import axiosWithToken from '../axios';
 
+// eslint-disable-next-line no-underscore-dangle
 const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
 
 const startLoading = () => ({
