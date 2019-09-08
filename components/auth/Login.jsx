@@ -111,11 +111,15 @@ const FormArea = styled(Form)`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  height: 25%;
+  height: 30%;
   width: 100%;
 
   @media (min-width: 500px) {
     width: 50%;
+  }
+
+  @media (min-width: 950px) {
+    width: 30%;
   }
 
   input {
