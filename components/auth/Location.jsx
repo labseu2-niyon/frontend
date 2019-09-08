@@ -10,6 +10,7 @@ import { Icon, AutoComplete } from 'antd';
 
 const Location = ({ locationRequest, locationData }) => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [select, setSelect] = useState({ state: false, data: '' });
   const getPossibleLocation = place => {
     locationRequest(place)
@@ -26,6 +27,7 @@ const Location = ({ locationRequest, locationData }) => {
     setSelect({ state: true, data: value });
   };
   const handleSubmit = () => {
+    setLoading(true);
     const inwork = select.data.split(',');
     select.state &&
       locationData({
@@ -33,6 +35,7 @@ const Location = ({ locationRequest, locationData }) => {
         countryName: inwork[1].trim()
       }).then(res => {
         if (res === 201) {
+          setLoading(false);
           Router.push('/auth/job-title');
         }
       });
@@ -77,7 +80,7 @@ const Location = ({ locationRequest, locationData }) => {
             />
           )}
         </Auto>
-        <Button primary small onClick={handleSubmit}>
+        <Button primary small onClick={handleSubmit} loadingB={loading}>
           Next
         </Button>
       </Section>
@@ -110,8 +113,8 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  height: 80vh;
+  justify-content: space-between;
+  height: 100vh;
 `;
 
 const IconT = styled.i`

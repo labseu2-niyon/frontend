@@ -1,11 +1,11 @@
-import { Heading2, Text, Button } from '../~common/index';
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link';
 import Router from 'next/router';
-import Steps from './StepsComp';
 import { connect } from 'react-redux';
+import Steps from './StepsComp';
+import { Heading2, Text, Button } from '../~common/index';
 import { emailSignup } from '../../redux/actions/authActions';
 
 const Email = ({ errors, touched, loading, status }) => {
@@ -143,9 +143,14 @@ const FormArea = styled(Form)`
   justify-content: center;
   width: 100%;
   padding: 2rem 0;
-  @media (min-width: 500px) {
+
+  @media (min-width: 600px) {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    width: 50%;
+    width: 70%;
+  }
+  @media (min-width: 950px) {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    width: 30%;
   }
 
   input {
@@ -162,7 +167,7 @@ const FormArea = styled(Form)`
     }
 
     @media (min-width: 500px) {
-      width: 40%;
+      width: 80%;
     }
   }
 `;
@@ -181,10 +186,6 @@ const Error = styled.p`
   font-size: 14px;
   position: absolute;
   bottom: 10%;
-  left: 7.5%;
+  left: 10%;
   color: #e29273;
-
-  @media (min-width: 500px) {
-    left: 28%;
-  }
 `;
