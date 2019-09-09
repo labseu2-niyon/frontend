@@ -9,7 +9,7 @@ const Wrapper = styled.div`
     position: relative;
     box-sizing: border-box;
     width: 48%;
-    height: 205px;
+    height: 200px;
     padding: 1rem 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -74,10 +74,6 @@ const L = styled.div`
   small {
     margin: 0 10px;
   }
-
-  i {
-    padding-top: 3px;
-  }
 `;
 
 function ExploreCard(props) {
@@ -117,13 +113,10 @@ function ExploreCard(props) {
 ExploreCard.propTypes = {
   Mentor: PropTypes.shape().isRequired,
   biography: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
   first_name: PropTypes.string.isRequired,
-  job: PropTypes.string.isRequired,
   last_name: PropTypes.string.isRequired,
   location: PropTypes.shape().isRequired,
   profile_picture: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
 };
 
 export default ExploreCard;
