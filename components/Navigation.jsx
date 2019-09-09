@@ -25,7 +25,7 @@ const Navigation = ({ logOutUser, fetchUser, authReducer, user }) => {
     <Nav>
       {user && (
         <div className="desktop">
-          <Avatar extraLarge source={user.image} />
+          <Avatar extraLarge source={user.profile_picture} />
           <p className="desktop name">
             {user.first_name} {user.last_name}
           </p>
