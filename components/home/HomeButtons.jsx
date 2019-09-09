@@ -19,7 +19,7 @@ const ButtonWrapper = styled.div`
 function HomeButtons({ numOfConnections }) {
   return (
     <ButtonWrapper>
-      <Link href="/connections"><Button primary>Connections ({numOfConnections})</Button></Link>
+      <Link href="/connections"><Button primary>Connections&nbsp;<small>({numOfConnections})</small></Button></Link>
       <Link href="/explore"><Button primary>Explore</Button></Link>
     </ButtonWrapper>
   );
