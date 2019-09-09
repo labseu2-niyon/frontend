@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 import {
   userTypeHandler,
   getJobTitles,
-  getMentorType
+  getMentorType,
+  userChoise
 } from '../../redux/actions/authActions';
 import Steps from './StepsComp';
 import { theme } from '../../lib/theme';
@@ -27,7 +28,9 @@ const JobTitle = ({
   allJobs,
   locationId,
   getMentorType,
-  mentorTypes
+  mentorTypes,
+  userChoise,
+  userId
 }) => {
   const [mentorPressed, setMentorPressed] = useState(false);
   const [menteePressed, setMenteePressed] = useState(false);
@@ -40,9 +43,7 @@ const JobTitle = ({
     helpError: false
   });
   const [testError, setTestError] = useState(false);
-  // const [checkedValue, setCheckedValue] = useState({});
-  const [options, setOptions] = useState([]);
-  const [checked, setChecked] = useState(false);
+  const [checkedValue, setCheckedValue] = useState([]);
 
   useEffect(() => {
     getJobTitles();
@@ -66,11 +67,9 @@ const JobTitle = ({
     if (jobTypeId === 100) {
       setErrors({ jobError: true });
       setTestError(true);
-    } else {
-      setErrors({ jobError: false });
-      setTestError(false);
     }
 
+    !checkedValue.length && setErrors({ helpError: true });
     const data = {
       locationId,
       industryId: '1'
@@ -79,61 +78,88 @@ const JobTitle = ({
     if (!mentorPressed && !menteePressed) {
       setErrors({ userTypeError: true });
     } else if (jobTypeId === 100) {
-      setErrors({ jobError: true });
       setTestError(true);
     } else {
-      setErrors({ userTypeError: false });
-      userTypeHandler(data, username, userType, jobTypeId).then(res => {
-        if (res === 201) {
-          Router.push('/auth/profile-info');
-        }
-      });
+      setTestError(false);
+      checkedValue.length && handleRequest(data);
     }
   };
 
-  const handleCheckBox = e => {
-    // const op = [];
-    // setChecked(e.target.checked);
-    // console.log(e.target.checked);
-    // //op.push(e.target.name);
-    // setOptions(options.concat(e.target.name));
+  //action creators request for update user information and added user choices
+  const handleRequest = data => {
+    checkedValue &&
+      checkedValue.forEach(item => {
+        userChoise({ mentorTypeId: Number(item), mentorId: userId }, userType);
+      });
+    userTypeHandler(data, username, userType, jobTypeId).then(res => {
+      setErrors({ helpError: false });
+      if (res === 201) {
+        Router.push('/auth/profile-info');
+      }
+    });
   };
 
-  const mentor = () => (
-    <div>
+  const handleCheckBox = e => {
+    if (e.target.checked) {
+      setErrors({ helpError: false });
+      setCheckedValue([...new Set([...checkedValue, e.target.name])]);
+    } else {
+      setCheckedValue(checkedValue.filter(item => item !== e.target.name));
+    }
+  };
+
+  const mentor = () => {
+    return (
+      <div>
+        <M>
+          <Text small>What kind of help can you provide?</Text>
+          {mentorTypes &&
+            mentorTypes.map(type => {
+              return (
+                <Flip top key={type.id}>
+                  <Label>
+                    <input
+                      type="checkbox"
+                      name={type.id}
+                      onChange={handleCheckBox}
+                      // checked={true}
+                    />
+                    {type.mentor_type_name}
+                  </Label>
+                </Flip>
+              );
+            })}
+          {errors.helpError && (
+            <OptionError>{err.userOptionError} </OptionError>
+          )}
+        </M>
+      </div>
+    );
+  };
+
+  const mentee = () => {
+    return (
       <M>
-        <Text small>What kind of help can you provide?</Text>
+        <Text small>What kind of help are you looking for?</Text>
         {mentorTypes &&
-          mentorTypes.map(type => (
-            <Flip top key={type.id}>
-              <Label key={type.id}>
-                <input
-                  type="checkbox"
-                  name={type.id}
-                  onChange={handleCheckBox}
-                />
-                {type.mentor_type_name}
-              </Label>
-            </Flip>
-          ))}
-        {/* {!checked && <Error>{err.userOptionError} </Error>} */}
+          mentorTypes.map(type => {
+            return (
+              <Flip top key={type.id}>
+                <Label key={type.id}>
+                  <input
+                    type="checkbox"
+                    name={type.id}
+                    onChange={handleCheckBox}
+                  />
+                  {type.mentor_type_name}
+                </Label>
+              </Flip>
+            );
+          })}
+        {errors.helpError && <OptionError>{err.userOptionError} </OptionError>}
       </M>
-    </div>
-  );
-  const mentee = () => (
-    <M>
-      <Text small>What kind of help are you looking for?</Text>
-      {mentorTypes &&
-        mentorTypes.map(type => (
-          <Flip top key={type.id}>
-            <Label key={type.id}>
-              <input type="checkbox" name={type.id} onChange={handleCheckBox} />
-              {type.mentor_type_name}
-            </Label>
-          </Flip>
-        ))}
-    </M>
-  );
+    );
+  };
 
   const onMenteePressed = () => {
     setMenteePressed(true);
@@ -179,7 +205,7 @@ const JobTitle = ({
           </Info>
         </Custom>
       </MentorIcons>
-        {errors.userTypeError && <MError>{err.userTypeError}</MError>}
+      {errors.userTypeError && <MError>{err.userTypeError}</MError>}
       <FormArea onSubmit={handleSubmit}>
         <InputWrapperJob>
           <select value={jobTypeId} onChange={handleSelect}>
@@ -209,17 +235,22 @@ const JobTitle = ({
   );
 };
 
-const mapStateToProps = state => ({
-  username: state.authReducer.emailData.username,
-  loading: state.authReducer.loading,
-  allJobs: state.authReducer.allJobs,
-  locationId: state.authReducer.locationId,
-  mentorTypes: state.authReducer.allMentorOptions
-});
+const mapStateToProps = state => {
+  return {
+    username: state.authReducer.emailData.username,
+    userId: state.authReducer.emailData.id,
+    loading: state.authReducer.loading,
+    allJobs: state.authReducer.allJobs,
+    locationId: state.authReducer.locationId,
+    mentorTypes: state.authReducer.allMentorOptions
+  };
+};
+
 const mapDispatchToProps = {
   userTypeHandler,
   getJobTitles,
-  getMentorType
+  getMentorType,
+  userChoise
 };
 
 export default connect(
@@ -366,6 +397,15 @@ const MError = styled.p`
   text-align: center;
 `;
 
+const OptionError = styled.p`
+  margin: 0;
+  font-size: 14px;
+  position: absolute;
+  bottom: 0;
+  left: 15%;
+  color: #e29273;
+`;
+
 const Label = styled.label`
   display: flex;
   align-items: center;
@@ -379,5 +419,6 @@ const Label = styled.label`
 `;
 
 const M = styled.div`
-  margin-bottom: 20px;
+  padding-bottom: 25px;
+  position: relative;
 `;

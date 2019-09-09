@@ -84,6 +84,20 @@ export const socialData = data => {
   };
 };
 
+// Action Creator for user Choice
+export const userChoise = (data, userType) => dispatch => {
+  dispatch({ type: types.START_LOADING });
+  axios
+    .post(`${_BASE_URL}/${userType}/choice`, data)
+    .then(res => {
+      dispatch({ type: types.SET_USER_CHOISE, payload: res.data.data });
+      dispatch({ type: types.STOP_LOADING });
+    })
+    .catch(() => {
+      dispatch({ type: types.STOP_LOADING });
+    });
+};
+
 // Action Creator for Singup a user with email
 // body {username, email, password}
 export const emailSignup = data => dispatch => {

@@ -24,7 +24,7 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         queryingDatabase: true,
         error: false,
-        errorMessage: null
+        errorMessage: null,
       };
     case types.FETCH_USER:
       return {
@@ -32,14 +32,14 @@ export const userReducer = (state = initialState, action) => {
         user: payload,
         queryingDatabase: false,
         error: false,
-        errorMessage: null
+        errorMessage: null,
       };
     case types.FETCH_USER_FAIL:
       return {
         ...state,
         error: true,
         queryingDatabase: false,
-        errorMessage: action.payload
+        errorMessage: action.payload,
       };
     case types.UPDATE_PASSWORD_SUCCESS:
       return {
