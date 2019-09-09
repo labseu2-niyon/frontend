@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 import axios from 'axios';
 import nookies from 'nookies';
 import Router from 'next/router';
@@ -99,7 +100,7 @@ export const emailSignup = data => dispatch => {
         }
       });
       nookies.set({}, 'token', res.data.data.token, {
-        maxAge: 60 * 60 * 24 * 14,
+        maxAge: 60 * 60 * 24 * 30,
         path: '/'
       });
       return res.data.status;
@@ -155,6 +156,16 @@ export const getJobTitles = () => dispatch => {
       dispatch({ type: types.GET_ALL_JOBS, payload: res.data.data });
     })
     .catch(() => {});
+};
+
+// Action Creator for getting Mentor type option
+export const getMentorType = () => dispatch => {
+  axios
+    .get(`${_BASE_URL}/types/all`)
+    .then(res => {
+      dispatch({ type: types.GET_ALL_MENTOR_TYPES, payload: res.data.data });
+    })
+    .catch();
 };
 
 // Action Creator for updating/patch user information gather from the steps
@@ -221,7 +232,7 @@ export const logInUser = ({ email, password }) => dispatch => {
         }
       });
       nookies.set({}, 'token', res.data.data.token, {
-        maxAge: 60 * 60 * 24 * 14,
+        maxAge: 60 * 60 * 24 * 30,
         path: '/'
       });
       return res.data;
