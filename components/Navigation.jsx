@@ -18,7 +18,8 @@ const Navigation = state => {
 
   const handleClick = () => {
     logOutUser();
-    window.location.href = '/auth/login';
+    // window.location.href = '/auth/login';
+    Router.push('/auth/login');
   };
 
   return (
