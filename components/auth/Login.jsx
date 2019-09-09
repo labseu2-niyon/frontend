@@ -7,11 +7,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Router from 'next/router';
 import Flip from 'react-reveal/Flip';
+import jwt from 'jsonwebtoken';
 import { Heading2, Text, Button } from '../~common/index';
 import { logInUser } from '../../redux/actions/authActions';
 import { theme } from '../../lib/theme';
 
-const Login = ({ errors, touched, loading, status }) => (
+const Login = ({
+ errors, touched, loading, status 
+}) => (
   <Root>
     <Flip left>
       <Logo>
@@ -107,20 +110,11 @@ const Root = styled.div`
 const FormArea = styled(Form)`
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   justify-content: space-around;
   height: 30%;
   width: 100%;
   max-width: 200px;
 
-  /*  @media (min-width: 500px) {
-    width: 50%;
-  }
-
-  @media (min-width: 950px) {
-    width: 30%;
-  }
-*/
   input {
     padding: 0.5rem;
     font-size: 16px;
