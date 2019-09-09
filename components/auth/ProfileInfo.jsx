@@ -108,7 +108,6 @@ const ProfileInfo = props => {
           Next
         </Button>
         <Skip href="/auth/social-info"></Skip>
-        {/* {error && <p>{error}</p>} */}
       </FormArea>
     </Root>
   );

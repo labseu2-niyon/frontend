@@ -53,7 +53,7 @@ const JobTitle = ({
       <div>
         <M>
           <Flip top>
-            <Text small>What kind of help are you looking for ?</Text>
+            <Text small>What kind of help are you provide ?</Text>
             <Label>
               <Field type="checkbox" name="preparation" />
               Job Preparation
@@ -79,7 +79,7 @@ const JobTitle = ({
     return (
       <M>
         <Flip top>
-          <Text small>What kind of help are you provide?</Text>
+          <Text small>What kind of help are you looking for ?</Text>
           <Label>
             <Field type="checkbox" name="preparation" />
             Job Preparation
@@ -253,6 +253,10 @@ const Costum = styled.div`
   flex-direction: column;
   i {
     transition: all 0.2s ease-in;
+
+    :hover {
+      cursor: pointer;
+    }
   }
   p {
     margin: 0;

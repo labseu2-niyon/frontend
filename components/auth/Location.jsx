@@ -13,17 +13,21 @@ const Location = ({ locationRequest, locationData }) => {
   const [loading, setLoading] = useState(false);
   const [select, setSelect] = useState({ state: false, data: '' });
   const [warning, setWarning] = useState('');
+  const [input, setInput] = useState('');
 
   const getPossibleLocation = place => {
-    locationRequest(place)
-      .then(res => {
-        if (res) {
-          setData(res);
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    setInput(place);
+    setSelect({ ...select, state: false });
+    !!place &&
+      locationRequest(place)
+        .then(res => {
+          if (res) {
+            setData(res);
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
   };
   const chosen = value => {
     setSelect({ state: true, data: value });
@@ -32,7 +36,10 @@ const Location = ({ locationRequest, locationData }) => {
     setLoading(false);
     !select.state && setWarning('Please Select Location');
     const inwork = select.data.split(',');
-    select.state &&
+    console.log(inwork);
+    inwork.every(e => !!e) &&
+      inwork.length === 2 &&
+      select.state &&
       (setLoading(true),
       setWarning(''),
       locationData({
@@ -122,7 +129,7 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   height: 100vh;
 `;
 
