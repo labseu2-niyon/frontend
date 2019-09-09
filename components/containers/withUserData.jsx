@@ -4,19 +4,19 @@ import { connect } from 'react-redux';
 import jwt from 'jsonwebtoken';
 import {
   fetchAllUsers,
-  fetchAllConnections
+  fetchAllConnections,
+  fetchUser
 } from '../../redux/actions/userActions';
 
 const withUserData = Component => {
   function WithUserData(props) {
     const [users, setUsers] = useState([]);
 
-    const mapUsers = (input) => {
-      const withDisplay = input.map((user) => ({ ...user, display: true }));
+    const mapUsers = input => {
+      const withDisplay = input.map(user => ({ ...user, display: true }));
 
       setUsers(withDisplay);
     };
-
     useEffect(() => {
       const u = jwt.decode(props.authReducer.token);
       (async () => {
@@ -26,8 +26,15 @@ const withUserData = Component => {
         mapUsers(props.userReducer.usersAll);
       })();
 
-      if (!props.userReducer.connectionsAll || !props.userReducer.connectionsAll) {
+      if (
+        !props.userReducer.connectionsAll ||
+        !props.userReducer.connectionsAll
+      ) {
         props.fetchConnections(u.username);
+      }
+
+      if (!props.userReducer.user) {
+        props.fetchUser(u.username);
       }
     }, []);
 
@@ -35,14 +42,22 @@ const withUserData = Component => {
       return null;
     }
 
-    return <Component {...props.userReducer} users={users} connectionsAll={users} setUsers={setUsers} />;
+    return (
+      <Component
+        {...props.userReducer}
+        users={users}
+        connectionsAll={users}
+        setUsers={setUsers}
+      />
+    );
   }
 
   const mapStateToProps = state => state;
 
   const mapDispatchToProps = {
     fetchUsers: fetchAllUsers,
-    fetchConnections: fetchAllConnections
+    fetchConnections: fetchAllConnections,
+    fetchUser: fetchUser
   };
 
   WithUserData.propTypes = {
