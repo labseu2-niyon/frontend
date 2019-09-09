@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import jwt from 'jsonwebtoken';
 import styled from 'styled-components';
 import { Icon } from 'antd';
 import { connect } from 'react-redux';
@@ -11,7 +12,10 @@ const dummyUser = {
   name: 'Guillermo Rauch',
 };
 
-const Navigation = ({ logOutUser }) => {
+const Navigation = (state) => {
+  const { logOutUser, authReducer } = state;
+  const userInfo = jwt.decode(authReducer.token);
+
   const handleClick = () => {
     logOutUser();
     Router.push('/auth/login');
@@ -21,7 +25,7 @@ const Navigation = ({ logOutUser }) => {
     <Nav>
       <div className="desktop">
         <Avatar extraLarge source={dummyUser.image} />
-        <p className="desktop name">{dummyUser.name}</p>
+        <p className="desktop name">{userInfo.username}</p>
       </div>
 
       <div className="mobile-avatar">
@@ -39,10 +43,10 @@ const Navigation = ({ logOutUser }) => {
             pathname: '/profile',
             query: {
               userId: 'abc123',
-              user: 'Guillermo Rauch',
+              user: userInfo.username,
               jobTitle: 'Web Developer',
               src:
-                'https://milan.serverlessdays.io/speakers/guillermo-rauch.jpg',
+                '',
             },
           }}
         >
