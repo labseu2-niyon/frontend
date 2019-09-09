@@ -87,13 +87,7 @@ function ExploreCard(props) {
   return (
     <Link href={{
       pathname: '/profile',
-      query: {
-        user: props.username,
-        jobTitle: props.job,
-        email: props.email,
-        src: props.profile_picture,
-        bio: props.biography,
-      },
+      query: props,
     }}
     >
       <Wrapper>
