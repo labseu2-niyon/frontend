@@ -23,7 +23,7 @@ const SignUp = ({}) => (
         </Pulse>
       </Logo>
     </Flip>
-    <Text small>Lorem Ipsum, welcome message, blah blah blah.`</Text>
+    <Text small>Sign up now to get in contact with mentors and young professionals</Text>
     <ButtonArea>
       <Flip top>
         <Button

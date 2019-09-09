@@ -1,75 +1,81 @@
-/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
+import Router from 'next/router';
 import { connect } from 'react-redux';
-import { socialData } from '../../redux/actions/authActions';
-import StepsComp from './StepsComp';
 import { Heading2, Text, Button } from '../~common/index';
+import StepsComp from './StepsComp';
+import { socialData } from '../../redux/actions/authActions';
 
-const Social = ({ errors, touched, username }) => {
-  return (
-    <Root>
-      <StepsComp stepNumber="1" />
-      <Heading2 primary>Welcome</Heading2>
-      <IconT className="far fa-user" />
-      <FormArea>
-        <InputWrapper>
-          <Text small>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-            nisl nisl, aliquam nec erat et, efficitur mollis metus.
-          </Text>
-          <input placeholder="username" value={username} disabled />
-        </InputWrapper>
-        <InputWrapper>
-          <Field name="firstName" type="text" placeholder="FirstName" />
-          {touched.firstName && errors.firstName && (
-            <Error>{errors.firstName}</Error>
-          )}
-        </InputWrapper>
-        <InputWrapper>
-          <Field name="lastName" type="text" placeholder="lastName" />
-          {touched.lastName && errors.lastName && (
-            <Error>{errors.lastName}</Error>
-          )}
-        </InputWrapper>
-        <Button primary small type="submit">
+const Social = ({ errors, touched, username }) => (
+  <Root>
+    <StepsComp stepNumber="1" />
+    <Heading2 primary>What's your name?</Heading2>
+    <IconT className="far fa-user" />
+    <FormArea>
+      <InputWrapper>
+        <Text small>
+          Please enter your first and last name.
+        </Text>
+        <Field
+          name="username"
+          type="text"
+          placeholder="username"
+          value={username}
+          disabled
+        />
+      </InputWrapper>
+      <InputWrapper>
+        <Field name="firstName" type="text" placeholder="First Name" />
+        {touched.firstName && errors.firstName && (
+        <Error>{errors.firstName}</Error>
+        )}
+      </InputWrapper>
+      <InputWrapper>
+        <Field name="lastName" type="text" placeholder="Last Name" />
+        {touched.lastName && errors.lastName && (
+        <Error>{errors.lastName}</Error>
+        )}
+      </InputWrapper>
+      <Button primary small type="submit">
           Next
-        </Button>
-      </FormArea>
-    </Root>
-  );
-};
+      </Button>
+    </FormArea>
+  </Root>
+);
 
 const FormikWithSocialForm = withFormik({
-  mapPropsToValues({ firstName, lastName }) {
+  mapPropsToValues({ username, firstName, lastName }) {
     return {
+      username: username || '',
       firstName: firstName || '',
       lastName: lastName || ''
     };
   },
   validationSchema: Yup.object().shape({
+    username: Yup.string(),
     firstName: Yup.string()
       .matches(/^([^0-9]*)$/, {
-        message: 'Must contain only letters'
+        message: 'Must contain only letters',
+        excludeEmptyString: true
       })
       .required('First Name is required.'),
     lastName: Yup.string()
       .matches(/^([^0-9]*)$/, {
-        message: 'Must contain only letters'
+        message: 'Must contain only letters',
+        excludeEmptyString: true
       })
       .required('Last Name is required.')
   }),
   handleSubmit(values, { props }) {
     props.socialData(values);
+    Router.push('/auth/location');
   }
 })(Social);
 
-const mapStateToProps = state => {
-  return {
-    username: state.authReducer.emailData.username
-  };
-};
+const mapStateToProps = state => ({
+  username: state.authReducer.emailData.username
+});
 const mapDispatchToProps = {
   socialData
 };

@@ -7,12 +7,7 @@ import Router from 'next/router';
 import { Avatar } from './~common/index';
 import { logOutUser } from '../redux/actions/authActions';
 
-const dummyUser = {
-  image: 'https://milan.serverlessdays.io/speakers/guillermo-rauch.jpg',
-  name: 'Guillermo Rauch',
-};
-
-const Navigation = (state) => {
+const Navigation = state => {
   const { logOutUser, authReducer } = state;
   const userInfo = jwt.decode(authReducer.token);
 
@@ -23,14 +18,19 @@ const Navigation = (state) => {
 
   return (
     <Nav>
-      <div className="desktop">
-        <Avatar extraLarge source={dummyUser.image} />
-        <p className="desktop name">{userInfo.username}</p>
-      </div>
+      {userInfo && (
+        <div className="desktop">
+          <Avatar extraLarge source={dummyUser.image} />
+          <p className="desktop name">{userInfo.username}</p>
+        </div>
+      )}
 
-      <div className="mobile-avatar">
-        <Avatar small source={dummyUser.image} />
-      </div>
+      {userInfo && (
+        <div className="mobile-avatar">
+          <Avatar small source={dummyUser.image} />
+        </div>
+      )}
+
       <Links>
         <Link href="/">
           <div>
@@ -38,16 +38,13 @@ const Navigation = (state) => {
             <a className="desktop">Home</a>
           </div>
         </Link>
+
         <Link
           href={{
-            pathname: '/profile',
+            pathname: '/my-profile',
             query: {
-              userId: 'abc123',
-              user: userInfo.username,
-              jobTitle: 'Web Developer',
-              src:
-                '',
-            },
+              user: userInfo.username
+            }
           }}
         >
           <div>
@@ -55,6 +52,25 @@ const Navigation = (state) => {
             <a className="desktop">Profile</a>
           </div>
         </Link>
+        {userInfo && (
+          <Link
+            href={{
+              pathname: '/profile',
+              query: {
+                userId: 'abc123',
+                user: userInfo.username,
+                jobTitle: 'Web Developer',
+                src: ''
+              }
+            }}
+          >
+            <div>
+              <Icon type="user" className="icon" />
+              <a className="desktop">Profile</a>
+            </div>
+          </Link>
+        )}
+
         <Link href="/connections">
           <div>
             <Icon type="share-alt" className="icon" />
@@ -67,12 +83,12 @@ const Navigation = (state) => {
             <a className="desktop">Explore</a>
           </div>
         </Link>
-        <Link href="/settings">
+        {/* <Link href="/settings">
           <div>
             <Icon type="setting" className="icon" />
             <a className="desktop">Settings</a>
           </div>
-        </Link>
+        </Link> */}
 
         <div onClick={handleClick}>
           <Icon type="logout" className="icon" />
@@ -133,6 +149,10 @@ const Nav = styled.div`
       margin-bottom: 20px;
     }
   }
+
+  p {
+    margin-top: 10px;
+  }
 `;
 
 const Links = styled.div`
@@ -169,11 +189,11 @@ const Links = styled.div`
   }
 
   i {
-    margin-top: 4px;
+    margin-top: 0px;
   }
 `;
 
 export default connect(
-  (state) => state,
-  { logOutUser },
+  state => state,
+  { logOutUser }
 )(Navigation);

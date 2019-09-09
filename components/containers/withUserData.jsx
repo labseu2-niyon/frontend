@@ -36,7 +36,6 @@ const withUserData = Component => {
     }
 
     return <Component {...props.userReducer} users={users} connectionsAll={users} setUsers={setUsers} />;
-
   }
 
   const mapStateToProps = state => state;
