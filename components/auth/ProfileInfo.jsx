@@ -64,13 +64,12 @@ const ProfileInfo = props => {
       lastName: props.userInfo.userNameData.lastName,
       bio: bio,
       locationId: props.userInfo.locationId,
-      jobId: props.userInfo.userTypeData.job
+      jobId: Number(props.userInfo.userTypeData)
     };
     const username = props.userInfo.emailData.username;
     const imgData = new FormData();
     imgData.append('image', image);
-    props.imageUpload(imgData, username);
-
+    image && props.imageUpload(imgData, username);
     props.userProfileInfo(data, username).then(res => {
       if (res === 200) {
         Router.push('/auth/social-info');
