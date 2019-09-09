@@ -5,7 +5,7 @@ const AWrapper = styled.div`
   width: ${({ size }) => size || '64px'};
   height: ${({ size }) => size || '64px'};
   background: #eaeaea;
-  border-radius: 50%; 
+  border-radius: 50%;
 `;
 
 const A = styled.img`
@@ -14,9 +14,7 @@ const A = styled.img`
 `;
 
 const Avatar = props => {
-  const {
-    large, medium, small, children, source, extraLarge
-  } = props;
+  const { large, medium, small, children, source, extraLarge } = props;
 
   let size;
   if (large) {

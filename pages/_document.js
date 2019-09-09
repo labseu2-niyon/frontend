@@ -33,6 +33,7 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <title>Niyon</title>
           <link rel="shortcut icon" href="/static/favicon.ico" />
           <link
             href="https://cdn.jsdelivr.net/npm/inter-ui@3.9.0/inter.min.css"
