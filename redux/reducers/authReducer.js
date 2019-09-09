@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { types } from '../authConstants';
 
 const initialState = {
@@ -11,8 +12,9 @@ const initialState = {
   socialData: [],
   userNameData: [],
   allJobs: [],
+  allMentorOptions: [],
   token: null,
-  message: '',
+  message: ''
 };
 
 export const authReducer = (state = initialState, { type, payload }) => {
@@ -22,7 +24,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: true,
-        error: null,
+        error: null
       };
     case types.SET_EMAIL_DATA:
       return {
@@ -30,103 +32,109 @@ export const authReducer = (state = initialState, { type, payload }) => {
         emailData: payload.data,
         token: payload.token,
         error: null,
-        loading: false,
+        loading: false
       };
     case types.REGISTER_USER_FAILURE:
       return {
         ...state,
         loading: false,
-        error: payload,
+        error: payload
       };
     //= =======================ADDED USER INFORMATION======================
     case types.USER_INFO_REQUEST:
       return {
         ...state,
         loading: true, // just for testing the endpoint
-        error: null,
+        error: null
       };
     case types.USER_INFO_SUCCESS:
       return {
         ...state,
         loading: false,
         // payload here
-        error: null,
+        error: null
       };
     case types.USER_INFO_FAIL:
       return {
         ...state,
         loading: false,
-        error: payload,
+        error: payload
       };
     //= ==============================perist Location data from the User======
     case types.SET_LOCATION_DATA:
       return {
         ...state,
         locationId: payload,
-        loading: false,
+        loading: false
       };
 
     case types.SET_USER_NAME:
       return {
         ...state,
-        userNameData: payload,
+        userNameData: payload
       };
     //= ==============================perist User Type data===================
     case types.START_LOADING:
       return {
         ...state,
         loading: true,
-        error: null,
+        error: null
       };
     case types.SET_USER_TYPE:
       return {
         ...state,
         userTypeData: payload,
-        loading: false,
+        loading: false
       };
     case types.STOP_LOADING:
       return {
         ...state,
         loading: false,
-        error: null,
+        error: null
       };
     //= ==============================perist Profile data===================
     case types.SET_PROFILE_DATA:
       return {
         ...state,
-        profileData: payload,
+        profileData: payload
       };
     //= ===============================Get All JOBS==========================
     case types.GET_ALL_JOBS:
       return {
         ...state,
-        allJobs: payload,
+        allJobs: payload
+      };
+    //= ===============================GET All Mentors options ==============
+    case types.GET_ALL_MENTOR_TYPES:
+      return {
+        ...state,
+        allMentorOptions: payload
       };
     //= ==============================perist Social Media data===================
     case types.SET_SOCIAL_MEDIA_DATA:
       return {
         ...state,
         socialData: payload,
-        loading: false,
+        loading: false
       };
     //= ==============================LOGIN ACTION TYPES===================
     case types.LOG_IN_USER_REQUEST:
       return {
         ...state,
-        loading: true,
+        loading: true
       };
     case types.LOG_IN_USER_SUCCESS:
       return {
         ...state,
         token: payload.token,
         message: payload.message,
-        loading: false,
+        loading: false
       };
     case types.LOG_IN_USER_FAILURE:
       return {
         ...state,
         error: payload,
-        loading: false,
+        loading: false
       };
     // ========================LOG OUT ACTION TYPES==================
     case types.LOG_OUT_USER:
@@ -143,44 +151,45 @@ export const authReducer = (state = initialState, { type, payload }) => {
         token: null,
         userNameData: [],
         allJobs: [],
-        message: '',
+        allMentorOptions: [],
+        message: ''
       };
     // ========================RESET PASSWORD ACTION TYPES==================
     case types.RESET_PASSWORD_REQUEST:
       return {
         ...state,
         loading: true,
-        error: '',
+        error: ''
       };
     case types.RESET_PASSWORD_SUCCESS:
       return {
         ...state,
         loading: false,
-        message: payload,
+        message: payload
       };
     case types.RESET_PASSWORD_FAILURE:
       return {
         ...state,
         loading: false,
-        error: payload,
+        error: payload
       };
     // ========================CHANGE PASSWORD ACTION TYPES==================
     case types.CHANGE_PASSWORD_REQUEST:
       return {
         ...state,
-        loading: true,
+        loading: true
       };
     case types.CHANGE_PASSWORD_SUCCESS:
       return {
         ...state,
         loading: false,
-        message: payload,
+        message: payload
       };
     case types.CHANGE_PASSWORD_FAILURE:
       return {
         ...state,
         loading: false,
-        error: payload,
+        error: payload
       };
     default:
       return state;
