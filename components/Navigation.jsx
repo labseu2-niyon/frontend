@@ -7,11 +7,6 @@ import Router from 'next/router';
 import { Avatar } from './~common/index';
 import { logOutUser } from '../redux/actions/authActions';
 
-const dummyUser = {
-  image: 'https://milan.serverlessdays.io/speakers/guillermo-rauch.jpg',
-  name: 'Guillermo Rauch',
-};
-
 const Navigation = (state) => {
   const { logOutUser, authReducer } = state;
   const userInfo = jwt.decode(authReducer.token);
@@ -24,12 +19,12 @@ const Navigation = (state) => {
   return (
     <Nav>
       <div className="desktop">
-        <Avatar extraLarge source={dummyUser.image} />
+        <Avatar extraLarge source={userInfo.profile_picture} />
         <p className="desktop name">{userInfo.username}</p>
       </div>
 
       <div className="mobile-avatar">
-        <Avatar small source={dummyUser.image} />
+        <Avatar small source={userInfo.username} />
       </div>
       <Links>
         <Link href="/">
@@ -40,13 +35,9 @@ const Navigation = (state) => {
         </Link>
         <Link
           href={{
-            pathname: '/profile',
+            pathname: '/my-profile',
             query: {
-              userId: 'abc123',
               user: userInfo.username,
-              jobTitle: 'Web Developer',
-              src:
-                '',
             },
           }}
         >
@@ -133,6 +124,10 @@ const Nav = styled.div`
       margin-bottom: 20px;
     }
   }
+
+  p {
+    margin-top: 10px;
+  }
 `;
 
 const Links = styled.div`
@@ -169,7 +164,7 @@ const Links = styled.div`
   }
 
   i {
-    margin-top: 4px;
+    margin-top: 0px;
   }
 `;
 
