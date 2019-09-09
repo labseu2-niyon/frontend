@@ -106,7 +106,6 @@ const FormikWithEmailForm = withFormik({
         Router.push('/auth/social');
       } else {
         //still need to check the new error for already existing user
-        console.log('RESS', res);
         setStatus(res);
       }
     });

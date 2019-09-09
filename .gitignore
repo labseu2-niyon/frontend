@@ -32,3 +32,4 @@ staging.now.json
 
 # yarn ting
 yarn.lock
+.eslintrc.js
