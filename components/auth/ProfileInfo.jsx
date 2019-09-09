@@ -82,7 +82,7 @@ const ProfileInfo = props => {
   return (
     <Root>
       <Steps stepNumber="4" />
-      <Heading2 primary>Show Us your face</Heading2>
+      <Heading2 primary>Choose your profile picture</Heading2>
       <FormArea onSubmit={handleSubmit}>
         <RoundIcon
           name="avatar"
@@ -96,9 +96,7 @@ const ProfileInfo = props => {
         >
           {imgUrl ? <img src={imgUrl} alt="avatar" /> : uploadButton}
         </RoundIcon>
-        <Text small>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </Text>
+        <Text small>Share more about you.</Text>
         <textarea
           type="text"
           placeholder="Biography"
