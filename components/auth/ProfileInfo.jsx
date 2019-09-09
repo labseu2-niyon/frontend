@@ -66,7 +66,6 @@ const ProfileInfo = props => {
       locationId: props.userInfo.locationId,
       jobId: props.userInfo.userTypeData.job
     };
-    console.log(image);
     const username = props.userInfo.emailData.username;
     const imgData = new FormData();
     imgData.append('image', image);
