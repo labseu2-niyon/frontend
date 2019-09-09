@@ -38,6 +38,7 @@ export default class MyDocument extends Document {
             href="https://cdn.jsdelivr.net/npm/inter-ui@3.9.0/inter.min.css"
             rel="stylesheet"
           />
+          <link rel="stylesheet" type="text/css" href="/static/nprogrss.css" />
           <script src="https://kit.fontawesome.com/51283197d2.js" />
         </Head>
         <body style={bodyStyles}>
