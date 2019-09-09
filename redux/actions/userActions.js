@@ -4,6 +4,9 @@ import { types } from '../userConstants';
 const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
 
 export const fetchUser = (username) => (dispatch) => {
+  dispatch({
+    type: types.FETCH_USER_REQUEST
+  });
   axiosWithAuth()
     .get(`${_BASE_URL}/user/${username}/profile`)
     .then((res) => {

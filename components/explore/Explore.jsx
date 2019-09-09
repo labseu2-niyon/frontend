@@ -12,8 +12,8 @@ const Wrapper = styled.main`
 `;
 
 const jobTitles = [
-  { value: 'designer and developer', label: 'UX Designer & UI Developer' },
-  { value: 'backend developer', label: 'Backend Developer' },
+  'Technology',
+  'Backend developer'
 ];
 
 function Explore(props) {
