@@ -11,9 +11,7 @@ import { Heading2, Text, Button } from '../~common/index';
 import { logInUser } from '../../redux/actions/authActions';
 import { theme } from '../../lib/theme';
 
-const Login = ({
-  errors, touched, loading, status
-}) => (
+const Login = ({ errors, touched, loading, status }) => (
   <Root>
     <Flip left>
       <Logo>
@@ -31,11 +29,7 @@ const Login = ({
       {/* </Link> */}
     </Flip>
     <TopWrapper>
-      <Heading2 primary>Welcome Back</Heading2>
-      <Text small>
-        Do not miss your next opportunity. Sign in to stay updated on your
-        professional world.
-      </Text>
+      <Heading2 primary>Log in to continue to Niyon</Heading2>
     </TopWrapper>
     <FormArea>
       <InputWrapper>
