@@ -40,9 +40,9 @@ const JobTitle = ({
     helpError: false
   });
   const [testError, setTestError] = useState(false);
-  //const [checkedValue, setCheckedValue] = useState({});
-  const [options, setOptions] = useState([]);
-  const [checked, setChecked] = useState(false);
+  // //const [checkedValue, setCheckedValue] = useState({});
+  // const [options, setOptions] = useState([]);
+  // const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     getJobTitles();
