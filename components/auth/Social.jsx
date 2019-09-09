@@ -11,24 +11,23 @@ const Social = ({ errors, touched, username }) => {
   return (
     <Root>
       <StepsComp stepNumber="1" />
-      <Heading2 primary>Welcome</Heading2>
+      <Heading2 primary>What's your name?</Heading2>
       <IconT className="far fa-user" />
       <FormArea>
         <InputWrapper>
           <Text small>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-            nisl nisl, aliquam nec erat et, efficitur mollis metus.
+            Please enter your first and last name.
           </Text>
           <input placeholder="username" value={username} disabled />
         </InputWrapper>
         <InputWrapper>
-          <Field name="firstName" type="text" placeholder="FirstName" />
+          <Field name="firstName" type="text" placeholder="First Name" />
           {touched.firstName && errors.firstName && (
             <Error>{errors.firstName}</Error>
           )}
         </InputWrapper>
         <InputWrapper>
-          <Field name="lastName" type="text" placeholder="lastName" />
+          <Field name="lastName" type="text" placeholder="Last Name" />
           {touched.lastName && errors.lastName && (
             <Error>{errors.lastName}</Error>
           )}

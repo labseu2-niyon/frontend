@@ -51,12 +51,11 @@ const Location = ({ locationRequest, locationData }) => {
     <Root>
       <Steps stepNumber="2" />
       <Section>
-        <Heading2 primary>Location Info</Heading2>
+        <Heading2 primary>Where are you located?</Heading2>
         <IconT className="fas fa-globe-europe" />
         {/* <Icon type="pushpin" theme="twoTone" /> */}
         <Text small>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nisl
-          nisl, aliquam nec erat et, efficitur mollis metus.
+          Please enter your city name.
         </Text>
         <Auto>
           <AutoComplete
@@ -86,11 +85,11 @@ const Location = ({ locationRequest, locationData }) => {
             />
           )}
         </Auto>
+        {warning && <Error>You need to enter a city name</Error>}
         <InputWrapper>
           <Button primary small onClick={handleSubmit} loadingB={loading}>
             Next
           </Button>
-          {warning && <Error>Please Select a Location</Error>}
         </InputWrapper>
       </Section>
     </Root>
@@ -147,7 +146,6 @@ const InputWrapper = styled.div`
 const Error = styled.p`
   margin: 0;
   font-size: 14px;
-  position: absolute;
   bottom: 10%;
   left: 26%;
   color: #e29273;
