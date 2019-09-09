@@ -18,68 +18,71 @@ const Navigation = state => {
 
   const handleClick = () => {
     logOutUser();
-    window.location.href = '/auth/login';
+    // window.location.href = '/auth/login';
+    Router.push('/auth/login');
   };
 
-  return (
-    <Nav>
-      <div className="desktop">
-        <Avatar extraLarge source={dummyUser.image} />
-        <p className="desktop name">{userInfo.username}</p>
-      </div>
+  if (userInfo) {
+    return (
+      <Nav>
+        <div className="desktop">
+          <Avatar extraLarge source={dummyUser.image} />
+          <p className="desktop name">{userInfo.username}</p>
+        </div>
 
-      <div className="mobile-avatar">
-        <Avatar small source={dummyUser.image} />
-      </div>
-      <Links>
-        <Link href="/">
-          <div>
-            <Icon type="home" className="icon" />
-            <a className="desktop">Home</a>
-          </div>
-        </Link>
-        <Link
-          href={{
-            pathname: '/profile',
-            query: {
-              userId: 'abc123',
-              user: userInfo.username,
-              jobTitle: 'Web Developer',
-              src: ''
-            }
-          }}
-        >
-          <div>
-            <Icon type="user" className="icon" />
-            <a className="desktop">Profile</a>
-          </div>
-        </Link>
-        <Link href="/connections">
-          <div>
-            <Icon type="share-alt" className="icon" />
-            <a className="desktop">Connections</a>
-          </div>
-        </Link>
-        <Link href="/explore">
-          <div>
-            <Icon type="search" className="icon" />
-            <a className="desktop">Explore</a>
-          </div>
-        </Link>
-        {/* <Link href="/settings">
+        <div className="mobile-avatar">
+          <Avatar small source={dummyUser.image} />
+        </div>
+        <Links>
+          <Link href="/">
+            <div>
+              <Icon type="home" className="icon" />
+              <a className="desktop">Home</a>
+            </div>
+          </Link>
+          <Link
+            href={{
+              pathname: '/profile',
+              query: {
+                userId: 'abc123',
+                user: userInfo.username,
+                jobTitle: 'Web Developer',
+                src: ''
+              }
+            }}
+          >
+            <div>
+              <Icon type="user" className="icon" />
+              <a className="desktop">Profile</a>
+            </div>
+          </Link>
+          <Link href="/connections">
+            <div>
+              <Icon type="share-alt" className="icon" />
+              <a className="desktop">Connections</a>
+            </div>
+          </Link>
+          <Link href="/explore">
+            <div>
+              <Icon type="search" className="icon" />
+              <a className="desktop">Explore</a>
+            </div>
+          </Link>
+          {/* <Link href="/settings">
           <div>
             <Icon type="setting" className="icon" />
             <a className="desktop">Settings</a>
           </div>
         </Link> */}
 
-        <div onClick={handleClick}>
-          <Icon type="logout" className="icon" />
-          <div className="desktop">Log out</div>
-        </div>
-      </Links>
-    </Nav>
-  );
+          <div onClick={handleClick}>
+            <Icon type="logout" className="icon" />
+            <div className="desktop">Log out</div>
+          </div>
+        </Links>
+      </Nav>
+    );
+  }
 };
 
 const Nav = styled.div`
