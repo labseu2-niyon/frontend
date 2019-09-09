@@ -43,9 +43,11 @@ const Login = ({ errors, touched, loading, status }) => (
         )}
         {status && status.msg && <Error>{status.msg}</Error>}
       </InputWrapper>
-      <Button small primary type="submit" loadingB={loading}>
-        Log In
-      </Button>
+      <InputWrapper>
+        <Button small primary type="submit" loadingB={loading}>
+          Log In
+        </Button>
+      </InputWrapper>
     </FormArea>
     <BottomWrapper>
       <Text small>
@@ -76,7 +78,7 @@ const FormikLoginForm = withFormik({
       if (res === 200) {
         Router.push('/');
       } else {
-        setStatus({ msg: res });
+        setStatus({ msg: 'Incorrect email or password. Please try again.' });
       }
     });
   }
@@ -96,32 +98,34 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   a {
     text-decoration: none;
   }
+  margin: 0 auto;
 `;
 
 const FormArea = styled(Form)`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-around;
   height: 30%;
   width: 100%;
+  max-width: 200px;
 
-  @media (min-width: 500px) {
+/*  @media (min-width: 500px) {
     width: 50%;
   }
 
   @media (min-width: 950px) {
     width: 30%;
   }
-
+*/
   input {
     padding: 0.5rem;
     font-size: 16px;
-    width: 70%;
+    width: 100%;
     display: block;
     color: #4d2d52;
     border: 1px solid rgba(77, 45, 82, 0.8);
@@ -145,7 +149,6 @@ const InputWrapper = styled.div`
 const Error = styled.p`
   margin: 0;
   font-size: 14px;
-  position: absolute;
   bottom: 10%;
   left: 15%;
   color: #e29273;
@@ -157,10 +160,9 @@ const TopWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  margin-top: 20px;
-  margin-bottom: 20px;
-
-  p {
+  padding: 2rem;
+  
+  h2 {
     text-align: center;
   }
 `;
