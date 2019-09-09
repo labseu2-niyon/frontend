@@ -34,7 +34,7 @@ const Navigation = ({ logOutUser, fetchUser, authReducer, user }) => {
 
       {user && (
         <div className="mobile-avatar">
-          <Avatar small source={user.image} />
+          <Avatar small source={user.profile_picture} />
         </div>
       )}
 

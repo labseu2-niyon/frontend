@@ -9,9 +9,7 @@ import Router from 'next/router';
 import Flip from 'react-reveal/Flip';
 import { Heading2, Text, Button } from '../~common/index';
 import { logInUser } from '../../redux/actions/authActions';
-import { fetchUser } from '../../redux/actions/userActions';
 import { theme } from '../../lib/theme';
-import jwt from 'jsonwebtoken';
 
 const Login = ({ errors, touched, loading, status }) => (
   <Root>
@@ -28,7 +26,6 @@ const Login = ({ errors, touched, loading, status }) => (
           </Pulse>
         </a>
       </Logo>
-      {/* </Link> */}
     </Flip>
     <TopWrapper>
       <Heading2 primary>Log in to continue to Niyon</Heading2>
@@ -227,4 +224,5 @@ const Pulse = styled.div`
       box-shadow: 1px 2px 10px 10px rgba(404,369,404, 0);
       
   }
+}
 `;
