@@ -78,6 +78,9 @@ const JobTitle = ({
     //Handling user Type Error
     if (!mentorPressed && !menteeePresed) {
       setErrors({ userTypeError: true });
+    } else if (jobTypeId === 100) {
+      setErrors({ jobError: true });
+      setTestError(true);
     } else {
       setErrors({ userTypeError: false });
       userTypeHandler(data, username, userType, jobTypeId).then(res => {
