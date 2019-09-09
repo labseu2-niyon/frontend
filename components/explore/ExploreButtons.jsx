@@ -5,7 +5,7 @@ import { Button } from '../~common';
 
 
 function ExploreButtons({ numOfConnections }) {
-  return <Link href="/connections"><Button primary>Connections ({numOfConnections})</Button></Link>;
+  return <Link href="/connections"><Button primary>Connections&nbsp;<small>({numOfConnections})</small></Button></Link>;
 }
 
 ExploreButtons.propTypes = {
