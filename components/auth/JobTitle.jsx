@@ -348,7 +348,7 @@ const Error = styled.p`
   font-size: 14px;
   position: absolute;
   bottom: 10%;
-  left: 12%;
+  left: 15%;
   color: #e29273;
 `;
 

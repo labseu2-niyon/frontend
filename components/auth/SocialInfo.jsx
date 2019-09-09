@@ -138,7 +138,8 @@ const InputWrapper = styled.div`
 
   i {
     position: absolute;
-    right: 15%;
+    right: 20%;
     top: 30%;
+    color: grey;
   }
 `;

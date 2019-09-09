@@ -4,6 +4,7 @@ import Router from 'next/router';
 import { types } from '../authConstants';
 import axiosWithToken from '../axios';
 
+// eslint-disable-next-line no-underscore-dangle
 const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
 
 const startLoading = () => ({
@@ -98,7 +99,7 @@ export const emailSignup = data => dispatch => {
         }
       });
       nookies.set({}, 'token', res.data.data.token, {
-        maxAge: 60 * 60 * 24 * 30,
+        maxAge: 60 * 60 * 24 * 14,
         path: '/'
       });
       return res.data.status;
@@ -220,7 +221,7 @@ export const logInUser = ({ email, password }) => dispatch => {
         }
       });
       nookies.set({}, 'token', res.data.data.token, {
-        maxAge: 60 * 60 * 24 * 30,
+        maxAge: 60 * 60 * 24 * 14,
         path: '/'
       });
       return res.data.status;

@@ -7,13 +7,16 @@ import Router from 'next/router';
 import { Avatar } from './~common/index';
 import { logOutUser } from '../redux/actions/authActions';
 
+
 const Navigation = (state) => {
+
+const Navigation = state => {
   const { logOutUser, authReducer } = state;
   const userInfo = jwt.decode(authReducer.token);
 
   const handleClick = () => {
     logOutUser();
-    Router.push('/auth/login');
+    window.location.href = '/auth/login';
   };
 
   return (
@@ -58,12 +61,12 @@ const Navigation = (state) => {
             <a className="desktop">Explore</a>
           </div>
         </Link>
-        <Link href="/settings">
+        {/* <Link href="/settings">
           <div>
             <Icon type="setting" className="icon" />
             <a className="desktop">Settings</a>
           </div>
-        </Link>
+        </Link> */}
 
         <div onClick={handleClick}>
           <Icon type="logout" className="icon" />
@@ -169,6 +172,6 @@ const Links = styled.div`
 `;
 
 export default connect(
-  (state) => state,
-  { logOutUser },
+  state => state,
+  { logOutUser }
 )(Navigation);
