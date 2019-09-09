@@ -9,7 +9,9 @@ import Router from 'next/router';
 import Flip from 'react-reveal/Flip';
 import { Heading2, Text, Button } from '../~common/index';
 import { logInUser } from '../../redux/actions/authActions';
+import { fetchUser } from '../../redux/actions/userActions';
 import { theme } from '../../lib/theme';
+import jwt from 'jsonwebtoken';
 
 const Login = ({ errors, touched, loading, status }) => (
   <Root>
@@ -75,7 +77,7 @@ const FormikLoginForm = withFormik({
   }),
   handleSubmit(values, { props, setStatus }) {
     props.logInUser(values).then(res => {
-      if (res === 200) {
+      if (res.status === 200) {
         Router.push('/');
       } else {
         setStatus({ msg: 'Incorrect email or password. Please try again.' });
@@ -114,7 +116,7 @@ const FormArea = styled(Form)`
   width: 100%;
   max-width: 200px;
 
-/*  @media (min-width: 500px) {
+  /*  @media (min-width: 500px) {
     width: 50%;
   }
 
@@ -161,7 +163,7 @@ const TopWrapper = styled.div`
   align-items: center;
   position: relative;
   padding: 2rem;
-  
+
   h2 {
     text-align: center;
   }
