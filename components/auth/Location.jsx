@@ -26,7 +26,7 @@ const Location = ({ locationRequest, locationData }) => {
           }
         })
         .catch(error => {
-          console.log(error);
+          //console.log(error);
         });
   };
   const chosen = value => {
@@ -36,7 +36,6 @@ const Location = ({ locationRequest, locationData }) => {
     setLoading(false);
     !select.state && setWarning('Please Select Location');
     const inwork = select.data.split(',');
-    console.log(inwork);
     inwork.every(e => !!e) &&
       inwork.length === 2 &&
       select.state &&
