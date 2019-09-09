@@ -129,7 +129,7 @@ const Root = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  p {
+  h2 {
     margin: 0 20px;
     text-align: center;
   }

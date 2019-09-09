@@ -60,9 +60,7 @@ const Location = ({ locationRequest, locationData }) => {
         <Heading2 primary>Where are you located?</Heading2>
         <IconT className="fas fa-globe-europe" />
         {/* <Icon type="pushpin" theme="twoTone" /> */}
-        <Text small>
-          Please enter your city name.
-        </Text>
+        <Text small>Please enter your city name.</Text>
         <Auto>
           <AutoComplete
             onChange={getPossibleLocation}
@@ -114,7 +112,7 @@ const Root = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  p {
+  h2 {
     text-align: center;
     padding: 0 20px;
     @media (min-width: 500px) {

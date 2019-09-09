@@ -85,6 +85,7 @@ const JobTitle = ({
     }
   };
 
+  //action creators request for update user information and added user choices
   const handleRequest = data => {
     checkedValue &&
       checkedValue.forEach(item => {
