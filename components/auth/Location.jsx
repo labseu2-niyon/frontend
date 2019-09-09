@@ -10,7 +10,10 @@ import { Icon, AutoComplete } from 'antd';
 
 const Location = ({ locationRequest, locationData }) => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [select, setSelect] = useState({ state: false, data: '' });
+  const [warning, setWarning] = useState('');
+
   const getPossibleLocation = place => {
     locationRequest(place)
       .then(res => {
@@ -26,16 +29,22 @@ const Location = ({ locationRequest, locationData }) => {
     setSelect({ state: true, data: value });
   };
   const handleSubmit = () => {
+    setLoading(false);
+    !select.state && setWarning('Please Select Location');
     const inwork = select.data.split(',');
     select.state &&
+      (setLoading(true),
+      setWarning(''),
       locationData({
         cityName: inwork[0].trim(),
         countryName: inwork[1].trim()
       }).then(res => {
         if (res === 201) {
+          setLoading(false);
+          setWarning('');
           Router.push('/auth/job-title');
         }
-      });
+      }));
   };
 
   return (
@@ -77,9 +86,12 @@ const Location = ({ locationRequest, locationData }) => {
             />
           )}
         </Auto>
-        <Button primary small onClick={handleSubmit}>
-          Next
-        </Button>
+        <InputWrapper>
+          <Button primary small onClick={handleSubmit} loadingB={loading}>
+            Next
+          </Button>
+          {warning && <Error>Please Select a Location</Error>}
+        </InputWrapper>
       </Section>
     </Root>
   );
@@ -110,8 +122,8 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  height: 80vh;
+  justify-content: space-between;
+  height: 100vh;
 `;
 
 const IconT = styled.i`
@@ -121,4 +133,22 @@ const IconT = styled.i`
 const Auto = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const InputWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-bottom: 30px;
+`;
+
+const Error = styled.p`
+  margin: 0;
+  font-size: 14px;
+  position: absolute;
+  bottom: 10%;
+  left: 26%;
+  color: #e29273;
 `;
