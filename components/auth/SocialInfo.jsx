@@ -15,7 +15,6 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
   const handleSubmit = e => {
     e.preventDefault();
     const data = {
-      user_id: usernameId,
       facebook,
       linkedin,
       twitter
@@ -61,7 +60,7 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
           />
           <i className="fab fa-twitter fa-lg"></i>
         </InputWrapper>
-        <InputWrapper>
+        {/* <InputWrapper>
           <input
             type="text"
             placeholder="Github handle"
@@ -70,7 +69,7 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
             }}
           />
           <i className="fab fa-github fa-lg"></i>
-        </InputWrapper>
+        </InputWrapper> */}
 
         <Button small primary type="submit" loadingB={loading}>
           Next
@@ -100,6 +99,9 @@ const Root = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  h2 {
+    text-align: center;
+  }
 `;
 
 const FormArea = styled.form`
