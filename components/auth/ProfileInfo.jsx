@@ -157,6 +157,17 @@ const FormArea = styled.form`
 
   @media (min-width: 500px) {
     width: 50%;
+
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
+    border-color: -moz-use-text-color #ffffff #ffffff -moz-use-text-color;
+    border-style: none solid solid none;
+    border-width: medium 1px 1px medium;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.07);
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
   }
 
   textarea {
@@ -173,12 +184,4 @@ const FormArea = styled.form`
       opacity: 0.4;
     }
   }
-`;
-
-const Input = styled.input`
-  width: 100%;
-  height: 100%;
-  color: grey;
-  position: absolute;
-  opacity: 0;
 `;
