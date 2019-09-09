@@ -205,11 +205,6 @@ const JobTitle = ({
           Next
         </Button>
       </FormArea>
-      {/* {mentorError && (
-        <Text small style={{ color: 'red' }}>
-          Mentorship type is required
-        </Text>
-      )} */}
     </Root>
   );
 };
@@ -249,10 +244,6 @@ const Header = styled.div`
   p {
     padding: 0 20px;
     text-align: center;
-
-    /* @media (min-width: 500px) {
-      width: 50%;
-    } */
   }
 `;
 
@@ -261,10 +252,6 @@ const MentorIcons = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
-
-  @media (min-width: 500px) {
-    width: 50%;
-  }
   i {
     color: grey;
   }
@@ -307,16 +294,9 @@ const FormArea = styled.form`
   justify-content: space-between;
   height: auto;
   padding: 30px 0;
-  @media (min-width: 500px) {
-    width: 50%;
-  }
 
   button {
     margin-top: 30px;
-  }
-
-  @media (min-width: 500px) {
-    width: 50%;
   }
 
   input {
@@ -351,24 +331,12 @@ const FormArea = styled.form`
     background-position: right 0.7em top 50%, 0 0;
     background-size: 0.65em auto, 100%;
 
-    @media (min-width: 500px) {
-      width: 70%;
-    }
     option {
       color: grey;
       opacity: 0.4;
     }
   }
 `;
-
-// const InputWrapper = styled.div`
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   position: relative;
-//   padding-bottom: 30px;
-// `;
 
 const InputWrapperJob = styled.div`
   width: 100%;
