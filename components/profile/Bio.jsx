@@ -38,7 +38,7 @@ const Location = styled.div`
     }
 
     i {
-        padding-top: 3px;
+        padding-top: 0px;
         margin-right: 10px;
     }
 `;
@@ -75,16 +75,18 @@ const Social = styled.div`
     }
 `;
 
-function Bio({ position, location, text }) {
+function Bio(props) {
+  const { user } = props;
+
   return (
     <Wrapper>
       <BioSection>
         <Location>
-          <div><Icon type="book" />{position}</div>
-          <div><Icon type="global" />{location}</div>
+          <div><Icon type="book" />{user.Mentor ? 'Mentor' : 'Mentee'}</div>
+          <div><Icon type="global" />{user.location.city_name}, {user.location.country_name}</div>
         </Location>
         <Heading2>Bio</Heading2>
-        {text.map((line) => <p>{line}</p>)}
+        <p>{user.biography}</p>
         <Social>
           <button type="button">
             <Icon type="linkedin" size="large" />
@@ -102,9 +104,7 @@ function Bio({ position, location, text }) {
 }
 
 Bio.propTypes = {
-  position: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
-  text: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  user: PropTypes.shape().isRequired
 };
 
 export default Bio;

@@ -48,17 +48,20 @@ const ButtonWrapper = styled.div`
     align-items: center;
 `;
 
-function PhotoSection({ user, jobTitle, src }) {
+function PhotoSection(props) {
+  const { user } = props;
+
   return (
     <Wrapper>
       <PhotoWrapper>
         <Photo>
-          <img src={src} alt="" height="100%" />
+          <img src={user.profile_picture} alt="" height="100%" />
         </Photo>
       </PhotoWrapper>
       <TextWrapper>
-        <Heading>{user}</Heading>
-        <p>{jobTitle}</p>
+        <Heading>{user.first_name} {user.last_name}</Heading>
+        <p><strong>Email:</strong> {user.email}</p>
+        <p><strong>Job:</strong> {user.job || 'Not listed'}</p>
       </TextWrapper>
       <ButtonWrapper>
         <Button small primary>Connect</Button>
@@ -68,9 +71,10 @@ function PhotoSection({ user, jobTitle, src }) {
 }
 
 PhotoSection.propTypes = {
-  jobTitle: PropTypes.string.isRequired,
-  user: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired,
+  user: PropTypes.shape().isRequired,
+  job: PropTypes.string.isRequired,
+  first_name: PropTypes.string.isRequired,
+  last_name: PropTypes.string.isRequired,
 };
 
 export default PhotoSection;

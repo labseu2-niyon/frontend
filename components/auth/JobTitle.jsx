@@ -43,6 +43,8 @@ const JobTitle = ({
   //const [checkedValue, setCheckedValue] = useState({});
   const [options, setOptions] = useState([]);
   const [checked, setChecked] = useState(false);
+  const [menteePressed, setMenteePressed] = useState(false);
+  const [mentorError, setMentorError] = useState(false);
 
   useEffect(() => {
     getJobTitles();
@@ -84,12 +86,7 @@ const JobTitle = ({
     } else {
       setErrors({ userTypeError: false });
       userTypeHandler(data, username, userType, jobTypeId).then(res => {
-        if (res === 201) {
-          Router.push('/auth/profile-info');
-        }
-      });
-    }
-  };
+
 
   const handleCheckBox = e => {
     // const op = [];
@@ -119,7 +116,6 @@ const JobTitle = ({
                 </Flip>
               );
             })}
-          {/* {!checked && <Error>{err.userOptionError} </Error>} */}
         </M>
       </div>
     );
@@ -164,11 +160,8 @@ const JobTitle = ({
     <Root>
       <Steps stepNumber="3" />
       <Header>
-        <Heading2 primary>Mentorship Info</Heading2>
-        <Text small>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nisl
-          nisl, aliquam nec erat et, efficitur mollis metus.
-        </Text>
+        <Heading2 primary>Who are you?</Heading2>
+        <Text small>Choose your mentorship type.</Text>
       </Header>
       <MentorIcons>
         <Costum>
@@ -199,6 +192,7 @@ const JobTitle = ({
         <InputWrapper>
           <select value={jobTypeId} onChange={handleSelect}>
             <option>Choose Job Type</option>
+
             {allJobs &&
               allJobs.map(job => {
                 return (
@@ -210,7 +204,7 @@ const JobTitle = ({
           </select>
           {testError && <Error>{err.jobTypeError}</Error>}
         </InputWrapper>
-        {menteeePresed && mentee()}
+        {menteePressed && mentee()}
         {mentorPressed && mentor()}
         <Button
           small
@@ -222,14 +216,10 @@ const JobTitle = ({
           Next
         </Button>
       </FormArea>
-      {mentorError && (
-        <Text small style={{ color: 'red' }}>
-          Menthorship type is required*
-        </Text>
-      )}
     </Root>
   );
 };
+
 
 const mapStateToProps = state => {
   return {
@@ -270,7 +260,7 @@ const Header = styled.div`
     text-align: center;
 
     @media (min-width: 500px) {
-      width: 50%;
+      width: 100%;
     }
   }
 `;
@@ -278,7 +268,7 @@ const Header = styled.div`
 const MentorIcons = styled.div`
   width: 85%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   position: relative;
   padding-bottom: 20px;
 
@@ -293,6 +283,7 @@ const MentorIcons = styled.div`
 const Costum = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 0 2rem;
   i {
     transition: all 0.2s ease-in;
 
@@ -392,7 +383,6 @@ const InputWrapper = styled.div`
 const Error = styled.p`
   margin: 0;
   font-size: 14px;
-  position: absolute;
   bottom: 10%;
   left: 15%;
   color: #e29273;

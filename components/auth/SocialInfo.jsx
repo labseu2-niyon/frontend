@@ -29,12 +29,12 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
   return (
     <Root>
       <Steps stepNumber="5" />
-      <Heading2 primary>Add Social Media</Heading2>
+      <Heading2 primary>Add your social media handles</Heading2>
       <FormArea onSubmit={handleSubmit}>
         <InputWrapper>
           <input
             type="text"
-            placeholder="facebook handler"
+            placeholder="Facebook handle"
             onChange={e => {
               setFacebook(e.target.value);
             }}
@@ -44,7 +44,7 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
         <InputWrapper>
           <input
             type="text"
-            placeholder="linkedin handler"
+            placeholder="Linkedin handle"
             onChange={e => {
               setLinkedin(e.target.value);
             }}
@@ -54,7 +54,7 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
         <InputWrapper>
           <input
             type="text"
-            placeholder="tweeter handler"
+            placeholder="Twitter handle"
             onChange={e => {
               setTweeter(e.target.value);
             }}
@@ -64,7 +64,7 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
         <InputWrapper>
           <input
             type="text"
-            placeholder="github handler"
+            placeholder="Github handle"
             onChange={e => {
               setGitHub(e.target.value);
             }}
