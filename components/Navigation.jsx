@@ -16,19 +16,25 @@ const Navigation = state => {
 
   const handleClick = () => {
     logOutUser();
-    window.location.href = '/auth/login';
+    Router.push('/auth/login');
   };
 
   return (
     <Nav>
-      <div className="desktop">
-        <Avatar extraLarge source={userInfo.profile_picture} />
-        <p className="desktop name">{userInfo.username}</p>
-      </div>
 
-      <div className="mobile-avatar">
-        <Avatar small source={userInfo.username} />
-      </div>
+      {userInfo && (
+        <div className="desktop">
+          <Avatar extraLarge source={dummyUser.image} />
+          <p className="desktop name">{userInfo.username}</p>
+        </div>
+      )}
+
+      {userInfo && (
+        <div className="mobile-avatar">
+          <Avatar small source={dummyUser.image} />
+        </div>
+      )}
+
       <Links>
         <Link href="/">
           <div>
@@ -36,6 +42,7 @@ const Navigation = state => {
             <a className="desktop">Home</a>
           </div>
         </Link>
+
         <Link
           href={{
             pathname: '/my-profile',
@@ -49,6 +56,25 @@ const Navigation = state => {
             <a className="desktop">Profile</a>
           </div>
         </Link>
+        {userInfo && (
+          <Link
+            href={{
+              pathname: '/profile',
+              query: {
+                userId: 'abc123',
+                user: userInfo.username,
+                jobTitle: 'Web Developer',
+                src: ''
+              }
+            }}
+          >
+            <div>
+              <Icon type="user" className="icon" />
+              <a className="desktop">Profile</a>
+            </div>
+          </Link>
+        )}
+
         <Link href="/connections">
           <div>
             <Icon type="share-alt" className="icon" />
