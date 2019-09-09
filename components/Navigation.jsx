@@ -7,9 +7,6 @@ import Router from 'next/router';
 import { Avatar } from './~common/index';
 import { logOutUser } from '../redux/actions/authActions';
 
-
-const Navigation = (state) => {
-
 const Navigation = state => {
   const { logOutUser, authReducer } = state;
   const userInfo = jwt.decode(authReducer.token);
@@ -21,7 +18,6 @@ const Navigation = state => {
 
   return (
     <Nav>
-
       {userInfo && (
         <div className="desktop">
           <Avatar extraLarge source={dummyUser.image} />
@@ -47,8 +43,8 @@ const Navigation = state => {
           href={{
             pathname: '/my-profile',
             query: {
-              user: userInfo.username,
-            },
+              user: userInfo.username
+            }
           }}
         >
           <div>
