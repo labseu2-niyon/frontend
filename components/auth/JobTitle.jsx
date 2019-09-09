@@ -1,18 +1,21 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Steps from './StepsComp';
-import { Heading2, Button, Text } from '../~common/index';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import Flip from 'react-reveal/Flip';
-import { theme } from '../../lib/theme';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import { userTypeHandler, getJobTitles } from '../../redux/actions/authActions';
+import Steps from './StepsComp';
+import { theme } from '../../lib/theme';
+import { Heading2, Button, Text } from '../~common/index';
+
+const err = {
+  jobTypeError: 'Plseae select a Job Type'
+};
 
 const JobTitle = ({
-  touched,
-  errors,
   values,
   status,
   userTypeHandler,
@@ -25,6 +28,12 @@ const JobTitle = ({
   const [mentorPressed, setMentorPressed] = useState(false);
   const [menteeePresed, setMenteePressed] = useState(false);
   const [mentorError, setMentorError] = useState(true);
+  const [jobTypeId, setJobTypeId] = useState('');
+  const [errors, setErrors] = useState({
+    jobError: false,
+    userTypeError: false,
+    helpError: false
+  });
 
   useEffect(() => {
     getJobTitles();
@@ -35,7 +44,7 @@ const JobTitle = ({
       values.user = menteeePresed ? 'mentee' : 'mentor';
       console.log(status);
       const data = {
-        locationId: locationId,
+        locationId,
         industryId: '1'
       };
       const type = status.user;
@@ -48,6 +57,24 @@ const JobTitle = ({
     }
   }, [status]);
 
+  const handleSelect = e => {
+    console.log(e.target.value);
+    if (e.target.value === 'Choose Job Type') {
+      setErrors({ jobError: true });
+    } else {
+      setJobTypeId(e.target.value);
+      setErrors({ jobError: false });
+    }
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log(typeof jobTypeId, jobTypeId);
+    if (!jobTypeId.length) {
+      setErrors({ jobError: true });
+    }
+  };
+
   const mentor = () => {
     return (
       <div>
@@ -55,19 +82,19 @@ const JobTitle = ({
           <Flip top>
             <Text small>What kind of help are you provide ?</Text>
             <Label>
-              <Field type="checkbox" name="preparation" />
+              <input type="checkbox" name="preparation" />
               Job Preparation
             </Label>
             <Label>
-              <Field type="checkbox" name="development" />
+              <input type="checkbox" name="development" />
               Skils Development
             </Label>
             <Label>
-              <Field type="checkbox" name="coaching" />
+              <input type="checkbox" name="coaching" />
               Life Coaching
             </Label>
             <Label>
-              <Field type="checkbox" name="networking" />
+              <input type="checkbox" name="networking" />
               Networking
             </Label>
           </Flip>
@@ -81,11 +108,11 @@ const JobTitle = ({
         <Flip top>
           <Text small>What kind of help are you looking for ?</Text>
           <Label>
-            <Field type="checkbox" name="preparation" />
+            <input type="checkbox" name="preparation" />
             Job Preparation
           </Label>
           <Label>
-            <Field
+            <input
               type="checkbox"
               name="development"
               checked={values.development}
@@ -93,11 +120,11 @@ const JobTitle = ({
             Skils Development
           </Label>
           <Label>
-            <Field type="checkbox" name="coaching" checked={values.coaching} />
+            <input type="checkbox" name="coaching" checked={values.coaching} />
             Life Coaching
           </Label>
           <Label>
-            <Field
+            <input
               type="checkbox"
               name="networking"
               checked={values.networking}
@@ -148,9 +175,9 @@ const JobTitle = ({
           </Info>
         </Costum>
       </MentorIcons>
-      <FormArea>
+      <FormArea onSubmit={handleSubmit}>
         <InputWrapper>
-          <Field component="select" name="job">
+          <select value={jobTypeId} onChange={handleSelect}>
             <option>Choose Job Type</option>
             {allJobs &&
               allJobs.map(job => {
@@ -160,8 +187,8 @@ const JobTitle = ({
                   </option>
                 );
               })}
-          </Field>
-          {touched.job && errors.job && <Error>{errors.job}</Error>}
+          </select>
+          {errors.jobError && <Error>{err.jobTypeError}</Error>}
         </InputWrapper>
         {menteeePresed && mentee()}
         {mentorPressed && mentor()}
@@ -276,7 +303,7 @@ const Info = styled.div`
   }
 `;
 
-const FormArea = styled(Form)`
+const FormArea = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
