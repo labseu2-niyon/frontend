@@ -18,28 +18,31 @@ const Navigation = state => {
 
   const handleClick = () => {
     logOutUser();
-    // window.location.href = '/auth/login';
     Router.push('/auth/login');
   };
 
-  if (userInfo) {
-    return (
-      <Nav>
+  return (
+    <Nav>
+      {userInfo && (
         <div className="desktop">
           <Avatar extraLarge source={dummyUser.image} />
           <p className="desktop name">{userInfo.username}</p>
         </div>
+      )}
 
+      {userInfo && (
         <div className="mobile-avatar">
           <Avatar small source={dummyUser.image} />
         </div>
-        <Links>
-          <Link href="/">
-            <div>
-              <Icon type="home" className="icon" />
-              <a className="desktop">Home</a>
-            </div>
-          </Link>
+      )}
+      <Links>
+        <Link href="/">
+          <div>
+            <Icon type="home" className="icon" />
+            <a className="desktop">Home</a>
+          </div>
+        </Link>
+        {userInfo && (
           <Link
             href={{
               pathname: '/profile',
@@ -56,33 +59,33 @@ const Navigation = state => {
               <a className="desktop">Profile</a>
             </div>
           </Link>
-          <Link href="/connections">
-            <div>
-              <Icon type="share-alt" className="icon" />
-              <a className="desktop">Connections</a>
-            </div>
-          </Link>
-          <Link href="/explore">
-            <div>
-              <Icon type="search" className="icon" />
-              <a className="desktop">Explore</a>
-            </div>
-          </Link>
-          {/* <Link href="/settings">
+        )}
+        <Link href="/connections">
+          <div>
+            <Icon type="share-alt" className="icon" />
+            <a className="desktop">Connections</a>
+          </div>
+        </Link>
+        <Link href="/explore">
+          <div>
+            <Icon type="search" className="icon" />
+            <a className="desktop">Explore</a>
+          </div>
+        </Link>
+        {/* <Link href="/settings">
           <div>
             <Icon type="setting" className="icon" />
             <a className="desktop">Settings</a>
           </div>
         </Link> */}
 
-          <div onClick={handleClick}>
-            <Icon type="logout" className="icon" />
-            <div className="desktop">Log out</div>
-          </div>
-        </Links>
-      </Nav>
-    );
-  }
+        <div onClick={handleClick}>
+          <Icon type="logout" className="icon" />
+          <div className="desktop">Log out</div>
+        </div>
+      </Links>
+    </Nav>
+  );
 };
 
 const Nav = styled.div`
