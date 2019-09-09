@@ -1,27 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import PhotoSection from './PhotoSection';
 import Bio from './Bio';
+import { fetchUser } from '../../redux/actions/userActions';
 
 const Container = styled.main`
     width: 100%;
 `;
 
-
-const bioData = {
-  position: 'Mentor',
-  location: 'San Fransisco',
-  text: ['Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    'Veniam aliquam similique ipsa omnis commodi, consequuntur assumenda quos porro eligendi, in odio mollitia optio doloremque laborum vitae, obcaecati quo ratione culpa.'],
-};
-
 function Profile(props) {
   return (
     <Container>
-      <PhotoSection {...props} />
-      <Bio {...bioData} />
+      <PhotoSection user={props} />
+      <Bio user={props} />
     </Container>
   );
 }
 
-export default Profile;
+const mapStateToProps = ({ userReducer }) => ({ userReducer });
+
+export default connect(mapStateToProps, { getUser: fetchUser })(Profile);
