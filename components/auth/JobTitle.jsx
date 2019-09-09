@@ -15,9 +15,9 @@ import { theme } from '../../lib/theme';
 import { Heading2, Button, Text } from '../~common/index';
 
 const err = {
-  jobTypeError: 'Plseae select a Job Type',
-  userTypeError: 'Please select a user type',
-  userOptionError: 'Minimum one field required'
+  jobTypeError: 'Please select a job',
+  userTypeError: 'Please choose who you want to register as',
+  userOptionError: 'Select at least one field'
 };
 
 const JobTitle = ({
@@ -33,9 +33,9 @@ const JobTitle = ({
   userId
 }) => {
   const [mentorPressed, setMentorPressed] = useState(false);
-  const [menteeePresed, setMenteePressed] = useState(false);
+  const [menteePressed, setMenteePressed] = useState(false);
   const [userType, setUserType] = useState('');
-  const [mentorError, setMentorError] = useState(true);
+  // const [mentorError, setMentorError] = useState(true);
   const [jobTypeId, setJobTypeId] = useState(100);
   const [errors, setErrors] = useState({
     jobError: false,
@@ -51,7 +51,7 @@ const JobTitle = ({
   }, []);
 
   const handleSelect = e => {
-    if (e.target.value === 100 || e.target.value === 'Choose Job Type') {
+    if (e.target.value === 100 || e.target.value === 'Select your job title') {
       setErrors({ jobError: true });
       setTestError(true);
     } else {
@@ -63,7 +63,7 @@ const JobTitle = ({
 
   const handleSubmit = e => {
     e.preventDefault();
-    //Handling Job type error
+    // Handling Job type error
     if (jobTypeId === 100) {
       setErrors({ jobError: true });
       setTestError(true);
@@ -74,8 +74,8 @@ const JobTitle = ({
       locationId,
       industryId: '1'
     };
-    //Handling user Type Error
-    if (!mentorPressed && !menteeePresed) {
+    // Handling user Type Error
+    if (!mentorPressed && !menteePressed) {
       setErrors({ userTypeError: true });
     } else if (jobTypeId === 100) {
       setTestError(true);
@@ -112,7 +112,7 @@ const JobTitle = ({
     return (
       <div>
         <M>
-          <Text small>What kind of help are you provide ?</Text>
+          <Text small>What kind of help can you provide?</Text>
           {mentorTypes &&
             mentorTypes.map(type => {
               return (
@@ -136,10 +136,11 @@ const JobTitle = ({
       </div>
     );
   };
+
   const mentee = () => {
     return (
       <M>
-        <Text small>What kind of help are you looking for ?</Text>
+        <Text small>What kind of help are you looking for?</Text>
         {mentorTypes &&
           mentorTypes.map(type => {
             return (
@@ -177,53 +178,48 @@ const JobTitle = ({
     <Root>
       <Steps stepNumber="3" />
       <Header>
-        <Heading2 primary>Mentorship Info</Heading2>
-        <Text small>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nisl
-          nisl, aliquam nec erat et, efficitur mollis metus.
-        </Text>
+        <Heading2 primary>Who are you?</Heading2>
+        <Text small>Choose your mentorship type.</Text>
       </Header>
       <MentorIcons>
-        <Costum>
+        <Custom>
           <i
             className="fas fa-user-graduate fa-6x"
-            style={{ color: menteeePresed && theme.primary }}
+            style={{ color: menteePressed && theme.primary }}
             onClick={onMenteePressed}
-          ></i>
+          />
           <Info>
             <p>Mentee</p>
-            <i className="fas fa-info-circle"></i>
+            <i className="fas fa-info-circle" />
           </Info>
-        </Costum>
-        <Costum>
+        </Custom>
+        <Custom>
           <i
             className="fas fa-user-cog fa-6x"
             style={{ color: mentorPressed && theme.primary }}
             onClick={onMentorPressed}
-          ></i>
+          />
           <Info>
             <p>Mentor</p>
-            <i className="fas fa-info-circle"></i>
+            <i className="fas fa-info-circle" />
           </Info>
-        </Costum>
-        {errors.userTypeError && <MError>{err.userTypeError}</MError>}
+        </Custom>
       </MentorIcons>
+      {errors.userTypeError && <MError>{err.userTypeError}</MError>}
       <FormArea onSubmit={handleSubmit}>
-        <InputWrapper>
+        <InputWrapperJob>
           <select value={jobTypeId} onChange={handleSelect}>
-            <option>Choose Job Type</option>
+            <option>What is your job title?</option>
             {allJobs &&
-              allJobs.map(job => {
-                return (
-                  <option value={job.id} key={job.tech_name}>
-                    {job.tech_name}
-                  </option>
-                );
-              })}
+              allJobs.map(job => (
+                <option value={job.id} key={job.tech_name}>
+                  {job.tech_name}
+                </option>
+              ))}
           </select>
           {testError && <Error>{err.jobTypeError}</Error>}
-        </InputWrapper>
-        {menteeePresed && mentee()}
+        </InputWrapperJob>
+        {menteePressed && mentee()}
         {mentorPressed && mentor()}
         <Button
           small
@@ -235,11 +231,6 @@ const JobTitle = ({
           Next
         </Button>
       </FormArea>
-      {mentorError && (
-        <Text small style={{ color: 'red' }}>
-          Menthorship type is required*
-        </Text>
-      )}
     </Root>
   );
 };
@@ -254,6 +245,7 @@ const mapStateToProps = state => {
     mentorTypes: state.authReducer.allMentorOptions
   };
 };
+
 const mapDispatchToProps = {
   userTypeHandler,
   getJobTitles,
@@ -283,31 +275,23 @@ const Header = styled.div`
   p {
     padding: 0 20px;
     text-align: center;
-
-    @media (min-width: 500px) {
-      width: 50%;
-    }
   }
 `;
 
 const MentorIcons = styled.div`
   width: 85%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   position: relative;
-  padding-bottom: 20px;
-
-  @media (min-width: 500px) {
-    width: 50%;
-  }
   i {
     color: grey;
   }
 `;
 
-const Costum = styled.div`
+const Custom = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 0 2rem;
   i {
     transition: all 0.2s ease-in;
 
@@ -341,16 +325,9 @@ const FormArea = styled.form`
   justify-content: space-between;
   height: auto;
   padding: 30px 0;
-  @media (min-width: 500px) {
-    width: 50%;
-  }
 
   button {
     margin-top: 30px;
-  }
-
-  @media (min-width: 500px) {
-    width: 50%;
   }
 
   input {
@@ -385,9 +362,6 @@ const FormArea = styled.form`
     background-position: right 0.7em top 50%, 0 0;
     background-size: 0.65em auto, 100%;
 
-    @media (min-width: 500px) {
-      width: 70%;
-    }
     option {
       color: grey;
       opacity: 0.4;
@@ -395,13 +369,14 @@ const FormArea = styled.form`
   }
 `;
 
-const InputWrapper = styled.div`
+const InputWrapperJob = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   padding-bottom: 30px;
+  max-width: 24rem;
 `;
 
 const Error = styled.p`
@@ -416,10 +391,10 @@ const Error = styled.p`
 const MError = styled.p`
   margin: 0;
   font-size: 14px;
-  position: absolute;
   bottom: 0;
   left: 26%;
   color: #e29273;
+  text-align: center;
 `;
 
 const OptionError = styled.p`
