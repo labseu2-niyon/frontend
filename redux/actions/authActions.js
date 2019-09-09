@@ -224,7 +224,7 @@ export const logInUser = ({ email, password }) => dispatch => {
         maxAge: 60 * 60 * 24 * 14,
         path: '/'
       });
-      return res.data.status;
+      return res.data;
     })
     .catch(error => {
       dispatch({
