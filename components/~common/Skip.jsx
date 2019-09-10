@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 
-function Skip({ href }) {
+function Skip({ onHandle }) {
   return (
     <S>
-      <Link href={href}>Skip</Link>
+      <button onClick={onHandle}>Skip</button>
       <div className="dash" />
     </S>
   );
@@ -22,6 +22,14 @@ const S = styled.div`
 
   a {
     text-decoration: none;
+  }
+
+  button {
+    background: transparent;
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
   }
 
   .dash {

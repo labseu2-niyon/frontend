@@ -103,7 +103,7 @@ const ProfileInfo = props => {
         <Button small primary type="submit" loadingB={props.loading}>
           Next
         </Button>
-        <Skip href="/auth/social-info"></Skip>
+        <Skip href="/auth/social-info" onHandle={handleSubmit}></Skip>
       </FormArea>
     </Root>
   );

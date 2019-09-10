@@ -74,7 +74,7 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
         <Button small primary type="submit" loadingB={loading}>
           Next
         </Button>
-        <Skip href="/"></Skip>
+        <Skip onHandle={() => Router.push('/')}></Skip>
       </FormArea>
     </Root>
   );
