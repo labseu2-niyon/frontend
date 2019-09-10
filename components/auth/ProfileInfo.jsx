@@ -76,7 +76,6 @@ const ProfileInfo = props => {
       }
     });
   };
-
   return (
     <Root>
       <Steps stepNumber="4" />
@@ -99,7 +98,13 @@ const ProfileInfo = props => {
           type="text"
           placeholder="Biography"
           onChange={e => setBio(e.target.value)}
+          maxLength="2001"
         />
+
+        {bio.length > 2000 && (
+          <p>Sorry, your biography should have a maximum of 2000 characters!</p>
+        )}
+
         <Button small primary type="submit" loadingB={props.loading}>
           Next
         </Button>
