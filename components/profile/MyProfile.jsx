@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import PhotoSection from './PhotoSection';
-import Bio from './Bio';
+import Bio from './MyBio';
 import { fetchUser } from '../../redux/actions/userActions';
 
 const Container = styled.main`
@@ -22,7 +22,6 @@ function Profile(props) {
   if (props.userReducer.error) {
     return <div>{props.userReducer.errorMessage}</div>;
   }
-
 
   const job = props.userReducer.user.job ? props.userReducer.user.job.tech_name : 'Not listed';
   const photoProps = { ...props.userReducer, user: { ...props.userReducer.user, job } };

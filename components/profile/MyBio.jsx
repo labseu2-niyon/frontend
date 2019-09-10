@@ -78,14 +78,12 @@ const Social = styled.div`
 function Bio(props) {
   const { user } = props;
 
-  const location = JSON.parse(user.location);
-
   return (
     <Wrapper>
       <BioSection>
         <Location>
           <div><Icon type="book" />{user.Mentor ? 'Mentor' : 'Mentee'}</div>
-          <div><Icon type="global" />{location.city_name}, {location.country_name}</div>
+          <div><Icon type="global" />{user.location.city_name}, {user.location.country_name}</div>
         </Location>
         <Heading2>Bio</Heading2>
         <p>{user.biography}</p>
