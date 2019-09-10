@@ -76,6 +76,7 @@ const ProfileInfo = props => {
       }
     });
   };
+
   return (
     <Root>
       <Steps stepNumber="4" />
@@ -108,7 +109,7 @@ const ProfileInfo = props => {
         <Button small primary type="submit" loadingB={props.loading}>
           Next
         </Button>
-        <Skip href="/auth/social-info"></Skip>
+        <Skip onHandle={handleSubmit}></Skip>
       </FormArea>
     </Root>
   );
