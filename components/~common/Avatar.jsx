@@ -6,11 +6,11 @@ const AWrapper = styled.div`
   height: ${({ size }) => size || '64px'};
   background: #eaeaea;
   border-radius: 50%;
+  overflow: hidden;
 `;
 
 const A = styled.img`
   width: ${({ widthSize }) => widthSize || '64px'};
-  border-radius: 50%;
 `;
 
 const Avatar = props => {

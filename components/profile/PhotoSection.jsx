@@ -32,6 +32,11 @@ const Photo = styled.div`
     overflow: hidden;
 `;
 
+const ImgProfile = styled.img`
+  object-fit: cover;
+  width: 100%;
+`;
+
 const TextWrapper = styled.div`
     flex: 1;
     display: flex;
@@ -55,7 +60,7 @@ function PhotoSection(props) {
     <Wrapper>
       <PhotoWrapper>
         <Photo>
-          <img src={user.profile_picture} alt="" height="100%" />
+          <ImgProfile src={user.profile_picture} alt="User Profile Picture" />
         </Photo>
       </PhotoWrapper>
       <TextWrapper>
