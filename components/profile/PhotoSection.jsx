@@ -49,6 +49,7 @@ const ButtonWrapper = styled.div`
 `;
 
 function PhotoSection({ user, jobTitle, src }) {
+  console.log(user)
   return (
     <Wrapper>
       <PhotoWrapper>
