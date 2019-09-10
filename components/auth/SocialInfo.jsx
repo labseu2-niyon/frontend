@@ -19,6 +19,7 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
       linkedin,
       twitter
     };
+
     socialDataHandler(data, username).then(res => {
       if (res === 201) {
         Router.push('/');
@@ -74,7 +75,7 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
         <Button small primary type="submit" loadingB={loading}>
           Next
         </Button>
-        <Skip href="/"></Skip>
+        <Skip onHandle={() => Router.push('/')}></Skip>
       </FormArea>
     </Root>
   );
