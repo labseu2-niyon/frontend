@@ -26,7 +26,7 @@ function Home(props) {
         )}
         src="/static/hacker.svg"
       />
-      <ProfileList title="UserSuggestions" users={props.users || []} expandable />
+      <ProfileList title="User Suggestions" users={props.users || []} expandable />
       <div style={{
         width: '100%', height: 1, background: '#eaeaea', border: 'none',
       }}
