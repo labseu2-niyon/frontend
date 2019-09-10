@@ -19,6 +19,7 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
       linkedin,
       twitter
     };
+
     socialDataHandler(data, username).then(res => {
       if (res === 201) {
         Router.push('/');

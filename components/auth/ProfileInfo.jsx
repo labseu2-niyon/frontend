@@ -99,7 +99,13 @@ const ProfileInfo = props => {
           type="text"
           placeholder="Biography"
           onChange={e => setBio(e.target.value)}
+          maxLength="1501"
         />
+
+        {bio.length > 1500 && (
+          <p>Sorry, your biography should have a maximum of 1500 characters!</p>
+        )}
+
         <Button small primary type="submit" loadingB={props.loading}>
           Next
         </Button>
