@@ -53,14 +53,14 @@ const FormikWithSocialForm = withFormik({
   validationSchema: Yup.object().shape({
     username: Yup.string(),
     firstName: Yup.string()
-      .matches(/^[a-zA-Z0-9]*$/, {
-        message: 'Only alphanumerical characters allowed',
+      .matches(/^[a-zA-Z]*$/, {
+        message: 'Must contain only letters',
         excludeEmptyString: true
       })
       .required('First Name is required.'),
     lastName: Yup.string()
-      .matches(/^[a-zA-Z0-9]*$/, {
-        message: 'Only alphanumerical characters allowed',
+      .matches(/^[a-zA-Z]*$/, {
+        message: 'Must contain only letters',
         excludeEmptyString: true
       })
       .required('Last Name is required.')
