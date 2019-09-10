@@ -47,6 +47,11 @@ const Photo = styled.div`
     overflow: hidden;
 `;
 
+const ImgProfile = styled.img`
+  object-fit: cover;
+  width: 100%;
+`;
+
 const Text = styled.div`
 
 `;
@@ -91,7 +96,7 @@ function ExploreCard(props) {
         <Contents>
           <PhotoWrapper>
             <Photo>
-              <img src={props.profile_picture} alt="" height="100%" />
+              <ImgProfile src={props.profile_picture} alt="Profile Picture"/>
             </Photo>
           </PhotoWrapper>
           <Text>
