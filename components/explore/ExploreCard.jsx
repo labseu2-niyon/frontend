@@ -78,12 +78,13 @@ const L = styled.div`
 
 function ExploreCard(props) {
   const position = props.Mentor ? 'Mentor' : 'Mentee';
-  const industry = props[position] ? props[position].industry.industry_name : 'Not listed';
+
+  const job = props.job ? props.job.tech_name : 'Not listed';
 
   return (
     <Link href={{
       pathname: '/profile',
-      query: props,
+      query: { ...props, job },
     }}
     >
       <Wrapper>
@@ -95,7 +96,7 @@ function ExploreCard(props) {
           </PhotoWrapper>
           <Text>
             <Heading3>{props.first_name || 'Not Listed'} {props.last_name}</Heading3>
-            <small>Field: {industry}</small>
+            <small>Field: {job || 'Not listed'}</small>
             <p>{props.biography}</p>
           </Text>
         </Contents>

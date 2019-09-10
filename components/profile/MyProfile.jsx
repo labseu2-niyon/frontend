@@ -15,7 +15,7 @@ function Profile(props) {
     props.getUser(props.user);
   }, [props.user]);
 
-  if (props.userReducer.queryingDatabase) {
+  if (!props.userReducer.user || props.userReducer.queryingDatabase) {
     return <div />;
   }
 
@@ -23,9 +23,13 @@ function Profile(props) {
     return <div>{props.userReducer.errorMessage}</div>;
   }
 
+
+  const job = props.userReducer.user.job ? props.userReducer.user.job.tech_name : 'Not listed';
+  const photoProps = { ...props.userReducer, user: { ...props.userReducer.user, job } };
+
   return (
     <Container>
-      <PhotoSection {...props.userReducer} />
+      <PhotoSection {...photoProps} />
       <Bio {...props.userReducer} />
     </Container>
   );

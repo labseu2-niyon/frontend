@@ -51,6 +51,8 @@ const ButtonWrapper = styled.div`
 function PhotoSection(props) {
   const { user } = props;
 
+  console.log(user);
+
   return (
     <Wrapper>
       <PhotoWrapper>
@@ -61,7 +63,7 @@ function PhotoSection(props) {
       <TextWrapper>
         <Heading>{user.first_name} {user.last_name}</Heading>
         <p><strong>Email:</strong> {user.email}</p>
-        <p><strong>Job:</strong> {user.job || 'Not listed'}</p>
+        <p><strong>Job:</strong> {user.job}</p>
       </TextWrapper>
       <ButtonWrapper>
         <Button small primary>Connect</Button>
