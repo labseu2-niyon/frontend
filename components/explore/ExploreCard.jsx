@@ -47,7 +47,13 @@ const Photo = styled.div`
   overflow: hidden;
 `;
 
+const ImgProfile = styled.img`
+  object-fit: cover;
+  width: 100%;
+`;
+
 const Text = styled.div``;
+
 
 const Location = styled.div`
   position: absolute;
@@ -77,7 +83,6 @@ const L = styled.div`
 const Bio = styled.div`
   flex-grow: 1;
   min-width: 0;
-  border: 1px solid green;
 
   p {
     overflow: hidden;
@@ -103,7 +108,7 @@ function ExploreCard(props) {
         <Contents>
           <PhotoWrapper>
             <Photo>
-              <img src={props.profile_picture} alt="" height="100%" />
+              <ImgProfile src={props.profile_picture} alt="Profile Picture"/>
             </Photo>
           </PhotoWrapper>
           <Text>
