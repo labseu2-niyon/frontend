@@ -84,7 +84,7 @@ function ExploreCard(props) {
   return (
     <Link href={{
       pathname: '/profile',
-      query: { ...props, job },
+      query: { ...props, job, location: JSON.stringify(props.location) },
     }}
     >
       <Wrapper>

@@ -51,8 +51,6 @@ const ButtonWrapper = styled.div`
 function PhotoSection(props) {
   const { user } = props;
 
-  console.log(user);
-
   return (
     <Wrapper>
       <PhotoWrapper>
