@@ -10,7 +10,7 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
   const [facebook, setFacebook] = useState('');
   const [linkedin, setLinkedin] = useState('');
   const [twitter, setTweeter] = useState('');
-  const [gitHub, setGitHub] = useState('');
+  // const [gitHub, setGitHub] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();

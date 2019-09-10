@@ -9,7 +9,7 @@ import axiosWithToken from '../axios';
 const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
 
 const startLoading = () => ({
-  type: types.START_LOADING
+  type: types.START_LOADING,
 });
 
 const stopLoading = () => ({ type: types.STOP_LOADING });
@@ -73,14 +73,14 @@ export const locationData = data => dispatch => {
 // Action creator for persisting profile data
 export const profileData = data => ({
   type: types.SET_PROFILE_DATA,
-  payload: data
+  payload: data,
 });
 
 export const socialData = data => {
   Router.push('/auth/location');
   return {
     type: types.SET_USER_NAME,
-    payload: data
+    payload: data,
   };
 };
 
@@ -110,19 +110,19 @@ export const emailSignup = data => dispatch => {
         type: types.SET_EMAIL_DATA,
         payload: {
           token: res.data.data.token,
-          data: res.data.data.user
-        }
+          data: res.data.data.user,
+        },
       });
       nookies.set({}, 'token', res.data.data.token, {
         maxAge: 60 * 60 * 24 * 30,
-        path: '/'
+        path: '/',
       });
       return res.data.status;
     })
     .catch(err => {
       dispatch({
         type: types.REGISTER_USER_FAILURE,
-        payload: err.response.data.message
+        payload: err.response.data.message,
       });
 
       return err.response.data.message;
@@ -197,7 +197,7 @@ export const userProfileInfo = (data, user) => dispatch => {
     .catch(err => {
       dispatch({
         type: types.USER_INFO_FAIL,
-        payload: err.response.data.message
+        payload: err.response.data.message,
       });
       return err.response.status;
     });
@@ -242,19 +242,19 @@ export const logInUser = ({ email, password }) => dispatch => {
         type: types.LOG_IN_USER_SUCCESS,
         payload: {
           token: res.data.data.token,
-          message: res.data.data.message
-        }
+          message: res.data.data.message,
+        },
       });
       nookies.set({}, 'token', res.data.data.token, {
         maxAge: 60 * 60 * 24 * 30,
-        path: '/'
+        path: '/',
       });
       return res.data;
     })
     .catch(error => {
       dispatch({
         type: types.LOG_IN_USER_FAILURE,
-        payload: error.message
+        payload: error.message,
       });
       return error.response.data.message;
     });
@@ -272,14 +272,14 @@ export const resetPassword = props => dispatch => {
     .then(res => {
       dispatch({
         type: types.RESET_PASSWORD_SUCCESS,
-        payload: res.data.data.message
+        payload: res.data.data.message,
       });
       Router.push('/auth/email-sent');
     })
     .catch(error => {
       dispatch({
         type: types.RESET_PASSWORD_FAILURE,
-        payload: error.response.data.message
+        payload: error.response.data.message,
       });
       return error.response.data.message;
     });
@@ -289,19 +289,22 @@ export const changePassword = props => dispatch => {
   dispatch({ type: types.CHANGE_PASSWORD_REQUEST });
   axios
     .patch(`${_BASE_URL}/user/newpassword?token=${props.token}`, {
-      password: props.password
+      password: props.password,
     })
     .then(res => {
       dispatch({
         type: types.CHANGE_PASSWORD_SUCCESS,
-        payload: res.data.data.message
+        payload: res.data.data,
       });
-      Router.push('/auth/login');
+
+      setTimeout(() => {
+        Router.push('/auth/login');
+      }, 2000);
     })
     .catch(error => {
       dispatch({
         type: types.CHANGE_PASSWORD_FAILURE,
-        payload: error.message
+        payload: error.message,
       });
     });
 };
