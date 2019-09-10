@@ -16,7 +16,7 @@ function Profile(props) {
   }, [props.user]);
 
   if (props.userReducer.queryingDatabase) {
-    return <div>Loading</div>;
+    return <div />;
   }
 
   if (props.userReducer.error) {
