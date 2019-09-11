@@ -11,9 +11,7 @@ import { Heading2, Text, Button } from '../~common/index';
 import { logInUser } from '../../redux/actions/authActions';
 import { theme } from '../../lib/theme';
 
-const Login = ({
-  errors, touched, loading, status
-}) => (
+const Login = ({ errors, touched, loading, status }) => (
   <Root>
     <Flip left>
       <Logo>
@@ -28,14 +26,9 @@ const Login = ({
           </Pulse>
         </a>
       </Logo>
-      {/* </Link> */}
     </Flip>
     <TopWrapper>
-      <Heading2 primary>Welcome Back</Heading2>
-      <Text small>
-        Do not miss your next opportunity. Sign in to stay updated on your
-        professional world.
-      </Text>
+      <Heading2 primary>Log in to continue to Niyon</Heading2>
     </TopWrapper>
     <FormArea>
       <InputWrapper>
@@ -49,9 +42,11 @@ const Login = ({
         )}
         {status && status.msg && <Error>{status.msg}</Error>}
       </InputWrapper>
-      <Button small primary type="submit" loadingB={loading}>
-        Log In
-      </Button>
+      <InputWrapper>
+        <Button small primary type="submit" loadingB={loading}>
+          Log In
+        </Button>
+      </InputWrapper>
     </FormArea>
     <BottomWrapper>
       <Text small>
@@ -79,10 +74,10 @@ const FormikLoginForm = withFormik({
   }),
   handleSubmit(values, { props, setStatus }) {
     props.logInUser(values).then(res => {
-      if (res === 200) {
+      if (res.status === 200) {
         Router.push('/');
       } else {
-        setStatus({ msg: res });
+        setStatus({ msg: 'Incorrect email or password. Please try again.' });
       }
     });
   }
@@ -102,32 +97,25 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   a {
     text-decoration: none;
   }
+  margin: 0 auto;
 `;
 
 const FormArea = styled(Form)`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-around;
   height: 30%;
   width: 100%;
-
-  @media (min-width: 500px) {
-    width: 50%;
-  }
-
-  @media (min-width: 950px) {
-    width: 30%;
-  }
+  max-width: 200px;
 
   input {
     padding: 0.5rem;
     font-size: 16px;
-    width: 70%;
+    width: 100%;
     display: block;
     color: #4d2d52;
     border: 1px solid rgba(77, 45, 82, 0.8);
@@ -151,7 +139,6 @@ const InputWrapper = styled.div`
 const Error = styled.p`
   margin: 0;
   font-size: 14px;
-  position: absolute;
   bottom: 10%;
   left: 15%;
   color: #e29273;
@@ -163,10 +150,9 @@ const TopWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  padding: 2rem;
 
-  p {
+  h2 {
     text-align: center;
   }
 `;
@@ -229,4 +215,5 @@ const Pulse = styled.div`
       box-shadow: 1px 2px 10px 10px rgba(404,369,404, 0);
       
   }
+}
 `;

@@ -15,15 +15,31 @@ export const userReducer = (state = initialState, action) => {
   const { payload } = action;
   switch (action.type) {
     case types.UPDATE_USER_PROFILE_REQUEST:
-
       return {
         ...state,
         user: payload,
       };
-    case types.FETCH_USER_FAILURE:
+    case types.FETCH_USER_REQUEST:
+      return {
+        ...state,
+        queryingDatabase: true,
+        error: false,
+        errorMessage: null,
+      };
+    case types.FETCH_USER:
+      return {
+        ...state,
+        user: payload,
+        queryingDatabase: false,
+        error: false,
+        errorMessage: null,
+      };
+    case types.FETCH_USER_FAIL:
       return {
         ...state,
         error: true,
+        queryingDatabase: false,
+        errorMessage: action.payload,
       };
     case types.UPDATE_PASSWORD_SUCCESS:
       return {

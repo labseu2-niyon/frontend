@@ -59,7 +59,7 @@ const Email = ({ errors, touched, loading, status }) => {
       )}
       <Text small>
         <Link href="/auth/signup">
-          <a>Login with Social Media</a>
+          <a>Sign up with Social Media</a>
         </Link>
       </Text>
     </Root>
@@ -78,7 +78,7 @@ const FormikWithEmailForm = withFormik({
   validationSchema: Yup.object().shape({
     username: Yup.string()
       .matches(/^[a-zA-Z0-9]*$/, {
-        message: 'No Spaces or weird characters mate',
+        message: 'Only alphanumerical characters allowed',
         excludeEmptyString: true
       })
       .required('Username is required'),
@@ -91,7 +91,7 @@ const FormikWithEmailForm = withFormik({
     confirm: Yup.string()
       .required()
       .label('Confirm password')
-      .test('passwords-match', 'Passwords must match ya fool', function(value) {
+      .test('passwords-match', 'Passwords must match', function(value) {
         return this.parent.password === value;
       })
   }),
@@ -106,7 +106,6 @@ const FormikWithEmailForm = withFormik({
         Router.push('/auth/social');
       } else {
         //still need to check the new error for already existing user
-        console.log('RESS', res);
         setStatus(res);
       }
     });

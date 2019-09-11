@@ -56,7 +56,7 @@ function SearchBox({ jobTitles, filter }) {
       <Box>
         <Heading2>Search</Heading2>
         <DropWrapper>
-          <Dropdown width="300px" icon="arrow-down" title="Job Title" list={jobTitles} />
+          <Dropdown width="300px" icon="arrow-down" title="Job Title" list={jobTitles} grabOption={(i) => console.log(i)} />
         </DropWrapper>
         <Selector>
           <Checkbox

@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 import axios from 'axios';
 import nookies from 'nookies';
 import Router from 'next/router';
@@ -83,6 +84,20 @@ export const socialData = data => {
   };
 };
 
+// Action Creator for user Choice
+export const userChoise = (data, userType) => dispatch => {
+  dispatch({ type: types.START_LOADING });
+  axios
+    .post(`${_BASE_URL}/${userType}/choice`, data)
+    .then(res => {
+      dispatch({ type: types.SET_USER_CHOISE, payload: res.data.data });
+      dispatch({ type: types.STOP_LOADING });
+    })
+    .catch(() => {
+      dispatch({ type: types.STOP_LOADING });
+    });
+};
+
 // Action Creator for Singup a user with email
 // body {username, email, password}
 export const emailSignup = data => dispatch => {
@@ -99,7 +114,7 @@ export const emailSignup = data => dispatch => {
         }
       });
       nookies.set({}, 'token', res.data.data.token, {
-        maxAge: 60 * 60 * 24 * 14,
+        maxAge: 60 * 60 * 24 * 30,
         path: '/'
       });
       return res.data.status;
@@ -155,6 +170,16 @@ export const getJobTitles = () => dispatch => {
       dispatch({ type: types.GET_ALL_JOBS, payload: res.data.data });
     })
     .catch(() => {});
+};
+
+// Action Creator for getting Mentor type option
+export const getMentorType = () => dispatch => {
+  axios
+    .get(`${_BASE_URL}/types/all`)
+    .then(res => {
+      dispatch({ type: types.GET_ALL_MENTOR_TYPES, payload: res.data.data });
+    })
+    .catch();
 };
 
 // Action Creator for updating/patch user information gather from the steps
@@ -221,10 +246,10 @@ export const logInUser = ({ email, password }) => dispatch => {
         }
       });
       nookies.set({}, 'token', res.data.data.token, {
-        maxAge: 60 * 60 * 24 * 14,
+        maxAge: 60 * 60 * 24 * 30,
         path: '/'
       });
-      return res.data.status;
+      return res.data;
     })
     .catch(error => {
       dispatch({

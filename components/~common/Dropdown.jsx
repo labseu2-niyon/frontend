@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { Icon } from 'antd';
 
-function Dropdown({ title, list, grabOption, icon, width }) {
+function Dropdown({
+  title, list, grabOption, icon, width
+}) {
   const [showOptions, setOptions] = useState(false);
   const [currentTitle, setTitle] = useState(title);
 
@@ -11,7 +13,7 @@ function Dropdown({ title, list, grabOption, icon, width }) {
   }
 
   function chooseOption(option) {
-    setTitle(option.label);
+    setTitle(option);
     grabOption(option);
     toggle();
   }
@@ -19,7 +21,7 @@ function Dropdown({ title, list, grabOption, icon, width }) {
   return (
     <div>
       <Title onClick={toggle} width={width}>
-        <p>{currentTitle}</p>
+        <p style={{ margin: 0 }}>{currentTitle}</p>
         {/* <i className={icon}><span role="img" aria-label="pig">🐷</span></i> */}
         <Icon
           type="arrow-up"
@@ -47,6 +49,7 @@ const Title = styled.div`
   box-sizing: border-box;
   cursor: pointer;
   line-height: 0.75rem;
+  height: 40px;
   padding: 0px 10px;
   width: ${({ width }) => width || '200px'};
   max-width: 100%;
@@ -58,6 +61,8 @@ const Title = styled.div`
   align-items: center;
   user-select: none;
   border: 1px solid #eaeaea;
+
+  .title { margin: none; }
 `;
 
 const Options = styled.div`
@@ -74,6 +79,7 @@ const Options = styled.div`
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.07);
   border: 1px solid #eaeaea;
+  z-index: 5;
 
   .label {
     &:hover {

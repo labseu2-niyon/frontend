@@ -64,14 +64,12 @@ const ProfileInfo = props => {
       lastName: props.userInfo.userNameData.lastName,
       bio: bio,
       locationId: props.userInfo.locationId,
-      jobId: props.userInfo.userTypeData.job
+      jobId: Number(props.userInfo.userTypeData)
     };
-    console.log(image);
     const username = props.userInfo.emailData.username;
     const imgData = new FormData();
     imgData.append('image', image);
-    props.imageUpload(imgData, username);
-
+    image && props.imageUpload(imgData, username);
     props.userProfileInfo(data, username).then(res => {
       if (res === 200) {
         Router.push('/auth/social-info');
@@ -82,7 +80,7 @@ const ProfileInfo = props => {
   return (
     <Root>
       <Steps stepNumber="4" />
-      <Heading2 primary>Show Us your face</Heading2>
+      <Heading2 primary>Choose your profile picture</Heading2>
       <FormArea onSubmit={handleSubmit}>
         <RoundIcon
           name="avatar"
@@ -96,9 +94,7 @@ const ProfileInfo = props => {
         >
           {imgUrl ? <img src={imgUrl} alt="avatar" /> : uploadButton}
         </RoundIcon>
-        <Text small>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </Text>
+        <Text small>Share more about you.</Text>
         <textarea
           type="text"
           placeholder="Biography"
@@ -108,7 +104,6 @@ const ProfileInfo = props => {
           Next
         </Button>
         <Skip href="/auth/social-info"></Skip>
-        {/* {error && <p>{error}</p>} */}
       </FormArea>
     </Root>
   );
@@ -134,7 +129,7 @@ const Root = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  p {
+  h2 {
     margin: 0 20px;
     text-align: center;
   }
@@ -178,12 +173,4 @@ const FormArea = styled.form`
       opacity: 0.4;
     }
   }
-`;
-
-const Input = styled.input`
-  width: 100%;
-  height: 100%;
-  color: grey;
-  position: absolute;
-  opacity: 0;
 `;

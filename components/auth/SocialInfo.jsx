@@ -15,7 +15,6 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
   const handleSubmit = e => {
     e.preventDefault();
     const data = {
-      user_id: usernameId,
       facebook,
       linkedin,
       twitter
@@ -29,12 +28,12 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
   return (
     <Root>
       <Steps stepNumber="5" />
-      <Heading2 primary>Add Social Media</Heading2>
+      <Heading2 primary>Add your social media handles</Heading2>
       <FormArea onSubmit={handleSubmit}>
         <InputWrapper>
           <input
             type="text"
-            placeholder="facebook handler"
+            placeholder="Facebook handle"
             onChange={e => {
               setFacebook(e.target.value);
             }}
@@ -44,7 +43,7 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
         <InputWrapper>
           <input
             type="text"
-            placeholder="linkedin handler"
+            placeholder="Linkedin handle"
             onChange={e => {
               setLinkedin(e.target.value);
             }}
@@ -54,23 +53,23 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
         <InputWrapper>
           <input
             type="text"
-            placeholder="tweeter handler"
+            placeholder="Twitter handle"
             onChange={e => {
               setTweeter(e.target.value);
             }}
           />
           <i className="fab fa-twitter fa-lg"></i>
         </InputWrapper>
-        <InputWrapper>
+        {/* <InputWrapper>
           <input
             type="text"
-            placeholder="github handler"
+            placeholder="Github handle"
             onChange={e => {
               setGitHub(e.target.value);
             }}
           />
           <i className="fab fa-github fa-lg"></i>
-        </InputWrapper>
+        </InputWrapper> */}
 
         <Button small primary type="submit" loadingB={loading}>
           Next
@@ -100,6 +99,9 @@ const Root = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  h2 {
+    text-align: center;
+  }
 `;
 
 const FormArea = styled.form`

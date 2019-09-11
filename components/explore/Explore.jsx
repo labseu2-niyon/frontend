@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import TopSection from '../TopSection';
@@ -10,11 +10,6 @@ import ExploreButtons from './ExploreButtons';
 const Wrapper = styled.main`
     width: 100%;
 `;
-
-const jobTitles = [
-  { value: 'designer and developer', label: 'UX Designer & UI Developer' },
-  { value: 'backend developer', label: 'Backend Developer' },
-];
 
 function Explore(props) {
   const connectionsLength = props.connectionsAll ? props.connectionsAll.length : 0;
@@ -49,18 +44,13 @@ function Explore(props) {
     props.setUsers(filteredUsers);
   };
 
-  useEffect(() => {
-
-  }, [props.users]);
-
-
   return (
     <Wrapper>
       <TopSection
         buttons={<ExploreButtons numOfConnections={connectionsLength} />}
         src="/static/friends-online.svg"
       />
-      <SearchBox jobTitles={jobTitles} filter={filter} />
+      <SearchBox jobTitles={props.jobs} filter={filter} />
       <ProfileList users={props.users} />
     </Wrapper>
   );
@@ -68,6 +58,7 @@ function Explore(props) {
 
 Explore.propTypes = {
   users: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  jobs: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   setUsers: PropTypes.func.isRequired,
   connectionsAll: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };

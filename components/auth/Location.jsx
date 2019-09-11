@@ -13,17 +13,21 @@ const Location = ({ locationRequest, locationData }) => {
   const [loading, setLoading] = useState(false);
   const [select, setSelect] = useState({ state: false, data: '' });
   const [warning, setWarning] = useState('');
+  const [input, setInput] = useState('');
 
   const getPossibleLocation = place => {
-    locationRequest(place)
-      .then(res => {
-        if (res) {
-          setData(res);
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    setInput(place);
+    setSelect({ ...select, state: false });
+    !!place &&
+      locationRequest(place)
+        .then(res => {
+          if (res) {
+            setData(res);
+          }
+        })
+        .catch(error => {
+          //console.log(error);
+        });
   };
   const chosen = value => {
     setSelect({ state: true, data: value });
@@ -32,7 +36,9 @@ const Location = ({ locationRequest, locationData }) => {
     setLoading(false);
     !select.state && setWarning('Please Select Location');
     const inwork = select.data.split(',');
-    select.state &&
+    inwork.every(e => !!e) &&
+      inwork.length === 2 &&
+      select.state &&
       (setLoading(true),
       setWarning(''),
       locationData({
@@ -51,13 +57,10 @@ const Location = ({ locationRequest, locationData }) => {
     <Root>
       <Steps stepNumber="2" />
       <Section>
-        <Heading2 primary>Location Info</Heading2>
+        <Heading2 primary>Where are you located?</Heading2>
         <IconT className="fas fa-globe-europe" />
         {/* <Icon type="pushpin" theme="twoTone" /> */}
-        <Text small>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nisl
-          nisl, aliquam nec erat et, efficitur mollis metus.
-        </Text>
+        <Text small>Please enter your city name.</Text>
         <Auto>
           <AutoComplete
             onChange={getPossibleLocation}
@@ -86,11 +89,11 @@ const Location = ({ locationRequest, locationData }) => {
             />
           )}
         </Auto>
+        {warning && <Error>You need to enter a city name</Error>}
         <InputWrapper>
           <Button primary small onClick={handleSubmit} loadingB={loading}>
             Next
           </Button>
-          {warning && <Error>Please Select a Location</Error>}
         </InputWrapper>
       </Section>
     </Root>
@@ -109,7 +112,7 @@ const Root = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  p {
+  h2 {
     text-align: center;
     padding: 0 20px;
     @media (min-width: 500px) {
@@ -122,7 +125,7 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   height: 100vh;
 `;
 
@@ -147,7 +150,6 @@ const InputWrapper = styled.div`
 const Error = styled.p`
   margin: 0;
   font-size: 14px;
-  position: absolute;
   bottom: 10%;
   left: 26%;
   color: #e29273;
