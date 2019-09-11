@@ -35,3 +35,5 @@ yarn.lock
 .eslintrc.js
 eslintrc.js
 /eslintrc.js
+
+package.json

@@ -64,12 +64,6 @@
     "prettier": "^1.18.2",
     "react-motions": "^0.3.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run husky-test"
-    }
-  },
   "lint-staged": {
     "*.js": [
       "npm run lint",
