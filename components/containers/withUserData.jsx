@@ -18,7 +18,7 @@ const withUserData = Component => {
     const [jobs, setJobs] = useState([]);
 
     const mapUsers = input => {
-      const withDisplay = input.map(user => ({ ...user, display: true }));
+      const withDisplay = input.map(user => ({ ...user, display: true, filtered: true }));
       setUsers(withDisplay);
     };
 
