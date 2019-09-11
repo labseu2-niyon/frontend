@@ -55,7 +55,6 @@ const ButtonWrapper = styled.div`
 
 function PhotoSection(props) {
   const { user, isLoggedInUser = false } = props;
-
   const userObj = {
     profile_picture: user.profile_picture || '',
     email: user.email || 'Not listed',

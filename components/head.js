@@ -21,6 +21,13 @@ const Head = ({
     <link rel="apple-touch-icon" href="/static/touch-icon.png" />
     <link rel="mask-icon" href="/static/favicon-mask.svg" color="#49B882" />
     <link rel="icon" href="/static/favicon.ico" />
+    <link rel="shortcut icon" href="/static/favicon.ico" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/inter-ui@3.9.0/inter.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="/static/nprogrss.css" />
+    <script src="https://kit.fontawesome.com/51283197d2.js" />
     <meta property="og:url" content={url || defaultOGURL} />
     <meta property="og:title" content={title || ''} />
     <meta
@@ -36,11 +43,11 @@ const Head = ({
   </NextHead>
 );
 
-Head.propTypes = {
-  title: string.isRequired,
-  description: string.isRequired,
-  url: string.isRequired,
-  ogImage: string.isRequired,
-};
+// Head.propTypes = {
+//   title: string.isRequired,
+//   description: string.isRequired,
+//   url: string.isRequired,
+//   ogImage: string.isRequired,
+// };
 
 export default Head;

@@ -1,7 +1,7 @@
 {
   "name": "niyon",
   "scripts": {
-    "dev": "next",
+    "dev": "next -p 3001",
     "build": "next build",
     "start": "next start",
     "test": "jest --watch --verbose",
@@ -63,12 +63,6 @@
     "lint-staged": "^9.2.3",
     "prettier": "^1.18.2",
     "react-motions": "^0.3.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run husky-test"
-    }
   },
   "lint-staged": {
     "*.js": [
