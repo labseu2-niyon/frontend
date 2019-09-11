@@ -1,7 +1,7 @@
 {
   "name": "niyon",
   "scripts": {
-    "dev": "next",
+    "dev": "next -p 3001",
     "build": "next build",
     "start": "next start",
     "test": "jest --watch --verbose",

@@ -12,7 +12,7 @@ const Container = styled.main`
 
 function Profile(props) {
   useEffect(() => {
-    props.getUser(props.user);
+   return props.getUser(props.user);
   }, [props.user]);
 
   if (props.userReducer.queryingDatabase) {
