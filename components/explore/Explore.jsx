@@ -44,13 +44,27 @@ function Explore(props) {
     props.setUsers(filteredUsers);
   };
 
+  const filterJobTitle = (job) => {
+    const filteredUsers = props.users.map(user => {
+      if (user.job) {
+        if (user.job.tech_name === job) {
+          return { ...user, filtered: true };
+        }
+        return { ...user, filtered: false };
+      }
+      return { ...user, filtered: false };
+    });
+
+    props.setUsers(filteredUsers);
+  };
+
   return (
     <Wrapper>
       <TopSection
         buttons={<ExploreButtons numOfConnections={connectionsLength} />}
         src="/static/friends-online.svg"
       />
-      <SearchBox jobTitles={props.jobs} filter={filter} />
+      <SearchBox jobTitles={props.jobs} filter={filter} filterJobTitle={filterJobTitle} />
       <ProfileList users={props.users} />
     </Wrapper>
   );

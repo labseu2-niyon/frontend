@@ -118,6 +118,7 @@ ExploreCard.propTypes = {
   last_name: PropTypes.string.isRequired,
   location: PropTypes.shape().isRequired,
   profile_picture: PropTypes.string.isRequired,
+  job: PropTypes.shape.isRequired,
 };
 
 export default ExploreCard;

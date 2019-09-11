@@ -48,15 +48,16 @@ const Selector = styled.div`
     }
 `;
 
-function SearchBox({ jobTitles, filter }) {
+function SearchBox({ jobTitles, filter, filterJobTitle }) {
   const [mentor, setMentor] = useState(true);
   const [mentee, setMentee] = useState(true);
+
   return (
     <Wrapper>
       <Box>
         <Heading2>Search</Heading2>
         <DropWrapper>
-          <Dropdown width="300px" icon="arrow-down" title="Job Title" list={jobTitles} grabOption={(i) => console.log(i)} />
+          <Dropdown width="300px" icon="arrow-down" title="Job Title" list={jobTitles} grabOption={(job) => filterJobTitle(job)} />
         </DropWrapper>
         <Selector>
           <Checkbox
@@ -82,6 +83,7 @@ function SearchBox({ jobTitles, filter }) {
 SearchBox.propTypes = {
   jobTitles: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   filter: PropTypes.func.isRequired,
+  filterJobTitle: PropTypes.func.isRequired,
 };
 
 export default SearchBox;
