@@ -91,7 +91,7 @@ const JobTitle = ({
       checkedValue.forEach(item => {
         userChoise({ mentorTypeId: Number(item), mentorId: userId }, userType);
       });
-    userTypeHandler(data, username, userType, jobTypeId).then(res => {
+    userTypeHandler(data, username, userType, jobTypeId).then(res => { 
       setErrors({ helpError: false });
       if (res === 201) {
         Router.push('/auth/profile-info');
@@ -122,7 +122,6 @@ const JobTitle = ({
                       type="checkbox"
                       name={type.id}
                       onChange={handleCheckBox}
-                      // checked={true}
                     />
                     {type.mentor_type_name}
                   </Label>
