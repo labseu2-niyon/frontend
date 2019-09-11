@@ -122,7 +122,6 @@ const JobTitle = ({
                       type="checkbox"
                       name={type.id}
                       onChange={handleCheckBox}
-                      // checked={true}
                     />
                     {type.mentor_type_name}
                   </Label>
