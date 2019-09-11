@@ -54,22 +54,30 @@ const ButtonWrapper = styled.div`
 `;
 
 function PhotoSection(props) {
-  const { user } = props;
+  const { user, isLoggedInUser = false } = props;
+
+  const userObj = {
+    profile_picture: user.profile_picture || '',
+    email: user.email || 'Not listed',
+    first_name: user.first_name || 'No Name',
+    last_name: user.last_name || '',
+    job: user.job || 'Not listed',
+  };
 
   return (
     <Wrapper>
       <PhotoWrapper>
         <Photo>
-          <ImgProfile src={user.profile_picture} alt="User Profile Picture" />
+          <ImgProfile src={userObj.profile_picture} alt="User Profile Picture" />
         </Photo>
       </PhotoWrapper>
       <TextWrapper>
-        <Heading>{user.first_name} {user.last_name}</Heading>
-        <p><strong>Email:</strong> {user.email}</p>
-        <p><strong>Job:</strong> {user.job}</p>
+        <Heading>{userObj.first_name} {userObj.last_name}</Heading>
+        <p><strong>Email:</strong> {userObj.email}</p>
+        <p><strong>Job:</strong> {userObj.job}</p>
       </TextWrapper>
       <ButtonWrapper>
-        <Button small primary>Connect</Button>
+        <Button small primary>{ isLoggedInUser ? 'Edit' : 'Connect'}</Button>
       </ButtonWrapper>
     </Wrapper>
   );
@@ -77,9 +85,7 @@ function PhotoSection(props) {
 
 PhotoSection.propTypes = {
   user: PropTypes.shape().isRequired,
-  job: PropTypes.string.isRequired,
-  first_name: PropTypes.string.isRequired,
-  last_name: PropTypes.string.isRequired,
+  isLoggedInUser: PropTypes.bool,
 };
 
 export default PhotoSection;

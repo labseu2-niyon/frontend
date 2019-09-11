@@ -108,7 +108,7 @@ function ExploreCard(props) {
         <Contents>
           <PhotoWrapper>
             <Photo>
-              <ImgProfile src={props.profile_picture} alt="Profile Picture"/>
+              <ImgProfile src={props.profile_picture} alt="Profile Picture" />
             </Photo>
           </PhotoWrapper>
           <Text>
@@ -146,7 +146,8 @@ ExploreCard.propTypes = {
   first_name: PropTypes.string.isRequired,
   last_name: PropTypes.string.isRequired,
   location: PropTypes.shape().isRequired,
-  profile_picture: PropTypes.string.isRequired
+  profile_picture: PropTypes.string.isRequired,
+  job: PropTypes.shape.isRequired,
 };
 
 export default ExploreCard;

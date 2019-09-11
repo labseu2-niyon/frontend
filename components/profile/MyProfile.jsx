@@ -28,7 +28,7 @@ function Profile(props) {
 
   return (
     <Container>
-      <PhotoSection {...photoProps} />
+      <PhotoSection {...photoProps} isLoggedInUser />
       <Bio {...props.userReducer} />
     </Container>
   );
