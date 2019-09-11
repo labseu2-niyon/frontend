@@ -15,9 +15,9 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
   const handleSubmit = e => {
     e.preventDefault();
     const data = {
-      facebook,
-      linkedin,
-      twitter
+      facebook: facebook || null,
+      linkedin: linkedin || null,
+      twitter: twitter || null
     };
 
     socialDataHandler(data, username).then(res => {
