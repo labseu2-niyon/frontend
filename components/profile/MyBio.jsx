@@ -78,12 +78,14 @@ const Social = styled.div`
 function Bio(props) {
   const { user } = props;
 
+  const loco = user.location ? `${user.location.city_name}, ${user.location.country_name}` : 'No location given';
+
   return (
     <Wrapper>
       <BioSection>
         <Location>
           <div><Icon type="book" />{user.Mentor ? 'Mentor' : 'Mentee'}</div>
-          <div><Icon type="global" />{user.location.city_name}, {user.location.country_name}</div>
+          <div><Icon type="global" />{loco}</div>
         </Location>
         <Heading2>Bio</Heading2>
         <p>{user.biography}</p>

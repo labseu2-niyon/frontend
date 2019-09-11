@@ -79,13 +79,14 @@ function Bio(props) {
   const { user } = props;
 
   const location = JSON.parse(user.location);
+  const loco = location ? `${location.city_name}, ${location.country_name}` : 'No location given';
 
   return (
     <Wrapper>
       <BioSection>
         <Location>
           <div><Icon type="book" />{user.Mentor ? 'Mentor' : 'Mentee'}</div>
-          <div><Icon type="global" />{location.city_name}, {location.country_name}</div>
+          <div><Icon type="global" />{loco}</div>
         </Location>
         <Heading2>Bio</Heading2>
         <p>{user.biography}</p>

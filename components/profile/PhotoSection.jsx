@@ -53,9 +53,10 @@ function PhotoSection(props) {
 
   const userObj = {
     profile_picture: user.profile_picture || '',
-    first_name: user.first_name || '',
+    email: user.email || 'Not listed',
+    first_name: user.first_name || 'No Name',
     last_name: user.last_name || '',
-    job: user.job || '',
+    job: user.job || 'Not listed',
   };
 
   return (
