@@ -91,7 +91,7 @@ const JobTitle = ({
       checkedValue.forEach(item => {
         userChoise({ mentorTypeId: Number(item), mentorId: userId }, userType);
       });
-    userTypeHandler(data, username, userType, jobTypeId).then(res => {
+    userTypeHandler(data, username, userType, jobTypeId).then(res => { 
       setErrors({ helpError: false });
       if (res === 201) {
         Router.push('/auth/profile-info');
