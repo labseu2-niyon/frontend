@@ -8,7 +8,14 @@ import { changePassword } from '../../redux/actions/authActions';
 import { theme } from '../../lib/theme';
 import PropTypes from 'prop-types';
 
-const ChangePassword = ({ errors, touched, loading, message, error }) => {
+const ChangePassword = ({
+  errors,
+  touched,
+  loading,
+  message,
+  error,
+  status
+}) => {
   console.log(message, error);
   return (
     <>
@@ -45,7 +52,7 @@ const ChangePassword = ({ errors, touched, loading, message, error }) => {
               <Error>{errors.confirm}</Error>
             )}
           </InputWrapper>
-          {message && (
+          {status && (
             <h3 style={{ color: theme.secondary, textAlign: 'center' }}>
               Password was reset succesfully !
             </h3>
@@ -79,11 +86,11 @@ const FormikChangePasswordForm = withFormik({
       })
   }),
 
-  handleSubmit(values, { props }) {
+  handleSubmit(values, { props, setStatus }) {
     const { password } = values;
     const params = new URL(document.location).searchParams;
     const token = params.get('token');
-    props.changePassword({ password, token });
+    props.changePassword({ password, token }).then(res => setStatus(res));
   }
 })(ChangePassword);
 
