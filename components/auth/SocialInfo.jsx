@@ -10,16 +10,16 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
   const [facebook, setFacebook] = useState('');
   const [linkedin, setLinkedin] = useState('');
   const [twitter, setTweeter] = useState('');
-  const [gitHub, setGitHub] = useState('');
+  // const [gitHub, setGitHub] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
     const data = {
-      user_id: usernameId,
-      facebook,
-      linkedin,
-      twitter
+      facebook: facebook || null,
+      linkedin: linkedin || null,
+      twitter: twitter || null
     };
+
     socialDataHandler(data, username).then(res => {
       if (res === 201) {
         Router.push('/');
@@ -61,7 +61,7 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
           />
           <i className="fab fa-twitter fa-lg"></i>
         </InputWrapper>
-        <InputWrapper>
+        {/* <InputWrapper>
           <input
             type="text"
             placeholder="Github handle"
@@ -70,12 +70,12 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
             }}
           />
           <i className="fab fa-github fa-lg"></i>
-        </InputWrapper>
+        </InputWrapper> */}
 
         <Button small primary type="submit" loadingB={loading}>
           Next
         </Button>
-        <Skip href="/"></Skip>
+        <Skip onHandle={() => Router.push('/')}></Skip>
       </FormArea>
     </Root>
   );
@@ -100,6 +100,9 @@ const Root = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  h2 {
+    text-align: center;
+  }
 `;
 
 const FormArea = styled.form`

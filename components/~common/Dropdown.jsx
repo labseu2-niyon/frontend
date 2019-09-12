@@ -79,6 +79,7 @@ const Options = styled.div`
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.07);
   border: 1px solid #eaeaea;
+  z-index: 5;
 
   .label {
     &:hover {

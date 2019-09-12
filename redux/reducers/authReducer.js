@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { types } from '../authConstants';
 
 const initialState = {
@@ -5,12 +6,13 @@ const initialState = {
   loading: false,
   error: null,
   emailData: [],
-  locationId: null,
+  locationId: 0,
   profileData: [],
-  userTypeData: [],
+  userTypeData: 0,
   socialData: [],
   userNameData: [],
   allJobs: [],
+  allMentorOptions: [],
   token: null,
   message: '',
 };
@@ -102,6 +104,12 @@ export const authReducer = (state = initialState, { type, payload }) => {
         ...state,
         allJobs: payload,
       };
+    //= ===============================GET All Mentors options ==============
+    case types.GET_ALL_MENTOR_TYPES:
+      return {
+        ...state,
+        allMentorOptions: payload,
+      };
     //= ==============================perist Social Media data===================
     case types.SET_SOCIAL_MEDIA_DATA:
       return {
@@ -136,13 +144,14 @@ export const authReducer = (state = initialState, { type, payload }) => {
         loading: false,
         error: null,
         emailData: [],
-        locationId: null,
+        locationId: 0,
         profileData: [],
-        userTypeData: [],
+        userTypeData: 0,
         socialData: [],
         token: null,
         userNameData: [],
         allJobs: [],
+        allMentorOptions: [],
         message: '',
       };
     // ========================RESET PASSWORD ACTION TYPES==================

@@ -23,7 +23,6 @@ const Img = styled.img`
 	max-width: 10%;
 `;
 
-
 const searchRef = React.createRef();
 
 function handleClick(e) {

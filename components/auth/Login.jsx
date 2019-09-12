@@ -26,7 +26,6 @@ const Login = ({ errors, touched, loading, status }) => (
           </Pulse>
         </a>
       </Logo>
-      {/* </Link> */}
     </Flip>
     <TopWrapper>
       <Heading2 primary>Log in to continue to Niyon</Heading2>
@@ -75,7 +74,7 @@ const FormikLoginForm = withFormik({
   }),
   handleSubmit(values, { props, setStatus }) {
     props.logInUser(values).then(res => {
-      if (res === 200) {
+      if (res.status === 200) {
         Router.push('/');
       } else {
         setStatus({ msg: 'Incorrect email or password. Please try again.' });
@@ -108,20 +107,11 @@ const Root = styled.div`
 const FormArea = styled(Form)`
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   justify-content: space-around;
   height: 30%;
   width: 100%;
   max-width: 200px;
 
-/*  @media (min-width: 500px) {
-    width: 50%;
-  }
-
-  @media (min-width: 950px) {
-    width: 30%;
-  }
-*/
   input {
     padding: 0.5rem;
     font-size: 16px;
@@ -161,7 +151,7 @@ const TopWrapper = styled.div`
   align-items: center;
   position: relative;
   padding: 2rem;
-  
+
   h2 {
     text-align: center;
   }
@@ -225,4 +215,5 @@ const Pulse = styled.div`
       box-shadow: 1px 2px 10px 10px rgba(404,369,404, 0);
       
   }
+}
 `;

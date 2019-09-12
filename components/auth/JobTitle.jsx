@@ -1,112 +1,177 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Steps from './StepsComp';
-import { Heading2, Button, Text } from '../~common/index';
-import { Form, Field, withFormik } from 'formik';
-import * as Yup from 'yup';
 import Flip from 'react-reveal/Flip';
-import { theme } from '../../lib/theme';
 import Router from 'next/router';
 import { connect } from 'react-redux';
-import { userTypeHandler, getJobTitles } from '../../redux/actions/authActions';
+import {
+  userTypeHandler,
+  getJobTitles,
+  getMentorType,
+  userChoise
+} from '../../redux/actions/authActions';
+import Steps from './StepsComp';
+import { theme } from '../../lib/theme';
+import { Heading2, Button, Text } from '../~common/index';
+
+const err = {
+  jobTypeError: 'Please select a job',
+  userTypeError: 'Please choose who you want to register as',
+  userOptionError: 'Select at least one field'
+};
 
 const JobTitle = ({
-  touched,
-  errors,
-  values,
-  status,
   userTypeHandler,
   username,
   loading,
   getJobTitles,
   allJobs,
-  locationId
+  locationId,
+  getMentorType,
+  mentorTypes,
+  userChoise,
+  userId
 }) => {
   const [mentorPressed, setMentorPressed] = useState(false);
   const [menteePressed, setMenteePressed] = useState(false);
-  const [mentorError, setMentorError] = useState(false);
+  const [userType, setUserType] = useState('');
+  // const [mentorError, setMentorError] = useState(true);
+  const [jobTypeId, setJobTypeId] = useState(100);
+  const [errors, setErrors] = useState({
+    jobError: false,
+    userTypeError: false,
+    helpError: false
+  });
+  const [testError, setTestError] = useState(false);
+  const [checkedValue, setCheckedValue] = useState([]);
 
   useEffect(() => {
     getJobTitles();
+    getMentorType();
   }, []);
 
-  useEffect(() => {
-    if (mentorPressed || menteePressed) {
-      values.user = menteePressed ? 'mentee' : 'mentor';
-      const data = {
-        locationId: locationId,
-        industryId: '1'
-      };
-      const type = status.user;
-      userTypeHandler(data, username, type, status).then(res => {
-        if (res === 201) {
-          Router.push('/auth/profile-info');
-        }
-      });
+  const handleSelect = e => {
+    if (e.target.value === 100 || e.target.value === 'Select your job title') {
+      setErrors({ jobError: true });
+      setTestError(true);
     } else {
-      setMentorError(true);
+      setJobTypeId(e.target.value);
+      setErrors({ jobError: false });
+      setTestError(false);
     }
-  }, [status]);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    // Handling Job type error
+    if (jobTypeId === 100) {
+      setErrors({ jobError: true });
+      setTestError(true);
+    }
+
+    !checkedValue.length && setErrors({ helpError: true });
+    const data = {
+      locationId,
+      industryId: '1'
+    };
+    // Handling user Type Error
+    if (!mentorPressed && !menteePressed) {
+      setErrors({ userTypeError: true });
+    } else if (jobTypeId === 100) {
+      setTestError(true);
+    } else {
+      setTestError(false);
+      checkedValue.length && handleRequest(data);
+    }
+  };
+
+  //action creators request for update user information and added user choices
+  const handleRequest = data => {
+    checkedValue &&
+      checkedValue.forEach(item => {
+        userChoise({ mentorTypeId: Number(item), mentorId: userId }, userType);
+      });
+    userTypeHandler(data, username, userType, jobTypeId).then(res => { 
+      setErrors({ helpError: false });
+      if (res === 201) {
+        Router.push('/auth/profile-info');
+      }
+    });
+  };
+
+  const handleCheckBox = e => {
+    if (e.target.checked) {
+      setErrors({ helpError: false });
+      setCheckedValue([...new Set([...checkedValue, e.target.name])]);
+    } else {
+      setCheckedValue(checkedValue.filter(item => item !== e.target.name));
+    }
+  };
 
   const mentor = () => {
     return (
       <div>
         <M>
-          <Flip top>
-            <Text small>What kind of help can you provide?</Text>
-            <Label>
-              <Field type="checkbox" name="preparation" />
-              Job Preparation
-            </Label>
-            <Label>
-              <Field type="checkbox" name="development" />
-              Skills Development
-            </Label>
-            <Label>
-              <Field type="checkbox" name="coaching" />
-              Life Coaching
-            </Label>
-            <Label>
-              <Field type="checkbox" name="networking" />
-              Networking
-            </Label>
-          </Flip>
+          <Text small>What kind of help can you provide?</Text>
+          {mentorTypes &&
+            mentorTypes.map(type => {
+              return (
+                <Flip top key={type.id}>
+                  <Label>
+                    <input
+                      type="checkbox"
+                      name={type.id}
+                      onChange={handleCheckBox}
+                    />
+                    {type.mentor_type_name}
+                  </Label>
+                </Flip>
+              );
+            })}
+          {errors.helpError && (
+            <OptionError>{err.userOptionError} </OptionError>
+          )}
         </M>
       </div>
     );
   };
+
   const mentee = () => {
     return (
       <M>
-        <Flip top>
-          <Text small>What kind of help are you looking for?</Text>
-          <Label>
-            <Field type="checkbox" name="preparation" />
-            Job Preparation
-          </Label>
-          <Label>
-            <Field
-              type="checkbox"
-              name="development"
-              checked={values.development}
-            />
-            Skills Development
-          </Label>
-          <Label>
-            <Field type="checkbox" name="coaching" checked={values.coaching} />
-            Life Coaching
-          </Label>
-          <Label>
-            <Field
-              type="checkbox"
-              name="networking"
-              checked={values.networking}
-            />
-            Networking
-          </Label>
-        </Flip>
+        <Text small>What kind of help are you looking for?</Text>
+        {mentorTypes &&
+          mentorTypes.map(type => {
+            return (
+              <Flip top key={type.id}>
+                <Label key={type.id}>
+                  <input
+                    type="checkbox"
+                    name={type.id}
+                    onChange={handleCheckBox}
+                  />
+                  {type.mentor_type_name}
+                </Label>
+              </Flip>
+            );
+          })}
+        {errors.helpError && <OptionError>{err.userOptionError} </OptionError>}
       </M>
     );
+  };
+
+  const onMenteePressed = () => {
+    setMenteePressed(true);
+    setMentorPressed(false);
+    setErrors({ userTypeError: false });
+    setUserType('mentee');
+  };
+
+  const onMentorPressed = () => {
+    setMenteePressed(false);
+    setMentorPressed(true);
+    setErrors({ userTypeError: false });
+    setUserType('mentor');
   };
   return (
     <Root>
@@ -116,56 +181,52 @@ const JobTitle = ({
         <Text small>Choose your mentorship type.</Text>
       </Header>
       <MentorIcons>
-        <Costum>
+        <Custom>
           <i
             className="fas fa-user-graduate fa-6x"
             style={{ color: menteePressed && theme.primary }}
-            onClick={() => {
-              setMenteePressed(true);
-              setMentorPressed(false);
-              setMentorError(false);
-            }}
-          ></i>
+            onClick={onMenteePressed}
+          />
           <Info>
             <p>Mentee</p>
-            <i className="fas fa-info-circle"></i>
+            <i className="fas fa-info-circle" />
           </Info>
-        </Costum>
-        <Costum>
+        </Custom>
+        <Custom>
           <i
             className="fas fa-user-cog fa-6x"
             style={{ color: mentorPressed && theme.primary }}
-            onClick={() => {
-              setMenteePressed(false);
-              setMentorPressed(true);
-              setMentorError(false);
-            }}
-          ></i>
+            onClick={onMentorPressed}
+          />
           <Info>
             <p>Mentor</p>
-            <i className="fas fa-info-circle"></i>
+            <i className="fas fa-info-circle" />
           </Info>
-        </Costum>
+        </Custom>
       </MentorIcons>
-      {mentorError && <Error>Mentorship type is required</Error>}
-      <FormArea>
-        <InputWrapper>
-          <Field component="select" name="job">
+      {errors.userTypeError && <MError>{err.userTypeError}</MError>}
+      <FormArea onSubmit={handleSubmit}>
+        <InputWrapperJob>
+          <select value={jobTypeId} onChange={handleSelect}>
             <option>What is your job title?</option>
             {allJobs &&
-              allJobs.map(job => {
-                return (
-                  <option value={job.id} key={job.tech_name}>
-                    {job.tech_name}
-                  </option>
-                );
-              })}
-          </Field>
-          {touched.job && errors.job && <Error>{errors.job}</Error>}
-        </InputWrapper>
+              allJobs.map(job => (
+                <option value={job.id} key={job.tech_name}>
+                  {job.tech_name}
+                </option>
+              ))}
+          </select>
+          {testError && <Error>{err.jobTypeError}</Error>}
+        </InputWrapperJob>
         {menteePressed && mentee()}
         {mentorPressed && mentor()}
-        <Button small primary type="submit" loadingB={loading}>
+        <Button
+          small
+          primary
+          type="submit"
+          loadingB={loading}
+          onClick={handleSubmit}
+        >
           Next
         </Button>
       </FormArea>
@@ -173,37 +234,28 @@ const JobTitle = ({
   );
 };
 
-const FormikWithJobTitleForm = withFormik({
-  mapPropsToValues({ job }) {
-    return {
-      job: job || ''
-    };
-  },
-  validationSchema: Yup.object().shape({
-    job: Yup.string().required('Job title is required')
-  }),
-  handleSubmit(values, { setStatus }) {
-    setStatus(values);
-  }
-})(JobTitle);
-
 const mapStateToProps = state => {
   return {
     username: state.authReducer.emailData.username,
+    userId: state.authReducer.emailData.id,
     loading: state.authReducer.loading,
     allJobs: state.authReducer.allJobs,
-    locationId: state.authReducer.locationId
+    locationId: state.authReducer.locationId,
+    mentorTypes: state.authReducer.allMentorOptions
   };
 };
+
 const mapDispatchToProps = {
   userTypeHandler,
-  getJobTitles
+  getJobTitles,
+  getMentorType,
+  userChoise
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(FormikWithJobTitleForm);
+)(JobTitle);
 
 const Root = styled.div`
   height: 100%;
@@ -222,10 +274,6 @@ const Header = styled.div`
   p {
     padding: 0 20px;
     text-align: center;
-
-    @media (min-width: 500px) {
-      width: 100%;
-    }
   }
 `;
 
@@ -234,21 +282,21 @@ const MentorIcons = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
-
-  @media (min-width: 500px) {
-    width: 50%;
-  }
   i {
     color: grey;
   }
 `;
 
-const Costum = styled.div`
+const Custom = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 2rem;
   i {
     transition: all 0.2s ease-in;
+
+    :hover {
+      cursor: pointer;
+    }
   }
   p {
     margin: 0;
@@ -268,7 +316,7 @@ const Info = styled.div`
   }
 `;
 
-const FormArea = styled(Form)`
+const FormArea = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -276,16 +324,9 @@ const FormArea = styled(Form)`
   justify-content: space-between;
   height: auto;
   padding: 30px 0;
-  @media (min-width: 500px) {
-    width: 50%;
-  }
 
   button {
     margin-top: 30px;
-  }
-
-  @media (min-width: 500px) {
-    width: 50%;
   }
 
   input {
@@ -320,9 +361,6 @@ const FormArea = styled(Form)`
     background-position: right 0.7em top 50%, 0 0;
     background-size: 0.65em auto, 100%;
 
-    @media (min-width: 500px) {
-      width: 70%;
-    }
     option {
       color: grey;
       opacity: 0.4;
@@ -330,19 +368,39 @@ const FormArea = styled(Form)`
   }
 `;
 
-const InputWrapper = styled.div`
+const InputWrapperJob = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   padding-bottom: 30px;
+  max-width: 24rem;
 `;
 
 const Error = styled.p`
   margin: 0;
   font-size: 14px;
+  position: absolute;
   bottom: 10%;
+  left: 15%;
+  color: #e29273;
+`;
+
+const MError = styled.p`
+  margin: 0;
+  font-size: 14px;
+  bottom: 0;
+  left: 26%;
+  color: #e29273;
+  text-align: center;
+`;
+
+const OptionError = styled.p`
+  margin: 0;
+  font-size: 14px;
+  position: absolute;
+  bottom: 0;
   left: 15%;
   color: #e29273;
 `;
@@ -360,5 +418,6 @@ const Label = styled.label`
 `;
 
 const M = styled.div`
-  margin-bottom: 20px;
+  padding-bottom: 25px;
+  position: relative;
 `;

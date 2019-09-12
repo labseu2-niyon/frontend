@@ -6,10 +6,15 @@ import { connect } from 'react-redux';
 import Router from 'next/router';
 import { Avatar } from './~common/index';
 import { logOutUser } from '../redux/actions/authActions';
+import { fetchUser } from '../redux/actions/userActions';
+import { useEffect } from 'react';
 
-const Navigation = state => {
-  const { logOutUser, authReducer } = state;
+const Navigation = ({ logOutUser, fetchUser, authReducer, user }) => {
   const userInfo = jwt.decode(authReducer.token);
+
+  useEffect(() => {
+    fetchUser(userInfo.username);
+  }, []);
 
   const handleClick = () => {
     logOutUser();
@@ -18,16 +23,18 @@ const Navigation = state => {
 
   return (
     <Nav>
-      {userInfo && (
+      {user && (
         <div className="desktop">
-          <Avatar extraLarge source={dummyUser.image} />
-          <p className="desktop name">{userInfo.username}</p>
+          <Avatar extraLarge source={user.profile_picture} />
+          <p className="desktop name">
+            {user.first_name} {user.last_name}
+          </p>
         </div>
       )}
 
-      {userInfo && (
+      {user && (
         <div className="mobile-avatar">
-          <Avatar small source={dummyUser.image} />
+          <Avatar small source={user.profile_picture} />
         </div>
       )}
 
@@ -39,28 +46,12 @@ const Navigation = state => {
           </div>
         </Link>
 
-        <Link
-          href={{
-            pathname: '/my-profile',
-            query: {
-              user: userInfo.username
-            }
-          }}
-        >
-          <div>
-            <Icon type="user" className="icon" />
-            <a className="desktop">Profile</a>
-          </div>
-        </Link>
-        {userInfo && (
+        {user && (
           <Link
             href={{
-              pathname: '/profile',
+              pathname: '/my-profile',
               query: {
-                userId: 'abc123',
-                user: userInfo.username,
-                jobTitle: 'Web Developer',
-                src: ''
+                user: user.username
               }
             }}
           >
@@ -124,6 +115,7 @@ const Nav = styled.div`
 
   .name {
     font-weight: 500;
+    text-align: center;
   }
 
   @media (max-width: 500px) {
@@ -193,7 +185,12 @@ const Links = styled.div`
   }
 `;
 
+const mapStateToProps = state => ({
+  authReducer: state.authReducer,
+  user: state.userReducer.user
+});
+
 export default connect(
-  state => state,
-  { logOutUser }
+  mapStateToProps,
+  { logOutUser, fetchUser }
 )(Navigation);

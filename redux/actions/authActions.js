@@ -1,11 +1,11 @@
+/* eslint-disable arrow-parens */
 import axios from 'axios';
 import nookies from 'nookies';
 import Router from 'next/router';
 import { types } from '../authConstants';
 import axiosWithToken from '../axios';
 
-// eslint-disable-next-line no-underscore-dangle
-const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
+import { getUrl } from './utils';
 
 const startLoading = () => ({
   type: types.START_LOADING
@@ -23,7 +23,7 @@ export const githubSignup = () => dispatch => {
   dispatch(startLoading());
   // console.log('Github endpoint request');
   // axiosWithToken()
-  //   .get(`${_BASE_URL}/user/auth/github`)
+  //   .get(`${getUrl()}/user/auth/github`)
   //   .then((res) => {
   //     debugger;
   //   })
@@ -59,7 +59,7 @@ export const emailSignUp = () => dispatch => {
 export const locationData = data => dispatch => {
   dispatch({ type: types.START_LOADING });
   return axios
-    .post(`${_BASE_URL}/location/getLocation`, data)
+    .post(`${getUrl()}/location/getLocation`, data)
     .then(res => {
       dispatch({ type: types.SET_LOCATION_DATA, payload: res.data.data });
       return res.data.status;
@@ -83,13 +83,27 @@ export const socialData = data => {
   };
 };
 
+// Action Creator for user Choice
+export const userChoise = (data, userType) => dispatch => {
+  dispatch({ type: types.START_LOADING });
+  axios
+    .post(`${getUrl()}/${userType}/choice`, data)
+    .then(res => {
+      dispatch({ type: types.SET_USER_CHOISE, payload: res.data.data });
+      dispatch({ type: types.STOP_LOADING });
+    })
+    .catch(() => {
+      dispatch({ type: types.STOP_LOADING });
+    });
+};
+
 // Action Creator for Singup a user with email
 // body {username, email, password}
 export const emailSignup = data => dispatch => {
   dispatch({ type: types.REGISTER_USER_REQUEST });
   // console.log('SignUp data: ', data);
   return axios
-    .post(`${_BASE_URL}/user/signup`, data)
+    .post(`${getUrl()}/user/signup`, data)
     .then(res => {
       dispatch({
         type: types.SET_EMAIL_DATA,
@@ -99,7 +113,7 @@ export const emailSignup = data => dispatch => {
         }
       });
       nookies.set({}, 'token', res.data.data.token, {
-        maxAge: 60 * 60 * 24 * 14,
+        maxAge: 60 * 60 * 24 * 30,
         path: '/'
       });
       return res.data.status;
@@ -122,7 +136,7 @@ export const emailSignup = data => dispatch => {
 export const userTypeHandler = (data, username, type, status) => dispatch => {
   dispatch({ type: types.START_LOADING });
   return axiosWithToken()
-    .post(`${_BASE_URL}/${type}/${username}/${type}`, data)
+    .post(`${getUrl()}/${type}/${username}/${type}`, data)
     .then(res => {
       dispatch({ type: types.SET_USER_TYPE, payload: status });
       return res.data.status;
@@ -137,7 +151,7 @@ export const userTypeHandler = (data, username, type, status) => dispatch => {
 export const locationRequest = data => dispatch => {
   dispatch({ type: types.START_LOADING });
   return axios
-    .get(`${_BASE_URL}/autocomplete/${data}`)
+    .get(`${getUrl()}/autocomplete/${data}`)
     .then(res => {
       dispatch({ type: types.STOP_LOADING });
       return res.data.data;
@@ -150,11 +164,21 @@ export const locationRequest = data => dispatch => {
 // Action Creator for getting all the jobs type from database
 export const getJobTitles = () => dispatch => {
   axios
-    .get(`${_BASE_URL}/jobs/all`)
+    .get(`${getUrl()}/jobs/all`)
     .then(res => {
       dispatch({ type: types.GET_ALL_JOBS, payload: res.data.data });
     })
     .catch(() => {});
+};
+
+// Action Creator for getting Mentor type option
+export const getMentorType = () => dispatch => {
+  axios
+    .get(`${getUrl()}/types/all`)
+    .then(res => {
+      dispatch({ type: types.GET_ALL_MENTOR_TYPES, payload: res.data.data });
+    })
+    .catch();
 };
 
 // Action Creator for updating/patch user information gather from the steps
@@ -163,7 +187,7 @@ export const getJobTitles = () => dispatch => {
 export const userProfileInfo = (data, user) => dispatch => {
   dispatch({ type: types.USER_INFO_REQUEST });
   return axiosWithToken()
-    .patch(`${_BASE_URL}/user/${user}/profile`, data)
+    .patch(`${getUrl()}/user/${user}/profile`, data)
     .then(res => {
       dispatch({ type: types.USER_INFO_SUCCESS, payload: res.data });
       // return status code in case of success
@@ -184,7 +208,7 @@ export const userProfileInfo = (data, user) => dispatch => {
 export const imageUpload = (data, user) => dispatch => {
   dispatch(startLoading());
   axiosWithToken()
-    .patch(`${_BASE_URL}/user/${user}/image/upload`, data)
+    .patch(`${getUrl()}/user/${user}/image/upload`, data)
     .then(() => {
       // debugger;
     })
@@ -198,7 +222,7 @@ export const imageUpload = (data, user) => dispatch => {
 export const socialDataHandler = (data, username) => dispatch => {
   dispatch({ type: types.START_LOADING });
   return axiosWithToken()
-    .post(`${_BASE_URL}/user/${username}/socialmedia`, data)
+    .post(`${getUrl()}/user/${username}/socialmedia`, data)
     .then(res => {
       dispatch({ type: types.SET_SOCIAL_MEDIA_DATA, payload: data });
       return res.data.status;
@@ -211,7 +235,7 @@ export const socialDataHandler = (data, username) => dispatch => {
 export const logInUser = ({ email, password }) => dispatch => {
   dispatch({ type: types.LOG_IN_USER_REQUEST });
   return axios
-    .post(`${_BASE_URL}/user/login`, { email, password })
+    .post(`${getUrl()}/user/login`, { email, password })
     .then(res => {
       dispatch({
         type: types.LOG_IN_USER_SUCCESS,
@@ -221,10 +245,10 @@ export const logInUser = ({ email, password }) => dispatch => {
         }
       });
       nookies.set({}, 'token', res.data.data.token, {
-        maxAge: 60 * 60 * 24 * 14,
+        maxAge: 60 * 60 * 24 * 30,
         path: '/'
       });
-      return res.data.status;
+      return res.data;
     })
     .catch(error => {
       dispatch({
@@ -243,7 +267,7 @@ export const logOutUser = () => dispatch => {
 export const resetPassword = props => dispatch => {
   dispatch({ type: types.RESET_PASSWORD_REQUEST });
   return axios
-    .post(`${_BASE_URL}/user/resetpassword`, { email: props.email })
+    .post(`${getUrl()}/user/resetpassword`, { email: props.email })
     .then(res => {
       dispatch({
         type: types.RESET_PASSWORD_SUCCESS,
@@ -262,16 +286,19 @@ export const resetPassword = props => dispatch => {
 
 export const changePassword = props => dispatch => {
   dispatch({ type: types.CHANGE_PASSWORD_REQUEST });
-  axios
-    .patch(`${_BASE_URL}/user/newpassword?token=${props.token}`, {
+  return axios
+    .patch(`${getUrl()}/user/newpassword?token=${props.token}`, {
       password: props.password
     })
     .then(res => {
       dispatch({
         type: types.CHANGE_PASSWORD_SUCCESS,
-        payload: res.data.data.message
+        payload: res.data.data
       });
-      Router.push('/auth/login');
+      setTimeout(() => {
+        Router.push('/auth/login');
+      }, 2000);
+      return res.data.data;
     })
     .catch(error => {
       dispatch({

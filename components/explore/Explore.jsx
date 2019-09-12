@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import TopSection from '../TopSection';
@@ -10,11 +10,6 @@ import ExploreButtons from './ExploreButtons';
 const Wrapper = styled.main`
     width: 100%;
 `;
-
-const jobTitles = [
-  'Technology',
-  'Backend developer'
-];
 
 function Explore(props) {
   const connectionsLength = props.connectionsAll ? props.connectionsAll.length : 0;
@@ -49,10 +44,19 @@ function Explore(props) {
     props.setUsers(filteredUsers);
   };
 
-  useEffect(() => {
+  const filterJobTitle = (job) => {
+    const filteredUsers = props.users.map(user => {
+      if (user.job) {
+        if (user.job.tech_name === job) {
+          return { ...user, filtered: true };
+        }
+        return { ...user, filtered: false };
+      }
+      return { ...user, filtered: false };
+    });
 
-  }, [props.users]);
-
+    props.setUsers(filteredUsers);
+  };
 
   return (
     <Wrapper>
@@ -60,7 +64,7 @@ function Explore(props) {
         buttons={<ExploreButtons numOfConnections={connectionsLength} />}
         src="/static/friends-online.svg"
       />
-      <SearchBox jobTitles={jobTitles} filter={filter} />
+      <SearchBox jobTitles={props.jobs} filter={filter} filterJobTitle={filterJobTitle} />
       <ProfileList users={props.users} />
     </Wrapper>
   );
@@ -68,6 +72,7 @@ function Explore(props) {
 
 Explore.propTypes = {
   users: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  jobs: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   setUsers: PropTypes.func.isRequired,
   connectionsAll: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };

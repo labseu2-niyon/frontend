@@ -64,13 +64,12 @@ const ProfileInfo = props => {
       lastName: props.userInfo.userNameData.lastName,
       bio: bio,
       locationId: props.userInfo.locationId,
-      jobId: props.userInfo.userTypeData.job
+      jobId: Number(props.userInfo.userTypeData)
     };
     const username = props.userInfo.emailData.username;
     const imgData = new FormData();
     imgData.append('image', image);
-    props.imageUpload(imgData, username);
-
+    image && props.imageUpload(imgData, username);
     props.userProfileInfo(data, username).then(res => {
       if (res === 200) {
         Router.push('/auth/social-info');
@@ -100,12 +99,17 @@ const ProfileInfo = props => {
           type="text"
           placeholder="Biography"
           onChange={e => setBio(e.target.value)}
+          maxLength="1501"
         />
+
+        {bio.length > 1500 && (
+          <p>Sorry, your biography should have a maximum of 1500 characters!</p>
+        )}
+
         <Button small primary type="submit" loadingB={props.loading}>
           Next
         </Button>
-        <Skip href="/auth/social-info"></Skip>
-        {/* {error && <p>{error}</p>} */}
+        <Skip onHandle={handleSubmit}></Skip>
       </FormArea>
     </Root>
   );
@@ -131,7 +135,7 @@ const Root = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  p {
+  h2 {
     margin: 0 20px;
     text-align: center;
   }
@@ -175,12 +179,4 @@ const FormArea = styled.form`
       opacity: 0.4;
     }
   }
-`;
-
-const Input = styled.input`
-  width: 100%;
-  height: 100%;
-  color: grey;
-  position: absolute;
-  opacity: 0;
 `;

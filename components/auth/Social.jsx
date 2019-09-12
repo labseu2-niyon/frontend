@@ -14,9 +14,7 @@ const Social = ({ errors, touched, username }) => (
     <IconT className="far fa-user" />
     <FormArea>
       <InputWrapper>
-        <Text small>
-          Please enter your first and last name.
-        </Text>
+        <Text small>Please enter your first and last name.</Text>
         <Field
           name="username"
           type="text"
@@ -28,17 +26,17 @@ const Social = ({ errors, touched, username }) => (
       <InputWrapper>
         <Field name="firstName" type="text" placeholder="First Name" />
         {touched.firstName && errors.firstName && (
-        <Error>{errors.firstName}</Error>
+          <Error>{errors.firstName}</Error>
         )}
       </InputWrapper>
       <InputWrapper>
         <Field name="lastName" type="text" placeholder="Last Name" />
         {touched.lastName && errors.lastName && (
-        <Error>{errors.lastName}</Error>
+          <Error>{errors.lastName}</Error>
         )}
       </InputWrapper>
       <Button primary small type="submit">
-          Next
+        Next
       </Button>
     </FormArea>
   </Root>
@@ -55,13 +53,13 @@ const FormikWithSocialForm = withFormik({
   validationSchema: Yup.object().shape({
     username: Yup.string(),
     firstName: Yup.string()
-      .matches(/^([^0-9]*)$/, {
+      .matches(/^[a-zA-Z]*$/, {
         message: 'Must contain only letters',
         excludeEmptyString: true
       })
       .required('First Name is required.'),
     lastName: Yup.string()
-      .matches(/^([^0-9]*)$/, {
+      .matches(/^[a-zA-Z]*$/, {
         message: 'Must contain only letters',
         excludeEmptyString: true
       })

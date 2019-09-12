@@ -1,14 +1,14 @@
 import axiosWithAuth from '../axios';
 import { types } from '../userConstants';
 
-const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
+import { getUrl } from './utils';
 
 export const fetchUser = (username) => (dispatch) => {
   dispatch({
-    type: types.FETCH_USER_REQUEST
+    type: types.FETCH_USER_REQUEST,
   });
   axiosWithAuth()
-    .get(`${_BASE_URL}/user/${username}/profile`)
+    .get(`${getUrl()}/user/${username}/profile`)
     .then((res) => {
       dispatch({
         type: types.FETCH_USER,
@@ -25,7 +25,7 @@ export const fetchUser = (username) => (dispatch) => {
 
 export const updatePassword = (username, body) => (dispatch) => {
   axiosWithAuth()
-    .patch(`${_BASE_URL}/user/${username}/password`, body)
+    .patch(`${getUrl()}/user/${username}/password`, body)
     .then((res) => {
       dispatch({
         type: types.UPDATE_PASSWORD_SUCCESS,
@@ -49,7 +49,7 @@ export const updatePassword = (username, body) => (dispatch) => {
 //         type: types.UPDATE_USER_PROFILE_SUCCESS,
 //         payload: res.data
 //       });
-//       // console.log(res.data);
+//       // (res.data);
 //     })
 //     .catch(error => {
 //       dispatch({
@@ -82,7 +82,7 @@ export const fetchAllConnections = (user) => (dispatch) => {
   dispatch({ type: types.FETCH_ALL_CONNECTIONS_REQUEST });
   // spinner
   axiosWithAuth()
-    .get(`${_BASE_URL}/user/${user}/users`)
+    .get(`${getUrl()}/user/${user}/users`)
     .then((res) => {
       dispatch({
         type: types.FETCH_ALL_CONNECTIONS_SUCCESS,
@@ -101,7 +101,7 @@ export const fetchAllUsers = (user) => (dispatch) => {
   dispatch({ type: types.FETCH_ALL_USERS_REQUEST });
   // spinner
   axiosWithAuth()
-    .get(`${_BASE_URL}/user/${user}/users`)
+    .get(`${getUrl()}/user/${user}/users`)
     .then((res) => {
       dispatch({
         type: types.FETCH_ALL_USERS_SUCCESS,
