@@ -62,6 +62,13 @@ const Navigation = ({ logOutUser, fetchUser, authReducer, user }) => {
           </Link>
         )}
 
+        <Link href="/chat">
+          <div>
+            <Icon type="message" className="icon" />
+            <a className="desktop">Chat</a>
+          </div>
+        </Link>
+
         <Link href="/connections">
           <div>
             <Icon type="share-alt" className="icon" />
