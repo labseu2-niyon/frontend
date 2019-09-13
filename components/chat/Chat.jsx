@@ -1,4 +1,4 @@
-import UserList from './UserList';
+// import UserList from './UserList';
 import { useEffect } from 'react';
 // Will it be protected or not?
 // import axiosWithToken from '../redux/axios';
@@ -11,7 +11,7 @@ const Chat = () => {
 
   return (
     <div>
-      <UserList></UserList>
+      {/* <UserList></UserList> */}
       <p>I'm the chat window</p>
     </div>
   );
