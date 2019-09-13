@@ -41,6 +41,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
+    "socket.io-client": "^2.2.0",
     "styled": "^1.0.0",
     "styled-components": "^4.3.2",
     "styled-theming": "^2.2.0",
