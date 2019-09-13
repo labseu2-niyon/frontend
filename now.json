@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "alias": "niyon-app",
+    "alias": ["niyonapp-staging", "app.niyonapp.com"],
     "builds": [
         { "use": "@now/next", "src": "next.config.js" }
     ],
