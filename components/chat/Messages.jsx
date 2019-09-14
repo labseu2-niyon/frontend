@@ -1,9 +1,22 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { useRouter, withRouter } from 'next/router';
 
-const Chat = ({ username, chatHistory }) => {
+const Chat = ({ username, chatHistory, currentUser, router, socket }) => {
   const [message, setMessage] = useState('');
-  //console.log(username, chatHistory)
+  console.log(chatHistory);
+  const handleSend = () => {
+    const { query } = router;
+    const dataForTheServer = {
+      sender: currentUser.id,
+      reciver: Number(query.id),
+      message,
+      connectionId: socket.id
+    };
+
+    console.log(dataForTheServer);
+    socket.emit('messegeAdd', dataForTheServer);
+  };
   return (
     <Wrapper>
       <Window>
@@ -12,8 +25,8 @@ const Chat = ({ username, chatHistory }) => {
       <Input>
         <input
           placeholder="enter your message..."
-          onChange={() => {
-            setMessage(e, target.value);
+          onChange={e => {
+            setMessage(e.target.value);
           }}
         />
         <button onClick={handleSend}>Send</button>
@@ -21,7 +34,7 @@ const Chat = ({ username, chatHistory }) => {
     </Wrapper>
   );
 };
-export default Chat;
+export default withRouter(Chat);
 
 const Wrapper = styled.div`
   display: flex;

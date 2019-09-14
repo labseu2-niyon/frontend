@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import ChatLayout from '../../components/chat/ChatLayout';
 import withAuth from '../../lib/withAuth';

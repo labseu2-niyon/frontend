@@ -14,7 +14,7 @@ const ChatLayout = props => {
   const [chatHistory, setChatHistory] = useState(mesagesData);
   const { socket } = props;
   useEffect(() => {
-    console.log(props.socket);
+    //console.log(props.socket);
     socket.on('connected', msg => {
       console.log('INSIDE CHAT LAYOUT ', msg);
     });
@@ -31,7 +31,7 @@ const ChatLayout = props => {
         currentUser={props.currentUser}
       />
       <Chat
-        username={props.usersList.username}
+        socket={socket}
         chatHistory={chatHistory}
         currentUser={props.currentUser}
       />
@@ -46,7 +46,7 @@ const Main = styled.div`
 const mapStateToProps = state => {
   return {
     usersList: state.userReducer.usersAll,
-    currentUser: state.userReducer.user.username
+    currentUser: state.userReducer.user
   };
 };
 
