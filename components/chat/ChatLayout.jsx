@@ -1,20 +1,22 @@
+/* eslint-disable react/prop-types */
+import { useEffect } from 'react';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
 import UserList from './UserList';
 import Chat from './Messages';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { useEffect } from 'react';
 
 const ChatLayout = props => {
   useEffect(() => {
-    props.socket.on('Delba', msg => {
-      console.log(msg);
+    console.log(props.socket);
+    props.socket.on('connected', msg => {
+      console.log('INSIDE CHAT LAYOUT ', msg);
     });
   }, []);
 
   return (
     <Main>
-      <UserList usersList={props.usersList}></UserList>
-      <Chat username={props.usersList.username}></Chat>
+      <UserList usersList={props.usersList} />
+      <Chat username={props.usersList.username} />
     </Main>
   );
 };
