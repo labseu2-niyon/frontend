@@ -12,7 +12,6 @@ const User = ({ user }) => {
             {user.first_name} {user.last_name}
           </p>
         </div> */}
-
         <List.Item>
           <List.Item.Meta
             avatar={<Avatar src={user.profile_picture} />}
