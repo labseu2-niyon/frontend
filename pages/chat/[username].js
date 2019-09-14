@@ -4,11 +4,11 @@ import ChatLayout from '../../components/chat/ChatLayout';
 import withAuth from '../../lib/withAuth';
 
 const Page = props => {
-  const router = useRouter();
+  //const router = useRouter();
 
-  return (  
+  return (
     <Layout>
-      <ChatLayout socket={props.socket}></ChatLayout>
+      <ChatLayout socket={props.socket} />
     </Layout>
   );
 };

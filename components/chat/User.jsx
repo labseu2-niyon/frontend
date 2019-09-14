@@ -1,17 +1,24 @@
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { List, Avatar } from 'antd';
 import styled from 'styled-components';
 
-const User = ({ user }) => {
+const User = ({ user, socket, currentUser }) => {
+  const handleEmit = () => {
+    const dataForTheServer = {
+      sender: currentUser,
+      reciver: user.username,
+      chatId: socket.id
+    };
+
+    console.log(dataForTheServer);
+
+    socket.emit('chatOpen', dataForTheServer);
+  };
+
   return (
-    <Root>
+    <Root onClick={handleEmit}>
       <Link href={`/chat/${user.username}`}>
-        {/* <div>
-          <Av large source={user.profile_picture} />
-          <p>
-            {user.first_name} {user.last_name}
-          </p>
-        </div> */}
         <List.Item>
           <List.Item.Meta
             avatar={<Avatar src={user.profile_picture} />}

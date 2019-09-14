@@ -25,8 +25,16 @@ const ChatLayout = props => {
 
   return (
     <Main>
-      <UserList usersList={props.usersList} />
-      <Chat username={props.usersList.username} chatHistory={chatHistory} />
+      <UserList
+        usersList={props.usersList}
+        socket={socket}
+        currentUser={props.currentUser}
+      />
+      <Chat
+        username={props.usersList.username}
+        chatHistory={chatHistory}
+        currentUser={props.currentUser}
+      />
     </Main>
   );
 };
@@ -36,7 +44,10 @@ const Main = styled.div`
 `;
 
 const mapStateToProps = state => {
-  return { usersList: state.userReducer.usersAll };
+  return {
+    usersList: state.userReducer.usersAll,
+    currentUser: state.userReducer.user.username
+  };
 };
 
 export default connect(

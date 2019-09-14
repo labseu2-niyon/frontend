@@ -2,15 +2,21 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 const Chat = ({ username, chatHistory }) => {
-  //console.log(username, chatHistory);
+  const [message, setMessage] = useState('');
+  //console.log(username, chatHistory)
   return (
     <Wrapper>
       <Window>
         <p>{username}</p>
       </Window>
       <Input>
-        <input placeholder="enter your message..." />
-        <button>Send</button>
+        <input
+          placeholder="enter your message..."
+          onChange={() => {
+            setMessage(e, target.value);
+          }}
+        />
+        <button onClick={handleSend}>Send</button>
       </Input>
     </Wrapper>
   );
