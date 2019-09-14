@@ -38,4 +38,7 @@ export default User;
 
 const Root = styled.div`
   width: 100px;
+  &:hover {
+    cursor: pointer;
+  }
 `;

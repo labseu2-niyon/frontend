@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { useRouter, withRouter } from 'next/router';
+import { withRouter } from 'next/router';
+import { Card, Input, Button, Icon } from 'antd';
 
 const Chat = ({ username, chatHistory, currentUser, router, socket }) => {
   const [message, setMessage] = useState('');
-  console.log(chatHistory);
   const handleSend = () => {
     const { query } = router;
     const dataForTheServer = {
@@ -22,15 +22,19 @@ const Chat = ({ username, chatHistory, currentUser, router, socket }) => {
       <Window>
         <p>{username}</p>
       </Window>
-      <Input>
-        <input
+      <InputWrapper>
+        <Input
           placeholder="enter your message..."
+          allowClear
           onChange={e => {
             setMessage(e.target.value);
           }}
         />
-        <button onClick={handleSend}>Send</button>
-      </Input>
+        <Button type="primary" onClick={handleSend}>
+          SEND
+          <Icon type="right" />
+        </Button>
+      </InputWrapper>
     </Wrapper>
   );
 };
@@ -40,21 +44,18 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 10%;
+  top: 15%;
   left: 50%;
 `;
 
-const Window = styled.div`
-  border: 1px solid black;
-  height: 80vh;
+const Window = styled(Card)`
+  height: 75vh;
   width: 400px;
 `;
 
-const Input = styled.div`
+const InputWrapper = styled.div`
   display: flex;
-  input {
-    width: 80%;
-  }
+
   button {
     width: 20%;
   }

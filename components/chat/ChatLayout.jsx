@@ -14,11 +14,12 @@ const ChatLayout = props => {
   const [chatHistory, setChatHistory] = useState(mesagesData);
   const { socket } = props;
   useEffect(() => {
-    //console.log(props.socket);
-    socket.on('connected', msg => {
+    console.log(props.socket);
+    socket.on('DD', msg => {
       console.log('INSIDE CHAT LAYOUT ', msg);
     });
     socket.on('chatHistory', data => {
+      console.log('CHAT HISTORY: ', data);
       setChatHistory(data);
     });
   }, []);
@@ -30,6 +31,7 @@ const ChatLayout = props => {
         socket={socket}
         currentUser={props.currentUser}
       />
+
       <Chat
         socket={socket}
         chatHistory={chatHistory}
