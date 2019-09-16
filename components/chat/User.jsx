@@ -26,7 +26,7 @@ const User = ({ user, socket, currentUser }) => {
           <List.Item.Meta
             avatar={<Avatar src={user.profile_picture} />}
             title={<a href="https://ant.design">{user.first_name}</a>}
-            // description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+            //description="Ant Design"
           />
         </List.Item>
       </Link>

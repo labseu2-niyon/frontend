@@ -15,7 +15,7 @@ const ChatLayout = props => {
   const { socket } = props;
   useEffect(() => {
     console.log(props.socket);
-    socket.on('DD', msg => {
+    socket.on('Delba', msg => {
       console.log('INSIDE CHAT LAYOUT ', msg);
     });
     socket.on('chatHistory', data => {
@@ -43,6 +43,7 @@ const ChatLayout = props => {
 
 const Main = styled.div`
   display: flex;
+  justify-content: center;
 `;
 
 const mapStateToProps = state => {

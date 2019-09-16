@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import User from './User';
-// import Scrollbar from './Scrollbar';
 import { Card } from 'antd';
 
 const UserList = ({ usersList, socket, currentUser }) => {

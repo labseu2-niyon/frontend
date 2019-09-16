@@ -1,10 +1,18 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'next/router';
 import { Card, Input, Button, Icon } from 'antd';
 
 const Chat = ({ username, chatHistory, currentUser, router, socket }) => {
   const [message, setMessage] = useState('');
+
+  // useEffect(() => {
+  //   message
+  //     ? socket.broadcast.emit('typing', socket.id)
+  //     : socket.broadcast.emit('stopTyping', socket.id);
+  // }, []);
+
   const handleSend = () => {
     const { query } = router;
     const dataForTheServer = {
@@ -43,9 +51,6 @@ export default withRouter(Chat);
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  position: fixed;
-  top: 15%;
-  left: 50%;
 `;
 
 const Window = styled(Card)`
