@@ -9,7 +9,7 @@ const UserList = ({ userList, socket, currentUser }) => {
         userList.map(user => (
           <User
             user={user}
-            key={user.id}
+            key={user.connectionId}
             socket={socket}
             currentUser={currentUser}
           />

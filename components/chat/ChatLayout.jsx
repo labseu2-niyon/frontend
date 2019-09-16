@@ -40,7 +40,6 @@ const ChatLayout = props => {
   useEffect(() => {
     //console.log('THIS IS CALLING', socket);
     socket.on('connectionList', data => {
-      console.log(data);
       setUserList(data);
     });
 
