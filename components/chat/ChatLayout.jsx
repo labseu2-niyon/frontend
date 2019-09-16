@@ -88,6 +88,10 @@ const Main = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+
+  .ant-card-body {
+    padding: 10px;
+  }
 `;
 
 const mapStateToProps = state => {

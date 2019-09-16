@@ -31,13 +31,15 @@ const ChatMessage = ({ user }) => {
 export default ChatMessage;
 
 const Recevier = styled.div`
-  color: lightcoral;
+  background-color: #e6f6fb;
   display: flex;
+  padding: 0;
   /* justify-content: flex-start; */
 `;
 
 const Sender = styled.div`
-  color: lightskyblue;
+  background-color: #eafaf1;
   display: flex;
+  padding: 0;
   /* justify-content: flex-end; */
 `;

@@ -21,7 +21,7 @@ const UserList = ({ userList, socket, currentUser }) => {
 export default UserList;
 
 const Root = styled(Card)`
-  min-width: 30%;
+  min-width: 130px;
   height: 80vh;
   overflow-y: scroll;
 `;
