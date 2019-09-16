@@ -5,13 +5,9 @@ import { connect } from 'react-redux';
 import UserList from './UserList';
 import Chat from './Messages';
 
-const mesagesData = [
-  { name: 'Rambo', message: 'This is a message1' },
-  { name: 'Arnold', message: 'Message 2' }
-];
-
 const ChatLayout = props => {
-  const [chatHistory, setChatHistory] = useState(mesagesData);
+  const [chatHistory, setChatHistory] = useState([]);
+  const [userList, setUserList] = useState([]);
   const { socket } = props;
   useEffect(() => {
     console.log(props.socket);
@@ -21,6 +17,10 @@ const ChatLayout = props => {
     socket.on('chatHistory', data => {
       console.log('CHAT HISTORY: ', data);
       setChatHistory(data);
+    });
+    socket.on('userList', data => {
+      //console.log(data);
+      //setUserList(data)
     });
   }, []);
 

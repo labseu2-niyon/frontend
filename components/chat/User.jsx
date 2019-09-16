@@ -7,7 +7,7 @@ const User = ({ user, socket, currentUser }) => {
   const handleEmit = () => {
     const dataForTheServer = {
       sender: currentUser.id,
-      reciver: user.username,
+      reciver: user.id,
       chatId: socket.id
     };
     console.log(dataForTheServer);
@@ -25,7 +25,7 @@ const User = ({ user, socket, currentUser }) => {
         <List.Item>
           <List.Item.Meta
             avatar={<Avatar src={user.profile_picture} />}
-            title={<a href="https://ant.design">{user.first_name}</a>}
+            title={<a href="">{user.first_name}</a>}
             //description="Ant Design"
           />
         </List.Item>

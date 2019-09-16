@@ -17,7 +17,7 @@ const Chat = ({ username, chatHistory, currentUser, router, socket }) => {
     const { query } = router;
     const dataForTheServer = {
       sender: currentUser.id,
-      reciver: Number(query.id),
+      receiver: Number(query.id),
       message,
       connectionId: socket.id
     };
