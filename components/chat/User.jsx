@@ -1,10 +1,12 @@
+import { useState } from 'react';
 import Link from 'next/link';
 import { List, Avatar } from 'antd';
 import styled from 'styled-components';
 
 const User = ({ user, socket, currentUser }) => {
-  //not sure when to send the data - onClick or in useEffect
+  const [selected, setSelected] = useState(false);
   const handleEmit = () => {
+    setSelected(true);
     const dataForTheServer = {
       sender: currentUser.id,
       reciver: user.id,
@@ -15,7 +17,7 @@ const User = ({ user, socket, currentUser }) => {
   };
 
   return (
-    <Root onClick={handleEmit}>
+    <Root onClick={handleEmit} selected={selected}>
       <Link
         href={{
           pathname: `/chat/${user.username}`,
@@ -38,6 +40,7 @@ export default User;
 
 const Root = styled.div`
   width: 100px;
+  /* background-color: ${props => (props.selected ? 'lightGrey' : 'white')}; */
   &:hover {
     cursor: pointer;
   }

@@ -8,7 +8,7 @@ const Chat = ({ username, chatHistory, currentUser, router, socket }) => {
   const [message, setMessage] = useState('');
 
   // useEffect(() => {
-  //   message
+  //   message.length
   //     ? socket.broadcast.emit('typing', socket.id)
   //     : socket.broadcast.emit('stopTyping', socket.id);
   // }, []);
@@ -51,11 +51,11 @@ export default withRouter(Chat);
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 70%;
 `;
 
 const Window = styled(Card)`
   height: 75vh;
-  width: 400px;
 `;
 
 const InputWrapper = styled.div`

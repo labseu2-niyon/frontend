@@ -43,7 +43,8 @@ const ChatLayout = props => {
 
 const Main = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 const mapStateToProps = state => {
