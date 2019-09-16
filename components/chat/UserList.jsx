@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import User from './User';
 import { Card } from 'antd';
+import User from './User';
 
 const UserList = ({ userList, socket, currentUser }) => {
   return (

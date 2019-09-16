@@ -1,18 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
-import { useEffect } from 'react';
 import styled from 'styled-components';
-import { withRouter } from 'next/router';
 import { Card, Input, Button, Icon } from 'antd';
 import { connect } from 'react-redux';
+import ChatMessage from './ChatMessage';
 
-const Chat = ({
-  username,
-  chatHistory,
-  currentUser,
-  socket,
-  currentRequestId
-}) => {
+const Chat = ({ chatHistory, currentUser, socket, currentRequestId }) => {
   const [message, setMessage] = useState('');
   // useEffect(() => {
   //   console.log(message);
@@ -28,14 +21,17 @@ const Chat = ({
       message,
       connectionId: socket.id
     };
-    console.log(dataForTheServer);
+    // console.log(dataForTheServer);
     setMessage('');
     socket.emit('messegeAdd', dataForTheServer);
   };
   return (
     <Wrapper>
       <Window>
-        <p>{username}</p>
+        {chatHistory &&
+          chatHistory.map((user, i) => {
+            return <ChatMessage key={i} user={user} />;
+          })}
       </Window>
       <InputWrapper>
         <Input
@@ -74,6 +70,7 @@ const Wrapper = styled.div`
 
 const Window = styled(Card)`
   height: 75vh;
+  overflow-y: scroll;
 `;
 
 const InputWrapper = styled.div`

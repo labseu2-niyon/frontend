@@ -7,34 +7,53 @@ import Chat from './Messages';
 
 const dummyChatHistory = [
   {
-    message: 'sdsdsddsd',
+    message:
+      ' We supply a series of design principles, practical patterns and high quality design resources to help people create their product prototypes beautifully and efficiently',
     date: 23.1982,
-    requestUser: 'ION '
+    requestUser: {
+      username: 'Ion'
+    }
   },
   {
     message: 'Mesage is sdsdaa',
     date: 23.1982,
-    requestUser: 'Rafa '
+    requestUser: {
+      username: 'Rafa'
+    }
   },
   {
     message: 'Mesage is sdsdaa',
-    date: 23.1982,
-    requestUser: 'Jonny '
+    date: '19 Apr 1976',
+    requestUser: {
+      username: 'Tom'
+    }
   },
   {
     message: 'Mesage is sdsdaa',
-    date: 23.1982,
-    sentUser: 'Pacala '
+    date: '19 Apr 1976',
+    sentUser: {
+      username: 'Jerry'
+    }
   },
   {
     message: 'Mesage is sdsdsddcqecaa',
-    date: 23.1982,
-    requestUser: 'Maria '
+    date: '19 Apr 1976',
+    requestUser: {
+      username: 'maria'
+    }
+  },
+  {
+    message:
+      'Mesage is sjaslklsakdj jklsaakjdlkaj lkasjkd alajksdlkasjdlka dla akldjk',
+    date: '19 Apr 1976',
+    sentUser: {
+      username: 'Jerry'
+    }
   }
 ];
 
 const ChatLayout = props => {
-  const [chatHistory, setChatHistory] = useState([]);
+  const [chatHistory, setChatHistory] = useState(dummyChatHistory);
   const [userList, setUserList] = useState([]);
   const { socket } = props;
   useEffect(() => {
