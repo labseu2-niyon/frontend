@@ -2,17 +2,18 @@ import styled from 'styled-components';
 import User from './User';
 import { Card } from 'antd';
 
-const UserList = ({ usersList, socket, currentUser }) => {
+const UserList = ({ userList, socket, currentUser }) => {
   return (
     <Root>
-      {usersList.map(user => (
-        <User
-          user={user}
-          key={user.id}
-          socket={socket}
-          currentUser={currentUser}
-        />
-      ))}
+      {userList &&
+        userList.map(user => (
+          <User
+            user={user}
+            key={user.id}
+            socket={socket}
+            currentUser={currentUser}
+          />
+        ))}
     </Root>
   );
 };

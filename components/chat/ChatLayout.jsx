@@ -10,24 +10,21 @@ const ChatLayout = props => {
   const [userList, setUserList] = useState([]);
   const { socket } = props;
   useEffect(() => {
-    console.log(props.socket);
-    socket.on('Delba', msg => {
-      console.log('INSIDE CHAT LAYOUT ', msg);
-    });
-    socket.on('chatHistory', data => {
-      console.log('CHAT HISTORY: ', data);
-      setChatHistory(data);
-    });
-    socket.on('userList', data => {
+    //console.log('THIS IS CALLING', socket);
+    socket.on('connectionList', data => {
       //console.log(data);
-      //setUserList(data)
+      setUserList(data);
     });
-  }, []);
 
+    // socket.on('chatHistory', data => {
+    //   //console.log('CHAT HISTORY: ', data);
+    //   setChatHistory(data);
+    // });
+  }, []);
   return (
     <Main>
       <UserList
-        usersList={props.usersList}
+        userList={userList}
         socket={socket}
         currentUser={props.currentUser}
       />
@@ -49,7 +46,7 @@ const Main = styled.div`
 
 const mapStateToProps = state => {
   return {
-    usersList: state.userReducer.usersAll,
+    //usersList: state.userReducer.usersAll,
     currentUser: state.userReducer.user
   };
 };

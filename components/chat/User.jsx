@@ -5,12 +5,12 @@ import styled from 'styled-components';
 
 const User = ({ user, socket, currentUser }) => {
   const [selected, setSelected] = useState(false);
+
+  console.log('USER ', user);
   const handleEmit = () => {
     setSelected(true);
     const dataForTheServer = {
-      sender: currentUser.id,
-      receiver: user.id,
-      chatId: socket.id
+      chatId: user.connectionId
     };
     console.log(dataForTheServer);
     socket.emit('chatOpen', dataForTheServer);
@@ -20,14 +20,14 @@ const User = ({ user, socket, currentUser }) => {
     <Root onClick={handleEmit} selected={selected}>
       <Link
         href={{
-          pathname: `/chat/${user.username}`,
-          query: { id: `${user.id}` }
+          pathname: `/chat/${user.requestUser.username}`,
+          query: { id: `${user.requestUser.id}` }
         }}
       >
         <List.Item>
           <List.Item.Meta
-            avatar={<Avatar src={user.profile_picture} />}
-            title={<a href="">{user.first_name}</a>}
+            avatar={<Avatar src={user.requestUser.profile_picture} />}
+            title={<a href="">{user.requestUser.username}</a>}
             //description="Ant Design"
           />
         </List.Item>
