@@ -5,12 +5,9 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { Text, Button } from '../~common/index';
 import { theme } from '../../lib/theme';
-import { githubSignup } from '../../redux/actions/authActions';
 
-function clickHandler() {
-  // console.log('clicked!');
-  githubSignup();
-}
+// import { getUrl } from './utils';
+// import { githubSignup } from '../../redux/actions/authActions';
 
 const SignUp = ({}) => (
   <Root>
@@ -33,11 +30,9 @@ const SignUp = ({}) => (
     </Text>
     <ButtonArea>
       <SocialWrapper>
-        <Image
-          src="../../static/social/social-github.png"
-          alt="github"
-          onClick={clickHandler}
-        />
+        <a href="https://niyon-dev.herokuapp.com/api/auth/github">
+          <Image src="../../static/social/social-github.png" alt="github" />
+        </a>
         <Image src="../../static/social/social-linkedin.png" alt="linkedin" />
         <Image src="../../static/social/social-facebook.png" alt="facebook" />
         <Image src="../../static/social/social-twitter.png" alt="twitter" />

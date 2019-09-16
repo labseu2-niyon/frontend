@@ -15,17 +15,19 @@ const stopLoading = () => ({ type: types.STOP_LOADING });
 
 // Action Creator for Social Media Signup
 
-export const githubSignup = () => {
-  // dispatch({ type: types.START_LOADING });
+export const githubSignup = () => dispatch => {
+  console.log(startLoading());
   console.log('Github endpoint request');
+  dispatch(startLoading());
   // axiosWithToken()
-  //   .get(`${getUrl()}/user/auth/github`)
+  //   .get(`${getUrl()}/auth/github`)
   //   .then((res) => {
-  //     debugger;
+  //     // debugger;
+  //     console.log(res);
   //   })
   //   .catch((err) => {
   //     console.log(err);
-  //     debugger;
+  //     // debugger;
   //   });
   // dispatch(stopLoading());
 };
