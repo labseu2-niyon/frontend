@@ -18,20 +18,20 @@ const User = ({ user, socket, currentUser }) => {
 
   return (
     <Root onClick={handleEmit} selected={selected}>
-      <Link
+      {/* <Link
         href={{
           pathname: `/chat/${user.requestUser.username}`,
           query: { id: `${user.requestUser.id}` }
         }}
-      >
-        <List.Item>
-          <List.Item.Meta
-            avatar={<Avatar src={user.requestUser.profile_picture} />}
-            title={<a href="">{user.requestUser.username}</a>}
-            //description="Ant Design"
-          />
-        </List.Item>
-      </Link>
+      > */}
+      <List.Item>
+        <List.Item.Meta
+          avatar={<Avatar src={user.requestUser.profile_picture} />}
+          title={user.requestUser.username}
+          //description="Ant Design"
+        />
+      </List.Item>
+      {/* </Link> */}
     </Root>
   );
 };
