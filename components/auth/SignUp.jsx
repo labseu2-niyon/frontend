@@ -23,9 +23,28 @@ const SignUp = ({}) => (
         </Pulse>
       </Logo>
     </Flip>
-    <Text small>Sign up now to get in contact with mentors and young professionals</Text>
+    <Text small>
+      Sign up now to get in contact with mentors and young professionals
+    </Text>
     <ButtonArea>
-      <Flip top>
+      <SocialWrapper>
+        <ImageWrapper href="">
+          <Image src="../../static/social/social-github.png" alt="github" />
+        </ImageWrapper>
+        <ImageWrapper href="">
+          <Image src="../../static/social/social-linkedin.png" alt="linkedin" />
+        </ImageWrapper>
+        <ImageWrapper href="">
+          <Image src="../../static/social/social-facebook.png" alt="facebook" />
+        </ImageWrapper>
+        <ImageWrapper href="">
+          <Image src="../../static/social/social-twitter.png" alt="twitter" />
+        </ImageWrapper>
+        <ImageWrapper href="">
+          <Image src="../../static/social/social-google.png" alt="google" />
+        </ImageWrapper>
+      </SocialWrapper>
+      {/* <Flip top>
         <Button
           large
           primary
@@ -33,11 +52,11 @@ const SignUp = ({}) => (
           //   Router.push('/auth/social');
           // }}
         >
-          Linkedin
+          Github
         </Button>
-      </Flip>
+      </Flip> */}
 
-      <Flip top>
+      {/* <Flip top>
         <Button
           large
           secondary
@@ -45,10 +64,11 @@ const SignUp = ({}) => (
           //   Router.push('/auth/social');
           // }}
         >
-          Github
+          Linkedin
         </Button>
-      </Flip>
-      {/* 
+      </Flip> */}
+
+      {/*
       <Flip top>
         <Button large danger onClick={() => Router.push('/auth/social')}>
           Twitter
@@ -103,7 +123,23 @@ const ButtonArea = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  height: 290px;
+  height: 50%;
+`;
+
+const SocialWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  /* background-color: greenyellow; */
+`;
+
+const ImageWrapper = styled.a`
+  height: 70%;
+`;
+
+const Image = styled.img`
+  height: 100%;
 `;
 
 const Logo = styled.div`
