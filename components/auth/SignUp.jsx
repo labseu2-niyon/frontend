@@ -5,7 +5,12 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { Text, Button } from '../~common/index';
 import { theme } from '../../lib/theme';
-// import { linkedinSignup } from '../../redux/actions/authActions';
+import { githubSignup } from '../../redux/actions/authActions';
+
+function clickHandler() {
+  // console.log('clicked!');
+  githubSignup();
+}
 
 const SignUp = ({}) => (
   <Root>
@@ -28,21 +33,15 @@ const SignUp = ({}) => (
     </Text>
     <ButtonArea>
       <SocialWrapper>
-        <ImageWrapper href="">
-          <Image src="../../static/social/social-github.png" alt="github" />
-        </ImageWrapper>
-        <ImageWrapper href="">
-          <Image src="../../static/social/social-linkedin.png" alt="linkedin" />
-        </ImageWrapper>
-        <ImageWrapper href="">
-          <Image src="../../static/social/social-facebook.png" alt="facebook" />
-        </ImageWrapper>
-        <ImageWrapper href="">
-          <Image src="../../static/social/social-twitter.png" alt="twitter" />
-        </ImageWrapper>
-        <ImageWrapper href="">
-          <Image src="../../static/social/social-google.png" alt="google" />
-        </ImageWrapper>
+        <Image
+          src="../../static/social/social-github.png"
+          alt="github"
+          onClick={clickHandler}
+        />
+        <Image src="../../static/social/social-linkedin.png" alt="linkedin" />
+        <Image src="../../static/social/social-facebook.png" alt="facebook" />
+        <Image src="../../static/social/social-twitter.png" alt="twitter" />
+        <Image src="../../static/social/social-google.png" alt="google" />
       </SocialWrapper>
       {/* <Flip top>
         <Button
@@ -131,15 +130,10 @@ const SocialWrapper = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  /* background-color: greenyellow; */
-`;
-
-const ImageWrapper = styled.a`
-  height: 70%;
 `;
 
 const Image = styled.img`
-  height: 100%;
+  height: 70%;
 `;
 
 const Logo = styled.div`

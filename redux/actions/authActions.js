@@ -14,14 +14,10 @@ const startLoading = () => ({
 const stopLoading = () => ({ type: types.STOP_LOADING });
 
 // Action Creator for Social Media Signup
-export const linkedinSignup = () => dispatch => {
-  dispatch(startLoading());
-  // console.log('Linkedin endpoint request');
-  dispatch(stopLoading());
-};
-export const githubSignup = () => dispatch => {
-  dispatch(startLoading());
-  // console.log('Github endpoint request');
+
+export const githubSignup = () => {
+  // dispatch({ type: types.START_LOADING });
+  console.log('Github endpoint request');
   // axiosWithToken()
   //   .get(`${getUrl()}/user/auth/github`)
   //   .then((res) => {
@@ -32,6 +28,12 @@ export const githubSignup = () => dispatch => {
   //     debugger;
   //   });
   // dispatch(stopLoading());
+};
+
+export const linkedinSignup = () => dispatch => {
+  dispatch(startLoading());
+  // console.log('Linkedin endpoint request');
+  dispatch(stopLoading());
 };
 
 export const facebookSignup = () => dispatch => {
