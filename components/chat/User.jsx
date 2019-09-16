@@ -9,7 +9,7 @@ const User = ({ user, socket, currentUser }) => {
     setSelected(true);
     const dataForTheServer = {
       sender: currentUser.id,
-      reciver: user.id,
+      receiver: user.id,
       chatId: socket.id
     };
     console.log(dataForTheServer);
