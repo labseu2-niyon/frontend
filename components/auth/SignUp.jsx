@@ -30,51 +30,27 @@ const SignUp = ({}) => (
     </Text>
     <ButtonArea>
       <SocialWrapper>
-        <a href="https://niyon-dev.herokuapp.com/api/auth/github">
+        <ImageWrapper href="https://niyon-dev.herokuapp.com/api/auth/github">
           <Image src="../../static/social/social-github.png" alt="github" />
-        </a>
-        <Image src="../../static/social/social-linkedin.png" alt="linkedin" />
-        <Image src="../../static/social/social-facebook.png" alt="facebook" />
-        <Image src="../../static/social/social-twitter.png" alt="twitter" />
-        <Image src="../../static/social/social-google.png" alt="google" />
+        </ImageWrapper>
+
+        <ImageWrapper href="https://niyon-dev.herokuapp.com/api/auth/linkedin">
+          <Image src="../../static/social/social-linkedin.png" alt="linkedin" />
+        </ImageWrapper>
+
+        <ImageWrapper href="https://niyon-dev.herokuapp.com/api/auth/facebook">
+          <Image src="../../static/social/social-facebook.png" alt="facebook" />
+        </ImageWrapper>
+
+        <ImageWrapper href="https://niyon-dev.herokuapp.com/api/auth/twitter">
+          <Image src="../../static/social/social-twitter.png" alt="twitter" />
+        </ImageWrapper>
+
+        <ImageWrapper href="https://niyon-dev.herokuapp.com/api/auth/google">
+          <Image src="../../static/social/social-google.png" alt="google" />
+        </ImageWrapper>
       </SocialWrapper>
-      {/* <Flip top>
-        <Button
-          large
-          primary
-          // onClick={() => {
-          //   Router.push('/auth/social');
-          // }}
-        >
-          Github
-        </Button>
-      </Flip> */}
 
-      {/* <Flip top>
-        <Button
-          large
-          secondary
-          // onClick={() => {
-          //   Router.push('/auth/social');
-          // }}
-        >
-          Linkedin
-        </Button>
-      </Flip> */}
-
-      {/*
-      <Flip top>
-        <Button large danger onClick={() => Router.push('/auth/social')}>
-          Twitter
-        </Button>
-      </Flip>
-
-      <Flip top>
-        <Button large warning onClick={() => Router.push('/auth/social')}>
-          Facebook
-        </Button>
-      </Flip>
-        */}
       <Flip top>
         <Button
           large
@@ -127,8 +103,12 @@ const SocialWrapper = styled.div`
   align-items: center;
 `;
 
+const ImageWrapper = styled.a`
+  height: 60%;
+`;
+
 const Image = styled.img`
-  height: 70%;
+  height: 100%;
 `;
 
 const Logo = styled.div`
