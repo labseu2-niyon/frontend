@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 import { Card } from 'antd';
 import User from './User';
+import { useState } from 'react';
 
 const UserList = ({ userList, socket, currentUser }) => {
+  const [chosen, setChosen] = useState();
+
   return (
     <Root>
       {userList &&
@@ -12,6 +15,8 @@ const UserList = ({ userList, socket, currentUser }) => {
             key={user.connectionId}
             socket={socket}
             currentUser={currentUser}
+            active={user === chosen}
+            onClick={() => setChosen(user)}
           />
         ))}
     </Root>
