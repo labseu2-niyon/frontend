@@ -5,12 +5,20 @@ import styled from 'styled-components';
 import { saveCurrentRequestId } from '../../redux/actions/authActions';
 import { connect } from 'react-redux';
 
-const User = ({ user, socket, currentUser, saveCurrentRequestId, active }) => {
-  // const [selected, setSelected] = useState(false);
-
+const User = ({
+  user,
+  socket,
+  currentUser,
+  saveCurrentRequestId,
+  active,
+  onClick
+}) => {
+  console.log(user);
+  console.log('ACTIVE ', active);
   const handleEmit = () => {
+    onClick();
     saveCurrentRequestId(user.requestUser.id);
-    // setSelected(true);
+
     const dataForTheServer = {
       chatId: user.connectionId
     };
@@ -36,7 +44,7 @@ export default connect(
 
 const Root = styled.div`
   width: 100px;
-  background-color: ${props => (props.selected ? 'lightGrey' : 'white')}
+  background-color: ${props => (props.selected ? 'lightGrey' : 'white')};
   &:hover {
     cursor: pointer;
   }

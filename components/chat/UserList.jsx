@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 const UserList = ({ userList, socket, currentUser }) => {
   const [chosen, setChosen] = useState();
-
+  console.log(chosen);
   return (
     <Root>
       {userList &&
@@ -15,8 +15,8 @@ const UserList = ({ userList, socket, currentUser }) => {
             key={user.connectionId}
             socket={socket}
             currentUser={currentUser}
-            active={user === chosen}
-            onClick={() => setChosen(user)}
+            active={user.connectionId === chosen}
+            onClick={() => setChosen(user.connectionId)}
           />
         ))}
     </Root>
