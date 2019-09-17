@@ -37,7 +37,11 @@ const Chat = ({ chatHistory, currentUser, socket, currentRequestId }) => {
       <Window>
         {chatHistory &&
           chatHistory.map((user, i) => {
-            return <ChatMessage key={i} user={user} />;
+            return (
+              currentUser && (
+                <ChatMessage key={i} user={user} currentUser={currentUser} />
+              )
+            );
           })}
         <div ref={messagesEndRef} />
       </Window>

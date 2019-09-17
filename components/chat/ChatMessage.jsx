@@ -2,22 +2,29 @@
 import styled from 'styled-components';
 import Comment from './Comment';
 
-const ChatMessage = ({ user }) => {
-  if (user.requestUser) {
+const ChatMessage = ({ user, currentUser }) => {
+  console.log('CURRETN USER', currentUser.username);
+  if (user.sender.username === currentUser.username) {
     return (
       <Sender>
         <Comment
-          username={user.requestUser.username}
+          username={user.sender.username}
           message={user.message}
-          date={user.date}
+          date={user.dateSent}
+          image={user.sender.profile_picture}
         />
       </Sender>
     );
   }
-  if (user.sentUser) {
+  if (user.sender.username !== currentUser.username) {
     return (
       <Recevier>
-        <Comment username={user.sentUser.username} message={user.message} />
+        <Comment
+          username={user.reciever.username}
+          message={user.message}
+          date={user.dateSent}
+          image={user.reciever.profile_picture}
+        />
       </Recevier>
     );
   }
@@ -33,13 +40,13 @@ export default ChatMessage;
 const Recevier = styled.div`
   background-color: #e6f6fb;
   display: flex;
-  padding: 0;
+  padding-left: 20px;
   /* justify-content: flex-start; */
 `;
 
 const Sender = styled.div`
   background-color: #eafaf1;
   display: flex;
-  padding: 0;
+  padding-left: 5px;
   /* justify-content: flex-end; */
 `;

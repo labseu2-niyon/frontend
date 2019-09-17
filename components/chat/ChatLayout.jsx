@@ -7,47 +7,69 @@ import Chat from './Messages';
 
 const dummyChatHistory = [
   {
-    message:
-      ' We supply a series of design principles, practical patterns and high quality design resources to help people create their product prototypes beautifully and efficiently',
-    date: 23.1982,
-    requestUser: {
-      username: 'Ion'
+    id: 2,
+    connectionId: 1,
+    read: false,
+    dateSent: '2019-09-17T08:31:21.583Z',
+    message: 'I am fine, Hello there how are you',
+    sender: {
+      id: 2,
+      first_name: 'John',
+      last_name: 'Doe',
+      username: 'john1',
+      profile_picture: null
+    },
+    reciever: {
+      id: 1,
+      first_name: 'John',
+      last_name: 'Doe',
+      username: 'john',
+      profile_picture:
+        'https://res.cloudinary.com/niyon/image/upload/v1568709098/niyon-app/xkycuq8yvjokynj8o3sr.png'
     }
   },
   {
-    message: 'Mesage is sdsdaa',
-    date: 23.1982,
-    requestUser: {
-      username: 'Rafa'
+    id: 3,
+    connectionId: 1,
+    read: false,
+    dateSent: '2019-09-17T08:31:21.583Z',
+    message: 'Not too bad',
+    sender: {
+      id: 1,
+      first_name: 'John',
+      last_name: 'Doe',
+      username: 'john',
+      profile_picture:
+        'https://res.cloudinary.com/niyon/image/upload/v1568709098/niyon-app/xkycuq8yvjokynj8o3sr.png'
+    },
+    reciever: {
+      id: 2,
+      first_name: 'John',
+      last_name: 'Doe',
+      username: 'john1',
+      profile_picture: null
     }
   },
   {
-    message: 'Mesage is sdsdaa',
-    date: '19 Apr 1976',
-    requestUser: {
-      username: 'Tom'
-    }
-  },
-  {
-    message: 'Mesage is sdsdaa',
-    date: '19 Apr 1976',
-    sentUser: {
-      username: 'Jerry'
-    }
-  },
-  {
-    message: 'Mesage is sdsdsddcqecaa',
-    date: '19 Apr 1976',
-    requestUser: {
-      username: 'maria'
-    }
-  },
-  {
-    message:
-      'Mesage is sjaslklsakdj jklsaakjdlkaj lkasjkd alajksdlkasjdlka dla akldjk',
-    date: '19 Apr 1976',
-    sentUser: {
-      username: 'Jerry'
+    id: 1,
+    connectionId: 1,
+    read: true,
+    dateSent: '2019-09-17T08:31:21.582Z',
+    message: 'Hello there how are you',
+    sender: {
+      id: 1,
+      first_name: 'John',
+      last_name: 'Doe',
+      username: 'john',
+      profile_picture:
+        'https://res.cloudinary.com/niyon/image/upload/v1568709098/niyon-app/xkycuq8yvjokynj8o3sr.png'
+    },
+    reciever: {
+      id: 2,
+      first_name: 'John',
+      last_name: 'Doe',
+      username: 'john1',
+      profile_picture: null
     }
   }
 ];
@@ -62,10 +84,10 @@ const ChatLayout = props => {
       setUserList(data);
     });
 
-    // socket.on('chatHistory', data => {
-    //   //console.log('CHAT HISTORY: ', data);
-    //   setChatHistory(data);
-    // });
+    socket.on('chatHistory', data => {
+      console.log('CHAT HISTORY: ', data);
+      //setChatHistory(data);
+    });
   }, []);
   return (
     <Main>
@@ -90,7 +112,8 @@ const Main = styled.div`
   width: 100%;
 
   .ant-card-body {
-    padding: 10px;
+    padding: 0;
+    margin: 0;
   }
 `;
 

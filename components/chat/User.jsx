@@ -4,6 +4,7 @@ import { List, Avatar } from 'antd';
 import styled from 'styled-components';
 import { saveCurrentRequestId } from '../../redux/actions/authActions';
 import { connect } from 'react-redux';
+import { theme } from '../../lib/theme';
 
 const User = ({
   user,
@@ -13,8 +14,6 @@ const User = ({
   active,
   onClick
 }) => {
-  console.log(user);
-  console.log('ACTIVE ', active);
   const handleEmit = () => {
     onClick();
     saveCurrentRequestId(user.requestUser.id);
@@ -43,9 +42,12 @@ export default connect(
 )(User);
 
 const Root = styled.div`
-  width: 100px;
-  background-color: ${props => (props.selected ? 'lightGrey' : 'white')};
+  width: 100%;
+  padding-left: 10px;
+  color: ${theme.primary};
+  background-color: ${props => (props.selected ? theme.secondary : 'white')};
   &:hover {
     cursor: pointer;
   }
+  transition: 1s all;
 `;
