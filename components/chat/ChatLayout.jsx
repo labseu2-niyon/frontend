@@ -14,9 +14,9 @@ const dummyChatHistory = [
     message: 'I am fine, Hello there how are you',
     sender: {
       id: 2,
-      first_name: 'John',
+      first_name: 'Jane',
       last_name: 'Doe',
-      username: 'john1',
+      username: 'jane',
       profile_picture: null
     },
     reciever: {
@@ -44,9 +44,9 @@ const dummyChatHistory = [
     },
     reciever: {
       id: 2,
-      first_name: 'John',
+      first_name: 'Jane',
       last_name: 'Doe',
-      username: 'john1',
+      username: 'jane',
       profile_picture: null
     }
   },
@@ -66,9 +66,9 @@ const dummyChatHistory = [
     },
     reciever: {
       id: 2,
-      first_name: 'John',
+      first_name: 'Jane',
       last_name: 'Doe',
-      username: 'john1',
+      username: 'jane',
       profile_picture: null
     }
   }
@@ -79,7 +79,6 @@ const ChatLayout = props => {
   const [userList, setUserList] = useState([]);
   const { socket } = props;
   useEffect(() => {
-    //console.log('THIS IS CALLING', socket);
     socket.on('connectionList', data => {
       setUserList(data);
     });
@@ -114,6 +113,7 @@ const Main = styled.div`
   .ant-card-body {
     padding: 0;
     margin: 0;
+    border: none;
   }
 `;
 
