@@ -16,13 +16,18 @@ const stopLoading = () => ({ type: types.STOP_LOADING });
 // Action Creator for Social Media Signup
 
 export const githubSignup = () => dispatch => {
-  // console.log(startLoading());
-  // console.log('Github endpoint request');
-  dispatch(startLoading());
+  // console.log('test');
   return axios
-    .get(`${getUrl()}/api/auth/github`)
+    .get(`${getUrl()}/auth/github`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    })
     .then(res => {
+      console.log(res);
       dispatch({
+        type: types.SET_TOKEN_SOCIAL,
         payload: {
           token: res.data.token
         }
@@ -31,15 +36,14 @@ export const githubSignup = () => dispatch => {
         maxAge: 60 * 60 * 24 * 30,
         path: '/'
       });
-      dispatch(stopLoading());
       return res.data.status;
     })
     .catch(err => {
       dispatch({
         type: types.REGISTER_USER_FAILURE,
-        payload: err.response.data.message
+        // payload: err.response.data.message
+        payload: err.message
       });
-      dispatch(stopLoading());
     });
 };
 
