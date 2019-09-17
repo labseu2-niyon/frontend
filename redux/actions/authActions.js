@@ -16,20 +16,31 @@ const stopLoading = () => ({ type: types.STOP_LOADING });
 // Action Creator for Social Media Signup
 
 export const githubSignup = () => dispatch => {
-  console.log(startLoading());
-  console.log('Github endpoint request');
+  // console.log(startLoading());
+  // console.log('Github endpoint request');
   dispatch(startLoading());
-  // axiosWithToken()
-  //   .get(`${getUrl()}/auth/github`)
-  //   .then((res) => {
-  //     // debugger;
-  //     console.log(res);
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //     // debugger;
-  //   });
-  // dispatch(stopLoading());
+  return axios
+    .get(`${getUrl()}/api/auth/github`)
+    .then(res => {
+      dispatch({
+        payload: {
+          token: res.data.token
+        }
+      });
+      nookies.set({}, 'token', res.data.token, {
+        maxAge: 60 * 60 * 24 * 30,
+        path: '/'
+      });
+      dispatch(stopLoading());
+      return res.data.status;
+    })
+    .catch(err => {
+      dispatch({
+        type: types.REGISTER_USER_FAILURE,
+        payload: err.response.data.message
+      });
+      dispatch(stopLoading());
+    });
 };
 
 export const linkedinSignup = () => dispatch => {
