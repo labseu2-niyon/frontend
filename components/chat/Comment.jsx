@@ -8,7 +8,7 @@ const CommentComp = ({ username, message, date, image }) => {
       avatar={<Avatar src={image} alt={username} />}
       content={<p>{message}</p>}
       datetime={
-        <Tooltip title="Date in another format">
+        <Tooltip title={moment(date).format('LLL')}>
           <p>{moment(date).fromNow()}</p>
         </Tooltip>
       }
