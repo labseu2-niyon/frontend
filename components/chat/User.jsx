@@ -12,14 +12,15 @@ const User = ({
   currentUser,
   saveCurrentRequestId,
   active,
-  onClick
+  onClick,
+  connectionId
 }) => {
   const handleEmit = () => {
     onClick();
     saveCurrentRequestId(user.id);
 
     const dataForTheServer = {
-      chatId: user.connectionId
+      chatId: connectionId
     };
     socket.emit('chatOpen', dataForTheServer);
   };

@@ -20,6 +20,7 @@ const UserList = ({ userList, socket, currentUser }) => {
                   ? user.requestUser
                   : user.sentuser
               }
+              connectionId={user.connectionId}
               key={user.connectionId}
               socket={socket}
               currentUser={currentUser}
