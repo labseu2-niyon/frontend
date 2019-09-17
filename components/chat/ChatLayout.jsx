@@ -15,7 +15,6 @@ const ChatLayout = props => {
     });
 
     socket.on('chatHistory', data => {
-      console.log('CHAT HISTORY: ', data);
       setChatHistory(data);
     });
   }, []);

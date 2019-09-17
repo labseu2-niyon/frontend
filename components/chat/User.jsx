@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import Link from 'next/link';
 import { List, Avatar } from 'antd';
 import styled from 'styled-components';
 import { saveCurrentRequestId } from '../../redux/actions/authActions';
@@ -9,7 +7,6 @@ import { theme } from '../../lib/theme';
 const User = ({
   user,
   socket,
-  currentUser,
   saveCurrentRequestId,
   active,
   onClick,
@@ -18,7 +15,6 @@ const User = ({
   const handleEmit = () => {
     onClick();
     saveCurrentRequestId(user.id);
-
     const dataForTheServer = {
       chatId: connectionId
     };

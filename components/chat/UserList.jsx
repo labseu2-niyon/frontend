@@ -5,9 +5,6 @@ import { useState } from 'react';
 
 const UserList = ({ userList, socket, currentUser }) => {
   const [chosen, setChosen] = useState();
-
-  console.log(userList);
-
   return (
     <Root>
       {userList &&
