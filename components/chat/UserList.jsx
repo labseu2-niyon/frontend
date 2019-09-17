@@ -5,19 +5,29 @@ import { useState } from 'react';
 
 const UserList = ({ userList, socket, currentUser }) => {
   const [chosen, setChosen] = useState();
+
+  console.log(userList);
+
   return (
     <Root>
       {userList &&
-        userList.map(user => (
-          <User
-            user={user}
-            key={user.connectionId}
-            socket={socket}
-            currentUser={currentUser}
-            active={user.connectionId === chosen}
-            onClick={() => setChosen(user.connectionId)}
-          />
-        ))}
+        currentUser &&
+        userList.map(user => {
+          return (
+            <User
+              user={
+                user.requestUser.username !== currentUser.username
+                  ? user.requestUser
+                  : user.sentuser
+              }
+              key={user.connectionId}
+              socket={socket}
+              currentUser={currentUser}
+              active={user.connectionId === chosen}
+              onClick={() => setChosen(user.connectionId)}
+            />
+          );
+        })}
     </Root>
   );
 };
@@ -25,7 +35,14 @@ const UserList = ({ userList, socket, currentUser }) => {
 export default UserList;
 
 const Root = styled(Card)`
-  min-width: 130px;
+  min-width: 200px;
   height: 80vh;
   overflow-y: scroll;
+  margin-right: 20px;
+
+  &.ant-card-bordered {
+    border: none;
+    box-shadow: ${({ theme }) => theme.boxShadow};
+    border-radius: 5px;
+  }
 `;

@@ -16,7 +16,7 @@ const User = ({
 }) => {
   const handleEmit = () => {
     onClick();
-    saveCurrentRequestId(user.requestUser.id);
+    saveCurrentRequestId(user.id);
 
     const dataForTheServer = {
       chatId: user.connectionId
@@ -28,8 +28,8 @@ const User = ({
     <Root onClick={handleEmit} selected={active}>
       <List.Item>
         <List.Item.Meta
-          avatar={<Avatar src={user.requestUser.profile_picture} />}
-          title={user.requestUser.username}
+          avatar={<Avatar src={user.profile_picture} />}
+          title={`${user.first_name} ${user.last_name}`}
         />
       </List.Item>
     </Root>
