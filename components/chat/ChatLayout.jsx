@@ -13,7 +13,7 @@ const ChatLayout = props => {
     socket.on('connectionList', data => {
       setUserList(data);
     });
-    //socket.emit('chatOpen', { chatId: 1 });
+    socket.emit('chatOpen', { chatId: props.currentConnectionId });
 
     socket.on('chatHistory', async data => {
       await setChatHistory(data);
@@ -21,12 +21,14 @@ const ChatLayout = props => {
   }, []);
   return (
     <Main>
-      <UserList
-        userList={userList}
-        socket={socket}
-        currentUser={props.currentUser}
-      />
-
+      {props.currentConnectionId && (
+        <UserList
+          userList={userList}
+          socket={socket}
+          currentUser={props.currentUser}
+          currentConnectionId={props.currentConnectionId}
+        />
+      )}
       <Chat
         socket={socket}
         chatHistory={chatHistory}
@@ -51,8 +53,8 @@ const Main = styled.div`
 
 const mapStateToProps = state => {
   return {
-    //usersList: state.userReducer.usersAll,
-    currentUser: state.userReducer.user
+    currentUser: state.userReducer.user,
+    currentConnectionId: state.authReducer.connectionId
   };
 };
 

@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { Card } from 'antd';
 import User from './User';
 
-const UserList = ({ userList, socket, currentUser }) => {
-  const [chosen, setChosen] = useState(1);
+const UserList = ({ userList, socket, currentUser, currentConnectionId }) => {
+  const [chosen, setChosen] = useState(currentConnectionId);
   return (
     <Root>
       {userList &&
