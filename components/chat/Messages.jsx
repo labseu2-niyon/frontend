@@ -10,19 +10,11 @@ const Chat = ({
   currentUser,
   socket,
   currentRequestId,
-  currentConnectionId
+  currentConnectionId,
+  setChatHistory
 }) => {
   const messagesEndRef = useRef(null);
   const [message, setMessage] = useState('');
-  // useEffect(() => {
-  //   console.log(message);
-  //   message.length > 0
-  //     ? socket.broadcast.emit('typing', socket.id)
-  //     : socket.broadcast.emit('stopTyping', socket.id);
-  // }, []);
-
-  // let id = chatHistory && chatHistory.map(item => item.connectionId);
-  // console.log(id[0]);
 
   const scrollToBottom = () => {
     messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -39,7 +31,6 @@ const Chat = ({
       message,
       connectionId: currentConnectionId
     };
-    console.log(dataForTheServer);
     socket.emit('messegeAdd', dataForTheServer);
     setMessage('');
   };
@@ -62,6 +53,9 @@ const Chat = ({
           allowClear
           onChange={e => {
             setMessage(e.target.value);
+            socket.on('typing', data => {
+              console.log('typing:', data);
+            });
           }}
           value={message}
         />
