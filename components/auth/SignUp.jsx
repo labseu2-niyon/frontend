@@ -11,14 +11,6 @@ import { theme } from '../../lib/theme';
 import { githubSignup } from '../../redux/actions/authActions';
 
 const SignUp = ({ authReducer, githubSignup }) => {
-  console.log(authReducer);
-  // const decodedToken = jwt.decode(authReducer.token);
-
-  const githubClickHandler = () => {
-    // alert('it works');
-    githubSignup();
-  };
-
   return (
     <Root>
       <Flip left>
@@ -40,20 +32,19 @@ const SignUp = ({ authReducer, githubSignup }) => {
       </Text>
       <ButtonArea>
         <SocialWrapper>
-          <a href="https://niyon-dev.herokuapp.com/api/auth/github ">
+          <a href="http://localhost:5000/api/auth/github ">
+            <Image src="../../static/social/social-github.png" alt="github" />
+          </a>
+          <a href="http://localhost:5000/api/auth/facebook ">
             <Image
-              src="../../static/social/social-github.png"
-              alt="github"
-              onClick={githubClickHandler}
+              src="../../static/social/social-facebook.png"
+              alt="facebook"
             />
           </a>
-          <Image src="../../static/social/social-linkedin.png" alt="linkedin" />
-
-          <Image src="../../static/social/social-facebook.png" alt="facebook" />
-
           <Image src="../../static/social/social-twitter.png" alt="twitter" />
-
-          <Image src="../../static/social/social-google.png" alt="google" />
+          <a href="http://localhost:5000/api/auth/google ">
+            <Image src="../../static/social/social-google.png" alt="google" />
+          </a>
         </SocialWrapper>
 
         <Flip top>

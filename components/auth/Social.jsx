@@ -1,13 +1,22 @@
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
+import jwt from 'jsonwebtoken';
+import { useEffect } from 'react';
 import * as Yup from 'yup';
-import Router from 'next/router';
+import { Router, useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import { Heading2, Text, Button } from '../~common/index';
 import StepsComp from './StepsComp';
 import { socialData } from '../../redux/actions/authActions';
 
-const Social = ({ errors, touched, username }) => (
+const Social = ({ errors, touched, username }) => {
+
+  const nextRouter = useRouter();
+  const { token } = nextRouter.query;
+  const user = jwt.decode(token);
+  if (username == undefined) username = user.username;
+  console.log(username);
+  return (
   <Root>
     <StepsComp stepNumber="1" />
     <Heading2 primary>What's your name?</Heading2>
@@ -40,7 +49,7 @@ const Social = ({ errors, touched, username }) => (
       </Button>
     </FormArea>
   </Root>
-);
+)};
 
 const FormikWithSocialForm = withFormik({
   mapPropsToValues({ username, firstName, lastName }) {
