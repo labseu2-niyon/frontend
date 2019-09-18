@@ -5,7 +5,13 @@ import { Card, Input, Button, Icon } from 'antd';
 import { connect } from 'react-redux';
 import ChatMessage from './ChatMessage';
 
-const Chat = ({ chatHistory, currentUser, socket, currentRequestId }) => {
+const Chat = ({
+  chatHistory,
+  currentUser,
+  socket,
+  currentRequestId,
+  currentConnectionId
+}) => {
   const messagesEndRef = useRef(null);
   const [message, setMessage] = useState('');
   // useEffect(() => {
@@ -14,6 +20,10 @@ const Chat = ({ chatHistory, currentUser, socket, currentRequestId }) => {
   //     ? socket.broadcast.emit('typing', socket.id)
   //     : socket.broadcast.emit('stopTyping', socket.id);
   // }, []);
+
+  // let id = chatHistory && chatHistory.map(item => item.connectionId);
+  // console.log(id[0]);
+
   const scrollToBottom = () => {
     messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
   };
@@ -27,8 +37,9 @@ const Chat = ({ chatHistory, currentUser, socket, currentRequestId }) => {
       sender: currentUser.id,
       receiver: currentRequestId,
       message,
-      connectionId: socket.id
+      connectionId: currentConnectionId
     };
+    console.log(dataForTheServer);
     socket.emit('messegeAdd', dataForTheServer);
     setMessage('');
   };
@@ -65,7 +76,8 @@ const Chat = ({ chatHistory, currentUser, socket, currentRequestId }) => {
 
 const mapStateToProps = state => {
   return {
-    currentRequestId: state.authReducer.requestId
+    currentRequestId: state.authReducer.requestId,
+    currentConnectionId: state.authReducer.connectionId
   };
 };
 

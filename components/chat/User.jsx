@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { List, Avatar } from 'antd';
 import styled from 'styled-components';
 import { saveCurrentRequestId } from '../../redux/actions/authActions';
@@ -14,7 +15,8 @@ const User = ({
 }) => {
   const handleEmit = () => {
     onClick();
-    saveCurrentRequestId(user.id);
+    //console.log(connectionId);
+    saveCurrentRequestId(user.id, connectionId);
     const dataForTheServer = {
       chatId: connectionId
     };

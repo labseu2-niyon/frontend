@@ -13,9 +13,10 @@ const ChatLayout = props => {
     socket.on('connectionList', data => {
       setUserList(data);
     });
+    //socket.emit('chatOpen', { chatId: 1 });
 
-    socket.on('chatHistory', data => {
-      setChatHistory(data);
+    socket.on('chatHistory', async data => {
+      await setChatHistory(data);
     });
   }, []);
   return (
@@ -30,6 +31,7 @@ const ChatLayout = props => {
         socket={socket}
         chatHistory={chatHistory}
         currentUser={props.currentUser}
+        userList={userList}
       />
     </Main>
   );

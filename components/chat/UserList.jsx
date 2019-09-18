@@ -1,10 +1,10 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { Card } from 'antd';
 import User from './User';
-import { useState } from 'react';
 
 const UserList = ({ userList, socket, currentUser }) => {
-  const [chosen, setChosen] = useState();
+  const [chosen, setChosen] = useState(1);
   return (
     <Root>
       {userList &&
