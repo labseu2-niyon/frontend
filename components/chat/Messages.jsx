@@ -29,8 +29,8 @@ const Chat = ({ chatHistory, currentUser, socket, currentRequestId }) => {
       message,
       connectionId: socket.id
     };
-    setMessage('');
     socket.emit('messegeAdd', dataForTheServer);
+    setMessage('');
   };
   return (
     <Wrapper>
