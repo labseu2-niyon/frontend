@@ -17,14 +17,13 @@ const Chat = ({
   const messagesEndRef = useRef(null);
   const [message, setMessage] = useState('');
 
-  // const scrollToBottom = () => {
-  //   messagesEndRef.current.scrollIntoView({ block: 'end' });
-  // };
+  const scrollToBottom2 = () => {
+    messagesEndRef.current.scrollIntoView({ block: 'end' });
+  };
 
-  function scrollToBottom999() {
-    const messages = document.getElementById('chatBottom');
-    messages.scrollTop = messages.scrollHeight;
-  }
+  useEffect(() => {
+    scrollToBottom2();
+  }, [chatHistory.length]);
 
   useEffect(() => {
     socket.on('newChat', data => {
@@ -36,7 +35,7 @@ const Chat = ({
     e.preventDefault();
     setTimeout(async () => {
       await scrollToBottom();
-    }, 400);
+    }, 450);
     const dataForTheServer = {
       sender: currentUser.id,
       receiver: currentRequestId,

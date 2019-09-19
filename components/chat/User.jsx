@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import { List, Avatar } from 'antd';
-import styled from 'styled-components';
-import { saveCurrentRequestId } from '../../redux/actions/authActions';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
+import { List, Avatar } from 'antd';
+import { scrollToBottom } from '../../redux/actions/userActions';
+import { saveCurrentRequestId } from '../../redux/actions/authActions';
 import { theme } from '../../lib/theme';
 
 const User = ({
@@ -11,11 +12,14 @@ const User = ({
   saveCurrentRequestId,
   active,
   onClick,
-  connectionId
+  connectionId,
+  scrollToBottom
 }) => {
+  useEffect(() => {
+    scrollToBottom();
+  }, []);
   const handleEmit = () => {
     onClick();
-    //console.log(connectionId);
     saveCurrentRequestId(user.id, connectionId);
     const dataForTheServer = {
       chatId: connectionId
@@ -37,7 +41,7 @@ const User = ({
 
 export default connect(
   state => state,
-  { saveCurrentRequestId }
+  { saveCurrentRequestId, scrollToBottom }
 )(User);
 
 const Root = styled.div`
