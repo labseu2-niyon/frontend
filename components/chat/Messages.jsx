@@ -33,7 +33,8 @@ const Chat = ({
     });
   }, []);
 
-  const handleSend = () => {
+  const handleSend = e => {
+    e.preventDefault();
     setTimeout(() => {
       scrollToBottom();
     }, 400);
