@@ -140,8 +140,3 @@ export const saveCurrentRequestId = data => {
     payload: data
   };
 };
-
-export const scrollToBottom = () => dispatch => {
-  const messages = document.getElementById('chatBottom');
-  messages.scrollTop = messages.scrollHeight;
-};

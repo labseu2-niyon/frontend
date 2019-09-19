@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { List, Avatar } from 'antd';
-import { scrollToBottom } from '../../redux/actions/userActions';
 import { saveCurrentRequestId } from '../../redux/actions/authActions';
 import { theme } from '../../lib/theme';
 
@@ -12,12 +11,8 @@ const User = ({
   saveCurrentRequestId,
   active,
   onClick,
-  connectionId,
-  scrollToBottom
+  connectionId
 }) => {
-  useEffect(() => {
-    scrollToBottom();
-  }, []);
   const handleEmit = () => {
     onClick();
     saveCurrentRequestId(user.id, connectionId);
@@ -48,7 +43,7 @@ const User = ({
 
 export default connect(
   state => state,
-  { saveCurrentRequestId, scrollToBottom }
+  { saveCurrentRequestId }
 )(User);
 
 const Root = styled.div`

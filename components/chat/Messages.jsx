@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Card, Input, Button, Icon } from 'antd';
 import { connect } from 'react-redux';
-import { scrollToBottom } from '../../redux/actions/userActions';
 import ChatMessage from './ChatMessage';
 
 const Chat = ({
@@ -11,8 +10,7 @@ const Chat = ({
   currentUser,
   socket,
   currentRequestId,
-  currentConnectionId,
-  scrollToBottom
+  currentConnectionId
 }) => {
   const messagesEndRef = useRef(null);
   const [message, setMessage] = useState('');
@@ -92,7 +90,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { scrollToBottom }
+  {}
 )(Chat);
 
 const Wrapper = styled.div`
