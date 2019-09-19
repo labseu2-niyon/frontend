@@ -111,12 +111,17 @@ const IconWrapper = styled.div`
   height: 32px;
   border-radius: 50%;
   background: #f5f5f5;
+  color: #348fbb;
   cursor: pointer;
+
+  &:hover {
+    color: #ffffff;
+    background: #348fbb;
+  }
+
   .icon {
     margin-bottom: 2px;
-    &:hover {
-      color: #348fbb;
-      transition: color 0.5s ease;
-    }
   }
+
+  transition: all 1s ease;
 `;

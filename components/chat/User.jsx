@@ -51,8 +51,19 @@ const Root = styled.div`
   padding: 0px 15px;
   color: ${theme.primary};
   background-color: ${props => (props.selected ? '#f2f2f2' : 'white')};
+  /* border-left: ${props =>
+    props.selected ? '5px solid #348fbb' : 'none'}; */
+  transition: background-color 1s ease;
+
   &:hover {
     cursor: pointer;
   }
-  transition: 1s all;
+
+  .ant-list-item-meta {
+    align-items: center;
+  }
+
+  .ant-list-item-meta-avatar {
+    margin-right: 10px;
+  }
 `;
