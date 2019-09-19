@@ -15,7 +15,6 @@ const User = ({
 }) => {
   const handleEmit = () => {
     onClick();
-    //console.log(connectionId);
     saveCurrentRequestId(user.id, connectionId);
     const dataForTheServer = {
       chatId: connectionId
@@ -27,7 +26,14 @@ const User = ({
     <Root onClick={handleEmit} selected={active}>
       <List.Item>
         <List.Item.Meta
-          avatar={<Avatar src={user.profile_picture} />}
+          avatar={
+            <Avatar
+              src={
+                user.profile_picture ||
+                'https://image.flaticon.com/icons/svg/660/660611.svg'
+              }
+            />
+          }
           title={`${user.first_name} ${user.last_name}`}
         />
       </List.Item>
