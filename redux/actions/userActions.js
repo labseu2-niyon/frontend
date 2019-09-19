@@ -134,9 +134,7 @@ export const fetchAllUsers = user => dispatch => {
 //     });
 // };
 
-export const saveCurrentRequestId = data => {
-  return {
-    type: 'SAVE_CURRENT_REQWEST_ID',
-    payload: data
-  };
-};
+export const saveCurrentRequestId = data => ({
+  type: 'SAVE_CURRENT_REQWEST_ID',
+  payload: data
+});
