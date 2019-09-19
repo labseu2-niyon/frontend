@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Card, Input, Button, Icon } from 'antd';
 import { connect } from 'react-redux';
 import ChatMessage from './ChatMessage';
+import 'emoji-mart/css/emoji-mart.css';
+import { Picker } from 'emoji-mart';
 
 const Chat = ({
   chatHistory,
@@ -14,6 +16,7 @@ const Chat = ({
 }) => {
   const messagesEndRef = useRef(null);
   const [message, setMessage] = useState('');
+  const [emojis, setEmojis] = useState(false);
 
   function scrollToBottom() {
     const messages = document.getElementById('chatBox');
@@ -50,6 +53,17 @@ const Chat = ({
       setMessage('');
     }
   };
+
+  const addEmoji = e => {
+    let emoji = e.native;
+    setMessage(message + emoji);
+    toggleEmojis();
+  };
+
+  function toggleEmojis() {
+    setEmojis(!emojis);
+  }
+
   return (
     <Wrapper>
       <Window id="chatBox">
@@ -63,21 +77,35 @@ const Chat = ({
           })}
         <div ref={messagesEndRef} />
       </Window>
-      <InputWrapper onSubmit={handleSend}>
-        <Input
-          placeholder="enter your message..."
-          allowClear
-          onChange={e => {
-            setMessage(e.target.value);
-            socket.emit('typing', { user: currentUser.username, type: true });
-          }}
-          value={message}
-        />
-        <Button type="primary" onClick={handleSend}>
-          SEND
-          <Icon type="right" />
-        </Button>
-      </InputWrapper>
+
+      <div>
+        <InputWrapper onSubmit={handleSend}>
+          <Input
+            placeholder="enter your message..."
+            allowClear
+            onChange={e => {
+              setMessage(e.target.value);
+              socket.emit('typing', { user: currentUser.username, type: true });
+            }}
+            value={message}
+          />
+          <Icon
+            type="smile"
+            style={{ fontSize: '18px' }}
+            className="icon"
+            onClick={toggleEmojis}
+          />
+        </InputWrapper>
+        {emojis ? (
+          <Emojis>
+            <Picker
+              title="Pick your emoji…"
+              emoji="point_up"
+              onSelect={addEmoji}
+            />
+          </Emojis>
+        ) : null}
+      </div>
     </Wrapper>
   );
 };
@@ -99,6 +127,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   margin-left: 250px;
   width: 100%;
+  height: 100vh;
 
   .ant-card-bordered {
     border: none;
@@ -106,7 +135,6 @@ const Wrapper = styled.div`
 `;
 
 const Window = styled(Card)`
-  height: 85vh;
   overflow-y: scroll;
   margin: 15px;
   padding: 0;
@@ -114,10 +142,31 @@ const Window = styled(Card)`
 
 const InputWrapper = styled.form`
   display: flex;
-  height: 5vh;
   margin: 20px;
+  border: 1px solid #cecece;
+  align-items: center;
+  border-radius: 4px;
 
+  .ant-input {
+    border: none;
+    color: #858585;
+  }
+
+  }
   button {
     width: 20%;
   }
+
+
+  .icon {
+    margin-right: 10px;
+    color: #348fbb;
+    cursor: pointer;
+  }
+`;
+
+const Emojis = styled.div`
+  position: absolute;
+  bottom: 55px;
+  right: 20px;
 `;
