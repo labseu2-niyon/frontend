@@ -12,7 +12,6 @@ import withAuth from '../lib/withAuth';
 
 const Navigation = ({ logOutUser, fetchUser, authReducer, user, socket }) => {
   const userInfo = jwt.decode(authReducer.token);
-  //console.log(socket);
   useEffect(() => {
     fetchUser(userInfo.username);
   }, []);

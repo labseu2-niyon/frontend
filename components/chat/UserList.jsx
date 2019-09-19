@@ -2,6 +2,8 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { Card } from 'antd';
 import User from './User';
+import Link from 'next/link';
+import { Icon } from 'antd';
 
 const UserList = ({ userList, socket, currentUser, currentConnectionId }) => {
   const [chosen, setChosen] = useState(currentConnectionId);
@@ -26,21 +28,29 @@ const UserList = ({ userList, socket, currentUser, currentConnectionId }) => {
             />
           );
         })}
-    </Root>
+    </Nav>
   );
 };
 
 export default UserList;
 
-const Root = styled(Card)`
-  min-width: 200px;
-  height: 80vh;
+const Nav = styled(Card)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  box-sizing: border-box;
+  /* padding: 2.5rem 0; */
+  height: 100vh;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
   overflow-y: scroll;
-  margin-right: 20px;
 
   &.ant-card-bordered {
     border: none;
     box-shadow: ${({ theme }) => theme.boxShadow};
-    border-radius: 5px;
   }
 `;

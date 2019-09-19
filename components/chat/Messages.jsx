@@ -96,17 +96,19 @@ export default connect(
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 250px;
   width: 100%;
 `;
 
 const Window = styled(Card)`
-  height: 75vh;
+  height: 95vh;
   overflow-y: scroll;
   padding: 0;
 `;
 
 const InputWrapper = styled.div`
   display: flex;
+  height: 5vh;
 
   button {
     width: 20%;
