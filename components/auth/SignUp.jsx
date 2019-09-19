@@ -3,14 +3,10 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Link from 'next/link';
 import Router from 'next/router';
-// import jwt from 'jsonwebtoken';
 import { Text, Button } from '../~common/index';
 import { theme } from '../../lib/theme';
 
-// import { getUrl } from './utils';
-import { githubSignup } from '../../redux/actions/authActions';
-
-const SignUp = ({ authReducer, githubSignup }) => {
+const SignUp = ({}) => {
   return (
     <Root>
       <Flip left>
@@ -66,13 +62,12 @@ const SignUp = ({ authReducer, githubSignup }) => {
 };
 
 function mapStateToProps(state) {
-  // console.log(state);
   return { authReducer: state.authReducer };
 }
 
 export default connect(
   mapStateToProps,
-  { githubSignup }
+  {}
 )(SignUp);
 
 const Root = styled.div`
