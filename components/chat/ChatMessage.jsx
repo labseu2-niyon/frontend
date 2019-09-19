@@ -4,28 +4,18 @@ import Comment from './Comment';
 
 const ChatMessage = ({ user, currentUser }) => {
   return (
-    <Sender
+    <Comment
+      name={
+        user.sender.username === currentUser.username
+          ? `${currentUser.first_name} ${currentUser.last_name}`
+          : `${user.sender.first_name} ${user.sender.last_name}`
+      }
+      message={user.message}
+      date={user.dateSent}
+      image={user.sender.profile_picture}
       currentUser={user.sender.username === currentUser.username ? true : false}
-    >
-      <Comment
-        name={
-          user.sender.username === currentUser.username
-            ? `${currentUser.first_name} ${currentUser.last_name}`
-            : `${user.sender.first_name} ${user.sender.last_name}`
-        }
-        message={user.message}
-        date={user.dateSent}
-        image={user.sender.profile_picture}
-      />
-    </Sender>
+    />
   );
 };
 
 export default ChatMessage;
-
-const Sender = styled.div`
-  display: flex;
-  padding-left: 5px;
-  /* background-color: ${props =>
-    props.currentUser ? '#eafaf1' : '#e6f6fb'}; */
-`;

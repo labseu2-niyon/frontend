@@ -1,9 +1,8 @@
-// import { Comment, Tooltip, Avatar } from 'antd';
 const moment = require('moment');
 import styled from 'styled-components';
 import Avatar from '../~common/Avatar';
 
-const CommentComp = ({ name, message, date, image }) => {
+const CommentComp = ({ name, message, date, image, currentUser }) => {
   return (
     <Comment>
       <UserData>
@@ -19,7 +18,7 @@ const CommentComp = ({ name, message, date, image }) => {
         <p className="time">{moment(date).fromNow()}</p>
       </UserData>
 
-      <Bubble>
+      <Bubble currentUser={currentUser}>
         <div>{message}</div>
       </Bubble>
     </Comment>
@@ -75,10 +74,10 @@ const Bubble = styled.div`
   display: flex;
   div {
     box-sizing: border-box;
-    color: white;
+    color: ${props => (props.currentUser ? '#222222' : 'white')};
     padding: 10px;
     line-height: 20px;
-    background: #348fbb;
+    background-color: ${props => (props.currentUser ? '#f1f0f0' : '#348fbb')};
     border-radius: 7px;
     margin: 10px 0 30px 0;
     position: relative;
