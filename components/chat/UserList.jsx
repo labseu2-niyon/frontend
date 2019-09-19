@@ -67,27 +67,12 @@ const UserList = ({ userList, socket, currentUser, currentConnectionId }) => {
 
 export default UserList;
 
-// const Root = styled(Card)`
-//   min-width: 200px;
-//   height: 80vh;
-//   overflow-y: scroll;
-//   margin-right: 20px;
-
-//   &.ant-card-bordered {
-//     border: none;
-//     box-shadow: ${({ theme }) => theme.boxShadow};
-//     border-radius: 5px;
-//   }
-// `;
-
 const Nav = styled(Card)`
   display: flex;
   flex-direction: column;
-  align-items: center;
   background: white;
   box-sizing: border-box;
-  /* padding: 2.5rem 0; */
-  height: 90vh;
+  height: 100vh;
   width: 250px;
   position: fixed;
   z-index: 1;
