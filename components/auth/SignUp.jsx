@@ -28,17 +28,17 @@ const SignUp = ({}) => {
       </Text>
       <ButtonArea>
         <SocialWrapper>
-          <a href="http://localhost:5000/api/auth/github ">
+          <a href="https://niyon-dev.herokuapp.com/api/auth/github ">
             <Image src="../../static/social/social-github.png" alt="github" />
           </a>
-          <a href="http://localhost:5000/api/auth/facebook ">
+          <a href="https://niyon-dev.herokuapp.com/api/auth/facebook ">
             <Image
               src="../../static/social/social-facebook.png"
               alt="facebook"
             />
           </a>
           <Image src="../../static/social/social-twitter.png" alt="twitter" />
-          <a href="http://localhost:5000/api/auth/google ">
+          <a href="https://niyon-dev.herokuapp.com/api/auth/google ">
             <Image src="../../static/social/social-google.png" alt="google" />
           </a>
         </SocialWrapper>

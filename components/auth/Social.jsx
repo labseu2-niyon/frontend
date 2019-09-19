@@ -9,7 +9,7 @@ import StepsComp from './StepsComp';
 import { socialData, saveToken } from '../../redux/actions/authActions';
 
 const Social = ({
- errors, touched, username, token, saveToken 
+ errors, touched, username, saveToken 
 }) => {
   const nextRouter = useRouter();
   const newToken = nextRouter.query.token;
@@ -17,8 +17,6 @@ const Social = ({
     const user = jwt.decode(newToken);
     if (username == undefined) username = user.username;
     saveToken(newToken, user.username);
-    console.log(newToken);
-    console.log(username);
   }
   return (
     <Root>
@@ -86,8 +84,7 @@ const FormikWithSocialForm = withFormik({
 })(Social);
 
 const mapStateToProps = state => ({
-  username: state.authReducer.emailData.username,
-  token: state.authReducer.token
+  username: state.authReducer.emailData.username
 });
 
 const mapDispatchToProps = {

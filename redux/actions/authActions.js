@@ -266,8 +266,6 @@ export const changePassword = props => dispatch => {
 };
 
 export const saveToken = (token, username) => dispatch => {
-  console.log(token);
-  console.log(username);
   dispatch({
     type: types.SAVE_TOKEN,
     payload: {

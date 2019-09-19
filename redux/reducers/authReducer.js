@@ -192,11 +192,10 @@ export const authReducer = (state = initialState, { type, payload }) => {
         error: payload
       };
     case types.SAVE_TOKEN:
-      console.log(payload);
       return {
         ...state,
         token: payload.token,
-        emailData: payload.username
+        emailData: { ...state.emailData, username: payload.username }
       };
     default:
       return state;
