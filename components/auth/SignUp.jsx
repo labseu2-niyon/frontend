@@ -5,8 +5,13 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { Text, Button } from '../~common/index';
 import { theme } from '../../lib/theme';
+import { getUrl } from '../../redux/actions/utils';
+
+const baseUrl = getUrl();
+console.log(baseUrl);
 
 const SignUp = ({}) => {
+  console.log('test');
   return (
     <Root>
       <Flip left>
@@ -28,17 +33,17 @@ const SignUp = ({}) => {
       </Text>
       <ButtonArea>
         <SocialWrapper>
-          <a href="https://niyon-staging.herokuapp.com/api/auth/github ">
+          <a href={`${baseUrl}/auth/google`}>
             <Image src="../../static/social/social-github.png" alt="github" />
           </a>
-          <a href="https://niyon-staging.herokuapp.com/api/auth/facebook ">
+          <a href={`${baseUrl}/auth/google`}>
             <Image
               src="../../static/social/social-facebook.png"
               alt="facebook"
             />
           </a>
           <Image src="../../static/social/social-twitter.png" alt="twitter" />
-          <a href="https://niyon-staging.herokuapp.com/api/auth/google ">
+          <a href={`${baseUrl}/auth/google`}>
             <Image src="../../static/social/social-google.png" alt="google" />
           </a>
         </SocialWrapper>
