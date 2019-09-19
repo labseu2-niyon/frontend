@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Card, Input, Button, Icon } from 'antd';
 import { connect } from 'react-redux';
+import { scrollToBottom } from '../../redux/actions/userActions';
 import ChatMessage from './ChatMessage';
 
 const Chat = ({
@@ -10,14 +11,19 @@ const Chat = ({
   currentUser,
   socket,
   currentRequestId,
-  currentConnectionId
+  currentConnectionId,
+  scrollToBottom
 }) => {
   const messagesEndRef = useRef(null);
   const [message, setMessage] = useState('');
 
-  const scrollToBottom = () => {
+  const scrollToBottom2 = () => {
     messagesEndRef.current.scrollIntoView({ block: 'end' });
   };
+
+  useEffect(() => {
+    scrollToBottom2();
+  }, [chatHistory.length]);
 
   useEffect(() => {
     socket.on('newChat', data => {
@@ -25,19 +31,11 @@ const Chat = ({
     });
   }, []);
 
-  // useEffect(() => {
-  //   if (message.length > 0) {
-  //     //console.log('YESS');
-  //     socket.on('typing', data => {
-  //       console.log('typing:', data);
-  //     });
-  //   }
-  // }, [message]);
-
-  const handleSend = () => {
-    setTimeout(() => {
-      scrollToBottom();
-    }, 400);
+  const handleSend = e => {
+    e.preventDefault();
+    setTimeout(async () => {
+      await scrollToBottom();
+    }, 450);
     const dataForTheServer = {
       sender: currentUser.id,
       receiver: currentRequestId,
@@ -52,7 +50,7 @@ const Chat = ({
   };
   return (
     <Wrapper>
-      <Window>
+      <Window id="chatBottom">
         {chatHistory &&
           chatHistory.map((user, i) => {
             return (
@@ -63,12 +61,13 @@ const Chat = ({
           })}
         <div ref={messagesEndRef} />
       </Window>
-      <InputWrapper>
+      <InputWrapper onSubmit={handleSend}>
         <Input
           placeholder="enter your message..."
           allowClear
           onChange={e => {
             setMessage(e.target.value);
+            socket.emit('typing', { user: currentUser.username, type: true });
           }}
           value={message}
         />
@@ -90,7 +89,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  null
+  { scrollToBottom }
 )(Chat);
 
 const Wrapper = styled.div`
@@ -111,7 +110,7 @@ const Window = styled(Card)`
   padding: 0;
 `;
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.form`
   display: flex;
   height: 5vh;
   margin: 20px;
