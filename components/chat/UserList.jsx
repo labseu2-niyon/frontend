@@ -2,11 +2,46 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { Card } from 'antd';
 import User from './User';
+import Link from 'next/link';
+import { Icon } from 'antd';
 
 const UserList = ({ userList, socket, currentUser, currentConnectionId }) => {
   const [chosen, setChosen] = useState(currentConnectionId);
   return (
-    <Root>
+    <Nav>
+      <Header>
+        {currentUser && (
+          <Link
+            href={{
+              pathname: '/my-profile',
+              query: {
+                user: currentUser.username
+              }
+            }}
+          >
+            <UserInfo>
+              {/* <PhotoWrapper>
+                <Photo>
+                  <ImgProfile
+                    src={
+                      currentUser.profile_picture ||
+                      'https://image.flaticon.com/icons/svg/660/660611.svg'
+                    }
+                    alt="User Profile Picture"
+                  />
+                </Photo>
+              </PhotoWrapper> */}
+              <p className="desktop name">Chats</p>
+            </UserInfo>
+          </Link>
+        )}
+        <Link href="/">
+          <IconWrapper>
+            {/* To resize ant icons we have to use inline styles */}
+            <Icon type="home" className="icon" style={{ fontSize: '18px' }} />
+          </IconWrapper>
+        </Link>
+      </Header>
       {userList &&
         currentUser &&
         userList.map(user => {
@@ -26,21 +61,77 @@ const UserList = ({ userList, socket, currentUser, currentConnectionId }) => {
             />
           );
         })}
-    </Root>
+    </Nav>
   );
 };
 
 export default UserList;
 
-const Root = styled(Card)`
-  min-width: 200px;
-  height: 80vh;
-  overflow-y: scroll;
-  margin-right: 20px;
+// const Root = styled(Card)`
+//   min-width: 200px;
+//   height: 80vh;
+//   overflow-y: scroll;
+//   margin-right: 20px;
 
+//   &.ant-card-bordered {
+//     border: none;
+//     box-shadow: ${({ theme }) => theme.boxShadow};
+//     border-radius: 5px;
+//   }
+// `;
+
+const Nav = styled(Card)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  box-sizing: border-box;
+  /* padding: 2.5rem 0; */
+  height: 90vh;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-y: scroll;
   &.ant-card-bordered {
     border: none;
     box-shadow: ${({ theme }) => theme.boxShadow};
-    border-radius: 5px;
+  }
+`;
+
+const Header = styled.div`
+  box-sizing: border-box;
+  margin: 15px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const UserInfo = styled.div`
+  display: flex;
+  align-items: center;
+  p {
+    font-weight: 500;
+    font-size: 20px;
+    margin: 0;
+    text-transform: uppercase;
+  }
+`;
+
+const IconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f5f5f5;
+  cursor: pointer;
+  .icon {
+    margin-bottom: 2px;
+    &:hover {
+      color: #348fbb;
+      transition: color 0.5s ease;
+    }
   }
 `;

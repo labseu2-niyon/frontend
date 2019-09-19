@@ -24,8 +24,11 @@ const ChatMessage = ({ user, currentUser }) => {
 export default ChatMessage;
 
 const Sender = styled.div`
-  background-color: #eafaf1;
+  /* background-color: #eafaf1; */
   display: flex;
   padding-left: 5px;
-  background-color: ${props => (props.currentUser ? '#eafaf1' : '#e6f6fb')};
+  /* background-color: ${props =>
+    props.currentUser ? '#eafaf1' : '#e6f6fb'}; */
+    /* background-color: ${props =>
+      props.currentUser ? '#eafaf1' : '#e6f6fb'}; */
 `;

@@ -1,11 +1,11 @@
 import withAuth from '../lib/withAuth';
-import Layout from '../components/Layout';
+import Layout2 from '../components/Layout2';
 import ChatLayout from '../components/chat/ChatLayout';
 
 const Page = props => (
-  <Layout pageName="Chat">
+  <Layout2 pageName="Chat">
     <ChatLayout socket={props.socket} />
-  </Layout>
+  </Layout2>
 );
 
 export default withAuth(Page);
