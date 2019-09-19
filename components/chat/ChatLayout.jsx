@@ -9,17 +9,23 @@ const ChatLayout = props => {
   const [chatHistory, setChatHistory] = useState([]);
   const [userList, setUserList] = useState([]);
   const { socket } = props;
+
   useEffect(() => {
     socket.on('connectionList', data => {
       setUserList(data);
     });
     socket.emit('chatOpen', { chatId: props.currentConnectionId });
-   
-    socket.on('chatHistory', async data => {
-      await setChatHistory(data);
-      console.log(data);
+    socket.on('chatHistory', data => {
+      setChatHistory(data);
     });
   }, []);
+  useEffect(() => {
+    socket.on('connectionList', data => {
+      setUserList(data);
+    });
+    socket.emit('chatOpen', { chatId: props.currentConnectionId });
+  }, [chatHistory]);
+
   return (
     <Main>
       <UserList
@@ -28,14 +34,14 @@ const ChatLayout = props => {
         currentUser={props.currentUser}
         currentConnectionId={props.currentConnectionId}
       />
-
-      <Chat
-        socket={socket}
-        chatHistory={chatHistory}
-        currentUser={props.currentUser}
-        userList={userList}
-        setChatHistory={setChatHistory}
-      />
+      {chatHistory && (
+        <Chat
+          socket={socket}
+          chatHistory={chatHistory}
+          currentUser={props.currentUser}
+          userList={userList}
+        />
+      )}
     </Main>
   );
 };

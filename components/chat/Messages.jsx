@@ -10,29 +10,45 @@ const Chat = ({
   currentUser,
   socket,
   currentRequestId,
-  currentConnectionId,
-  setChatHistory
+  currentConnectionId
 }) => {
   const messagesEndRef = useRef(null);
   const [message, setMessage] = useState('');
 
   const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current.scrollIntoView({ block: 'end' });
   };
+
   useEffect(() => {
-    scrollToBottom();
-  }, [message]);
+    socket.on('newChat', data => {
+      socket.emit('chatOpen', currentConnectionId);
+    });
+  }, []);
+
+  // useEffect(() => {
+  //   if (message.length > 0) {
+  //     //console.log('YESS');
+  //     socket.on('typing', data => {
+  //       console.log('typing:', data);
+  //     });
+  //   }
+  // }, [message]);
 
   const handleSend = () => {
-    scrollToBottom();
+    setTimeout(() => {
+      scrollToBottom();
+    }, 400);
     const dataForTheServer = {
       sender: currentUser.id,
       receiver: currentRequestId,
       message,
       connectionId: currentConnectionId
     };
-    socket.emit('messegeAdd', dataForTheServer);
-    setMessage('');
+
+    if (message.length) {
+      socket.emit('messegeAdd', dataForTheServer);
+      setMessage('');
+    }
   };
   return (
     <Wrapper>
@@ -53,9 +69,6 @@ const Chat = ({
           allowClear
           onChange={e => {
             setMessage(e.target.value);
-            socket.on('typing', data => {
-              console.log('typing:', data);
-            });
           }}
           value={message}
         />
