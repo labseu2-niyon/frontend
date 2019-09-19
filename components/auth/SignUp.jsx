@@ -33,10 +33,10 @@ const SignUp = ({}) => {
       </Text>
       <ButtonArea>
         <SocialWrapper>
-          <a href={`${baseUrl}/auth/google`}>
+          <a href={`${baseUrl}/auth/github`}>
             <Image src="../../static/social/social-github.png" alt="github" />
           </a>
-          <a href={`${baseUrl}/auth/google`}>
+          <a href={`${baseUrl}/auth/facebook`}>
             <Image
               src="../../static/social/social-facebook.png"
               alt="facebook"
