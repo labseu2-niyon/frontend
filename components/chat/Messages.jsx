@@ -105,9 +105,9 @@ const Wrapper = styled.div`
 `;
 
 const Window = styled(Card)`
-  height: 90vh;
+  height: 85vh;
   overflow-y: scroll;
-  margin: 0px 20px;
+  margin: 15px;
   padding: 0;
 `;
 
