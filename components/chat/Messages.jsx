@@ -17,25 +17,28 @@ const Chat = ({
   const messagesEndRef = useRef(null);
   const [message, setMessage] = useState('');
 
-  const scrollToBottom2 = () => {
-    messagesEndRef.current.scrollIntoView({ block: 'end' });
-  };
+  function scrollToBottom() {
+    const messages = document.getElementById('chatBox');
+    messages.scrollTop = messages.scrollHeight;
+  }
 
   useEffect(() => {
-    scrollToBottom2();
+    scrollToBottom();
   }, [chatHistory.length]);
 
   useEffect(() => {
+    setTimeout(() => {
+      scrollToBottom();
+    }, 1000);
     socket.on('newChat', data => {
       socket.emit('chatOpen', currentConnectionId);
     });
   }, []);
 
-  const handleSend = e => {
-    e.preventDefault();
-    setTimeout(async () => {
-      await scrollToBottom();
-    }, 450);
+  const handleSend = () => {
+    setTimeout(() => {
+      scrollToBottom();
+    }, 400);
     const dataForTheServer = {
       sender: currentUser.id,
       receiver: currentRequestId,
@@ -50,7 +53,7 @@ const Chat = ({
   };
   return (
     <Wrapper>
-      <Window id="chatBottom">
+      <Window id="chatBox">
         {chatHistory &&
           chatHistory.map((user, i) => {
             return (

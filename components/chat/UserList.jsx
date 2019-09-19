@@ -42,7 +42,6 @@ const UserList = ({ userList, socket, currentUser, currentConnectionId }) => {
           </IconWrapper>
         </Link>
       </Header>
-
       {userList &&
         currentUser &&
         userList.map(user => {
@@ -66,6 +65,8 @@ const UserList = ({ userList, socket, currentUser, currentConnectionId }) => {
   );
 };
 
+export default UserList;
+
 const Nav = styled(Card)`
   display: flex;
   flex-direction: column;
@@ -78,7 +79,6 @@ const Nav = styled(Card)`
   top: 0;
   left: 0;
   overflow-y: scroll;
-
   &.ant-card-bordered {
     border: none;
     box-shadow: ${({ theme }) => theme.boxShadow};
@@ -133,15 +133,17 @@ const IconWrapper = styled.div`
   height: 32px;
   border-radius: 50%;
   background: #f5f5f5;
+  color: #348fbb;
   cursor: pointer;
+
+  &:hover {
+    color: #ffffff;
+    background: #348fbb;
+  }
 
   .icon {
     margin-bottom: 2px;
-    &:hover {
-      color: #348fbb;
-      transition: color 0.5s ease;
-    }
   }
-`;
 
-export default UserList;
+  transition: all 1s ease;
+`;
