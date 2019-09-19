@@ -7,7 +7,7 @@ import { Icon } from 'antd';
 
 const UserList = ({ userList, socket, currentUser, currentConnectionId }) => {
   const [chosen, setChosen] = useState(currentConnectionId);
-
+  // console.log(currentUser, userList);
   return (
     <Nav>
       <Header>

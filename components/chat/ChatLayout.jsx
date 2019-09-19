@@ -4,27 +4,35 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import UserList from './UserList';
 import Chat from './Messages';
+import { fetchUser } from '../../redux/actions/userActions';
+import jwt from 'jsonwebtoken';
 
 const ChatLayout = props => {
   const [chatHistory, setChatHistory] = useState([]);
   const [userList, setUserList] = useState([]);
   const { socket } = props;
+  const user = jwt.decode(props.authReducer.token);
 
   useEffect(() => {
+    props.fetchUser(user.username);
+
     socket.on('connectionList', data => {
       setUserList(data);
     });
+
     socket.emit('chatOpen', { chatId: props.currentConnectionId });
     socket.on('chatHistory', data => {
       setChatHistory(data);
     });
   }, []);
+
   useEffect(() => {
     socket.on('connectionList', data => {
       setUserList(data);
     });
+
     socket.emit('chatOpen', { chatId: props.currentConnectionId });
-  }, [chatHistory]);
+  }, [chatHistory.length]);
 
   return (
     <Main>
@@ -61,11 +69,12 @@ const Main = styled.div`
 const mapStateToProps = state => {
   return {
     currentUser: state.userReducer.user,
+    authReducer: state.authReducer,
     currentConnectionId: state.authReducer.connectionId
   };
 };
 
 export default connect(
   mapStateToProps,
-  {}
+  { fetchUser }
 )(ChatLayout);
