@@ -56,7 +56,7 @@ const ButtonWrapper = styled.div`
 function PhotoSection(props) {
   const { user, isLoggedInUser = false } = props;
   const userObj = {
-    profile_picture: user.profile_picture || '',
+    profile_picture: user.profile_picture || 'https://image.flaticon.com/icons/svg/660/660611.svg',
     email: user.email || 'Not listed',
     first_name: user.first_name || 'No Name',
     last_name: user.last_name || '',
