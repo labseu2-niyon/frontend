@@ -4,18 +4,17 @@ import jwt from 'jsonwebtoken';
 import * as Yup from 'yup';
 import { Router, useRouter } from 'next/router';
 import { connect } from 'react-redux';
-// import { useState } from 'react';
 import { Heading2, Text, Button } from '../~common/index';
 import StepsComp from './StepsComp';
 import { socialData, saveToken } from '../../redux/actions/authActions';
 
-const Social = ({ errors, touched, username, token0, saveToken }) => {
+const Social = ({ errors, touched, username, token, saveToken }) => {
   const nextRouter = useRouter();
-  const { token } = nextRouter.query;
-  // const user = jwt.decode(token1);
-  // if (username === undefined) username = user.username;
-  saveToken(token);
-  console.log(token0);
+  const newToken = nextRouter.query.token;
+  const user = jwt.decode(newToken);
+  if (username === undefined) username = user.username;
+  saveToken(newToken);
+  // console.log(token);
   // console.log(username);
   return (
     <Root>
@@ -84,7 +83,7 @@ const FormikWithSocialForm = withFormik({
 
 const mapStateToProps = state => ({
   username: state.authReducer.emailData.username,
-  token0: state.authReducer.token
+  token: state.authReducer.token
 });
 
 const mapDispatchToProps = {
