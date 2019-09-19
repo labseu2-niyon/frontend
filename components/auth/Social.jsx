@@ -2,20 +2,24 @@ import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import jwt from 'jsonwebtoken';
 import * as Yup from 'yup';
-import { Router, useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import { Heading2, Text, Button } from '../~common/index';
 import StepsComp from './StepsComp';
 import { socialData, saveToken } from '../../redux/actions/authActions';
 
-const Social = ({ errors, touched, username, token, saveToken }) => {
+const Social = ({
+ errors, touched, username, token, saveToken 
+}) => {
   const nextRouter = useRouter();
   const newToken = nextRouter.query.token;
-  const user = jwt.decode(newToken);
-  if (username === undefined) username = user.username;
-  saveToken(newToken);
-  // console.log(token);
-  // console.log(username);
+  if (newToken) {
+    const user = jwt.decode(newToken);
+    if (username == undefined) username = user.username;
+    saveToken(newToken, user.username);
+    console.log(newToken);
+    console.log(username);
+  }
   return (
     <Root>
       <StepsComp stepNumber="1" />
@@ -87,7 +91,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  socialData, saveToken
+  socialData,
+  saveToken
 };
 
 export default connect(

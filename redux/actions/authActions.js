@@ -265,9 +265,18 @@ export const changePassword = props => dispatch => {
     });
 };
 
-export const saveToken = token => dispatch => {
+export const saveToken = (token, username) => dispatch => {
+  console.log(token);
+  console.log(username);
   dispatch({
     type: types.SAVE_TOKEN,
-    payload: token
+    payload: {
+      token,
+      username
+    }
+  });
+  nookies.set({}, 'token', token, {
+    maxAge: 60 * 60 * 24 * 30,
+    path: '/'
   });
 };
