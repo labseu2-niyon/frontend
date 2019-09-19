@@ -98,17 +98,23 @@ const Wrapper = styled.div`
   flex-direction: column;
   margin-left: 250px;
   width: 100%;
+
+  .ant-card-bordered {
+    border: none;
+  }
 `;
 
 const Window = styled(Card)`
-  height: 95vh;
+  height: 90vh;
   overflow-y: scroll;
+  margin: 0px 20px;
   padding: 0;
 `;
 
 const InputWrapper = styled.div`
   display: flex;
   height: 5vh;
+  margin: 20px;
 
   button {
     width: 20%;

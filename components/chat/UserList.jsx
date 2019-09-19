@@ -72,7 +72,6 @@ const Nav = styled(Card)`
   flex-direction: column;
   background: white;
   box-sizing: border-box;
-  padding: 15px;
   height: 100vh;
   width: 250px;
   position: fixed;
@@ -88,10 +87,10 @@ const Nav = styled(Card)`
 `;
 
 const Header = styled.div`
+  box-sizing: border-box;
+  margin: 15px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  width: 100%;
 `;
 
 const UserInfo = styled.div`

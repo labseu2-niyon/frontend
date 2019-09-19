@@ -15,7 +15,6 @@ const User = ({
 }) => {
   const handleEmit = () => {
     onClick();
-    //console.log(connectionId);
     saveCurrentRequestId(user.id, connectionId);
     const dataForTheServer = {
       chatId: connectionId
@@ -42,9 +41,9 @@ export default connect(
 
 const Root = styled.div`
   width: 100%;
-  padding-left: 10px;
+  padding: 0px 15px;
   color: ${theme.primary};
-  background-color: ${props => (props.selected ? theme.secondary : 'white')};
+  background-color: ${props => (props.selected ? '#f2f2f2' : 'white')};
   &:hover {
     cursor: pointer;
   }
