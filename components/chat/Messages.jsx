@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Card, Input, Button, Icon } from 'antd';
 import { connect } from 'react-redux';
+import { scrollToBottom } from '../../redux/actions/userActions';
 import ChatMessage from './ChatMessage';
 
 const Chat = ({
@@ -10,14 +11,20 @@ const Chat = ({
   currentUser,
   socket,
   currentRequestId,
-  currentConnectionId
+  currentConnectionId,
+  scrollToBottom
 }) => {
   const messagesEndRef = useRef(null);
   const [message, setMessage] = useState('');
 
-  const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView({ block: 'end' });
-  };
+  // const scrollToBottom = () => {
+  //   messagesEndRef.current.scrollIntoView({ block: 'end' });
+  // };
+
+  function scrollToBottom999() {
+    const messages = document.getElementById('chatBottom');
+    messages.scrollTop = messages.scrollHeight;
+  }
 
   useEffect(() => {
     socket.on('newChat', data => {
@@ -25,18 +32,10 @@ const Chat = ({
     });
   }, []);
 
-  // useEffect(() => {
-  //   if (message.length > 0) {
-  //     //console.log('YESS');
-  //     socket.on('typing', data => {
-  //       console.log('typing:', data);
-  //     });
-  //   }
-  // }, [message]);
-
-  const handleSend = () => {
-    setTimeout(() => {
-      scrollToBottom();
+  const handleSend = e => {
+    e.preventDefault();
+    setTimeout(async () => {
+      await scrollToBottom();
     }, 400);
     const dataForTheServer = {
       sender: currentUser.id,
@@ -52,7 +51,7 @@ const Chat = ({
   };
   return (
     <Wrapper>
-      <Window>
+      <Window id="chatBottom">
         {chatHistory &&
           chatHistory.map((user, i) => {
             return (
@@ -63,7 +62,7 @@ const Chat = ({
           })}
         <div ref={messagesEndRef} />
       </Window>
-      <InputWrapper>
+      <InputWrapper onSubmit={handleSend}>
         <Input
           placeholder="enter your message..."
           allowClear
@@ -90,7 +89,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  null
+  { scrollToBottom }
 )(Chat);
 
 const Wrapper = styled.div`
@@ -105,7 +104,7 @@ const Window = styled(Card)`
   padding: 0;
 `;
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.form`
   display: flex;
 
   button {
