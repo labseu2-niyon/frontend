@@ -4,8 +4,8 @@ import Avatar from '../~common/Avatar';
 
 const CommentComp = ({ name, message, date, image, currentUser }) => {
   return (
-    <Comment>
-      <UserData>
+    <Comment currentUser={currentUser}>
+      <UserData currentUser={currentUser}>
         <PhotoWrapper>
           <Photo>
             <ImgProfile
@@ -26,16 +26,22 @@ const CommentComp = ({ name, message, date, image, currentUser }) => {
 };
 
 const Comment = styled.div`
-  width: 100%;
-
+  display: flex;
+  flex-direction: column;
+  align-items: ${props => (props.currentUser ? 'flex-end' : 'flex-start')};
   .data {
     margin-bottom: 15px;
+  }
+
+  .user {
+    background: red;
   }
 `;
 
 const UserData = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: ${props => (props.currentUser ? 'row-reverse' : 'row')};
 
   p {
     margin-bottom: 0;
@@ -79,9 +85,7 @@ const Bubble = styled.div`
     line-height: 20px;
     background-color: ${props => (props.currentUser ? '#f1f0f0' : '#348fbb')};
     border-radius: 7px;
-    margin: 10px 0 30px 0;
-    position: relative;
-    align-self: flex-start;
+    margin: 10px 0 20px 0;
   }
 
   /* &:after {
