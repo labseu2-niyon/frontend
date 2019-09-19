@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { Avatar } from './~common/index';
 import { logOutUser } from '../redux/actions/authActions';
 import { fetchUser } from '../redux/actions/userActions';
-import withAuth from '../lib/withAuth';
+import { profile_placeholder } from '../lib/utils';
 
 const Navigation = ({ logOutUser, fetchUser, authReducer, user, socket }) => {
   const userInfo = jwt.decode(authReducer.token);
@@ -25,13 +25,8 @@ const Navigation = ({ logOutUser, fetchUser, authReducer, user, socket }) => {
     <Nav>
       {user && (
         <div className="desktop">
-          <Avatar
-            extraLarge
-            source={
-              user.profile_picture ||
-              'https://image.flaticon.com/icons/svg/660/660611.svg'
-            }
-          />
+
+          <Avatar extraLarge source={user.profile_picture || profile_placeholder} />
           <p className="desktop name">
             {user.first_name} {user.last_name}
           </p>

@@ -114,6 +114,7 @@ export const authReducer = (
       return {
         ...state,
         allMentorOptions: payload
+
       };
     //= ===============================SAVE current request id=================
     case 'SAVE_CURRENT_REQWEST_ID':
@@ -121,6 +122,7 @@ export const authReducer = (
         ...state,
         requestId: payload,
         connectionId: payload2
+
       };
     //= ==============================perist Social Media data===================
     case types.SET_SOCIAL_MEDIA_DATA:
@@ -202,6 +204,14 @@ export const authReducer = (
         ...state,
         loading: false,
         error: payload
+
+      };
+    case types.SAVE_TOKEN:
+      return {
+        ...state,
+        token: payload.token,
+        emailData: { ...state.emailData, username: payload.username }
+
       };
     default:
       return state;
