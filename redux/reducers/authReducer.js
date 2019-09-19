@@ -191,6 +191,11 @@ export const authReducer = (state = initialState, { type, payload }) => {
         loading: false,
         error: payload
       };
+    case types.SAVE_TOKEN:
+      return {
+        ...state,
+        token: payload
+      };
     default:
       return state;
   }

@@ -264,3 +264,10 @@ export const changePassword = props => dispatch => {
       });
     });
 };
+
+export const saveToken = token => dispatch => {
+  dispatch({
+    type: types.SAVE_TOKEN,
+    payload: token
+  });
+};
