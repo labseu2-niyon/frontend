@@ -4,7 +4,6 @@ import nookies from 'nookies';
 import Router from 'next/router';
 import { types } from '../authConstants';
 import axiosWithToken from '../axios';
-
 import { getUrl } from './utils';
 
 const startLoading = () => ({
@@ -12,67 +11,6 @@ const startLoading = () => ({
 });
 
 const stopLoading = () => ({ type: types.STOP_LOADING });
-
-// Action Creator for Social Media Signup
-
-export const githubSignup = () => dispatch => {
-  // console.log('test');
-  return axios
-    .get(`${getUrl()}/auth/github`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      }
-    })
-    .then(res => {
-      console.log(res);
-      dispatch({
-        type: types.SET_TOKEN_SOCIAL,
-        payload: {
-          token: res.data.token
-        }
-      });
-      nookies.set({}, 'token', res.data.token, {
-        maxAge: 60 * 60 * 24 * 30,
-        path: '/'
-      });
-      return res.data.status;
-    })
-    .catch(err => {
-      dispatch({
-        type: types.REGISTER_USER_FAILURE,
-        // payload: err.response.data.message
-        payload: err.message
-      });
-    });
-};
-
-export const linkedinSignup = () => dispatch => {
-  dispatch(startLoading());
-  // console.log('Linkedin endpoint request');
-  dispatch(stopLoading());
-};
-
-export const facebookSignup = () => dispatch => {
-  dispatch(startLoading());
-
-  // console.log('Facebook endpoint request');
-  dispatch(stopLoading());
-};
-
-export const twitterSignup = () => dispatch => {
-  dispatch(startLoading());
-
-  // console.log('Twitter endpoint request');
-  dispatch(stopLoading());
-};
-
-export const emailSignUp = () => dispatch => {
-  dispatch(startLoading());
-
-  // console.log('Email endpoint request', userData);
-  dispatch(stopLoading());
-};
 
 // Action creator for persisting location data
 export const locationData = data => dispatch => {
@@ -116,7 +54,7 @@ export const userChoise = (data, userType) => dispatch => {
     });
 };
 
-// Action Creator for Singup a user with email
+// Action Creator for Signup a user with email
 // body {username, email, password}
 export const emailSignup = data => dispatch => {
   dispatch({ type: types.REGISTER_USER_REQUEST });

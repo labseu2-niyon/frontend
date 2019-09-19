@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import jwt from 'jsonwebtoken';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import * as Yup from 'yup';
 import { Router, useRouter } from 'next/router';
 import { connect } from 'react-redux';
@@ -13,8 +13,8 @@ const Social = ({ errors, touched, username }) => {
   const nextRouter = useRouter();
   const { token } = nextRouter.query;
   const user = jwt.decode(token);
-  if (username == undefined) username = user.username;
-  console.log(username);
+  if (username === undefined) username = user.username;
+  // console.log(username);
   return (
     <Root>
       <StepsComp stepNumber="1" />

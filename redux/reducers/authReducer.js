@@ -40,13 +40,6 @@ export const authReducer = (state = initialState, { type, payload }) => {
         loading: false,
         error: payload
       };
-    // ========================REGISTER USER WITH SOCIAL==================
-    case types.SET_TOKEN_SOCIAL:
-      return {
-        ...state,
-        token: payload.token,
-        loading: false
-      };
     //= =======================ADDED USER INFORMATION======================
     case types.USER_INFO_REQUEST:
       return {
