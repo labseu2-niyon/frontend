@@ -29,8 +29,7 @@ const User = ({
           avatar={
             <Avatar
               src={
-                user.profile_picture ||
-                'https://image.flaticon.com/icons/svg/660/660611.svg'
+                user.profile_picture || '../../static/profile-placeholder.svg'
               }
             />
           }

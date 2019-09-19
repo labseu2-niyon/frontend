@@ -41,7 +41,6 @@ const Comment = styled.div`
 const UserData = styled.div`
   display: flex;
   align-items: center;
-  flex-direction: ${props => (props.currentUser ? 'row-reverse' : 'row')};
 
   p {
     margin-bottom: 0;
