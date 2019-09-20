@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Link from 'next/link';
 import Router from 'next/router';
-import { Text, Button } from '../~common/index';
+import { Text, Button, Heading2 } from '../~common/index';
 import { theme } from '../../lib/theme';
 import { getUrl } from '../../redux/actions/utils';
 
@@ -25,9 +25,7 @@ const SignUp = ({}) => (
         </Pulse>
       </Logo>
     </Flip>
-    <Text small>
-      Sign up now to get in contact with mentors and young professionals
-    </Text>
+    <Heading2 primary>Signup</Heading2>
     <ButtonArea>
       <SocialWrapper>
         <a href={`${baseUrl}/auth/facebook`}>
@@ -90,6 +88,9 @@ const Root = styled.div`
   a {
     text-decoration: none;
   }
+  h2 {
+    padding: 2rem;
+  }
 `;
 
 const ButtonArea = styled.div`
@@ -106,7 +107,6 @@ const SocialWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 50%;
 `;
 
 const StyledImage = styled.img`
