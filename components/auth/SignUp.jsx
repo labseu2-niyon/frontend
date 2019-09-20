@@ -30,18 +30,22 @@ const SignUp = ({}) => (
     </Text>
     <ButtonArea>
       <SocialWrapper>
+        <a href={`${baseUrl}/auth/google`}>
+          <Image src="../../static/social/social-google.png" alt="google" />
+        </a>
         <a href={`${baseUrl}/auth/github`}>
           <Image src="../../static/social/social-github.png" alt="github" />
         </a>
         <a href={`${baseUrl}/auth/facebook`}>
           <Image src="../../static/social/social-facebook.png" alt="facebook" />
         </a>
-        <Image src="../../static/social/social-twitter.png" alt="twitter" />
-        <a href={`${baseUrl}/auth/google`}>
-          <Image src="../../static/social/social-google.png" alt="google" />
+        <a href={`${baseUrl}/auth/twitter`}>
+          <Image src="../../static/social/social-twitter.png" alt="twitter" />
+        </a>
+        <a href={`${baseUrl}/auth/linkedin`}>
+          <Image src="../../static/social/social-linkedin.png" alt="linkedin" />
         </a>
       </SocialWrapper>
-
       <Flip top>
         <Button
           large
