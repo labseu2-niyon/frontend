@@ -106,7 +106,6 @@ const Chat = ({
             allowClear
             onChange={e => {
               setMessage(e.target.value);
-              socket.emit('typing', { user: currentUser.username, type: true });
             }}
             value={message}
           />
