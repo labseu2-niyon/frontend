@@ -5,7 +5,7 @@ export const getUrl = () => {
       ? 'https://niyon-prod.herokuapp.com/api'
       : 'https://niyon-staging.herokuapp.com/api';
   } else {
-    _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
+    _BASE_URL = 'https://niyon-staging.herokuapp.com/api';
   }
 
   return _BASE_URL;
