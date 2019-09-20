@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Card, Input, Button, Icon } from 'antd';
 import { connect } from 'react-redux';
+import { PulseLoader } from 'react-spinners';
 import ChatMessage from './ChatMessage';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
@@ -12,11 +13,30 @@ const Chat = ({
   currentUser,
   socket,
   currentRequestId,
-  currentConnectionId
+  currentConnectionId,
+  userTyping
 }) => {
   const messagesEndRef = useRef(null);
   const [message, setMessage] = useState('');
   const [emojis, setEmojis] = useState(false);
+
+  if (message.length === 0) {
+    socket.emit('typing', '');
+  } else if (message.length > 0) {
+    scrollToBottom();
+    socket.emit('typing', currentUser.username);
+  }
+
+  const type = userTyping ? (
+    <TYPEWRAPPER>
+      <PulseLoader sizeUnit={'px'} size={8} color={'#123abc'} loading={true} />
+      <p>
+        <span>{userTyping}</span> is typing
+      </p>
+    </TYPEWRAPPER>
+  ) : (
+    ''
+  );
 
   function scrollToBottom() {
     const messages = document.getElementById('chatBox');
@@ -75,6 +95,7 @@ const Chat = ({
               )
             );
           })}
+        <p style={{ padding: '3px' }}>{type}</p>
         <div ref={messagesEndRef} />
       </Window>
 
@@ -169,4 +190,19 @@ const Emojis = styled.div`
   position: absolute;
   bottom: 55px;
   right: 20px;
+`;
+
+const TYPEWRAPPER = styled.div`
+  display: flex;
+  color: lightGrey;
+  padding-right: 25px;
+  font-style: italic;
+  bottom: 20%;
+  position: relative;
+  span {
+    text-transform: uppercase;
+    margin-left: 10px;
+  }
+  p {
+  }
 `;

@@ -11,7 +11,7 @@ const Page = props => (
     (it messes up the socket.on event if it's a parent). Some weird Socket.io behaviour for sure.
     I've had many sleepless nights.   */}
     <ChatData> </ChatData>
-    <ChatLayout socket={props.socket} />
+    <ChatLayout socket={props.socket} {...props} />
   </div>
 );
 
