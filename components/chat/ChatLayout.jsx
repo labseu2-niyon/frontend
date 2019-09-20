@@ -10,10 +10,12 @@ const ChatLayout = props => {
   const [userList, setUserList] = useState([]);
   const { socket } = props;
 
+  //console.log(props.userTyping);
   useEffect(() => {
     socket.on('connectionList', data => {
       setUserList(data);
     });
+
     socket.emit('chatOpen', { chatId: props.currentConnectionId });
     socket.on('chatHistory', data => {
       setChatHistory(data);
@@ -40,6 +42,7 @@ const ChatLayout = props => {
           chatHistory={chatHistory}
           currentUser={props.currentUser}
           userList={userList}
+          userTyping={props.userTyping}
         />
       )}
     </Main>
