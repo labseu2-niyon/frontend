@@ -9,6 +9,7 @@ const initialState = {
   errorMessage: null,
   usersAll: [],
   connectionsAll: [],
+  connectionsReceived: [],
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -106,6 +107,43 @@ export const userReducer = (state = initialState, action) => {
         queryingDatabase: false,
         errorMessage: payload,
       };
+      case types.CREATE_CONNECTION_SUCCESS:
+        return {
+          ...state,
+          queryingDatabase: false,
+          connectionsAll: [...state.connectionsAll, action.payload],
+        };
+      case types.FETCH_CONNECTION_REQUEST:
+        return {
+          ...state,
+          queryingDatabase: true,
+        };
+      case types.FETCH_CONNECTION_SUCCESS:
+        return {
+          ...state,
+          queryingDatabase: false,
+          connection: payload,
+        };
+  
+      case types.FETCH_RECEIVED_CONNECTIONS_REQUEST:
+        return {
+          ...state,
+          queryingDatabase: true,
+        };
+      case types.FETCH_RECEIVED_CONNECTIONS_SUCCESS:
+        return {
+          ...state,
+          queryingDatabase: false,
+          connectionsReceived: payload,
+        };
+      case types.FETCH_RECEIVED_CONNECTIONS_FAILURE:
+        return {
+          ...state,
+          queryingDatabase: false,
+          errorMessage: payload,
+        };
+  
+
     case types.FETCH_ALL_CONNECTIONS_REQUEST:
       return {
         ...state,
