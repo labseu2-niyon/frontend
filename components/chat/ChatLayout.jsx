@@ -10,7 +10,6 @@ const ChatLayout = props => {
   const [userList, setUserList] = useState([]);
   const { socket } = props;
 
-  //console.log(props.userTyping);
   useEffect(() => {
     socket.on('connectionList', data => {
       setUserList(data);

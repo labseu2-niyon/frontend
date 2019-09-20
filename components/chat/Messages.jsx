@@ -122,10 +122,12 @@ const Chat = ({
               title="Pick your emoji…"
               emoji="point_up"
               onSelect={addEmoji}
+      <Field>
             />
           </Emojis>
         ) : null}
       </div>
+      </Field>
     </Wrapper>
   );
 };
@@ -145,6 +147,7 @@ export default connect(
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   margin-left: 250px;
   width: 100%;
   height: 100vh;
