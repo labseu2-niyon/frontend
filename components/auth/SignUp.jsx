@@ -30,20 +30,32 @@ const SignUp = ({}) => (
     </Text>
     <ButtonArea>
       <SocialWrapper>
-        <a href={`${baseUrl}/auth/google`}>
-          <Image src="../../static/social/social-google.png" alt="google" />
-        </a>
-        <a href={`${baseUrl}/auth/github`}>
-          <Image src="../../static/social/social-github.png" alt="github" />
-        </a>
         <a href={`${baseUrl}/auth/facebook`}>
-          <Image src="../../static/social/social-facebook.png" alt="facebook" />
+          <StyledImage
+            src="../../static/social/social-facebook.png"
+            alt="facebook"
+          />
         </a>
+
+        <a href={`${baseUrl}/auth/github`}>
+          <StyledImage
+            src="../../static/social/social-github.png"
+            alt="github"
+          />
+        </a>
+
+        <a href={`${baseUrl}/auth/google`}>
+          <StyledImage
+            src="../../static/social/social-google.png"
+            alt="google"
+          />
+        </a>
+
         <a href={`${baseUrl}/auth/twitter`}>
-          <Image src="../../static/social/social-twitter.png" alt="twitter" />
-        </a>
-        <a href={`${baseUrl}/auth/linkedin`}>
-          <Image src="../../static/social/social-linkedin.png" alt="linkedin" />
+          <StyledImage
+            src="../../static/social/social-twitter.png"
+            alt="twitter"
+          />
         </a>
       </SocialWrapper>
       <Flip top>
@@ -93,6 +105,7 @@ const ButtonArea = styled.div`
   justify-content: space-evenly;
   align-items: center;
   height: 50%;
+  width: 90%;
 `;
 
 const SocialWrapper = styled.div`
@@ -100,10 +113,20 @@ const SocialWrapper = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  background-color: green;
+  width: 50%;
+
+  @media (max-width: 600px) {
+    width: 80%;
+  }
+
+  a {
+    background-color: blue;
+  }
 `;
 
-const Image = styled.img`
-  height: 100%;
+const StyledImage = styled.img`
+  width: 3rem;
 `;
 
 const Logo = styled.div`
