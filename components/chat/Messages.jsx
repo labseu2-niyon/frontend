@@ -101,7 +101,7 @@ const Chat = ({
 
       <div>
         <InputWrapper onSubmit={handleSend}>
-          <Input
+          <input
             placeholder="enter your message..."
             allowClear
             onChange={e => {
@@ -167,16 +167,23 @@ const InputWrapper = styled.form`
   align-items: center;
   border-radius: 4px;
 
-  .ant-input {
+  input {
     border: none;
-    color: #858585;
+    width: 100%;
+    margin: 5px 10px;
   }
 
-  }
-  button {
-    width: 20%;
+  input::placeholder {
+    color: #bfbfbf;
   }
 
+  input:hover {
+    outline: none;
+  }
+
+  input:focus {
+    outline: none;
+  }
 
   .icon {
     margin-right: 10px;
