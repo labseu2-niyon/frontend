@@ -133,3 +133,83 @@ export const fetchAllUsers = (user) => (dispatch) => {
 //       });
 //     });
 // };
+
+export const createConnection = ({ senderUserId, requestUserId }) => (dispatch) => {
+  dispatch({ type: types.CREATE_CONNECTION_REQUEST });
+
+  const senderId = parseInt(senderUserId, 10);
+
+  axiosWithAuth()
+    .post(`${getUrl()}/connection`, {
+      senderUserId: senderId,
+      requestUserId,
+    })
+    .then((res) => {
+      dispatch({
+        type: types.CREATE_CONNECTION_SUCCESS,
+        payload: res.data.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.CREATE_CONNECTION_FAILURE,
+        payload: error.message,
+      });
+    });
+};
+
+export const fetchConnection = (id) => (dispatch) => {
+  dispatch({ type: types.FETCH_CONNECTION_REQUEST });
+  // spinner
+  axiosWithAuth().get(`${getUrl()}/connection/${id}`)
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.FETCH_CONNECTION_SUCCESS,
+        payload: res.data.data,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch({
+        type: types.FETCH_CONNECTION_FAILURE,
+        payload: error.message,
+      });
+    });
+};
+
+export const fetchAllConnections = (id) => (dispatch) => {
+  dispatch({ type: types.FETCH_ALL_CONNECTIONS_REQUEST });
+  // spinner
+  axiosWithAuth().get(`${getUrl()}/connection/${id}/accepted`)
+    .then((res) => {
+      dispatch({
+        type: types.FETCH_ALL_CONNECTIONS_SUCCESS,
+        payload: res.data.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.FETCH_ALL_CONNECTIONS_FAILURE,
+        payload: error.message,
+      });
+    });
+};
+
+export const fetchReceivedConnections = (id) => (dispatch) => {
+  dispatch({ type: types.FETCH_RECEIVED_CONNECTIONS_REQUEST });
+  // spinner
+  axiosWithAuth().get(`${getUrl()}/connection/${id}/requests`)
+    .then((res) => {
+      dispatch({
+        type: types.FETCH_ALL_CONNECTIONS_SUCCESS,
+        payload: res.data.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.FETCH_ALL_CONNECTIONS_FAILURE,
+        payload: error.message,
+      });
+    });
+};
