@@ -75,20 +75,14 @@ const Chat = ({
   return (
     <Wrapper>
       <Window id="chatBox">
-        {chatHistory.length ? (
+        {chatHistory &&
           chatHistory.map((user, i) => {
             return (
               currentUser && (
                 <ChatMessage key={i} user={user} currentUser={currentUser} />
               )
             );
-          })
-        ) : (
-          <Info>
-            <i class="fa fa-info-circle"></i>
-            <p>No Connection to chat with</p>
-          </Info>
-        )}
+          })}
       </Window>
 
       <div>
