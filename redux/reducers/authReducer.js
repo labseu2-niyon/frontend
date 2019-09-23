@@ -210,6 +210,12 @@ export const authReducer = (
         token: payload.token,
         emailData: { ...state.emailData, username: payload.username }
       };
+    case types.STORE_TOKEN:
+      return {
+        ...state,
+        token: payload.token,
+        emailData: { ...state.emailData, username: payload.username }
+      };
     default:
       return state;
   }
