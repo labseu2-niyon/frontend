@@ -162,6 +162,7 @@ const Window = styled(Card)`
   overflow-y: scroll;
   margin: 15px;
   padding: 0;
+  flex-grow:1;
 `;
 
 const InputWrapper = styled.form`
