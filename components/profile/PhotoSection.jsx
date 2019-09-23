@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Heading, Button } from '../~common';
+import { profile_placeholder } from '../../lib/utils';
 
 const Wrapper = styled.section`
     width: 100%;
@@ -56,7 +57,7 @@ const ButtonWrapper = styled.div`
 function PhotoSection(props) {
   const { user, isLoggedInUser = false } = props;
   const userObj = {
-    profile_picture: user.profile_picture || '',
+    profile_picture: user.profile_picture || profile_placeholder,
     email: user.email || 'Not listed',
     first_name: user.first_name || 'No Name',
     last_name: user.last_name || '',

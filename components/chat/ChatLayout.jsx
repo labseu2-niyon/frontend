@@ -6,30 +6,44 @@ import UserList from './UserList';
 import Chat from './Messages';
 
 const ChatLayout = props => {
+  const [chatHistory, setChatHistory] = useState([]);
+  const [userList, setUserList] = useState([]);
   const { socket } = props;
 
+  //console.log(props.userTyping);
   useEffect(() => {
+    socket.on('connectionList', data => {
+      setUserList(data);
+    });
+
     socket.emit('chatOpen', { chatId: props.currentConnectionId });
+    socket.on('chatHistory', data => {
+      setChatHistory(data);
+    });
   }, []);
 
   useEffect(() => {
+    socket.on('connectionList', data => {
+      setUserList(data);
+    });
+
     socket.emit('chatOpen', { chatId: props.currentConnectionId });
-  }, [props.chatHistory]);
+  }, [chatHistory]);
 
   return (
     <Main>
       <UserList
-        userList={props.userList}
+        userList={userList}
         socket={socket}
         currentUser={props.currentUser}
         currentConnectionId={props.currentConnectionId}
       />
-      {props.chatHistory && (
+      {chatHistory && (
         <Chat
           socket={socket}
-          chatHistory={props.chatHistory}
+          chatHistory={chatHistory}
           currentUser={props.currentUser}
-          userList={props.userList}
+          userList={userList}
           userTyping={props.userTyping}
         />
       )}
@@ -52,8 +66,8 @@ const Main = styled.div`
 const mapStateToProps = state => {
   return {
     currentUser: state.userReducer.user,
-    authReducer: state.authReducer
-    //currentConnectionId: state.authReducer.connectionId
+    authReducer: state.authReducer,
+    currentConnectionId: state.authReducer.connectionId
   };
 };
 
