@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import UserList from './UserList';
@@ -52,8 +52,9 @@ const Main = styled.div`
 const mapStateToProps = state => {
   return {
     currentUser: state.userReducer.user,
-    authReducer: state.authReducer,
-    currentConnectionId: state.authReducer.connectionId
+    authReducer: state.authReducer
+    //current connection its comming dirrectly from withAuth when user loggedin
+    // currentConnectionId: state.authReducer.connectionId - not taken from redux-store anymore
   };
 };
 
