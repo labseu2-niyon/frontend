@@ -265,6 +265,13 @@ export const changePassword = props => dispatch => {
     });
 };
 
+
+export const saveCurrentRequestId = (userId, connectionID) => ({
+  type: 'SAVE_CURRENT_REQWEST_ID',
+  payload: userId,
+  payload2: connectionID
+});
+
 export const saveToken = (token, username) => dispatch => {
   dispatch({
     type: types.SAVE_TOKEN,
@@ -278,3 +285,4 @@ export const saveToken = (token, username) => dispatch => {
     path: '/'
   });
 };
+

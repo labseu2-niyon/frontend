@@ -13,11 +13,16 @@ const initialState = {
   userNameData: [],
   allJobs: [],
   allMentorOptions: [],
+  requestId: null,
+  connectionId: null,
   token: null,
   message: ''
 };
 
-export const authReducer = (state = initialState, { type, payload }) => {
+export const authReducer = (
+  state = initialState,
+  { type, payload, payload2 }
+) => {
   // ========================REGISTER USER WITH EMAIL==================
   switch (type) {
     case types.REGISTER_USER_REQUEST:
@@ -109,6 +114,15 @@ export const authReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allMentorOptions: payload
+
+      };
+    //= ===============================SAVE current request id=================
+    case 'SAVE_CURRENT_REQWEST_ID':
+      return {
+        ...state,
+        requestId: payload,
+        connectionId: payload2
+
       };
     //= ==============================perist Social Media data===================
     case types.SET_SOCIAL_MEDIA_DATA:
@@ -190,12 +204,14 @@ export const authReducer = (state = initialState, { type, payload }) => {
         ...state,
         loading: false,
         error: payload
+
       };
     case types.SAVE_TOKEN:
       return {
         ...state,
         token: payload.token,
         emailData: { ...state.emailData, username: payload.username }
+
       };
     default:
       return state;

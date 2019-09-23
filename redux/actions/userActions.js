@@ -3,39 +3,39 @@ import { types } from '../userConstants';
 
 import { getUrl } from './utils';
 
-export const fetchUser = (username) => (dispatch) => {
+export const fetchUser = username => dispatch => {
   dispatch({
-    type: types.FETCH_USER_REQUEST,
+    type: types.FETCH_USER_REQUEST
   });
   axiosWithAuth()
     .get(`${getUrl()}/user/${username}/profile`)
-    .then((res) => {
+    .then(res => {
       dispatch({
         type: types.FETCH_USER,
-        payload: res.data.data,
+        payload: res.data.data
       });
     })
-    .catch((error) => {
+    .catch(error => {
       dispatch({
         type: types.FETCH_USER_FAIL,
-        payload: error.message,
+        payload: error.message
       });
     });
 };
 
-export const updatePassword = (username, body) => (dispatch) => {
+export const updatePassword = (username, body) => dispatch => {
   axiosWithAuth()
     .patch(`${getUrl()}/user/${username}/password`, body)
-    .then((res) => {
+    .then(res => {
       dispatch({
         type: types.UPDATE_PASSWORD_SUCCESS,
-        payload: res.data.status,
+        payload: res.data.status
       });
     })
-    .catch((error) => {
+    .catch(error => {
       dispatch({
         type: types.UPDATE_PASSWORD_FAILURE,
-        payload: error.response.status,
+        payload: error.response.status
       });
     });
 };
@@ -78,21 +78,21 @@ export const updatePassword = (username, body) => (dispatch) => {
 //     });
 // };
 
-export const fetchAllUsers = (user) => (dispatch) => {
+export const fetchAllUsers = user => dispatch => {
   dispatch({ type: types.FETCH_ALL_USERS_REQUEST });
   // spinner
   axiosWithAuth()
     .get(`${getUrl()}/user/${user}/users`)
-    .then((res) => {
+    .then(res => {
       dispatch({
         type: types.FETCH_ALL_USERS_SUCCESS,
-        payload: res.data.data,
+        payload: res.data.data
       });
     })
-    .catch((error) => {
+    .catch(error => {
       dispatch({
         type: types.FETCH_ALL_USERS_FAILURE,
-        payload: error.message,
+        payload: error.message
       });
     });
 };
@@ -160,8 +160,7 @@ export const acceptConnection = (id, profileUser) => (dispatch) => {
   // spinner
   const obj = { accepted: true, pending: false };
   axiosWithAuth().patch(`${getUrl()}/connection/${id}`, obj)
-    .then((res) => {
-      console.log(res);
+    .then(() => {
       dispatch({
         type: types.ACCEPT_CONNECTION_SUCCESS,
         payload: { id, ...obj, profileUser },
@@ -210,3 +209,8 @@ export const fetchReceivedConnections = (id) => (dispatch) => {
       });
     });
 };
+
+export const saveCurrentRequestId = data => ({
+  type: 'SAVE_CURRENT_REQWEST_ID',
+  payload: data
+});

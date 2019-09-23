@@ -9,12 +9,10 @@ import { Avatar } from './~common/index';
 import { logOutUser } from '../redux/actions/authActions';
 import { fetchUser } from '../redux/actions/userActions';
 import { profile_placeholder } from '../lib/utils';
+import withAuth from '../lib/withAuth';
 
-const Navigation = ({
-  logOutUser, fetchUser, authReducer, user
-}) => {
+const Navigation = ({ logOutUser, fetchUser, authReducer, user, socket }) => {
   const userInfo = jwt.decode(authReducer.token);
-
   useEffect(() => {
     fetchUser(userInfo.username);
   }, []);
@@ -28,7 +26,10 @@ const Navigation = ({
     <Nav>
       {user && (
         <div className="desktop">
-          <Avatar extraLarge source={user.profile_picture || profile_placeholder} />
+          <Avatar
+            extraLarge
+            source={user.profile_picture || profile_placeholder}
+          />
           <p className="desktop name">
             {user.first_name} {user.last_name}
           </p>
@@ -64,6 +65,13 @@ const Navigation = ({
             </div>
           </Link>
         )}
+
+        <Link href="/chat">
+          <div>
+            <Icon type="message" className="icon" />
+            <a className="desktop">Chat</a>
+          </div>
+        </Link>
 
         <Link href="/connections">
           <div>
@@ -196,4 +204,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { logOutUser, fetchUser }
-)(Navigation);
+)(withAuth(Navigation));

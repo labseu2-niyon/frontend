@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Link from 'next/link';
 import { Heading, Button } from '../~common';
 
 const Wrapper = styled.section`
@@ -48,6 +49,14 @@ const ButtonWrapper = styled.div`
     align-items: center;
 `;
 
+const LoggedInUserButton = () => <Button small primary>Edit</Button>;
+
+const StatusButton = ({ connected, clickHandler, text }) => {
+  if (connected) {
+    return <Link href="/chat"><Button small primary onClick={clickHandler}>Chat</Button></Link>;
+  }
+  return <Button small primary onClick={clickHandler}>{text}</Button>;
+};
 
 function PhotoSection(props) {
   const { profileUser, isLoggedInUser = false } = props;
@@ -74,13 +83,7 @@ function PhotoSection(props) {
             profileUser: props.profileUser
           });
       default:
-        return props
-          .connectionFunctions
-          .createConnection({
-            senderUserId: props.user.id,
-            requestUserId: props.profileUser.id,
-            profileUser: props.profileUser
-          });
+        return 'CONNECT';
     }
   };
 
@@ -97,8 +100,8 @@ function PhotoSection(props) {
       </TextWrapper>
       <ButtonWrapper>
         { isLoggedInUser
-          ? <Button small primary>Edit</Button>
-          : <Button small primary onClick={clickHandler}>{props.connected ? 'Connected' : props.status.text}</Button>}
+          ? <LoggedInUserButton />
+          : <StatusButton clickHandler={clickHandler} text={props.status.text} connected={props.connected} /> }
       </ButtonWrapper>
     </Wrapper>
   );

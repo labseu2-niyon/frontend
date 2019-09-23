@@ -134,11 +134,10 @@ export const userReducer = (state = initialState, action) => {
         queryingDatabase: true
       };
     case types.ACCEPT_CONNECTION_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         queryingDatabase: false,
-        connectionsAll: [...state.connectionsAll, action.payload.profileUser]
+        connectionsAll: [...state.connectionsAll, { connection: action.payload.profileUser }]
       };
     case types.ACCEPT_CONNECTION_FAILURE:
       return {
