@@ -16,7 +16,6 @@ const Chat = ({
   currentConnectionId,
   userTyping
 }) => {
-  const messagesEndRef = useRef(null);
   const [message, setMessage] = useState('');
   const [emojis, setEmojis] = useState(false);
 
@@ -96,7 +95,6 @@ const Chat = ({
             );
           })}
         <p style={{ padding: '3px' }}>{type}</p>
-        <div ref={messagesEndRef} />
       </Window>
 
       <div>
