@@ -10,6 +10,7 @@ const startLoading = () => ({
   type: types.START_LOADING
 });
 
+
 const stopLoading = () => ({ type: types.STOP_LOADING });
 
 // Action creator for persisting location data
@@ -265,7 +266,6 @@ export const changePassword = props => dispatch => {
     });
 };
 
-
 export const saveCurrentRequestId = (userId, connectionID) => ({
   type: 'SAVE_CURRENT_REQWEST_ID',
   payload: userId,
@@ -285,4 +285,3 @@ export const saveToken = (token, username) => dispatch => {
     path: '/'
   });
 };
-
