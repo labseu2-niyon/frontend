@@ -15,7 +15,9 @@ const Social = ({
   const newToken = nextRouter.query.token;
   if (newToken) {
     const user = jwt.decode(newToken);
-    if (username == undefined) username = user.username;
+    if (username === undefined) {
+      username = user.username;
+    }
     saveToken(newToken, user.username);
   }
   return (

@@ -286,3 +286,17 @@ export const saveToken = (token, username) => dispatch => {
   });
 };
 
+
+export const storeToken = (token, username) => dispatch => {
+  nookies.set({}, 'token', token, {
+    maxAge: 60 * 60 * 24 * 30,
+    path: '/'
+  });
+  dispatch({
+    type: types.STORE_TOKEN,
+    payload: {
+      token,
+      username
+    }
+  }); 
+};
