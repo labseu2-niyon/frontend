@@ -6,44 +6,30 @@ import UserList from './UserList';
 import Chat from './Messages';
 
 const ChatLayout = props => {
-  const [chatHistory, setChatHistory] = useState([]);
-  const [userList, setUserList] = useState([]);
   const { socket } = props;
 
-  //console.log(props.userTyping);
   useEffect(() => {
-    socket.on('connectionList', data => {
-      setUserList(data);
-    });
-
     socket.emit('chatOpen', { chatId: props.currentConnectionId });
-    socket.on('chatHistory', data => {
-      setChatHistory(data);
-    });
   }, []);
 
   useEffect(() => {
-    socket.on('connectionList', data => {
-      setUserList(data);
-    });
-
     socket.emit('chatOpen', { chatId: props.currentConnectionId });
-  }, [chatHistory]);
+  }, [props.chatHistory]);
 
   return (
     <Main>
       <UserList
-        userList={userList}
+        userList={props.userList}
         socket={socket}
         currentUser={props.currentUser}
         currentConnectionId={props.currentConnectionId}
       />
-      {chatHistory && (
+      {props.chatHistory && (
         <Chat
           socket={socket}
-          chatHistory={chatHistory}
+          chatHistory={props.chatHistory}
           currentUser={props.currentUser}
-          userList={userList}
+          userList={props.userList}
           userTyping={props.userTyping}
         />
       )}
