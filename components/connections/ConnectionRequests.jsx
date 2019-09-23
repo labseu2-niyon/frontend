@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Icon } from 'antd';
 import Link from 'next/link';
 import { Heading2 } from '../~common';
-import ExploreCard from '../explore/ExploreCard';
 
 const Wrapper = styled.div`
     box-sizing: border-box;
@@ -21,15 +19,6 @@ const Header = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    .icon {
-        color: #484848;
-        font-size: 20px;
-        width: 40px;
-        text-align: center;
-        transform: ${({ open }) => (open ? 'rotate(180deg)' : 'rotate(0deg)')};
-        transition: transform 100ms;
-    }
 `;
 
 const CardWrapper = styled.div`
@@ -84,12 +73,9 @@ const Person = styled.div`
 `;
 
 function ConnectionRequests({ users }) {
-  const [open, setOpen] = useState(true);
-  console.log(users);
-
   return (
-    <Wrapper open={open}>
-      <Header open={open}>
+    <Wrapper>
+      <Header>
         <Heading2>Connection Requests</Heading2>
       </Header>
       <CardWrapper>
