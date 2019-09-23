@@ -89,7 +89,6 @@ const Chat = ({
             <p>No Connection to chat with</p>
           </Info>
         )}
-          })}
       </Window>
 
       <div>
