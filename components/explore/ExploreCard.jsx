@@ -15,7 +15,7 @@ function ExploreCard(props) {
     <Link
       href={{
         pathname: '/profile',
-        query: { ...props, job, location: JSON.stringify(props.location) }
+        query: { id: props.id }
       }}
     >
       <Wrapper>
@@ -74,6 +74,7 @@ const Wrapper = styled.div`
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   margin: 1rem 0;
   transition: transform 200ms;
+  background: white;
   cursor: pointer;
 
   @media (max-width: 600px) {
