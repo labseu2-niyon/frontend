@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import styled from 'styled-components';
 import Comment from './Comment';
 
 const ChatMessage = ({ user, currentUser }) => {

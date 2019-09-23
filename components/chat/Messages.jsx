@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Card, Input, Button, Icon } from 'antd';
+import { Card, Icon } from 'antd';
 import { connect } from 'react-redux';
 import { PulseLoader } from 'react-spinners';
+import { Picker } from 'emoji-mart';
 import ChatMessage from './ChatMessage';
 import 'emoji-mart/css/emoji-mart.css';
-import { Picker } from 'emoji-mart';
 
 const Chat = ({
   chatHistory,
@@ -75,14 +75,20 @@ const Chat = ({
   return (
     <Wrapper>
       <Window id="chatBox">
-        {chatHistory &&
+        {chatHistory.length ? (
           chatHistory.map((user, i) => {
             return (
               currentUser && (
                 <ChatMessage key={i} user={user} currentUser={currentUser} />
               )
             );
-          })}
+          })
+        ) : (
+          <Info>
+            <i class="fa fa-info-circle"></i>
+            <p>No Connection to chat with</p>
+          </Info>
+        )}
       </Window>
 
       <div>
@@ -214,4 +220,14 @@ const UserTyping = styled.div`
     margin-bottom: 0px;
     font-size: 14px;
   }
+`;
+
+const Info = styled.div`
+  color: #059;
+  display: flex;
+  align-items: baseline;
+  width: 40%;
+  justify-content: space-evenly;
+  font-size: 20px;
+  margin: 0 auto;
 `;
