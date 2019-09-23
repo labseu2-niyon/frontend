@@ -84,6 +84,7 @@ const Bubble = styled.div`
     background-color: ${props => (props.currentUser ? '#f1f0f0' : '#348fbb')};
     border-radius: 7px;
     margin: 10px 0 20px 0;
+    word-break: break-word;
   }
 
   /* &:after {
