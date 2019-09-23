@@ -52,9 +52,10 @@ const Main = styled.div`
 const mapStateToProps = state => {
   return {
     currentUser: state.userReducer.user,
-    authReducer: state.authReducer
+    authReducer: state.authReducer,
     //current connection its comming dirrectly from withAuth when user loggedin
-    // currentConnectionId: state.authReducer.connectionId - not taken from redux-store anymore
+    currentConnectionId: state.authReducer.connectionId
+    //- not taken from redux-store anymore
   };
 };
 
