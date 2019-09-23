@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Heading, Button } from '../~common';
-import { profile_placeholder } from '../../lib/utils';
 
 const Wrapper = styled.section`
     width: 100%;
@@ -33,11 +32,6 @@ const Photo = styled.div`
     overflow: hidden;
 `;
 
-const ImgProfile = styled.img`
-  object-fit: cover;
-  width: 100%;
-`;
-
 const TextWrapper = styled.div`
     flex: 1;
     display: flex;
@@ -54,38 +48,68 @@ const ButtonWrapper = styled.div`
     align-items: center;
 `;
 
+
 function PhotoSection(props) {
-  const { user, isLoggedInUser = false } = props;
+  const { profileUser, isLoggedInUser = false } = props;
   const userObj = {
-    profile_picture: user.profile_picture || profile_placeholder,
-    email: user.email || 'Not listed',
-    first_name: user.first_name || 'No Name',
-    last_name: user.last_name || '',
-    job: user.job || 'Not listed',
+    profile_picture: profileUser.profile_picture || 'https://image.flaticon.com/icons/svg/660/660611.svg',
+    email: profileUser.email || 'Not listed',
+    first_name: profileUser.first_name || 'No Name',
+    last_name: profileUser.last_name || '',
+    job: profileUser.job ? profileUser.job.tech_name : 'Not listed',
+  };
+
+  const clickHandler = () => {
+    switch (props.status.text) {
+      case 'ACCEPT':
+        return props
+          .connectionFunctions
+          .acceptConnection(props.status.id, props.profileUser);
+      case 'CONNECT':
+        return props
+          .connectionFunctions
+          .createConnection({
+            senderUserId: props.user.id,
+            requestUserId: props.profileUser.id,
+            profileUser: props.profileUser
+          });
+      default:
+        return props
+          .connectionFunctions
+          .createConnection({
+            senderUserId: props.user.id,
+            requestUserId: props.profileUser.id,
+            profileUser: props.profileUser
+          });
+    }
   };
 
   return (
     <Wrapper>
       <PhotoWrapper>
         <Photo>
-          <ImgProfile src={userObj.profile_picture} alt="User Profile Picture" />
+          <img src={userObj.profile_picture} alt="" height="100%" />
         </Photo>
       </PhotoWrapper>
       <TextWrapper>
         <Heading>{userObj.first_name} {userObj.last_name}</Heading>
-        <p><strong>Email:</strong> {userObj.email}</p>
-        <p><strong>Job:</strong> {userObj.job}</p>
+        <p>{userObj.job}</p>
       </TextWrapper>
       <ButtonWrapper>
-        <Button small primary>{ isLoggedInUser ? 'Edit' : 'Connect'}</Button>
+        { isLoggedInUser
+          ? <Button small primary>Edit</Button>
+          : <Button small primary onClick={clickHandler}>{props.connected ? 'Connected' : props.status.text}</Button>}
       </ButtonWrapper>
     </Wrapper>
   );
 }
 
 PhotoSection.propTypes = {
-  user: PropTypes.shape().isRequired,
-  isLoggedInUser: PropTypes.bool,
+  connected: PropTypes.number.isRequired,
+  status: PropTypes.shape().isRequired,
+  profileUser: PropTypes.shape().isRequired,
+  isLoggedInUser: PropTypes.bool.isRequired,
+  connectionFunctions: PropTypes.shape(PropTypes.func).isRequired,
 };
 
 export default PhotoSection;

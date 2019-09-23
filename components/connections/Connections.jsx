@@ -5,6 +5,7 @@ import TopSection from '../TopSection';
 import ProfileList from './ProfileList';
 import withUserData from '../containers/withUserData';
 import ConnectionButtons from './ConnectionsButtons';
+import ConnectionRequests from './ConnectionRequests';
 
 const Wrapper = styled.div`
     width: 100%;
@@ -25,6 +26,7 @@ function Connections(props) {
 )}
         src="/static/friends-online.svg"
       />
+      <ConnectionRequests users={props.connectionsReceived.received || []} />
       <ProfileList title="My Connections" users={props.connectionsAll || []} />
     </Wrapper>
   );
@@ -32,6 +34,7 @@ function Connections(props) {
 
 Connections.propTypes = {
   connectionsAll: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  connectionsReceived: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 export default withUserData(Connections);

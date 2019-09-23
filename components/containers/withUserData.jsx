@@ -5,7 +5,10 @@ import jwt from 'jsonwebtoken';
 import {
   fetchAllUsers,
   fetchAllConnections,
-  fetchUser
+  fetchUser,
+  fetchReceivedConnections,
+  createConnection,
+  acceptConnection
 } from '../../redux/actions/userActions';
 
 import {
@@ -15,11 +18,18 @@ import {
 const withUserData = Component => {
   function WithUserData(props) {
     const [users, setUsers] = useState([]);
+    const [connections, setConnections] = useState([]);
+    const [connectionsReceived, setConnectionsReceived] = useState([]);
     const [jobs, setJobs] = useState([]);
 
     const mapUsers = input => {
       const withDisplay = input.map(user => ({ ...user, display: true, filtered: true }));
       setUsers(withDisplay);
+    };
+
+    const mapConnections = input => {
+      const withDisplay = input.map(({ connection }) => ({ ...connection, display: true, filtered: true }));
+      setConnections(withDisplay);
     };
 
     const mapJobs = input => {
@@ -36,7 +46,11 @@ const withUserData = Component => {
         }
 
         if (!props.userReducer.connectionsAll.length) {
-          props.fetchConnections(u.username);
+          props.fetchConnections(u.subject);
+        }
+
+        if (!props.userReducer.connectionsReceived.length) {
+          props.fetchRConnections(u.subject);
         }
 
         if (!props.userReducer.user) {
@@ -57,6 +71,18 @@ const withUserData = Component => {
       mapJobs(props.authReducer.allJobs);
     }, [props.authReducer.allJobs]);
 
+    useEffect(() => {
+      if (connections !== props.userReducer.connectionsAll) {
+        mapConnections(props.userReducer.connectionsAll);
+      }
+    }, [props.userReducer.connectionsAll]);
+
+    useEffect(() => {
+      if (connectionsReceived !== props.userReducer.connectionsReceived) {
+        setConnectionsReceived(props.userReducer.connectionsReceived);
+      }
+    }, [props.userReducer.connectionsReceived]);
+
     if (!users.length || !jobs.length) {
       return null;
     }
@@ -66,8 +92,13 @@ const withUserData = Component => {
         {...props.userReducer}
         jobs={jobs}
         users={users}
-        connectionsAll={users}
+        connectionsAll={connections}
+        connectionsReceived={connectionsReceived}
         setUsers={setUsers}
+        connectionFunctions={{
+          createConnection: props.createConnection,
+          acceptConnection: props.acceptConnection
+        }}
       />
     );
   }
@@ -78,7 +109,10 @@ const withUserData = Component => {
     fetchUsers: fetchAllUsers,
     fetchConnections: fetchAllConnections,
     fetchOneUser: fetchUser,
-    getJobs: getJobTitles
+    getJobs: getJobTitles,
+    fetchRConnections: fetchReceivedConnections,
+    createConnection,
+    acceptConnection,
   };
 
   WithUserData.propTypes = {
@@ -86,10 +120,13 @@ const withUserData = Component => {
     userReducer: PropTypes.shape().isRequired,
     usersAll: PropTypes.arrayOf().isRequired,
     connectionsAll: PropTypes.arrayOf().isRequired,
+    createConnection: PropTypes.func.isRequired,
+    acceptConnection: PropTypes.func.isRequired,
     fetchOneUser: PropTypes.func.isRequired,
     fetchUsers: PropTypes.func.isRequired,
     fetchConnections: PropTypes.func.isRequired,
-    getJobs: PropTypes.func.isRequired
+    fetchRConnections: PropTypes.func.isRequired,
+    getJobs: PropTypes.func.isRequired,
   };
 
   return connect(
