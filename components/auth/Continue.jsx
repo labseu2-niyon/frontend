@@ -14,16 +14,15 @@ const ContinuePage = ({ storeToken }) => {
       const user = jwt.decode(newToken);
       console.log(user.username);
       storeToken(newToken, user.username);
+      Router.push('/');
+    } else {
+      Router.push('/auth/login');
     }
   }, []);
 
   return (
     <Root>
-      <Heading2 primary>Continue</Heading2>
-      <Text>Continue to home page</Text>
-      <Button primary large onClick={() => Router.push('/')}>
-        Continue
-      </Button>
+      <Heading2 primary>Redirecting</Heading2>
     </Root>
   );
 };
