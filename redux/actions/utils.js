@@ -1,8 +1,14 @@
 function getOrigin(req) {
-  var protocol = 'https:';
-  var host = req
-    ? req.headers['x-forwarded-host'] || req.headers['host']
-    : window.location.host;
+  let protocol = 'https:';
+
+  let host = '';
+
+  if (typeof window !== 'undefined') {
+    host = window.location.host;
+  } else if (req && req.headers) {
+    host = req.headers['x-forwarded-host'] || req.headers['host'];
+  }
+
   if (host.indexOf('localhost') > -1) {
     protocol = 'http:';
   }
