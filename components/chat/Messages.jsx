@@ -16,6 +16,7 @@ const Chat = ({
   currentConnectionId,
   userTyping
 }) => {
+  const messagesEndRef = useRef(null);
   const [message, setMessage] = useState('');
   const [emojis, setEmojis] = useState(false);
 
@@ -25,6 +26,17 @@ const Chat = ({
     scrollToBottom();
     socket.emit('typing', currentUser.username);
   }
+
+  const type = userTyping ? (
+    <TYPEWRAPPER>
+      <PulseLoader sizeUnit={'px'} size={8} color={'#123abc'} loading={true} />
+      <p>
+        <span>{userTyping}</span> is typing
+      </p>
+    </TYPEWRAPPER>
+  ) : (
+    ''
+  );
 
   function scrollToBottom() {
     const messages = document.getElementById('chatBox');
@@ -83,52 +95,36 @@ const Chat = ({
               )
             );
           })}
+        <p style={{ padding: '3px' }}>{type}</p>
+        <div ref={messagesEndRef} />
       </Window>
 
       <div>
-        <div>
-          <InputWrapper onSubmit={handleSend}>
-            <input
-              placeholder="enter your message..."
-              allowClear
-              onChange={e => {
-                setMessage(e.target.value);
-              }}
-              value={message}
+        <InputWrapper onSubmit={handleSend}>
+          <input
+            placeholder="enter your message..."
+            allowClear
+            onChange={e => {
+              setMessage(e.target.value);
+            }}
+            value={message}
+          />
+          <Icon
+            type="smile"
+            style={{ fontSize: '18px' }}
+            className="icon"
+            onClick={toggleEmojis}
+          />
+        </InputWrapper>
+        {emojis ? (
+          <Emojis>
+            <Picker
+              title="Pick your emoji…"
+              emoji="point_up"
+              onSelect={addEmoji}
             />
-            <Icon
-              type="smile"
-              style={{ fontSize: '18px' }}
-              className="icon"
-              onClick={toggleEmojis}
-            />
-          </InputWrapper>
-          {emojis ? (
-            <Emojis>
-              <Picker
-                title="Pick your emoji…"
-                emoji="point_up"
-                onSelect={addEmoji}
-              />
-            </Emojis>
-          ) : null}
-        </div>
-
-        {userTyping ? (
-          <UserTyping>
-            <p>
-              <span>{userTyping}</span> is typing
-            </p>
-            <PulseLoader
-              sizeUnit={'px'}
-              size={2}
-              color={'#c2c2c2'}
-              loading={true}
-            />
-          </UserTyping>
-        ) : (
-          <UserTyping></UserTyping>
-        )}
+          </Emojis>
+        ) : null}
       </div>
     </Wrapper>
   );
@@ -147,12 +143,11 @@ export default connect(
 )(Chat);
 
 const Wrapper = styled.div`
-  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   margin-left: 250px;
   width: 100%;
+  height: 100vh;
 
   .ant-card-bordered {
     border: none;
@@ -167,7 +162,7 @@ const Window = styled(Card)`
 
 const InputWrapper = styled.form`
   display: flex;
-  margin: 0 20px;
+  margin: 20px;
   border: 1px solid #cecece;
   align-items: center;
   border-radius: 4px;
@@ -203,17 +198,17 @@ const Emojis = styled.div`
   right: 20px;
 `;
 
-const UserTyping = styled.div`
+const TYPEWRAPPER = styled.div`
   display: flex;
-  color: #c2c2c2;
+  color: lightGrey;
+  padding-right: 25px;
   font-style: italic;
-  margin: 5px 20px;
-  padding: 0px 10px;
-  min-height: 30px;
-
+  bottom: 20%;
+  position: relative;
+  span {
+    text-transform: uppercase;
+    margin-left: 10px;
+  }
   p {
-    margin-right: 2px;
-    margin-bottom: 0px;
-    font-size: 14px;
   }
 `;
