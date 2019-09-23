@@ -31,7 +31,7 @@ function Home(props) {
         width: '100%', height: 1, background: '#eaeaea', border: 'none',
       }}
       />
-      <ProfileList title="My Connections" users={props.users || []} expandable />
+      <ProfileList title="My Connections" users={props.connectionsAll || []} expandable />
     </Wrapper>
   );
 }

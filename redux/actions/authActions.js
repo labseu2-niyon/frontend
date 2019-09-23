@@ -4,56 +4,14 @@ import nookies from 'nookies';
 import Router from 'next/router';
 import { types } from '../authConstants';
 import axiosWithToken from '../axios';
-
 import { getUrl } from './utils';
 
 const startLoading = () => ({
   type: types.START_LOADING
 });
 
+
 const stopLoading = () => ({ type: types.STOP_LOADING });
-
-// Action Creator for Social Media Signup
-export const linkedinSignup = () => dispatch => {
-  dispatch(startLoading());
-  // console.log('Linkedin endpoint request');
-  dispatch(stopLoading());
-};
-export const githubSignup = () => dispatch => {
-  dispatch(startLoading());
-  // console.log('Github endpoint request');
-  // axiosWithToken()
-  //   .get(`${getUrl()}/user/auth/github`)
-  //   .then((res) => {
-  //     debugger;
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //     debugger;
-  //   });
-  // dispatch(stopLoading());
-};
-
-export const facebookSignup = () => dispatch => {
-  dispatch(startLoading());
-
-  // console.log('Facebook endpoint request');
-  dispatch(stopLoading());
-};
-
-export const twitterSignup = () => dispatch => {
-  dispatch(startLoading());
-
-  // console.log('Twitter endpoint request');
-  dispatch(stopLoading());
-};
-
-export const emailSignUp = () => dispatch => {
-  dispatch(startLoading());
-
-  // console.log('Email endpoint request', userData);
-  dispatch(stopLoading());
-};
 
 // Action creator for persisting location data
 export const locationData = data => dispatch => {
@@ -97,7 +55,7 @@ export const userChoise = (data, userType) => dispatch => {
     });
 };
 
-// Action Creator for Singup a user with email
+// Action Creator for Signup a user with email
 // body {username, email, password}
 export const emailSignup = data => dispatch => {
   dispatch({ type: types.REGISTER_USER_REQUEST });
@@ -306,4 +264,39 @@ export const changePassword = props => dispatch => {
         payload: error.message
       });
     });
+};
+
+export const saveCurrentRequestId = (userId, connectionID) => ({
+  type: 'SAVE_CURRENT_REQWEST_ID',
+  payload: userId,
+  payload2: connectionID
+});
+
+export const saveToken = (token, username) => dispatch => {
+  dispatch({
+    type: types.SAVE_TOKEN,
+    payload: {
+      token,
+      username
+    }
+  });
+  nookies.set({}, 'token', token, {
+    maxAge: 60 * 60 * 24 * 30,
+    path: '/'
+  });
+};
+
+
+export const storeToken = (token, username) => dispatch => {
+  nookies.set({}, 'token', token, {
+    maxAge: 60 * 60 * 24 * 30,
+    path: '/'
+  });
+  dispatch({
+    type: types.STORE_TOKEN,
+    payload: {
+      token,
+      username
+    }
+  }); 
 };

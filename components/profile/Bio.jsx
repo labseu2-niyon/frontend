@@ -77,9 +77,7 @@ const Social = styled.div`
 
 function Bio(props) {
   const { user } = props;
-
-  const location = JSON.parse(user.location);
-  const loco = location ? `${location.city_name}, ${location.country_name}` : 'No location given';
+  const loco = user.location ? `${user.location.city_name}, ${user.location.country_name}` : 'No location given';
 
   return (
     <Wrapper>

@@ -3,39 +3,39 @@ import { types } from '../userConstants';
 
 import { getUrl } from './utils';
 
-export const fetchUser = (username) => (dispatch) => {
+export const fetchUser = username => dispatch => {
   dispatch({
-    type: types.FETCH_USER_REQUEST,
+    type: types.FETCH_USER_REQUEST
   });
   axiosWithAuth()
     .get(`${getUrl()}/user/${username}/profile`)
-    .then((res) => {
+    .then(res => {
       dispatch({
         type: types.FETCH_USER,
-        payload: res.data.data,
+        payload: res.data.data
       });
     })
-    .catch((error) => {
+    .catch(error => {
       dispatch({
         type: types.FETCH_USER_FAIL,
-        payload: error.message,
+        payload: error.message
       });
     });
 };
 
-export const updatePassword = (username, body) => (dispatch) => {
+export const updatePassword = (username, body) => dispatch => {
   axiosWithAuth()
     .patch(`${getUrl()}/user/${username}/password`, body)
-    .then((res) => {
+    .then(res => {
       dispatch({
         type: types.UPDATE_PASSWORD_SUCCESS,
-        payload: res.data.status,
+        payload: res.data.status
       });
     })
-    .catch((error) => {
+    .catch(error => {
       dispatch({
         type: types.UPDATE_PASSWORD_FAILURE,
-        payload: error.response.status,
+        payload: error.response.status
       });
     });
 };
@@ -78,40 +78,21 @@ export const updatePassword = (username, body) => (dispatch) => {
 //     });
 // };
 
-export const fetchAllConnections = (user) => (dispatch) => {
-  dispatch({ type: types.FETCH_ALL_CONNECTIONS_REQUEST });
-  // spinner
-  axiosWithAuth()
-    .get(`${getUrl()}/user/${user}/users`)
-    .then((res) => {
-      dispatch({
-        type: types.FETCH_ALL_CONNECTIONS_SUCCESS,
-        payload: res.data.data,
-      });
-    })
-    .catch((error) => {
-      dispatch({
-        type: types.FETCH_ALL_CONNECTIONS_FAILURE,
-        payload: error.message,
-      });
-    });
-};
-
-export const fetchAllUsers = (user) => (dispatch) => {
+export const fetchAllUsers = user => dispatch => {
   dispatch({ type: types.FETCH_ALL_USERS_REQUEST });
   // spinner
   axiosWithAuth()
     .get(`${getUrl()}/user/${user}/users`)
-    .then((res) => {
+    .then(res => {
       dispatch({
         type: types.FETCH_ALL_USERS_SUCCESS,
-        payload: res.data.data,
+        payload: res.data.data
       });
     })
-    .catch((error) => {
+    .catch(error => {
       dispatch({
         type: types.FETCH_ALL_USERS_FAILURE,
-        payload: error.message,
+        payload: error.message
       });
     });
 };
@@ -133,3 +114,103 @@ export const fetchAllUsers = (user) => (dispatch) => {
 //       });
 //     });
 // };
+
+export const createConnection = ({ senderUserId, requestUserId, profileUser }) => (dispatch) => {
+  dispatch({ type: types.CREATE_CONNECTION_REQUEST });
+
+  axiosWithAuth()
+    .post(`${getUrl()}/connection`, {
+      senderUserId,
+      requestUserId,
+    })
+    .then(() => {
+      dispatch({
+        type: types.CREATE_CONNECTION_SUCCESS,
+        payload: profileUser,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.CREATE_CONNECTION_FAILURE,
+        payload: error.message,
+      });
+    });
+};
+
+export const fetchConnection = (id) => (dispatch) => {
+  dispatch({ type: types.FETCH_CONNECTION_REQUEST });
+  // spinner
+  axiosWithAuth().get(`${getUrl()}/connection/${id}`)
+    .then((res) => {
+      dispatch({
+        type: types.FETCH_CONNECTION_SUCCESS,
+        payload: res.data.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.FETCH_CONNECTION_FAILURE,
+        payload: error.message,
+      });
+    });
+};
+
+export const acceptConnection = (id, profileUser) => (dispatch) => {
+  dispatch({ type: types.ACCEPT_CONNECTION_REQUEST });
+  // spinner
+  const obj = { accepted: true, pending: false };
+  axiosWithAuth().patch(`${getUrl()}/connection/${id}`, obj)
+    .then(() => {
+      dispatch({
+        type: types.ACCEPT_CONNECTION_SUCCESS,
+        payload: { id, ...obj, profileUser },
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.ACCEPT_CONNECTION_FAILURE,
+        payload: error.message,
+      });
+    });
+};
+
+export const fetchAllConnections = (id) => (dispatch) => {
+  dispatch({ type: types.FETCH_ALL_CONNECTIONS_REQUEST });
+  // spinner
+  axiosWithAuth().get(`${getUrl()}/connection/${id}/accepted`)
+    .then((res) => {
+      dispatch({
+        type: types.FETCH_ALL_CONNECTIONS_SUCCESS,
+        payload: res.data.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.FETCH_ALL_CONNECTIONS_FAILURE,
+        payload: error.message,
+      });
+    });
+};
+
+export const fetchReceivedConnections = (id) => (dispatch) => {
+  dispatch({ type: types.FETCH_RECEIVED_CONNECTIONS_REQUEST });
+  // spinner
+  axiosWithAuth().get(`${getUrl()}/connection/${id}/requests`)
+    .then((res) => {
+      dispatch({
+        type: types.FETCH_RECEIVED_CONNECTIONS_SUCCESS,
+        payload: res.data.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.FETCH_RECEIVED_CONNECTIONS_FAILURE,
+        payload: error.message,
+      });
+    });
+};
+
+export const saveCurrentRequestId = data => ({
+  type: 'SAVE_CURRENT_REQWEST_ID',
+  payload: data
+});

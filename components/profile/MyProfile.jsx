@@ -11,9 +11,7 @@ const Container = styled.main`
 `;
 
 function Profile(props) {
-  useEffect(() => {
-   return props.getUser(props.user);
-  }, [props.user]);
+  useEffect(() => props.getUser(props.user), [props.user]);
 
   if (!props.userReducer.user || props.userReducer.queryingDatabase) {
     return <div />;
@@ -24,7 +22,7 @@ function Profile(props) {
   }
 
   const job = props.userReducer.user.job ? props.userReducer.user.job.tech_name : 'Not listed';
-  const photoProps = { ...props.userReducer, user: { ...props.userReducer.user, job } };
+  const photoProps = { ...props.userReducer, profileUser: { ...props.userReducer.user, job } };
 
   return (
     <Container>

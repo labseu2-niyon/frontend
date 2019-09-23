@@ -10,12 +10,17 @@ import Flip from 'react-reveal/Flip';
 import { Heading2, Text, Button } from '../~common/index';
 import { logInUser } from '../../redux/actions/authActions';
 import { theme } from '../../lib/theme';
+import { getUrl } from '../../redux/actions/utils';
 
-const Login = ({ errors, touched, loading, status }) => (
+const baseUrl = getUrl();
+
+const Login = ({
+ errors, touched, loading, status 
+}) => (
   <Root>
     <Flip left>
       <Logo>
-        <a href="https://niyon.now.sh/">
+        <a href="https://niyonapp.com/">
           <Pulse>
             <svg width={50} height={50} viewBox="0 0 147 147" fill="none">
               <path
@@ -28,9 +33,31 @@ const Login = ({ errors, touched, loading, status }) => (
       </Logo>
     </Flip>
     <TopWrapper>
-      <Heading2 primary>Log in to continue to Niyon</Heading2>
+      <Heading2 primary>Login</Heading2>
     </TopWrapper>
     <FormArea>
+      <SocialWrapper>
+        <a href={`${baseUrl}/auth/facebook`}>
+          <StyledImage
+            src="../../static/social/social-facebook.png"
+            alt="facebook"
+          />
+        </a>
+
+        <a href={`${baseUrl}/auth/github`}>
+          <StyledImage
+            src="../../static/social/social-github.png"
+            alt="github"
+          />
+        </a>
+
+        <a href={`${baseUrl}/auth/google`}>
+          <StyledImage
+            src="../../static/social/social-google.png"
+            alt="google"
+          />
+        </a>
+      </SocialWrapper>
       <InputWrapper>
         <Field name="email" type="email" placeholder="email" />
         {touched.email && errors.email && <Error>{errors.email}</Error>}
@@ -125,6 +152,19 @@ const FormArea = styled(Form)`
       opacity: 0.4;
     }
   }
+`;
+
+const SocialWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+`;
+
+const StyledImage = styled.img`
+  width: 3rem;
+  margin: 0 0.8rem;
 `;
 
 const InputWrapper = styled.div`

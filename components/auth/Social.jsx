@@ -1,46 +1,60 @@
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
+import jwt from 'jsonwebtoken';
 import * as Yup from 'yup';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import { Heading2, Text, Button } from '../~common/index';
 import StepsComp from './StepsComp';
-import { socialData } from '../../redux/actions/authActions';
+import { socialData, saveToken } from '../../redux/actions/authActions';
 
-const Social = ({ errors, touched, username }) => (
-  <Root>
-    <StepsComp stepNumber="1" />
-    <Heading2 primary>What's your name?</Heading2>
-    <IconT className="far fa-user" />
-    <FormArea>
-      <InputWrapper>
-        <Text small>Please enter your first and last name.</Text>
-        <Field
-          name="username"
-          type="text"
-          placeholder="username"
-          value={username}
-          disabled
-        />
-      </InputWrapper>
-      <InputWrapper>
-        <Field name="firstName" type="text" placeholder="First Name" />
-        {touched.firstName && errors.firstName && (
-          <Error>{errors.firstName}</Error>
-        )}
-      </InputWrapper>
-      <InputWrapper>
-        <Field name="lastName" type="text" placeholder="Last Name" />
-        {touched.lastName && errors.lastName && (
-          <Error>{errors.lastName}</Error>
-        )}
-      </InputWrapper>
-      <Button primary small type="submit">
-        Next
-      </Button>
-    </FormArea>
-  </Root>
-);
+const Social = ({
+ errors, touched, username, saveToken 
+}) => {
+  const nextRouter = useRouter();
+  const newToken = nextRouter.query.token;
+  if (newToken) {
+    const user = jwt.decode(newToken);
+    if (username === undefined) {
+      username = user.username;
+    }
+    saveToken(newToken, user.username);
+  }
+  return (
+    <Root>
+      <StepsComp stepNumber="1" />
+      <Heading2 primary>What's your name?</Heading2>
+      <IconT className="far fa-user" />
+      <FormArea>
+        <InputWrapper>
+          <Text small>Please enter your first and last name.</Text>
+          <Field
+            name="username"
+            type="text"
+            placeholder="username"
+            value={username}
+            disabled
+          />
+        </InputWrapper>
+        <InputWrapper>
+          <Field name="firstName" type="text" placeholder="First Name" />
+          {touched.firstName && errors.firstName && (
+            <Error>{errors.firstName}</Error>
+          )}
+        </InputWrapper>
+        <InputWrapper>
+          <Field name="lastName" type="text" placeholder="Last Name" />
+          {touched.lastName && errors.lastName && (
+            <Error>{errors.lastName}</Error>
+          )}
+        </InputWrapper>
+        <Button primary small type="submit">
+          Next
+        </Button>
+      </FormArea>
+    </Root>
+  );
+};
 
 const FormikWithSocialForm = withFormik({
   mapPropsToValues({ username, firstName, lastName }) {
@@ -74,8 +88,10 @@ const FormikWithSocialForm = withFormik({
 const mapStateToProps = state => ({
   username: state.authReducer.emailData.username
 });
+
 const mapDispatchToProps = {
-  socialData
+  socialData,
+  saveToken
 };
 
 export default connect(
