@@ -1,6 +1,5 @@
 const moment = require('moment');
 import styled from 'styled-components';
-import Avatar from '../~common/Avatar';
 
 const CommentComp = ({ name, message, date, image, currentUser }) => {
   return (
