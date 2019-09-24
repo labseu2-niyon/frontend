@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { Button } from '../~common/index';
 import { Upload, Icon, message } from 'antd';
+import { Button } from '../~common/index';
 import {
   profileData,
   userProfileInfo,
@@ -68,13 +70,21 @@ const ProfileInfo = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    const username = props.user.username;
+    image && setLoading(true);
+    const { username } = props.user;
     const imgData = new FormData();
     imgData.append('image', image);
     image &&
       props.imageUpload(imgData, username).then(res => {
-        res === 200 ? success() : error();
+        //console.log(res);
+        if (res === 200) {
+          setLoading(false);
+          success();
+        } else {
+          setLoading(false);
+          error();
+        }
+        // res === 200 ? success() : error();
       });
   };
 
@@ -95,7 +105,7 @@ const ProfileInfo = props => {
             {imgUrl ? <img src={imgUrl} alt="avatar" /> : uploadButton}
           </RoundIcon>
 
-          <Button large primary type="submit">
+          <Button large primary type="submit" loadingB={loading}>
             Set new Profile Image
           </Button>
         </FormArea>
@@ -104,13 +114,11 @@ const ProfileInfo = props => {
   );
 };
 
-const mapPropsToProps = state => {
-  return {
-    userInfo: state.authReducer,
-    loading: state.authReducer.loading,
-    error: state.authReducer.error
-  };
-};
+const mapPropsToProps = state => ({
+  userInfo: state.authReducer,
+  loading: state.authReducer.loading,
+  error: state.authReducer.error
+});
 
 export default connect(
   mapPropsToProps,
