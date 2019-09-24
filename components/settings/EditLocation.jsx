@@ -2,9 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from 'antd';
 import { Text } from '../../components/~common/index';
-
 import styled from 'styled-components';
-import Router from 'next/router';
 import { connect } from 'react-redux';
 import {
   locationData,
@@ -140,6 +138,7 @@ export default connect(
 const LocationSection = styled.section`
   padding: 10px 0;
   display: flex;
+  justify-content: center;
 `;
 
 const Root = styled.div`

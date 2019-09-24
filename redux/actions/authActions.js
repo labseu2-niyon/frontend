@@ -152,7 +152,6 @@ export const userProfileInfo = (data, user) => dispatch => {
       return res.data.status;
     })
     .catch(err => {
-      debugger;
       dispatch({
         type: types.USER_INFO_FAIL,
         payload: err.response.data.message

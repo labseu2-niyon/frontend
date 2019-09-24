@@ -124,7 +124,7 @@ const JobTitle = ({
           small
           primary
           type="submit"
-          loadingB={loading}
+          loadingB={false}
           onClick={handleSubmit}
         >
           Change

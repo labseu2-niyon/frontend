@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Link from 'next/link';
 import { Form, Input, Button } from 'antd';
@@ -10,9 +11,6 @@ const EditPassword = ({ updatePassword, username, status, form }) => {
   const [newPassword, setNewPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [submitted, setSubmit] = useState(false);
-  console.log(oldPassword, newPassword, repeatPassword);
 
   const handleConfirmBlur = e => {
     const { value } = e.target;
@@ -36,13 +34,13 @@ const EditPassword = ({ updatePassword, username, status, form }) => {
 
   const handleSubmit2 = e => {
     e.preventDefault();
-    setLoading(true);
     const body = {
       password: oldPassword,
       newPassword
     };
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
+        setLoading(true);
         //console.log('Received values of form: ', values);
         updatePassword(username, body).then(() => {
           setLoading(false);
@@ -79,7 +77,7 @@ const EditPassword = ({ updatePassword, username, status, form }) => {
   const { getFieldDecorator } = form;
 
   return (
-    <div>
+    <Root>
       <Form onSubmit={handleSubmit2}>
         <Form.Item label="Old Password">
           {getFieldDecorator('old', {
@@ -191,7 +189,7 @@ const EditPassword = ({ updatePassword, username, status, form }) => {
           </p>
         ) : null}
       </form> */}
-    </div>
+    </Root>
   );
 };
 
@@ -204,3 +202,27 @@ export default connect(
   mapStateToProps,
   { updatePassword }
 )(WrappedRegistrationForm);
+
+const Root = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  form {
+    width: 80%;
+  }
+  input {
+  }
+  button {
+    width: 100%;
+  }
+
+  p {
+    text-align: center;
+    margin-top: 20px;
+    color: darkred;
+  }
+
+  a {
+    text-transform: uppercase;
+  }
+`;

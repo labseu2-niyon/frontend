@@ -25,7 +25,7 @@ const EditProfile = ({ user, userProfileInfo, socialDataHandler }) => {
 
   if (user) {
     return (
-      <div>
+      <>
         <EditImage user={user} />
         <Divider dashed />
         <EditnameBio userProfileInfo={userProfileInfo} user={user} />
@@ -35,7 +35,7 @@ const EditProfile = ({ user, userProfileInfo, socialDataHandler }) => {
         <EditMentorship user={user} />
         <Divider dashed />
         <EditSocialMedia socialDataHandler={socialDataHandler} user={user} />
-      </div>
+      </>
     );
   }
   return <></>;

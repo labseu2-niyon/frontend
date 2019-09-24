@@ -139,8 +139,11 @@ export default WrappedRegistrationForm;
 
 const FirstSection = styled.section`
   display: flex;
-  flex-direction: column;
-  width: 100%;
+
+  justify-content: center;
+  form {
+    width: 80%;
+  }
 
   button {
     width: 100%;

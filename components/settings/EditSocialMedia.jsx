@@ -108,6 +108,13 @@ const WrappedRegistrationForm = Form.create({ name: 'register' })(
 export default WrappedRegistrationForm;
 
 const SocialSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  form {
+    width: 80%;
+  }
   button {
     width: 100%;
   }
