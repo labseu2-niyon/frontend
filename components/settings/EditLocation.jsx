@@ -5,7 +5,7 @@ import { Text } from '../../components/~common/index';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import {
-  locationData,
+  locationDataForSettings,
   locationRequest,
   userProfileInfo,
   saveLocationId
@@ -14,7 +14,7 @@ import { Icon, AutoComplete } from 'antd';
 
 const Location = ({
   locationRequest,
-  locationData,
+  locationDataForSettings,
   user,
   saveLocationId,
   locationId,
@@ -59,16 +59,17 @@ const Location = ({
       select.state &&
       (setLoading(true),
       setWarning(''),
-      locationData({
+      locationDataForSettings({
         cityName: inwork[0].trim(),
         countryName: inwork[1].trim()
       }).then(res => {
-        if (res === 201) {
+        console.log(res);
+        if (res.status === 201) {
           const data = {
             firstName: user.first_name,
             lastName: user.last_name,
             bio: user.bio,
-            locationId: locationId,
+            locationId: res.id,
             jobId: '5' //not sure how to take job id from the user yet
           };
 
@@ -132,7 +133,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { locationData, locationRequest, userProfileInfo, saveLocationId }
+  { locationDataForSettings, locationRequest, userProfileInfo, saveLocationId }
 )(Location);
 
 const LocationSection = styled.section`

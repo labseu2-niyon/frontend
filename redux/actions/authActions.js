@@ -26,6 +26,19 @@ export const locationData = data => dispatch => {
     });
 };
 
+export const locationDataForSettings = data => dispatch => {
+  dispatch({ type: types.START_LOADING });
+  return axios
+    .post(`${getUrl()}/location/getLocation`, data)
+    .then(res => {
+      dispatch({ type: types.SET_LOCATION_DATA, payload: res.data.data });
+      return { status: res.data.status, id: res.data.data };
+    })
+    .catch(() => {
+      dispatch({ type: types.STOP_LOADING });
+    });
+};
+
 // Action creator for persisting profile data
 export const profileData = data => ({
   type: types.SET_PROFILE_DATA,
