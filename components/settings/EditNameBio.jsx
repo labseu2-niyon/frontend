@@ -8,6 +8,7 @@ const EditNameBio = ({ user, form, userProfileInfo }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastname] = useState('');
   const [bio, setBio] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const { TextArea } = Input;
   useEffect(() => {
@@ -41,9 +42,15 @@ const EditNameBio = ({ user, form, userProfileInfo }) => {
           locationId: user.location.locationId,
           jobId: '5' //not sure how to take job id from the user yet
         };
-
+        setLoading(true);
         userProfileInfo(data, user.username).then(res => {
-          res === 200 ? success() : error();
+          if (res === 200) {
+            success();
+            setLoading(false);
+          } else {
+            error();
+            setLoading(false);
+          }
         });
       }
     });
@@ -120,7 +127,7 @@ const EditNameBio = ({ user, form, userProfileInfo }) => {
           <Button
             type="primary"
             size="large"
-            loading={false}
+            loading={loading}
             htmlType="submit"
             style={{ backgroundColor: theme.primary }}
           >

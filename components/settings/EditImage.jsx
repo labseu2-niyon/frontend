@@ -104,10 +104,11 @@ const ProfileInfo = props => {
           >
             {imgUrl ? <img src={imgUrl} alt="avatar" /> : uploadButton}
           </RoundIcon>
-
-          <Button large primary type="submit" loadingB={loading}>
-            Set new Profile Image
-          </Button>
+          {image && (
+            <Button large primary type="submit" loadingB={loading}>
+              Set new Profile Image
+            </Button>
+          )}
         </FormArea>
       </Root>
     </Image>
