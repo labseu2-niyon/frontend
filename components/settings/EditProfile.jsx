@@ -16,7 +16,7 @@ import EditnameBio from './EditNameBio';
 
 const EditProfile = ({ user, userProfileInfo, socialDataHandler }) => {
   const router = useRouter();
-  console.log(user);
+  //console.log(user);
 
   useEffect(() => {
     fetchUser(router.query.user);

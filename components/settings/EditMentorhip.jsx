@@ -45,7 +45,7 @@ const JobTitle = ({
   const [testError, setTestError] = useState(false);
   const [checkedValue, setCheckedValue] = useState([]);
 
-  console.log(activeTab);
+  //console.log(activeTab);
 
   useEffect(() => {
     getJobTitles();

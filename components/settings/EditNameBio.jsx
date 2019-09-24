@@ -76,7 +76,7 @@ const EditNameBio = ({ user, form, userProfileInfo }) => {
               ]
             })(
               <Input
-                value={user.first_name}
+                // value={user.first_name}
                 placeholder={user.first_name}
                 onChange={e => setFirstName(e.target.value)}
               />
@@ -96,7 +96,7 @@ const EditNameBio = ({ user, form, userProfileInfo }) => {
               ]
             })(
               <Input
-                value={user.first_name}
+                // value={user.first_name}
                 placeholder={user.last_name}
                 onChange={e => setLastname(e.target.value)}
               />
@@ -117,7 +117,7 @@ const EditNameBio = ({ user, form, userProfileInfo }) => {
             })(
               <TextArea
                 rows={10}
-                value={user.bio}
+                // value={user.bio}
                 placeholder={user.bio}
                 onChange={e => setBio(e.target.value)}
               />

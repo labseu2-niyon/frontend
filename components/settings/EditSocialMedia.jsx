@@ -47,7 +47,7 @@ const EditSocialMedia = ({ user, form, socialDataHandler }) => {
               ]
             })(
               <Input
-                value={google}
+                // value={google}
                 placeholder="Google handler"
                 onChange={e => setGoogle(e.target.value)}
               />
@@ -63,7 +63,7 @@ const EditSocialMedia = ({ user, form, socialDataHandler }) => {
               ]
             })(
               <Input
-                value={google}
+                // value={google}
                 placeholder="GitHub handler"
                 onChange={e => setGithub(e.target.value)}
               />
@@ -79,7 +79,7 @@ const EditSocialMedia = ({ user, form, socialDataHandler }) => {
               ]
             })(
               <Input
-                value={google}
+                // value={google}
                 placeholder="Facebook handler"
                 onChange={e => setFacebook(e.target.value)}
               />
