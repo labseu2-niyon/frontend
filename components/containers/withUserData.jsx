@@ -72,9 +72,7 @@ const withUserData = Component => {
     }, [props.authReducer.allJobs]);
 
     useEffect(() => {
-      console.log('received');
       if (connections !== props.userReducer.connectionsAll) {
-        console.log('updating');
         mapConnections(props.userReducer.connectionsAll);
       }
     }, [props.userReducer.connectionsAll]);

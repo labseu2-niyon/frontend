@@ -16,7 +16,6 @@ const ChangePassword = ({
   error,
   status
 }) => {
-  console.log(message, error);
   return (
     <>
       <Root>
