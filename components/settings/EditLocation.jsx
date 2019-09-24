@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { useState, useEffect } from 'react';
-import { Text, Heading2 } from '../~common/index';
 import { Button } from 'antd';
+import { Text } from '../../components/~common/index';
 
 import styled from 'styled-components';
 import Router from 'next/router';
@@ -83,40 +83,45 @@ const Location = ({
 
   return (
     <Root>
-      <div style={{ marginRight: '20px' }}>
-        <Auto onSubmit={handleSubmit}>
-          <AutoComplete
-            onChange={getPossibleLocation}
-            onSelect={chosen}
-            style={{ width: 200 }}
-            dataSource={data}
-            // autoFocus={true}
-            placeholder={`${user.location.city_name}, ${user.location.country_name}`}
-            filterOption={(inputValue, option) =>
-              option.props.children
-                .toUpperCase()
-                .indexOf(inputValue.toUpperCase()) !== -1
-            }
-          />
-          {!select.state ? (
-            <Icon
-              type="loading"
-              style={{ marginLeft: '1em', fontSize: '1.5em' }}
+      <Text big bold>
+        Change Your Location
+      </Text>
+      <LocationSection>
+        <div style={{ marginRight: '20px' }}>
+          <Auto onSubmit={handleSubmit}>
+            <AutoComplete
+              onChange={getPossibleLocation}
+              onSelect={chosen}
+              style={{ width: 200 }}
+              dataSource={data}
+              // autoFocus={true}
+              placeholder={`${user.location.city_name}, ${user.location.country_name}`}
+              filterOption={(inputValue, option) =>
+                option.props.children
+                  .toUpperCase()
+                  .indexOf(inputValue.toUpperCase()) !== -1
+              }
             />
-          ) : (
-            <Icon
-              type="check-circle"
-              theme="twoTone"
-              twoToneColor="#52c41a"
-              style={{ marginLeft: '1em', fontSize: '1.5em' }}
-            />
-          )}
-        </Auto>
-        {warning && <Error>You need to enter a city name</Error>}
-      </div>
-      <Button primary small onClick={handleSubmit} loading={loading}>
-        Save Location
-      </Button>
+            {!select.state ? (
+              <Icon
+                type="loading"
+                style={{ marginLeft: '1em', fontSize: '1.5em' }}
+              />
+            ) : (
+              <Icon
+                type="check-circle"
+                theme="twoTone"
+                twoToneColor="#52c41a"
+                style={{ marginLeft: '1em', fontSize: '1.5em' }}
+              />
+            )}
+          </Auto>
+          {warning && <Error>You need to enter a city name</Error>}
+        </div>
+        <Button primary small onClick={handleSubmit} loading={loading}>
+          Save Location
+        </Button>
+      </LocationSection>
     </Root>
   );
 };
@@ -132,26 +137,21 @@ export default connect(
   { locationData, locationRequest, userProfileInfo, saveLocationId }
 )(Location);
 
-const Root = styled.div`
+const LocationSection = styled.section`
+  padding: 10px 0;
   display: flex;
 `;
 
-const IconT = styled.i`
-  font-size: 100px;
-  color: green;
+const Root = styled.div`
+  margin-top: 50px;
+  p {
+    text-align: center;
+  }
 `;
+
 const Auto = styled.form`
   display: flex;
   align-items: center;
-`;
-
-const InputWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  padding-bottom: 30px;
 `;
 
 const Error = styled.p`

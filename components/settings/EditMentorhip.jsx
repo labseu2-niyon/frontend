@@ -3,8 +3,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Flip from 'react-reveal/Flip';
-import Router from 'next/router';
 import { Tabs } from 'antd';
 import { connect } from 'react-redux';
 import {
@@ -88,7 +86,9 @@ const JobTitle = ({
   return (
     <Root>
       <Header>
-        <Text big>Change your mentorship type</Text>
+        <Text big bold>
+          Change your mentorship type
+        </Text>
       </Header>
       <TabsWrapper defaultActiveKey={activeTab} onChange={callback} type="card">
         <TabPane tab="Mentee" key="1">

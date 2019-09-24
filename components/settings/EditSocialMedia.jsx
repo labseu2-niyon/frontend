@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
 import styled from 'styled-components';
-
+import { Text } from '../~common/index';
 import { Form, Input, message, Button } from 'antd';
 
 const EditSocialMedia = ({ user, form, socialDataHandler }) => {
@@ -32,6 +32,9 @@ const EditSocialMedia = ({ user, form, socialDataHandler }) => {
   if (user) {
     return (
       <SocialSection>
+        <Text big bold>
+          Update Your Social Media Handlers
+        </Text>
         <Form onSubmit={handleSocialMedia}>
           <Form.Item label="Google">
             {getFieldDecorator('google', {
@@ -100,5 +103,10 @@ export default WrappedRegistrationForm;
 const SocialSection = styled.section`
   button {
     width: 100%;
+  }
+
+  p {
+    margin-top: 30px;
+    text-align: center;
   }
 `;
