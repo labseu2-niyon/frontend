@@ -25,9 +25,7 @@ const Location = ({ locationRequest, locationData }) => {
             setData(res);
           }
         })
-        .catch(error => {
-          //console.log(error);
-        });
+        .catch(error => {});
   };
   const chosen = value => {
     setSelect({ state: true, data: value });
