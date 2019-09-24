@@ -12,7 +12,6 @@ const ContinuePage = ({ storeToken }) => {
     const newToken = nextRouter.query.token;
     if (newToken) {
       const user = jwt.decode(newToken);
-      console.log(user.username);
       storeToken(newToken, user.username);
       Router.push('/');
     } else {
