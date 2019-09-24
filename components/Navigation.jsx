@@ -85,12 +85,22 @@ const Navigation = ({ logOutUser, fetchUser, authReducer, user, socket }) => {
             <a className="desktop">Explore</a>
           </div>
         </Link>
-        <Link href="/settings">
-          <div>
-            <Icon type="setting" className="icon" />
-            <a className="desktop">Settings</a>
-          </div>
-        </Link>
+        {user && (
+          <Link
+            href={{
+              pathname: '/settings',
+              query: {
+                user: user.username
+              }
+            }}
+          >
+            <div>
+              <Icon type="setting" className="icon" />
+              <a className="desktop">Settings</a>
+            </div>
+          </Link>
+        )}
+
         <div onClick={handleClick}>
           <Icon type="logout" className="icon" />
           <div className="desktop">Log out</div>

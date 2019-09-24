@@ -17,26 +17,26 @@ function Page({ user, fetchUser, username }) {
   return (
     <Layout pageName="Settings">
       <Wrapper>
-        <EditProfile user={user} />
+        <EditProfile />
       </Wrapper>
     </Layout>
   );
 }
 
-const mapStateToProps = (state) => ({
-  user: state.userReducer.user,
+const mapStateToProps = state => ({
+  user: state.userReducer.user
 });
 
 const mapDispatchToProps = {
-  fetchUser,
+  fetchUser
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(withAuth(Page));
 
-Page.getInitialProps = async (ctx) => {
+Page.getInitialProps = async ctx => {
   const cookies = nookies.get(ctx);
   const { username } = jwt.decode(cookies.token);
   return { username };
@@ -45,5 +45,5 @@ Page.getInitialProps = async (ctx) => {
 Page.propTypes = {
   user: PropTypes.shape(),
   username: PropTypes.string.isRequired,
-  fetchUser: PropTypes.func.isRequired,
+  fetchUser: PropTypes.func.isRequired
 };

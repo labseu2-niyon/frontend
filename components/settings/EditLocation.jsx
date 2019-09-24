@@ -4,10 +4,20 @@ import { Text, Heading2, Button } from '../~common/index';
 import styled from 'styled-components';
 import Router from 'next/router';
 import { connect } from 'react-redux';
-import { locationData, locationRequest } from '../../redux/actions/authActions';
+import {
+  locationData,
+  locationRequest,
+  userTypeHandler
+} from '../../redux/actions/authActions';
 import { Icon, AutoComplete } from 'antd';
 
-const Location = ({ locationRequest, locationData, handleSave }) => {
+const Location = ({
+  locationRequest,
+  locationData,
+  userType,
+  user,
+  userTypeHandler
+}) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [select, setSelect] = useState({ state: false, data: '' });
@@ -33,6 +43,7 @@ const Location = ({ locationRequest, locationData, handleSave }) => {
   };
   const handleSubmit = e => {
     e.preventDefault();
+    const data = {};
     setLoading(false);
     !select.state && setWarning('Please Select Location');
     const inwork = select.data.split(',');
@@ -48,51 +59,59 @@ const Location = ({ locationRequest, locationData, handleSave }) => {
         if (res === 201) {
           setLoading(false);
           setWarning('');
+          userTypeHandler(data, username, userType, jobTypeId);
         }
       }));
   };
 
   return (
-    <>
-      {/* <Icon type="pushpin" theme="twoTone" /> */}
-      <Text small>Please enter your city name.</Text>
-      <Auto onSubmit={handleSubmit}>
-        <AutoComplete
-          onChange={getPossibleLocation}
-          onSelect={chosen}
-          style={{ width: 200 }}
-          dataSource={data}
-          // autoFocus={true}
-          placeholder="Choose new Location"
-          filterOption={(inputValue, option) =>
-            option.props.children
-              .toUpperCase()
-              .indexOf(inputValue.toUpperCase()) !== -1
-          }
-        />
-        {!select.state ? (
-          <Icon
-            type="loading"
-            style={{ marginLeft: '1em', fontSize: '1.5em' }}
+    <Root>
+      <div>
+        <Auto onSubmit={handleSubmit}>
+          <AutoComplete
+            onChange={getPossibleLocation}
+            onSelect={chosen}
+            style={{ width: 200 }}
+            dataSource={data}
+            // autoFocus={true}
+            placeholder="Choose new Location"
+            filterOption={(inputValue, option) =>
+              option.props.children
+                .toUpperCase()
+                .indexOf(inputValue.toUpperCase()) !== -1
+            }
           />
-        ) : (
-          <Icon
-            type="check-circle"
-            theme="twoTone"
-            twoToneColor="#52c41a"
-            style={{ marginLeft: '1em', fontSize: '1.5em' }}
-          />
-        )}
-      </Auto>
-      {warning && <Error>You need to enter a city name</Error>}
-    </>
+          {!select.state ? (
+            <Icon
+              type="loading"
+              style={{ marginLeft: '1em', fontSize: '1.5em' }}
+            />
+          ) : (
+            <Icon
+              type="check-circle"
+              theme="twoTone"
+              twoToneColor="#52c41a"
+              style={{ marginLeft: '1em', fontSize: '1.5em' }}
+            />
+          )}
+        </Auto>
+        {warning && <Error>You need to enter a city name</Error>}
+      </div>
+      <Button primary small onClick={handleSubmit} loadingB={loading}>
+        Save Location
+      </Button>
+    </Root>
   );
 };
 
 export default connect(
   state => state,
-  { locationData, locationRequest }
+  { locationData, locationRequest, userTypeHandler }
 )(Location);
+
+const Root = styled.div`
+  display: flex;
+`;
 
 const IconT = styled.i`
   font-size: 100px;

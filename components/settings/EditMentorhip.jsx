@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
@@ -86,8 +88,8 @@ const JobTitle = ({
 
   // action creators request for update user information and added user choices
   const handleRequest = data => {
-    checkedValue
-      && checkedValue.forEach(item => {
+    checkedValue &&
+      checkedValue.forEach(item => {
         userChoise({ mentorTypeId: Number(item), mentorId: userId }, userType);
       });
     userTypeHandler(data, username, userType, jobTypeId).then(res => {
@@ -108,39 +110,14 @@ const JobTitle = ({
   };
 
   const mentor = () => (
-      <div>
-        <M>
-          <Text small>What kind of help can you provide?</Text>
-          {mentorTypes &&
-            mentorTypes.map(type => {
-              return (
-                <Flip top key={type.id}>
-                  <Label>
-                    <input
-                      type="checkbox"
-                      name={type.id}
-                      onChange={handleCheckBox}
-                    />
-                    {type.mentor_type_name}
-                  </Label>
-                </Flip>
-              );
-            })}
-          {errors.helpError && (
-            <OptionError>{err.userOptionError} </OptionError>
-          )}
-        </M>
-      </div>
-    );
-
-  const mentee = () => (
+    <div>
       <M>
-        <Text small>What kind of help are you looking for?</Text>
+        <Text small>What kind of help can you provide?</Text>
         {mentorTypes &&
           mentorTypes.map(type => {
             return (
               <Flip top key={type.id}>
-                <Label key={type.id}>
+                <Label>
                   <input
                     type="checkbox"
                     name={type.id}
@@ -153,7 +130,30 @@ const JobTitle = ({
           })}
         {errors.helpError && <OptionError>{err.userOptionError} </OptionError>}
       </M>
-    );
+    </div>
+  );
+
+  const mentee = () => (
+    <M>
+      <Text small>What kind of help are you looking for?</Text>
+      {mentorTypes &&
+        mentorTypes.map(type => {
+          return (
+            <Flip top key={type.id}>
+              <Label key={type.id}>
+                <input
+                  type="checkbox"
+                  name={type.id}
+                  onChange={handleCheckBox}
+                />
+                {type.mentor_type_name}
+              </Label>
+            </Flip>
+          );
+        })}
+      {errors.helpError && <OptionError>{err.userOptionError} </OptionError>}
+    </M>
+  );
 
   const onMenteePressed = () => {
     setMenteePressed(true);
@@ -202,8 +202,8 @@ const JobTitle = ({
         <InputWrapperJob>
           <select value={jobTypeId} onChange={handleSelect}>
             <option>Change your job title?</option>
-            {allJobs
-              && allJobs.map(job => (
+            {allJobs &&
+              allJobs.map(job => (
                 <option value={job.id} key={job.tech_name}>
                   {job.tech_name}
                 </option>
@@ -220,7 +220,7 @@ const JobTitle = ({
           loadingB={loading}
           onClick={handleSubmit}
         >
-          Next
+          Change
         </Button>
       </FormArea>
     </Root>
@@ -228,13 +228,13 @@ const JobTitle = ({
 };
 
 const mapStateToProps = state => ({
-    username: state.authReducer.emailData.username,
-    userId: state.authReducer.emailData.id,
-    loading: state.authReducer.loading,
-    allJobs: state.authReducer.allJobs,
-    locationId: state.authReducer.locationId,
-    mentorTypes: state.authReducer.allMentorOptions
-  });
+  username: state.authReducer.emailData.username,
+  userId: state.authReducer.emailData.id,
+  loading: state.authReducer.loading,
+  allJobs: state.authReducer.allJobs,
+  locationId: state.authReducer.locationId,
+  mentorTypes: state.authReducer.allMentorOptions
+});
 
 const mapDispatchToProps = {
   userTypeHandler,
