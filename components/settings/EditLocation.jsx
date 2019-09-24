@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Text, Heading2, Button } from '../~common/index';
 import styled from 'styled-components';
 import Router from 'next/router';
@@ -7,22 +7,30 @@ import { connect } from 'react-redux';
 import {
   locationData,
   locationRequest,
-  userTypeHandler
+  userProfileInfo,
+  saveLocationId
 } from '../../redux/actions/authActions';
 import { Icon, AutoComplete } from 'antd';
+
 
 const Location = ({
   locationRequest,
   locationData,
-  userType,
   user,
-  userTypeHandler
+  saveLocationId,
+  locationId,
+  userProfileInfo
 }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [select, setSelect] = useState({ state: false, data: '' });
   const [warning, setWarning] = useState('');
   const [input, setInput] = useState('');
+  const [userType, setUserType] = useState('');
+
+  useEffect(() => {
+    user.mentee ? setUserType('mentee') : setUserType('mentor');
+  }, []);
 
   const getPossibleLocation = place => {
     setInput(place);
@@ -43,7 +51,7 @@ const Location = ({
   };
   const handleSubmit = e => {
     e.preventDefault();
-    const data = {};
+    //saveLocationId(user.location.id);
     setLoading(false);
     !select.state && setWarning('Please Select Location');
     const inwork = select.data.split(',');
@@ -57,9 +65,17 @@ const Location = ({
         countryName: inwork[1].trim()
       }).then(res => {
         if (res === 201) {
+          const data = {
+            firstName: user.first_name,
+            lastName: user.last_name,
+            bio: user.bio,
+            locationId: locationId,
+            jobId: '5' //not sure how to take job id from the user yet
+          };
+
           setLoading(false);
           setWarning('');
-          userTypeHandler(data, username, userType, jobTypeId);
+          userProfileInfo(data, user.username);
         }
       }));
   };
@@ -104,9 +120,15 @@ const Location = ({
   );
 };
 
+const mapStateToProps = state => {
+  return {
+    locationId: state.authReducer.locationId
+  };
+};
+
 export default connect(
-  state => state,
-  { locationData, locationRequest, userTypeHandler }
+  mapStateToProps,
+  { locationData, locationRequest, userProfileInfo, saveLocationId }
 )(Location);
 
 const Root = styled.div`

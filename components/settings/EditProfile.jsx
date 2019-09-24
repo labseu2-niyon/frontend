@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { saveLocationId } from '../../redux/actions/authActions';
 import { fetchUser } from '../../redux/actions/userActions';
 import { withRouter, useRouter } from 'next/router';
 import Avatar from '../~common/Avatar';
@@ -14,20 +13,14 @@ import EditMentorship from './EditMentorhip';
 //   name: 'Guillermo Rauch'
 // };
 
-const EditProfile = ({ user, saveLocationId, username }) => {
-  const [userType, setUserType] = useState('');
+const EditProfile = ({ user, username }) => {
   const router = useRouter();
 
   const usern = router.query;
   console.log(user);
   fetchUser(username);
-  useEffect(() => {
-    saveLocationId(user.location.id);
-    //user.mentee ? setUserType('mentee') : setUserType('mentor');
-  }, []);
 
   const handleSave = () => {};
-  console.log(userType);
 
   if (user) {
     return (
@@ -64,7 +57,7 @@ const EditProfile = ({ user, saveLocationId, username }) => {
           </div>
           <h3>Enter new Location</h3>
           <div>
-            <EditLocation userType={userType} user={user} />
+            <EditLocation user={user} />
           </div>
 
           <div>
@@ -99,7 +92,6 @@ const EditProfile = ({ user, saveLocationId, username }) => {
 };
 
 const mapDispatchToProps = {
-  saveLocationId,
   fetchUser
 };
 const mapStateToProps = state => {
