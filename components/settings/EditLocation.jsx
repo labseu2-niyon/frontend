@@ -33,7 +33,6 @@ const Location = ({ locationRequest, locationData, handleSave }) => {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    console.log('Working');
     setLoading(false);
     !select.state && setWarning('Please Select Location');
     const inwork = select.data.split(',');
@@ -56,6 +55,7 @@ const Location = ({ locationRequest, locationData, handleSave }) => {
   return (
     <>
       {/* <Icon type="pushpin" theme="twoTone" /> */}
+      <Text small>Please enter your city name.</Text>
       <Auto onSubmit={handleSubmit}>
         <AutoComplete
           onChange={getPossibleLocation}

@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { Icon, AutoComplete } from 'antd';
-import { locationData, locationRequest } from '../../redux/actions/authActions';
+import { saveLocationId } from '../../redux/actions/authActions';
 import Avatar from '../~common/Avatar';
 import EditLocation from './EditLocation';
+import EditMentorship from './EditMentorhip';
 
 // const dummyUser = {
 //   image: 'https://milan.serverlessdays.io/speakers/guillermo-rauch.jpg',
@@ -13,8 +13,11 @@ import EditLocation from './EditLocation';
 
 const handleSave = () => {};
 
-const EditProfile = ({ user }) => {
+const EditProfile = ({ user, saveLocationId }) => {
   console.log(user);
+  useEffect(() => {
+    saveLocationId(user.location.id);
+  }, []);
   return (
     <div>
       <Image>
@@ -47,10 +50,8 @@ const EditProfile = ({ user }) => {
           <EditLocation handleSubmit={handleSave} />
         </div>
 
-        <h3>Mentorship</h3>
         <div>
-          <p>Job Title</p>
-          <select name="jobTitle" />
+          <EditMentorship />
         </div>
         <div>
           <p>Mentor or Mentee Option</p>
@@ -89,8 +90,12 @@ const Image = styled.div`
   }
 `;
 
-const mapDispatchToProps = {};
-const mapStateToProps = state => ({});
+const mapDispatchToProps = {
+  saveLocationId
+};
+const mapStateToProps = state => {
+  return state;
+};
 
 export default connect(
   mapStateToProps,

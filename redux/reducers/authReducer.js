@@ -72,6 +72,11 @@ export const authReducer = (
         locationId: payload,
         loading: false
       };
+    case 'SAVE_LOCATION_ID':
+      return {
+        ...state,
+        locationId: payload
+      };
 
     case types.SET_USER_NAME:
       return {
