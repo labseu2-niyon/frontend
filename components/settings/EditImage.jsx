@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Router from 'next/router';
 import { connect } from 'react-redux';
-import { Text, Button, Heading2, Skip } from '../~common/index';
+import { Button } from '../~common/index';
 import { Upload, Icon, message } from 'antd';
 import {
   profileData,
@@ -12,7 +11,6 @@ import {
 
 const ProfileInfo = props => {
   const [image, setImage] = useState('');
-  const [bio, setBio] = useState('');
   const [imgUrl, setImgUrl] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -81,26 +79,28 @@ const ProfileInfo = props => {
   };
 
   return (
-    <Root>
-      <FormArea onSubmit={handleSubmit}>
-        <RoundIcon
-          name="avatar"
-          listType="picture-card"
-          className="avatar-uploader"
-          showUploadList={false}
-          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-          beforeUpload={beforeUpload}
-          onChange={handleChange}
-          style={{ fontSize: '30px', padding: '20px' }}
-        >
-          {imgUrl ? <img src={imgUrl} alt="avatar" /> : uploadButton}
-        </RoundIcon>
+    <Image>
+      <Root>
+        <FormArea onSubmit={handleSubmit}>
+          <RoundIcon
+            name="avatar"
+            listType="picture-card"
+            className="avatar-uploader"
+            showUploadList={false}
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            beforeUpload={beforeUpload}
+            onChange={handleChange}
+            style={{ fontSize: '30px', padding: '20px' }}
+          >
+            {imgUrl ? <img src={imgUrl} alt="avatar" /> : uploadButton}
+          </RoundIcon>
 
-        <Button large primary type="submit">
-          Set new Profile Image
-        </Button>
-      </FormArea>
-    </Root>
+          <Button large primary type="submit">
+            Set new Profile Image
+          </Button>
+        </FormArea>
+      </Root>
+    </Image>
   );
 };
 
@@ -122,10 +122,22 @@ const Root = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  margin-top: 1rem;
 
   h2 {
     margin: 0 20px;
     text-align: center;
+  }
+`;
+
+const Image = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 0;
+  p {
+    margin-left: 1rem;
   }
 `;
 

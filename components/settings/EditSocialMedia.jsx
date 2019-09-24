@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { Text } from '../~common/index';
 import { Form, Input, message, Button } from 'antd';
+import { theme } from '../../lib/theme';
 
 const EditSocialMedia = ({ user, form, socialDataHandler }) => {
   const [google, setGoogle] = useState('');
@@ -84,7 +85,13 @@ const EditSocialMedia = ({ user, form, socialDataHandler }) => {
               />
             )}
           </Form.Item>
-          <Button type="primary" size="large" loading={false} htmlType="submit">
+          <Button
+            type="primary"
+            size="large"
+            loading={false}
+            htmlType="submit"
+            style={{ backgroundColor: theme.primary }}
+          >
             Update Social Media Handlers
           </Button>
         </Form>

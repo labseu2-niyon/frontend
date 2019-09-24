@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { fetchUser } from '../../redux/actions/userActions';
 import {
@@ -14,7 +13,7 @@ import EditImage from './EditImage';
 import EditSocialMedia from './EditSocialMedia';
 import EditnameBio from './EditNameBio';
 
-import { Form } from 'antd';
+import { Divider } from 'antd';
 
 const EditProfile = ({ user, userProfileInfo, socialDataHandler }) => {
   const router = useRouter();
@@ -27,15 +26,14 @@ const EditProfile = ({ user, userProfileInfo, socialDataHandler }) => {
   if (user) {
     return (
       <div>
-        <Image>
-          <EditImage user={user} />
-        </Image>
+        <EditImage user={user} />
+        <Divider dashed />
         <EditnameBio userProfileInfo={userProfileInfo} user={user} />
-
+        <Divider dashed />
         <EditLocation user={user} />
-
+        <Divider dashed />
         <EditMentorship user={user} />
-
+        <Divider dashed />
         <EditSocialMedia socialDataHandler={socialDataHandler} user={user} />
       </div>
     );
@@ -58,14 +56,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withRouter(EditProfile));
-
-const Image = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 3rem 0;
-  p {
-    margin-left: 1rem;
-  }
-`;

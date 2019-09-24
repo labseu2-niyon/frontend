@@ -2,13 +2,14 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Form, Input, message, Button } from 'antd';
-const { TextArea } = Input;
+import { theme } from '../../lib/theme';
 
 const EditNameBio = ({ user, form, userProfileInfo }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastname] = useState('');
   const [bio, setBio] = useState('');
 
+  const { TextArea } = Input;
   useEffect(() => {
     if (user) {
       form.getFieldDecorator('First Name', { initialValue: user.first_name });
@@ -116,7 +117,13 @@ const EditNameBio = ({ user, form, userProfileInfo }) => {
             )}
           </Form.Item>
 
-          <Button type="primary" size="large" loading={false} htmlType="submit">
+          <Button
+            type="primary"
+            size="large"
+            loading={false}
+            htmlType="submit"
+            style={{ backgroundColor: theme.primary }}
+          >
             Update Information
           </Button>
         </Form>
