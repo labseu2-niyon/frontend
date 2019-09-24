@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Router from 'next/router';
 import { connect } from 'react-redux';
@@ -15,6 +15,10 @@ const ProfileInfo = props => {
   const [bio, setBio] = useState('');
   const [imgUrl, setImgUrl] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setImgUrl(props.user.profile_picture);
+  }, []);
 
   function getBase64(img, callback) {
     const reader = new FileReader();
@@ -56,24 +60,24 @@ const ProfileInfo = props => {
     }
   };
 
+  const success = () => {
+    message.success('Image update succesfuly');
+  };
+
+  const error = () => {
+    message.error('Error updating image');
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
-    const data = {
-      firstName: props.userInfo.userNameData.firstName,
-      lastName: props.userInfo.userNameData.lastName,
-      bio: bio,
-      locationId: props.userInfo.locationId,
-      jobId: Number(props.userInfo.userTypeData)
-    };
-    const username = props.userInfo.emailData.username;
+
+    const username = props.user.username;
     const imgData = new FormData();
     imgData.append('image', image);
-    image && props.imageUpload(imgData, username);
-    props.userProfileInfo(data, username).then(res => {
-      if (res === 200) {
-        Router.push('/auth/social-info');
-      }
-    });
+    image &&
+      props.imageUpload(imgData, username).then(res => {
+        res === 200 ? success() : error();
+      });
   };
 
   return (
@@ -92,7 +96,7 @@ const ProfileInfo = props => {
           {imgUrl ? <img src={imgUrl} alt="avatar" /> : uploadButton}
         </RoundIcon>
 
-        <Button large primary type="submit" loadingB={props.loading}>
+        <Button large primary type="submit">
           Set new Profile Image
         </Button>
       </FormArea>

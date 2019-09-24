@@ -166,10 +166,10 @@ export const userProfileInfo = (data, user) => dispatch => {
 // user : username
 export const imageUpload = (data, user) => dispatch => {
   dispatch(startLoading());
-  axiosWithToken()
+  return axiosWithToken()
     .patch(`${getUrl()}/user/${user}/image/upload`, data)
-    .then(() => {
-      // debugger;
+    .then(res => {
+      return res.data.status;
     })
     .catch(() => {
       // debugger;

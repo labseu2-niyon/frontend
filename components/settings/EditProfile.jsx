@@ -37,7 +37,7 @@ const EditProfile = ({ user, username, form, userProfileInfo }) => {
   const [lastName, setLastname] = useState('');
   const [bio, setBio] = useState('');
   const router = useRouter();
-  console.log(router.query.user);
+  console.log(user);
 
   useEffect(() => {
     fetchUser(router.query.user);
@@ -88,7 +88,7 @@ const EditProfile = ({ user, username, form, userProfileInfo }) => {
     return (
       <div>
         <Image>
-          <EditImage />
+          <EditImage user={user} />
         </Image>
         <div>
           <FirstSection>
