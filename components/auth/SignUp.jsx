@@ -9,7 +9,7 @@ import { getUrl } from '../../redux/actions/utils';
 
 const baseUrl = getUrl();
 
-const SignUp = ({}) => (
+const SignUp = () => (
   <Root>
     <Flip left>
       <Logo>
