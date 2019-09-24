@@ -8,6 +8,7 @@ import { withRouter, useRouter } from 'next/router';
 import Avatar from '../~common/Avatar';
 import EditLocation from './EditLocation';
 import EditMentorship from './EditMentorhip';
+import EditImage from './EditImage';
 
 import {
   Form,
@@ -87,8 +88,7 @@ const EditProfile = ({ user, username, form, userProfileInfo }) => {
     return (
       <div>
         <Image>
-          <Avatar large source={user.profile_picture} />
-          <p>Edit Profile Image</p>
+          <EditImage />
         </Image>
         <div>
           <FirstSection>
