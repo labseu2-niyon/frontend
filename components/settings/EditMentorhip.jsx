@@ -88,7 +88,7 @@ const JobTitle = ({
   return (
     <Root>
       <Header>
-        <Text small>Change your mentorship type.</Text>
+        <Text big>Change your mentorship type</Text>
       </Header>
       <TabsWrapper defaultActiveKey={activeTab} onChange={callback} type="card">
         <TabPane tab="Mentee" key="1">

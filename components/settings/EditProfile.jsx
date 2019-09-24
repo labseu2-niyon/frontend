@@ -3,27 +3,17 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { fetchUser } from '../../redux/actions/userActions';
-import { userProfileInfo } from '../../redux/actions/authActions';
+import {
+  userProfileInfo,
+  socialDataHandler
+} from '../../redux/actions/authActions';
 import { withRouter, useRouter } from 'next/router';
-import Avatar from '../~common/Avatar';
 import EditLocation from './EditLocation';
 import EditMentorship from './EditMentorhip';
 import EditImage from './EditImage';
+import EditSocialMedia from './EditSocialMedia';
 
-import {
-  Form,
-  Input,
-  message,
-  Tooltip,
-  Icon,
-  Cascader,
-  Select,
-  Row,
-  Col,
-  Checkbox,
-  Button,
-  AutoComplete
-} from 'antd';
+import { Form, Input, message, Button } from 'antd';
 
 const { TextArea } = Input;
 
@@ -32,10 +22,19 @@ const { TextArea } = Input;
 //   name: 'Guillermo Rauch'
 // };
 
-const EditProfile = ({ user, username, form, userProfileInfo }) => {
+const EditProfile = ({
+  user,
+  username,
+  form,
+  userProfileInfo,
+  socialDataHandler
+}) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastname] = useState('');
   const [bio, setBio] = useState('');
+  const [google, setGoogle] = useState('');
+  const [github, setGithub] = useState('');
+  const [facebook, setFacebook] = useState('');
   const router = useRouter();
   console.log(user);
 
@@ -193,32 +192,23 @@ const EditProfile = ({ user, username, form, userProfileInfo }) => {
             <EditMentorship user={user} />
           </div>
 
-          <h3>Social</h3>
-
-          <div>
-            <p>Github</p>
-            <input type="text" />
-          </div>
-          <div>
-            <p>Twitter</p>
-            <input type="text" />
-          </div>
-          <div>
-            <p>Linkedin</p>
-            <input type="text" />
-          </div>
-
-          <button onClick={handleSave}>Save</button>
+          <SocialSection>
+            <EditSocialMedia
+              socialDataHandler={socialDataHandler}
+              user={user}
+            />
+          </SocialSection>
         </div>
       </div>
     );
   }
-  return <div></div>;
+  return <></>;
 };
 
 const mapDispatchToProps = {
   fetchUser,
-  userProfileInfo
+  userProfileInfo,
+  socialDataHandler
 };
 const mapStateToProps = state => {
   return {
@@ -251,10 +241,15 @@ const FirstSection = styled.section`
 
   button {
     width: 100%;
-    margin: 0 auto;
   }
 `;
 
 const LocationSection = styled.section`
   padding: 30px 0;
+`;
+
+const SocialSection = styled.section`
+  button {
+    width: 100%;
+  }
 `;
