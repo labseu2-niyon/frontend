@@ -9,7 +9,7 @@ import Logo from '../~common/Logo';
 
 const baseUrl = getUrl();
 
-const SignUp = ({}) => (
+const SignUp = () => (
   <Root>
     <Logo />
     <Heading2 primary>Signup</Heading2>
@@ -63,7 +63,7 @@ export default connect(
 )(SignUp);
 
 const Root = styled.div`
-  height: 90vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
