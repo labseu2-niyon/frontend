@@ -9,7 +9,6 @@ import { Heading2, Text, Button } from '../~common/index';
 import { emailSignup } from '../../redux/actions/authActions';
 
 const Email = ({ errors, touched, loading, status }) => {
-  //console.log(loading, status);
   return (
     <Root>
       <Steps stepNumber="1" />
