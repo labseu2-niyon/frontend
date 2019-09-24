@@ -10,6 +10,12 @@ const UserList = ({ userList, socket, currentUser, currentConnectionId }) => {
   return (
     <Nav>
       <Header>
+        <Link href="/">
+          <IconWrapper>
+            {/* To resize ant icons we have to use inline styles */}
+            <Icon type="home" className="icon" style={{ fontSize: '18px' }} />
+          </IconWrapper>
+        </Link>
         {currentUser && (
           <Link
             href={{
@@ -35,12 +41,6 @@ const UserList = ({ userList, socket, currentUser, currentConnectionId }) => {
             </UserInfo>
           </Link>
         )}
-        <Link href="/">
-          <IconWrapper>
-            {/* To resize ant icons we have to use inline styles */}
-            <Icon type="home" className="icon" style={{ fontSize: '18px' }} />
-          </IconWrapper>
-        </Link>
       </Header>
       {userList &&
         currentUser &&
@@ -78,7 +78,11 @@ const Nav = styled(Card)`
   z-index: 1;
   top: 0;
   left: 0;
-  overflow-y: scroll;
+  overflow-y: hidden;
+
+  &:hover {
+    overflow-y: scroll;
+  }
   &.ant-card-bordered {
     border: none;
     box-shadow: ${({ theme }) => theme.boxShadow};
@@ -89,7 +93,7 @@ const Header = styled.div`
   box-sizing: border-box;
   margin: 15px;
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
 `;
 
 const UserInfo = styled.div`
@@ -135,6 +139,7 @@ const IconWrapper = styled.div`
   background: #f5f5f5;
   color: #348fbb;
   cursor: pointer;
+  margin-right: 10px;
 
   &:hover {
     color: #ffffff;
