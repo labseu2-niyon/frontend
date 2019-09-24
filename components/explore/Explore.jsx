@@ -15,7 +15,9 @@ const Wrapper = styled.main`
 function Explore(props) {
   useEffect(() => {
     props.jobs.unshift('All');
+    // console.log(props.jobs);
   }, []);
+
   const connectionsLength = props.connectionsAll
     ? props.connectionsAll.length
     : 0;
@@ -50,16 +52,20 @@ function Explore(props) {
   };
 
   const filterJobTitle = job => {
+    
     const filteredUsers = props.users.map(user => {
-      if (user.job) {
-        if (user.job.tech_name === job) {
-          return { ...user, filtered: true };
+      if (job === 'All') {
+        return { ...user, filtered: true };
+      }else {
+        if (user.job) {
+          if (user.job.tech_name === job) {
+            return { ...user, filtered: true };
+          }
+          return { ...user, filtered: false };
         }
         return { ...user, filtered: false };
       }
-      if (job === 'All') {
-        return { ...user, filtered: false };
-      }
+      
     });
 
     props.setUsers(filteredUsers);
@@ -71,7 +77,6 @@ function Explore(props) {
         buttons={<ExploreButtons numOfConnections={connectionsLength} />}
         src="/static/friends-online.svg"
       />
-      {console.log(props.jobs)}
       <SearchBox
         jobTitles={props.jobs}
         filter={filter}
