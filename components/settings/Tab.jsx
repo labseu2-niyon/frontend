@@ -20,6 +20,9 @@ const Option = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  &:hover {
+    color: blue;
+  }
 
   .icon {
     margin: 4px 0 0 5px;

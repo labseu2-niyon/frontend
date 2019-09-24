@@ -10,7 +10,6 @@ const startLoading = () => ({
   type: types.START_LOADING
 });
 
-
 const stopLoading = () => ({ type: types.STOP_LOADING });
 
 // Action creator for persisting location data
@@ -286,7 +285,6 @@ export const saveToken = (token, username) => dispatch => {
   });
 };
 
-
 export const storeToken = (token, username) => dispatch => {
   nookies.set({}, 'token', token, {
     maxAge: 60 * 60 * 24 * 30,
@@ -298,5 +296,5 @@ export const storeToken = (token, username) => dispatch => {
       token,
       username
     }
-  }); 
+  });
 };
