@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Flip from 'react-reveal/Flip';
 import Router from 'next/router';
+import { Tabs } from 'antd';
 import { connect } from 'react-redux';
 import {
   userTypeHandler,
@@ -13,7 +14,8 @@ import {
   userChoise
 } from '../../redux/actions/authActions';
 import { theme } from '../../lib/theme';
-import { Heading2, Button, Text } from '../~common/index';
+import { Button, Text } from '../~common/index';
+const { TabPane } = Tabs;
 
 const err = {
   jobTypeError: 'Please select a job',
@@ -31,12 +33,11 @@ const JobTitle = ({
   getMentorType,
   mentorTypes,
   userChoise,
-  userId
+  userId,
+  user
 }) => {
-  const [mentorPressed, setMentorPressed] = useState(false);
-  const [menteePressed, setMenteePressed] = useState(false);
   const [userType, setUserType] = useState('');
-  // const [mentorError, setMentorError] = useState(true);
+  const [activeTab, setActiveTab] = useState('');
   const [jobTypeId, setJobTypeId] = useState(100);
   const [errors, setErrors] = useState({
     jobError: false,
@@ -46,9 +47,12 @@ const JobTitle = ({
   const [testError, setTestError] = useState(false);
   const [checkedValue, setCheckedValue] = useState([]);
 
+  console.log(activeTab);
+
   useEffect(() => {
     getJobTitles();
     getMentorType();
+    user.mentee ? setActiveTab('1') : setActiveTab('2');
   }, []);
 
   const handleSelect = e => {
@@ -75,133 +79,37 @@ const JobTitle = ({
       locationId,
       industryId: '1'
     };
-    // Handling user Type Error
-    if (!mentorPressed && !menteePressed) {
-      setErrors({ userTypeError: true });
-    } else if (jobTypeId === 100) {
-      setTestError(true);
-    } else {
-      setTestError(false);
-      checkedValue.length && handleRequest(data);
-    }
   };
 
-  // action creators request for update user information and added user choices
-  const handleRequest = data => {
-    checkedValue &&
-      checkedValue.forEach(item => {
-        userChoise({ mentorTypeId: Number(item), mentorId: userId }, userType);
-      });
-    userTypeHandler(data, username, userType, jobTypeId).then(res => {
-      setErrors({ helpError: false });
-      if (res === 201) {
-        Router.push('/auth/profile-info');
-      }
-    });
-  };
-
-  const handleCheckBox = e => {
-    if (e.target.checked) {
-      setErrors({ helpError: false });
-      setCheckedValue([...new Set([...checkedValue, e.target.name])]);
-    } else {
-      setCheckedValue(checkedValue.filter(item => item !== e.target.name));
-    }
-  };
-
-  const mentor = () => (
-    <div>
-      <M>
-        <Text small>What kind of help can you provide?</Text>
-        {mentorTypes &&
-          mentorTypes.map(type => {
-            return (
-              <Flip top key={type.id}>
-                <Label>
-                  <input
-                    type="checkbox"
-                    name={type.id}
-                    onChange={handleCheckBox}
-                  />
-                  {type.mentor_type_name}
-                </Label>
-              </Flip>
-            );
-          })}
-        {errors.helpError && <OptionError>{err.userOptionError} </OptionError>}
-      </M>
-    </div>
-  );
-
-  const mentee = () => (
-    <M>
-      <Text small>What kind of help are you looking for?</Text>
-      {mentorTypes &&
-        mentorTypes.map(type => {
-          return (
-            <Flip top key={type.id}>
-              <Label key={type.id}>
-                <input
-                  type="checkbox"
-                  name={type.id}
-                  onChange={handleCheckBox}
-                />
-                {type.mentor_type_name}
-              </Label>
-            </Flip>
-          );
-        })}
-      {errors.helpError && <OptionError>{err.userOptionError} </OptionError>}
-    </M>
-  );
-
-  const onMenteePressed = () => {
-    setMenteePressed(true);
-    setMentorPressed(false);
-    setErrors({ userTypeError: false });
-    setUserType('mentee');
-  };
-
-  const onMentorPressed = () => {
-    setMenteePressed(false);
-    setMentorPressed(true);
-    setErrors({ userTypeError: false });
-    setUserType('mentor');
-  };
+  function callback(key) {
+    console.log(key);
+    setActiveTab(key);
+  }
   return (
     <Root>
       <Header>
         <Text small>Change your mentorship type.</Text>
       </Header>
-      <MentorIcons>
-        <Custom>
+      <TabsWrapper defaultActiveKey={activeTab} onChange={callback} type="card">
+        <TabPane tab="Mentee" key="1">
           <i
             className="fas fa-user-graduate fa-6x"
-            style={{ color: menteePressed && theme.primary }}
-            onClick={onMenteePressed}
+            style={{ color: theme.primary }}
           />
-          <Info>
-            <p>Mentee</p>
-            <i className="fas fa-info-circle" />
-          </Info>
-        </Custom>
-        <Custom>
+        </TabPane>
+        <TabPane tab="Mentor" key="2">
           <i
             className="fas fa-user-cog fa-6x"
-            style={{ color: mentorPressed && theme.primary }}
-            onClick={onMentorPressed}
+            style={{ color: theme.primary }}
           />
-          <Info>
-            <p>Mentor</p>
-            <i className="fas fa-info-circle" />
-          </Info>
-        </Custom>
-      </MentorIcons>
+        </TabPane>
+      </TabsWrapper>
+
       {errors.userTypeError && <MError>{err.userTypeError}</MError>}
       <FormArea onSubmit={handleSubmit}>
         <InputWrapperJob>
           <select value={jobTypeId} onChange={handleSelect}>
-            <option>Change your job title?</option>
+            <option>{user.job.tech_name}</option>
             {allJobs &&
               allJobs.map(job => (
                 <option value={job.id} key={job.tech_name}>
@@ -209,10 +117,9 @@ const JobTitle = ({
                 </option>
               ))}
           </select>
-          {testError && <Error>{err.jobTypeError}</Error>}
         </InputWrapperJob>
-        {menteePressed && mentee()}
-        {mentorPressed && mentor()}
+        {/* {menteePressed && mentee()}
+        {mentorPressed && mentor()} */}
         <Button
           small
           primary
@@ -250,10 +157,10 @@ export default connect(
 
 const Root = styled.div`
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
 `;
 
 const Header = styled.div`
@@ -268,42 +175,20 @@ const Header = styled.div`
   }
 `;
 
-const MentorIcons = styled.div`
-  width: 85%;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  i {
-    color: grey;
+const TabsWrapper = styled(Tabs)`
+  .ant-tabs-nav {
+    width: 100%;
   }
-`;
-
-const Custom = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0 2rem;
-  i {
-    transition: all 0.2s ease-in;
-
-    :hover {
-      cursor: pointer;
-    }
+  .ant-tabs-tab {
+    width: 200px;
+    text-align: center;
   }
-  p {
-    margin: 0;
-    font-size: 14px;
+  .ant-tabs-tabpane {
+    display: flex;
+    justify-content: center;
   }
-`;
-
-const Info = styled.div`
-  display: flex;
-  align-self: flex-end;
-  margin: 3px;
-  align-items: center;
-
   i {
-    padding-left: 5px;
-    color: black;
+    margin: 0 auto;
   }
 `;
 
@@ -385,27 +270,6 @@ const MError = styled.p`
   left: 26%;
   color: #e29273;
   text-align: center;
-`;
-
-const OptionError = styled.p`
-  margin: 0;
-  font-size: 14px;
-  position: absolute;
-  bottom: 0;
-  left: 15%;
-  color: #e29273;
-`;
-
-const Label = styled.label`
-  display: flex;
-  align-items: center;
-  margin-left: 30px;
-  input {
-    width: 5px;
-    height: 5px;
-    padding: 12px;
-    margin-right: 12px;
-  }
 `;
 
 const M = styled.div`

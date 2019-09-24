@@ -190,11 +190,7 @@ const EditProfile = ({ user, username, form, userProfileInfo }) => {
           </LocationSection>
 
           <div>
-            <EditMentorship />
-          </div>
-          <div>
-            <p>Mentor or Mentee Option</p>
-            <select name="jobTitle" />
+            <EditMentorship user={user} />
           </div>
 
           <h3>Social</h3>
