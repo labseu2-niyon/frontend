@@ -149,9 +149,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-left: 250px;
+  /* margin-left: 250px; */
   width: 100%;
   height: 100vh;
+  background-color: lightblue;
 
   .ant-card-bordered {
     border: none;
@@ -215,14 +216,4 @@ const UserTyping = styled.div`
     margin-bottom: 0px;
     font-size: 14px;
   }
-`;
-
-const Info = styled.div`
-  color: #059;
-  display: flex;
-  align-items: baseline;
-  width: 40%;
-  justify-content: space-evenly;
-  font-size: 20px;
-  margin: 0 auto;
 `;

@@ -41,14 +41,13 @@ const Main = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  background-color: red;
 
   .ant-card-body {
     padding: 0;
     margin: 0;
     border: none;
   }
-
-  
 `;
 
 const mapStateToProps = state => ({
@@ -63,52 +62,3 @@ export default connect(
   mapStateToProps,
   {}
 )(ChatLayout);
-
-
-// @media screen and (max-width: 600px) {
-
-//   .hXtAjt {
-//     display: flex;
-//     justify-content: space-between;
-//   }
-
-//   /* left side with list of users */
-//   .ant-card.jvJjgw {
-//     background-color: green;
-//     width: 15%;
-//   }
-
-//   /* top left wrapper of home icon and CHATS */
-//   .ant-card-body {
-//     padding: 0;
-//     margin: 0;
-//     border: none;
-//     background-color: grey;
-//     /* display: flex; */
-//     /* justify-content: center; */
-//   }
-
-//   /* top left home icon and CHATS */
-//   .jIRBJL {
-//     padding: 0.5rem;
-//     margin: 0;
-//     border: none;
-//     background-color: purple;
-//   }
-
-//   /* CHATS */
-//   .bEKYEe {
-//     display: none;
-//   }
-
-//   .iQMAjv {
-//     background-color: orange;
-//     margin: 0;
-//     width: 100%;
-//   }
-
-//   #chatBox {
-//     background-color: yellow;
-//     width: 50%;
-//   }
-// }
