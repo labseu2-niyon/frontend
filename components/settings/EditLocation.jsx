@@ -1,6 +1,8 @@
 /* eslint-disable */
 import { useState, useEffect } from 'react';
-import { Text, Heading2, Button } from '../~common/index';
+import { Text, Heading2 } from '../~common/index';
+import { Button } from 'antd';
+
 import styled from 'styled-components';
 import Router from 'next/router';
 import { connect } from 'react-redux';
@@ -11,7 +13,6 @@ import {
   saveLocationId
 } from '../../redux/actions/authActions';
 import { Icon, AutoComplete } from 'antd';
-
 
 const Location = ({
   locationRequest,
@@ -82,7 +83,7 @@ const Location = ({
 
   return (
     <Root>
-      <div>
+      <div style={{ marginRight: '20px' }}>
         <Auto onSubmit={handleSubmit}>
           <AutoComplete
             onChange={getPossibleLocation}
@@ -90,7 +91,7 @@ const Location = ({
             style={{ width: 200 }}
             dataSource={data}
             // autoFocus={true}
-            placeholder="Choose new Location"
+            placeholder={`${user.location.city_name}, ${user.location.country_name}`}
             filterOption={(inputValue, option) =>
               option.props.children
                 .toUpperCase()
@@ -113,7 +114,7 @@ const Location = ({
         </Auto>
         {warning && <Error>You need to enter a city name</Error>}
       </div>
-      <Button primary small onClick={handleSubmit} loadingB={loading}>
+      <Button primary small onClick={handleSubmit} loading={loading}>
         Save Location
       </Button>
     </Root>

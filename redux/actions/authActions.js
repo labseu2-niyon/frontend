@@ -18,7 +18,6 @@ export const locationData = data => dispatch => {
   return axios
     .post(`${getUrl()}/location/getLocation`, data)
     .then(res => {
-      debugger;
       dispatch({ type: types.SET_LOCATION_DATA, payload: res.data.data });
       return res.data.status;
     })
@@ -148,12 +147,12 @@ export const userProfileInfo = (data, user) => dispatch => {
   return axiosWithToken()
     .patch(`${getUrl()}/user/${user}/profile`, data)
     .then(res => {
-      debugger;
       dispatch({ type: types.USER_INFO_SUCCESS, payload: res.data });
       // return status code in case of success
       return res.data.status;
     })
     .catch(err => {
+      debugger;
       dispatch({
         type: types.USER_INFO_FAIL,
         payload: err.response.data.message
