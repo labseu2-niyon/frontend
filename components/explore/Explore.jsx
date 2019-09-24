@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useEffect } from 'react';
 import TopSection from '../TopSection';
 import SearchBox from './SearchBox';
 import ProfileList from './ProfileList';
@@ -12,10 +13,12 @@ const Wrapper = styled.main`
 `;
 
 function Explore(props) {
+  useEffect(() => {
+    props.jobs.unshift('All');
+  }, []);
   const connectionsLength = props.connectionsAll
     ? props.connectionsAll.length
     : 0;
-
   const filter = (mentor, mentee) => {
     const filteredUsers = props.users.map(user => {
       if (mentor && mentee) {
@@ -54,7 +57,9 @@ function Explore(props) {
         }
         return { ...user, filtered: false };
       }
-      return { ...user, filtered: false };
+      if (job === 'All') {
+        return { ...user, filtered: false };
+      }
     });
 
     props.setUsers(filteredUsers);
@@ -66,6 +71,7 @@ function Explore(props) {
         buttons={<ExploreButtons numOfConnections={connectionsLength} />}
         src="/static/friends-online.svg"
       />
+      {console.log(props.jobs)}
       <SearchBox
         jobTitles={props.jobs}
         filter={filter}
