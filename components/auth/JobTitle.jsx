@@ -334,7 +334,7 @@ const FormArea = styled.form`
     font-size: 16px;
     width: 70%;
     display: block;
-    color: #4d2d52;
+    color: ${({ theme }) => theme.inputPurple};
     border: 1px solid rgba(77, 45, 82, 0.8);
     border-radius: 4px;
     ::placeholder {
@@ -384,7 +384,7 @@ const Error = styled.p`
   position: absolute;
   bottom: 10%;
   left: 15%;
-  color: #e29273;
+  color: ${({ theme }) => theme.errorOrange};
 `;
 
 const MError = styled.p`
@@ -392,7 +392,7 @@ const MError = styled.p`
   font-size: 14px;
   bottom: 0;
   left: 26%;
-  color: #e29273;
+  color: ${({ theme }) => theme.errorOrange};
   text-align: center;
 `;
 
@@ -402,7 +402,7 @@ const OptionError = styled.p`
   position: absolute;
   bottom: 0;
   left: 15%;
-  color: #e29273;
+  color: ${({ theme }) => theme.errorOrange};
 `;
 
 const Label = styled.label`

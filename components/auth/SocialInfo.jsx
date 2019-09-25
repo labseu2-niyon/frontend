@@ -5,6 +5,7 @@ import Steps from './StepsComp';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import { socialDataHandler } from '../../redux/actions/authActions';
+import { theme } from '../../lib/theme';
 
 const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
   const [facebook, setFacebook] = useState('');
@@ -113,7 +114,7 @@ const FormArea = styled.form`
   justify-content: space-between;
   height: 320px;
 
-  @media (min-width: 500px) {
+  @media (min-width: ${({ theme }) => theme.mobileWidth}) {
     width: 50%;
   }
 
@@ -122,7 +123,7 @@ const FormArea = styled.form`
     font-size: 16px;
     width: 70%;
     display: block;
-    color: #4d2d52;
+    color: ${({ theme }) => theme.inputPurple};
     border: 1px solid rgba(77, 45, 82, 0.8);
     border-radius: 4px;
     ::placeholder {

@@ -1,8 +1,8 @@
-import Tab from './Tab';
 import styled from 'styled-components';
+import Tab from './Tab';
+import { theme } from '../../lib/theme';
 
-const Wrapper = ({ children }) => {
-  return (
+const Wrapper = ({ children }) => (
     <Main>
       <Tabs>
         <Tab name="Edit Profile" route="/settings" />
@@ -11,7 +11,6 @@ const Wrapper = ({ children }) => {
       <div>{children}</div>
     </Main>
   );
-};
 
 const Main = styled.div`
   box-shadow: ${({ theme }) => theme.boxShadow};
@@ -31,7 +30,7 @@ const Tabs = styled.div`
     color: ${({ theme }) => theme.black};
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: ${({ theme }) => theme.mobileWidth}) {
     flex-direction: column;
   }
 `;
