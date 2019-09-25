@@ -3,38 +3,37 @@ import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link';
 import { connect } from 'react-redux';
-import { Heading2, Text, Button } from '../~common/index';
 import { resetPassword } from '../../redux/actions/authActions';
-import Header from './CardHeader';
+import Header from './Header';
 import Card from './Card';
+import Content from './ContentWrapper';
+import FormStyles from './Form';
+import { lighten } from 'polished';
 
 const ResetPassword = ({ errors, touched, status, loading }) => (
   <Card>
     <Header></Header>
+    <Content>
+      <h3>Let's find your account.</h3>
+      <p>Please enter your email:</p>
+      <FormStyles>
+        <div className="input-wrapper">
+          <Field name="email" type="email" placeholder="email" />
+          {touched.email && errors.email && (
+            <p className="error">{errors.email}</p>
+          )}
+          {status && status.msg && <p className="error">{status.msg}</p>}
+        </div>
 
-    <TopWrapper>
-      <Heading2 primary>Let's find your account.</Heading2>
-      <Text small>Please enter your email.</Text>
-    </TopWrapper>
-    <FormArea>
-      <InputWrapper>
-        <Field name="email" type="email" placeholder="email" />
-        {touched.email && errors.email && <Error>{errors.email}</Error>}
-        {status && status.msg && <Error>{status.msg}</Error>}
-      </InputWrapper>
-      <ButtonArea>
-        <Button large primary loadingB={loading} type="submit">
-          Find Account
-        </Button>
-        <Link href="/auth/login">
-          <a>
-            <Button large secondary>
-              Go Back
-            </Button>
-          </a>
-        </Link>
-      </ButtonArea>
-    </FormArea>
+        <button type="submit">Find Account</button>
+      </FormStyles>
+
+      <Link href="/auth/login">
+        <a>
+          <Button>Go Back</Button>
+        </a>
+      </Link>
+    </Content>
   </Card>
 );
 
@@ -70,73 +69,22 @@ export default connect(
   { resetPassword }
 )(FormikResetPasswordForm);
 
-const FormArea = styled(Form)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-center;
-  height: 40%;
+const Button = styled.button`
   width: 100%;
-
-  @media (min-width: 500px) {
-    width: 50%;
-  }
-
-  @media (min-width: 950px) {
-    width: 30%;
-  }
-
-  input {
-    padding: 0.5rem;
-    font-size: 16px;
-    width: 70%;
-    display: block;
-    color: #4d2d52;
-    border: 1px solid rgba(77, 45, 82, 0.8);
-    border-radius: 4px;
-    ::placeholder {
-      color: grey;
-      opacity: 0.4;
-    }
-  }
-`;
-
-const InputWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  padding-bottom: 30px;
-`;
-
-const Error = styled.p`
-  margin: 0;
-  font-size: 14px;
-  position: absolute;
-  bottom: 10%;
-  left: 15%;
-  color: #e29273;
-`;
-
-const ButtonArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  height: 320px;
-`;
-
-const TopWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
+  height: 35px;
+  border-radius: 5px;
+  color: white;
+  border: none;
+  background: #859755;
   margin-top: 20px;
-  margin-bottom: 20px;
 
-  p {
-    text-align: center;
+  cursor: pointer;
+  &:hover {
+    background: ${lighten(0.1, '#859755')};
+  }
+  transition: background 1s ease;
+
+  &:first-child {
+    margin-bottom: 15px;
   }
 `;
