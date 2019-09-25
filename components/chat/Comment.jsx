@@ -1,28 +1,30 @@
-const moment = require('moment');
 import styled from 'styled-components';
+import { theme } from '../../lib/theme';
 
-const CommentComp = ({ name, message, date, image, currentUser }) => {
-  return (
-    <Comment currentUser={currentUser}>
-      <UserData currentUser={currentUser}>
-        <PhotoWrapper>
-          <Photo>
-            <ImgProfile
-              src={image || '../../static/profile-placeholder.svg'}
-              alt="User Profile Picture"
-            />
-          </Photo>
-        </PhotoWrapper>
-        <p className="name">{name}</p>
-        <p className="time">{moment(date).fromNow()}</p>
-      </UserData>
+const moment = require('moment');
 
-      <Bubble currentUser={currentUser}>
-        <div>{message}</div>
-      </Bubble>
-    </Comment>
-  );
-};
+const CommentComp = ({
+ name, message, date, image, currentUser 
+}) => (
+  <Comment currentUser={currentUser}>
+    <UserData currentUser={currentUser}>
+      <PhotoWrapper>
+        <Photo>
+          <ImgProfile
+            src={image || '../../static/profile-placeholder.svg'}
+            alt="User Profile Picture"
+          />
+        </Photo>
+      </PhotoWrapper>
+      <p className="name">{name}</p>
+      <p className="time">{moment(date).fromNow()}</p>
+    </UserData>
+
+    <Bubble currentUser={currentUser}>
+      <div>{message}</div>
+    </Bubble>
+  </Comment>
+);
 
 const Comment = styled.div`
   display: flex;
@@ -51,7 +53,7 @@ const UserData = styled.div`
   }
 
   .time {
-    color: #c2c2c2;
+    color: ${({ theme }) => theme.grey};
   }
 `;
 
