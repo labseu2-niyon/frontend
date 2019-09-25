@@ -110,11 +110,17 @@ const ProfileInfo = props => {
             </p>
           )}
 
-          <Button small primary type="submit" loadingB={props.loading}>
-            Next
-          </Button>
-          <Skip onHandle={handleSubmit}></Skip>
-        </FormArea>
+            <button type="submit">Next</button>
+          </FormStyles>
+        </Content>
+
+        <BottomWrapper>
+          <p>
+            <Link href="/auth/social-info">
+              <a>Skip</a>
+            </Link>
+          </p>
+        </BottomWrapper>
       </Card>
     </main>
   );
@@ -145,30 +151,10 @@ const RoundIcon = styled(Upload)`
   }
 `;
 
-const FormArea = styled.form`
+const BottomWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  height: 470px;
-
-  @media (min-width: 500px) {
-    width: 50%;
-  }
-
-  textarea {
-    padding: 0.5rem;
-    font-size: 16px;
-    width: 70%;
-    height: 120px;
-    display: block;
-    color: #4d2d52;
-    border: 1px solid rgba(77, 45, 82, 0.8);
-    border-radius: 4px;
-    ::placeholder {
-      color: grey;
-      opacity: 0.4;
-    }
-  }
+  margin-bottom: 2rem;
 `;
