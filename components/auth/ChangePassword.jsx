@@ -39,7 +39,7 @@ const ChangePassword = ({
             {touched.confirm && errors.confirm && <p>{errors.confirm}</p>}
           </div>
           <button type="submit">Change my password</button>
-          {status && <h4>Your was changed successfully!</h4>}
+          {status && <h4>Your password was changed successfully!</h4>}
         </FormStyles>
       </Content>
     </Card>

@@ -1,74 +1,74 @@
 import styled from 'styled-components';
 import Link from 'next/link';
-import { Heading4, Text, Button } from '../~common/index';
-import Header from './CardHeader';
+import Header from './Header';
 import Card from './Card';
+import Content from './ContentWrapper';
+import { lighten } from 'polished';
 
 const EmailSent = () => (
   <Card>
     <Header></Header>
-    <TopWrapper>
-      <Heading4 primary>We have just emailed you a link.</Heading4>
-      <Text small>
-        Please check your email and click the secure link. You will then be able
-        to change your password.
-      </Text>
-    </TopWrapper>
-    <ButtonArea>
-      <Link href="/auth/reset-password">
-        <a>
-          <Button large secondary>
-            Try a different email
-          </Button>
-        </a>
-      </Link>
-      <Link href="/auth/login">
-        <Button large primary type="submit">
-          Back to Login
-        </Button>
-      </Link>
-    </ButtonArea>
-    <BottomWrapper>
-      <Text small>
-        If you do not see our email, please check your spam folder.
-      </Text>
-    </BottomWrapper>
+    <Content>
+      <Section>
+        <h4>We have just emailed you a secure link</h4>
+        <p>
+          Please check your email and click on the link. You will then be able
+          to change your password.
+        </p>
+      </Section>
+
+      <Section>
+        <Link href="/auth/reset-password">
+          <a>
+            <Button>Try a different email</Button>
+          </a>
+        </Link>
+        <Link href="/auth/login">
+          <Button primary>Back to login</Button>
+        </Link>
+      </Section>
+
+      <Section>
+        <p className="warning">
+          If you do not see our email, please check your spam folder.
+        </p>
+      </Section>
+    </Content>
   </Card>
 );
 
+const Button = styled.button`
+  width: 100%;
+  height: 35px;
+  border-radius: 5px;
+  color: white;
+  border: none;
+  background: ${props => (props.primary ? '#348fbb' : '#859755')};
+
+  cursor: pointer;
+  &:hover {
+    background: ${props =>
+      props.primary
+        ? `${lighten(0.1, '#348fbb')}`
+        : `${lighten(0.1, '#859755')}`};
+  }
+  transition: background 1s ease;
+
+  &:first-child {
+    margin-bottom: 15px;
+  }
+`;
+
+const Section = styled.div`
+  margin-bottom: 20px;
+
+  h4 {
+    margin-bottom: 20px;
+  }
+
+  .warning {
+    text-align: center;
+  }
+`;
+
 export default EmailSent;
-
-const ButtonArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  height: 320px;
-`;
-
-const TopWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  margin-top: 20px;
-  margin-bottom: 20px;
-
-  p {
-    text-align: center;
-  }
-`;
-
-const BottomWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  margin-bottom: 20px;
-
-  p {
-    text-align: center;
-  }
-`;
