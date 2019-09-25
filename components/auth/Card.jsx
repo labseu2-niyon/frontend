@@ -13,13 +13,12 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
 `;
 
 const AuthCard = styled.div`
   @media (max-width: 450px) {
     width: 100%;
-    margin: 0 30px;
+    margin: 1rem;
   }
 
   display: flex;
@@ -27,6 +26,7 @@ const AuthCard = styled.div`
   width: 400px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
+  margin: 5rem 0;
 `;
 
 export default Card;
