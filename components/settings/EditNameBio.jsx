@@ -4,11 +4,18 @@ import styled from 'styled-components';
 import { Form, Input, message, Button } from 'antd';
 import { theme } from '../../lib/theme';
 
-const EditNameBio = ({ user, form, userProfileInfo }) => {
+const EditNameBio = ({ user, form, userProfileInfo, jobId }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastname] = useState('');
   const [bio, setBio] = useState('');
   const [loading, setLoading] = useState(false);
+  const [job, setJobid] = useState(null);
+
+  useEffect(() => {
+    jobId && setJobid(jobId[0].id);
+  }, [jobId]);
+
+  console.log(job);
 
   const { TextArea } = Input;
   useEffect(() => {
@@ -40,7 +47,7 @@ const EditNameBio = ({ user, form, userProfileInfo }) => {
           lastName,
           bio,
           locationId: user.location.locationId,
-          jobId: '5' //not sure how to take job id from the user yet
+          jobId: job //not sure how to take job id from the user yet
         };
         setLoading(true);
         userProfileInfo(data, user.username).then(res => {

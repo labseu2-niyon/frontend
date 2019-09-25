@@ -6,7 +6,8 @@ import { Divider } from 'antd';
 import { fetchUser } from '../../redux/actions/userActions';
 import {
   userProfileInfo,
-  socialDataHandler
+  socialDataHandler,
+  getJobTitles
 } from '../../redux/actions/authActions';
 import EditLocation from './EditLocation';
 import EditMentorship from './EditMentorhip';
@@ -14,20 +15,47 @@ import EditImage from './EditImage';
 import EditSocialMedia from './EditSocialMedia';
 import EditnameBio from './EditNameBio';
 
-const EditProfile = ({ user, userProfileInfo, socialDataHandler }) => {
+const EditProfile = ({
+  user,
+  userProfileInfo,
+  socialDataHandler,
+  getJobTitles,
+  allJobs
+}) => {
+  const [jobId, setJobId] = useState(null);
   const router = useRouter();
   //console.log(user);
+  //console.log(jobId);
+  //console.log(allJobs);
 
   useEffect(() => {
     fetchUser(router.query.user);
+    getJobTitles();
   }, []);
+
+  useEffect(() => {
+    getCurrentJobId();
+  }, [allJobs, user]);
+
+  const getCurrentJobId = () => {
+    const id =
+      user &&
+      allJobs.filter(job => {
+        return job.tech_name === user.job.tech_name;
+      });
+    setJobId(id);
+  };
 
   if (user) {
     return (
       <>
         <EditImage user={user} />
         <Divider dashed />
-        <EditnameBio userProfileInfo={userProfileInfo} user={user} />
+        <EditnameBio
+          userProfileInfo={userProfileInfo}
+          user={user}
+          jobId={jobId}
+        />
         <Divider dashed />
         <EditLocation user={user} />
         <Divider dashed />
@@ -43,11 +71,13 @@ const EditProfile = ({ user, userProfileInfo, socialDataHandler }) => {
 const mapDispatchToProps = {
   fetchUser,
   userProfileInfo,
-  socialDataHandler
+  socialDataHandler,
+  getJobTitles
 };
 const mapStateToProps = state => {
   return {
-    user: state.userReducer.user
+    user: state.userReducer.user,
+    allJobs: state.authReducer.allJobs
   };
 };
 
