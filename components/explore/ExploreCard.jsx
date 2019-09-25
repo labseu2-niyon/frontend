@@ -82,8 +82,9 @@ const Wrapper = styled.div`
   cursor: pointer;
 
   @media (max-width: ${({ theme }) => theme.tabletWidth}) {
-    width: 90%;
+    width: 100%;
     padding: 0.5rem 1rem;
+    margin: 0;
   }
 
   &:hover {
@@ -101,6 +102,10 @@ const PhotoWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-right: 2rem;
+
+  @media (max-width: ${({ theme }) => theme.tabletWidth}) {
+    
+  }
 `;
 
 const Photo = styled.div`
@@ -116,7 +121,10 @@ const ImgProfile = styled.img`
   width: 100%;
 `;
 
-const Text = styled.div``;
+const Text = styled.div`
+  font-size: ${({ theme }) => theme.h4}
+`;
+
 
 const Location = styled.div`
   position: absolute;
