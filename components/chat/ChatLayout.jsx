@@ -49,15 +49,13 @@ const Main = styled.div`
   }
 `;
 
-const mapStateToProps = state => {
-  return {
-    currentUser: state.userReducer.user,
-    authReducer: state.authReducer,
-    //current connection its comming dirrectly from withAuth when user loggedin
-    currentConnectionId: state.authReducer.connectionId
-    //- not taken from redux-store anymore
-  };
-};
+const mapStateToProps = state => ({
+  currentUser: state.userReducer.user,
+  authReducer: state.authReducer,
+  // current connection its comming dirrectly from withAuth when user loggedin
+  currentConnectionId: state.authReducer.connectionId
+  // - not taken from redux-store anymore
+});
 
 export default connect(
   mapStateToProps,

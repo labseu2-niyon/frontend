@@ -5,6 +5,7 @@ import { Icon } from 'antd';
 import Link from 'next/link';
 import { Heading3 } from '../~common';
 import { profile_placeholder } from '../../lib/utils';
+import { theme } from '../../lib/theme';
 
 function ExploreCard(props) {
   const position = props.Mentor ? 'Mentor' : 'Mentee';
@@ -22,7 +23,10 @@ function ExploreCard(props) {
         <Contents>
           <PhotoWrapper>
             <Photo>
-              <ImgProfile src={props.profile_picture || profile_placeholder} alt="Profile Picture" />
+              <ImgProfile
+                src={props.profile_picture || profile_placeholder}
+                alt="Profile Picture"
+              />
             </Photo>
           </PhotoWrapper>
           <Text>
@@ -61,7 +65,7 @@ ExploreCard.propTypes = {
   last_name: PropTypes.string.isRequired,
   location: PropTypes.shape().isRequired,
   profile_picture: PropTypes.string.isRequired,
-  job: PropTypes.shape.isRequired,
+  job: PropTypes.shape.isRequired
 };
 
 const Wrapper = styled.div`
@@ -77,8 +81,8 @@ const Wrapper = styled.div`
   background: white;
   cursor: pointer;
 
-  @media (max-width: 600px) {
-    width: 100%;
+  @media (max-width: ${({ theme }) => theme.tabletWidth}) {
+    width: 90%;
     padding: 0.5rem 1rem;
   }
 
@@ -114,7 +118,6 @@ const ImgProfile = styled.img`
 
 const Text = styled.div``;
 
-
 const Location = styled.div`
   position: absolute;
   bottom: 0;
@@ -143,6 +146,13 @@ const L = styled.div`
 const Bio = styled.div`
   flex-grow: 1;
   min-width: 0;
+  display: none;
+
+  @media (min-width: ${({ theme }) => theme.mobileWidth}) and (max-width: ${({
+  theme
+}) => theme.tabletWidth}) {
+    display: contents;
+  }
 
   p {
     overflow: hidden;

@@ -110,7 +110,7 @@ const Nav = styled.div`
   box-sizing: border-box;
   padding: 2.5rem 0;
   height: 100vh;
-  width: 250px;
+  width: 20%;
   position: fixed;
   z-index: 1;
   top: 0;
