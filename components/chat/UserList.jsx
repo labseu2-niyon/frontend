@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { Card , Icon } from 'antd';
-import User from './User';
+import { Card, Icon } from 'antd';
 import Link from 'next/link';
-
+import User from './User';
+import { theme } from '../../lib/theme';
 
 const UserList = ({
  userList, socket, currentUser, currentConnectionId 
@@ -48,20 +48,20 @@ const UserList = ({
       {userList
         && currentUser
         && userList.map(user => (
-            <User
-              user={
-                user.requestUser.username !== currentUser.username
-                  ? user.requestUser
-                  : user.sentuser
-              }
-              connectionId={user.connectionId}
-              key={user.connectionId}
-              socket={socket}
-              currentUser={currentUser}
-              active={user.connectionId === chosen}
-              onClick={() => setChosen(user.connectionId)}
-            />
-          ))}
+          <User
+            user={
+              user.requestUser.username !== currentUser.username
+                ? user.requestUser
+                : user.sentuser
+            }
+            connectionId={user.connectionId}
+            key={user.connectionId}
+            socket={socket}
+            currentUser={currentUser}
+            active={user.connectionId === chosen}
+            onClick={() => setChosen(user.connectionId)}
+          />
+        ))}
     </Nav>
   );
 };
@@ -71,27 +71,21 @@ export default UserList;
 const Nav = styled(Card)`
   display: flex;
   flex-direction: column;
-  background: lightgreen;
   box-sizing: border-box;
   height: 100vh;
   width: 30%;
-  /* position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  overflow-y: hidden; */
 
-  /* &:hover {
-    overflow-y: scroll;
-  } */
   &.ant-card-bordered {
     border: none;
     box-shadow: ${({ theme }) => theme.boxShadow};
   }
 
-  @media screen and (max-width: 600px) {
-    background: lightgreen;
+  @media screen and (max-width: ${({ theme }) => theme.mobileWidth}) {
     width: 15%;
+
+    .ant-list-item-meta-content {
+      display: none;
+    }
   }
 `;
 
@@ -100,7 +94,6 @@ const Header = styled.div`
   margin: 1rem;
   display: flex;
   justify-content: left;
-  background: yellow;
 `;
 
 const IconWrapper = styled.div`
@@ -113,10 +106,10 @@ const IconWrapper = styled.div`
   background: #f5f5f5;
   color: #348fbb;
   cursor: pointer;
-  margin-right: 10px;
+  margin-right: 0.7rem;
   background-color: lightblue;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: ${({ theme }) => theme.mobileWidth}) {
     margin: 0;
   }
 
@@ -126,7 +119,7 @@ const IconWrapper = styled.div`
   }
 
   .icon {
-    margin-bottom: 2px;
+    margin-bottom: 0.1rem;
   }
 
   transition: all 1s ease;
@@ -135,13 +128,14 @@ const IconWrapper = styled.div`
 const UserInfo = styled.div`
   display: flex;
   align-items: center;
+  
   p {
     font-weight: 500;
     font-size: 1.2rem;
     margin: 0;
     text-transform: uppercase;
 
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: ${({ theme }) => theme.mobileWidth}) {
       display: none;
     }
   }
