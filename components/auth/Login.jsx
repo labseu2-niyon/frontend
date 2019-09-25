@@ -18,40 +18,40 @@ import SocialWrapper from './SocialWrapper';
 const baseUrl = getUrl();
 
 const Login = ({ errors, touched, loading, status }) => (
-  <Card>
-    <Header />
-    <Content>
-      <h3>Welcome</h3>
-      <p>Please enter your details to login:</p>
+  <div>
+    <Card>
+      <Header />
+      <Content>
+        <h3>Login</h3>
 
-      <FormStyles>
-        <div>
-          <Field name="email" type="email" placeholder="Email" />
-          {touched.email && errors.email && <p>{errors.email}</p>}
-        </div>
-        <div>
-          <Field name="password" type="password" placeholder="Password" />
-          {touched.password && errors.password && <p>{errors.password}</p>}
-        </div>
-        {status && status.msg && <p>{status.msg}</p>}
+        <FormStyles>
+          <div>
+            <Field name="email" type="email" placeholder="Email" />
+            {touched.email && errors.email && <p>{errors.email}</p>}
+          </div>
+          <div>
+            <Field name="password" type="password" placeholder="Password" />
+            {touched.password && errors.password && <p>{errors.password}</p>}
+          </div>
+          {status && status.msg && <p>{status.msg}</p>}
 
-        <button type="submit">Login</button>
-        <Link href="/auth/reset-password">
-          <a>Forgot Password?</a>
-        </Link>
-      </FormStyles>
-      <SocialWrapper baseUrl={baseUrl} type="Login"></SocialWrapper>
-
-      <BottomWrapper>
-        <p>
-          Don't have an account?{' '}
-          <Link href="/auth/signup">
-            <a>Join Now</a>
+          <button type="submit">Login</button>
+          <Link href="/auth/reset-password">
+            <a>Forgot Password?</a>
           </Link>
-        </p>
-      </BottomWrapper>
-    </Content>
-  </Card>
+        </FormStyles>
+        <SocialWrapper baseUrl={baseUrl} type="Login"></SocialWrapper>
+      </Content>
+    </Card>
+    <BottomWrapper>
+      <p>
+        Don't have an account?{' '}
+        <Link href="/auth/signup">
+          <a>Join Now</a>
+        </Link>
+      </p>
+    </BottomWrapper>
+  </div>
 );
 
 const FormikLoginForm = withFormik({
@@ -92,4 +92,5 @@ const BottomWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 2rem;
 `;

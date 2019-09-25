@@ -5,67 +5,61 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import Steps from './Steps';
-import { Heading2, Text, Button } from '../~common/index';
 import { emailSignup } from '../../redux/actions/authActions';
 import Card from './Card';
+import FormStyles from './Form';
+import Content from './ContentWrapper';
 
 const Email = ({ errors, touched, loading, status }) => {
   return (
     <main>
       <Steps stepNumber="1" />
       <Card>
-        <FormArea>
-          <Heading2 primary>Register</Heading2>
-          <InputWrapper>
-            <Field name="username" type="text" placeholder="username" />
-            {touched.username && errors.username && (
-              <Error>{errors.username}</Error>
-            )}
-          </InputWrapper>
-          <InputWrapper>
-            <Field name="email" type="email" placeholder="email" />
-            {touched.email && errors.email && <Error>{errors.email}</Error>}
-          </InputWrapper>
-          <InputWrapper>
-            <Field name="password" type="password" placeholder="password" />
-            {touched.password && errors.password && (
-              <Error>{errors.password}</Error>
-            )}
-          </InputWrapper>
-          <InputWrapper>
-            <Field
-              name="confirm"
-              type="password"
-              placeholder="confirm password"
-            />
-            {touched.confirm && errors.confirm && (
-              <Error>{errors.confirm}</Error>
-            )}
-          </InputWrapper>
+        <Content>
+          <h3>Register with email:</h3>
+          <FormStyles>
+            <div>
+              <Field name="username" type="text" placeholder="username" />
+              {touched.username && errors.username && <p>{errors.username}</p>}
+            </div>
+            <div>
+              <Field name="email" type="email" placeholder="email" />
+              {touched.email && errors.email && <p>{errors.email}</p>}
+            </div>
+            <div>
+              <Field name="password" type="password" placeholder="password" />
+              {touched.password && errors.password && <p>{errors.password}</p>}
+            </div>
+            <div>
+              <Field
+                name="confirm"
+                type="password"
+                placeholder="confirm password"
+              />
+              {touched.confirm && errors.confirm && <p>{errors.confirm}</p>}
+            </div>
 
-          <Button small primary type="submit" loadingB={loading}>
-            Register
-          </Button>
-          {/* {error && <Error style={{ textAlign: 'center' }}>{error}</Error>} */}
-        </FormArea>
-        {status && (
-          <p
-            style={{
-              margin: '5px 10px',
-              textAlign: 'center',
-              fontSize: '14px',
-              color: 'red'
-            }}
-          >
-            {status}
-          </p>
-        )}
-        <Text small>
-          <Link href="/auth/signup">
-            <a>Sign up with Social Media</a>
-          </Link>
-        </Text>
+            <button type="submit">Register</button>
+          </FormStyles>
+          {status && (
+            <p
+              style={{
+                margin: '5px 10px',
+                textAlign: 'center',
+                fontSize: '14px',
+                color: 'red'
+              }}
+            >
+              {status}
+            </p>
+          )}
+        </Content>
       </Card>
+      <BottomWrapper>
+        <Link href="/auth/signup">
+          <a>Sign up with social media</a>
+        </Link>
+      </BottomWrapper>
     </main>
   );
 };
@@ -128,49 +122,14 @@ export default connect(
   { emailSignup }
 )(FormikWithEmailForm);
 
-const FormArea = styled(Form)`
+const BottomWrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 2rem 0;
-  background: white;
-  border-radius: 5px;
+  margin-bottom: 2rem;
 
-  input {
-    padding: 0.5rem;
-    font-size: 16px;
-    width: 80%;
-    display: block;
-    color: #e8e8e8;
-    border: 2px solid #e8e8e8;
-    border-radius: 4px;
-    ::placeholder {
-      color: grey;
-      opacity: 0.4;
-    }
-
-    @media (min-width: 500px) {
-      width: 80%;
-    }
+  a {
+    color: #348fbb;
   }
-`;
-
-const InputWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  padding-bottom: 30px;
-`;
-
-const Error = styled.p`
-  margin: 0;
-  font-size: 14px;
-  position: absolute;
-  bottom: 10%;
-  left: 10%;
-  color: #e29273;
 `;

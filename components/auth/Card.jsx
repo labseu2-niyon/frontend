@@ -26,7 +26,7 @@ const AuthCard = styled.div`
   width: 400px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  margin: 5rem 0;
+  margin: 3rem 0;
 `;
 
 export default Card;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { lighten } from 'polished';
 
 const FormStyles = styled(Form)`
-  margin: 30px 0;
+  margin: 20px 0 0 0;
   display: flex;
   flex-direction: column;
 
@@ -42,7 +42,6 @@ const FormStyles = styled(Form)`
   button {
     width: 100%;
     height: 35px;
-    margin-bottom: 20px;
     border-radius: 5px;
     background: #348fbb;
     color: white;
@@ -56,6 +55,7 @@ const FormStyles = styled(Form)`
 
   a {
     align-self: center;
+    margin: 20px 0;
   }
 `;
 
