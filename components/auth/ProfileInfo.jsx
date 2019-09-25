@@ -172,7 +172,7 @@ const FormArea = styled.form`
     width: 70%;
     height: 120px;
     display: block;
-    color: #4d2d52;
+    color: ${({ theme }) => theme.inputPurple};
     border: 1px solid rgba(77, 45, 82, 0.8);
     border-radius: 4px;
     ::placeholder {

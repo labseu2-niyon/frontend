@@ -334,7 +334,7 @@ const FormArea = styled.form`
     font-size: 16px;
     width: 70%;
     display: block;
-    color: #4d2d52;
+    color: ${({ theme }) => theme.inputPurple};
     border: 1px solid rgba(77, 45, 82, 0.8);
     border-radius: 4px;
     ::placeholder {
