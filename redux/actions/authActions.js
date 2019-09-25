@@ -71,7 +71,6 @@ export const userChoise = (data, userType) => dispatch => {
 // body {username, email, password}
 export const emailSignup = data => dispatch => {
   dispatch({ type: types.REGISTER_USER_REQUEST });
-  // console.log('SignUp data: ', data);
   return axios
     .post(`${getUrl()}/user/signup`, data)
     .then(res => {

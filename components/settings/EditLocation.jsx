@@ -16,8 +16,6 @@ const Location = ({
   locationRequest,
   locationDataForSettings,
   user,
-  saveLocationId,
-  locationId,
   jobId,
   userProfileInfo
 }) => {

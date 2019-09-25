@@ -19,7 +19,7 @@ const EditPassword = ({ updatePassword, username, status, form }) => {
 
   const compareToFirstPassword = (rule, value, callback) => {
     if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
+      callback('Passwords that you enter is inconsistent!');
     } else {
       callback();
     }
@@ -83,8 +83,8 @@ const EditPassword = ({ updatePassword, username, status, form }) => {
           {getFieldDecorator('old', {
             rules: [
               {
-                type: 'string',
-                message: 'The input is not valid'
+                min: 8,
+                message: 'Password must be at least 8 characters'
               },
               {
                 required: true,
@@ -92,7 +92,7 @@ const EditPassword = ({ updatePassword, username, status, form }) => {
               }
             ]
           })(
-            <Input
+            <Input.Password
               placeholder="Old password"
               onChange={e => setOldPassword(e.target.value)}
             />
@@ -101,6 +101,10 @@ const EditPassword = ({ updatePassword, username, status, form }) => {
         <Form.Item label="Password" hasFeedback>
           {getFieldDecorator('password', {
             rules: [
+              {
+                min: 8,
+                message: 'Password must be at least 8 characters'
+              },
               {
                 required: true,
                 message: 'Please input your password!'
@@ -119,6 +123,10 @@ const EditPassword = ({ updatePassword, username, status, form }) => {
         <Form.Item label="Confirm Password" hasFeedback>
           {getFieldDecorator('confirm', {
             rules: [
+              {
+                min: 8,
+                message: 'Password must be at least 8 characters'
+              },
               {
                 required: true,
                 message: 'Please confirm your password!'

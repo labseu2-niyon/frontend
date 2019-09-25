@@ -1,5 +1,4 @@
 import withAuth from '../lib/withAuth';
-
 import ChatData from '../components/ChatData';
 import ChatLayout from '../components/chat/ChatLayout';
 

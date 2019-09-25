@@ -9,11 +9,6 @@ const EditNameBio = ({ user, form, userProfileInfo, jobId, allJobs }) => {
   const [lastName, setLastname] = useState('');
   const [bio, setBio] = useState('');
   const [loading, setLoading] = useState(false);
-  const [job, setJobid] = useState(null);
-
-  useEffect(() => {
-    jobId && setJobid(jobId[0].id);
-  }, [jobId]);
 
   const { TextArea } = Input;
   useEffect(() => {
@@ -39,13 +34,13 @@ const EditNameBio = ({ user, form, userProfileInfo, jobId, allJobs }) => {
     e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        //console.log('Received values of form: ', values);
+        console.log('Received values of form: ', values.select);
         const data = {
           firstName,
           lastName,
           bio,
           locationId: user.location.locationId,
-          jobId: job
+          jobId: values.select
         };
         setLoading(true);
         userProfileInfo(data, user.username).then(res => {
@@ -131,17 +126,15 @@ const EditNameBio = ({ user, form, userProfileInfo, jobId, allJobs }) => {
           <Form.Item label="Change Job Type" hasFeedback>
             {getFieldDecorator('select', {
               rules: [
-                { required: false, message: 'Please select your country!' }
+                { required: false, message: 'Please select your Job Type!' }
               ]
             })(
-              <Select placeholder="Please select a country">
-                {/* <Option value="china">China</Option>
-                <Option value="usa">U.S.A</Option> */}
+              <Select placeholder={user.job.tech_name}>
                 {allJobs &&
                   allJobs.map(job => (
-                    <option value={job.id} key={job.tech_name}>
+                    <Select.Option value={job.id} key={job.tech_name}>
                       {job.tech_name}
-                    </option>
+                    </Select.Option>
                   ))}
               </Select>
             )}
