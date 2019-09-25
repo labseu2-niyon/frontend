@@ -6,12 +6,14 @@ import Link from 'next/link';
 import React from 'react';
 import { connect } from 'react-redux';
 import Router from 'next/router';
-import { Heading2, Text, Button } from '../~common/index';
+import { Text } from '../~common/index';
 import { logInUser } from '../../redux/actions/authActions';
 import { getUrl } from '../../redux/actions/utils';
 import Header from './Header';
 import Card from './Card';
 import Content from './ContentWrapper';
+import { lighten } from 'polished';
+import FormStyles from './Form';
 
 const baseUrl = getUrl();
 
@@ -19,26 +21,25 @@ const Login = ({ errors, touched, loading, status }) => (
   <Card>
     <Header />
     <Content>
-      <h3>Welcome!</h3>
-      <p>Please enter your details to login</p>
-      <FormArea>
-        <InputWrapper>
-          <Field name="email" type="email" placeholder="email" />
-          {touched.email && errors.email && <Error>{errors.email}</Error>}
-        </InputWrapper>
-        <InputWrapper>
-          <Field name="password" type="password" placeholder="password" />
-          {touched.password && errors.password && (
-            <Error>{errors.password}</Error>
-          )}
-          {status && status.msg && <Error>{status.msg}</Error>}
-        </InputWrapper>
-        <InputWrapper>
-          <Button small primary type="submit" loadingB={loading}>
-            Log In
-          </Button>
-        </InputWrapper>
-      </FormArea>
+      <h3>Welcome</h3>
+      <p>Please enter your details to login:</p>
+
+      <FormStyles>
+        <div>
+          <Field name="email" type="email" placeholder="Email" />
+          {touched.email && errors.email && <p>{errors.email}</p>}
+        </div>
+        <div>
+          <Field name="password" type="password" placeholder="Password" />
+          {touched.password && errors.password && <p>{errors.password}</p>}
+        </div>
+        {status && status.msg && <p>{status.msg}</p>}
+
+        <button type="submit">Login</button>
+        <Link href="/auth/reset-password">
+          <a>Forgot Password?</a>
+        </Link>
+      </FormStyles>
       <SocialWrapper>
         <a href={`${baseUrl}/auth/facebook`}>
           <StyledImage
@@ -62,12 +63,9 @@ const Login = ({ errors, touched, loading, status }) => (
         </a>
       </SocialWrapper>
       <BottomWrapper>
-        <Text small>
-          <Link href="/auth/reset-password">Forgot Password?</Link>
-        </Text>
-        <Text small>
-          <Link href="/auth/signup">New to Niyon? Join now</Link>
-        </Text>
+        <Link href="/auth/signup">
+          <a>New to Niyon? Join now</a>
+        </Link>
       </BottomWrapper>
     </Content>
   </Card>
@@ -106,29 +104,6 @@ export default connect(
   { logInUser }
 )(FormikLoginForm);
 
-const FormArea = styled(Form)`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 30%;
-  width: 100%;
-  max-width: 200px;
-
-  input {
-    padding: 0.5rem;
-    font-size: 16px;
-    width: 100%;
-    display: block;
-    color: #4d2d52;
-    border: 1px solid rgba(77, 45, 82, 0.8);
-    border-radius: 4px;
-    ::placeholder {
-      color: grey;
-      opacity: 0.4;
-    }
-  }
-`;
-
 const SocialWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -141,36 +116,6 @@ const StyledImage = styled.img`
   width: 3rem;
   margin: 0 0.8rem;
 `;
-
-const InputWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  padding-bottom: 30px;
-`;
-
-const Error = styled.p`
-  margin: 0;
-  font-size: 14px;
-  bottom: 10%;
-  left: 15%;
-  color: #e29273;
-`;
-
-// const TopWrapper = styled.div`
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   position: relative;
-//   padding: 2rem;
-
-//   h2 {
-//     text-align: center;
-//   }
-// `;
 
 const BottomWrapper = styled.div`
   width: 100%;
