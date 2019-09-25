@@ -41,13 +41,16 @@ const Login = ({ errors, touched, loading, status }) => (
         </Link>
       </FormStyles>
       <SocialWrapper baseUrl={baseUrl} type="Login"></SocialWrapper>
+
+      <BottomWrapper>
+        <p>
+          Don't have an account?{' '}
+          <Link href="/auth/signup">
+            <a>Join Now</a>
+          </Link>
+        </p>
+      </BottomWrapper>
     </Content>
-    <BottomWrapper>
-      <div className="line"></div>
-      <Link href="/auth/signup">
-        <a>New to Niyon? Join now</a>
-      </Link>
-    </BottomWrapper>
   </Card>
 );
 
@@ -85,12 +88,9 @@ export default connect(
 )(FormikLoginForm);
 
 const BottomWrapper = styled.div`
-  .line {
-    margin-bottom: 1px solid #ededed;
-  }
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 30px;
+  margin: 30px 0;
 `;

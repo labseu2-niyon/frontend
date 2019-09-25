@@ -74,7 +74,7 @@ const Or = styled.div`
     color: #222;
     padding: 0 10px;
     background-color: #fff;
-    font-size: 13px;
+    font-size: 12px;
     line-height: 18px;
     font-weight: 500;
     letter-spacing: 1px;
