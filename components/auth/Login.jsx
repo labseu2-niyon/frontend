@@ -23,7 +23,7 @@ const Login = ({ errors, touched, loading, status }) => (
       <Header />
       <Content>
         <h3>Login</h3>
-
+        <p>Please enter your details to login:</p>
         <FormStyles>
           <div>
             <Field name="email" type="email" placeholder="Email" />

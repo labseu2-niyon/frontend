@@ -13,28 +13,28 @@ import Content from './ContentWrapper';
 const Email = ({ errors, touched, loading, status }) => {
   return (
     <main>
-      <Steps stepNumber="1" />
+      <Steps stepNumber={0} />
       <Card>
         <Content>
-          <h3>Register with email:</h3>
+          <h3>Register</h3>
           <FormStyles>
             <div>
-              <Field name="username" type="text" placeholder="username" />
+              <Field name="username" type="text" placeholder="Username" />
               {touched.username && errors.username && <p>{errors.username}</p>}
             </div>
             <div>
-              <Field name="email" type="email" placeholder="email" />
+              <Field name="email" type="email" placeholder="Email" />
               {touched.email && errors.email && <p>{errors.email}</p>}
             </div>
             <div>
-              <Field name="password" type="password" placeholder="password" />
+              <Field name="password" type="password" placeholder="Password" />
               {touched.password && errors.password && <p>{errors.password}</p>}
             </div>
             <div>
               <Field
                 name="confirm"
                 type="password"
-                placeholder="confirm password"
+                placeholder="Confirm Password"
               />
               {touched.confirm && errors.confirm && <p>{errors.confirm}</p>}
             </div>

@@ -10,7 +10,7 @@ const EmailSent = () => (
     <Header></Header>
     <Content>
       <Section>
-        <h4>We have just emailed you a secure link</h4>
+        <h4>We have just emailed you a secure link.</h4>
         <p>
           Please check your email and click on the link. You will then be able
           to change your password.
