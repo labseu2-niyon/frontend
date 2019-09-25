@@ -9,41 +9,16 @@ import Router from 'next/router';
 import { Heading2, Text, Button } from '../~common/index';
 import { logInUser } from '../../redux/actions/authActions';
 import { getUrl } from '../../redux/actions/utils';
-import Logo from '../~common/Logo';
+import Header from './CardHeader';
 import Card from './Card';
 
 const baseUrl = getUrl();
 
 const Login = ({ errors, touched, loading, status }) => (
   <Card>
-    <Logo />
-
-    <TopWrapper>
-      <Heading2 primary>Login</Heading2>
-    </TopWrapper>
+    <Header />
+    <h2>Welcome!</h2>
     <FormArea>
-      <SocialWrapper>
-        <a href={`${baseUrl}/auth/facebook`}>
-          <StyledImage
-            src="../../static/social/social-facebook.png"
-            alt="facebook"
-          />
-        </a>
-
-        <a href={`${baseUrl}/auth/github`}>
-          <StyledImage
-            src="../../static/social/social-github.png"
-            alt="github"
-          />
-        </a>
-
-        <a href={`${baseUrl}/auth/google`}>
-          <StyledImage
-            src="../../static/social/social-google.png"
-            alt="google"
-          />
-        </a>
-      </SocialWrapper>
       <InputWrapper>
         <Field name="email" type="email" placeholder="email" />
         {touched.email && errors.email && <Error>{errors.email}</Error>}
@@ -61,6 +36,22 @@ const Login = ({ errors, touched, loading, status }) => (
         </Button>
       </InputWrapper>
     </FormArea>
+    <SocialWrapper>
+      <a href={`${baseUrl}/auth/facebook`}>
+        <StyledImage
+          src="../../static/social/social-facebook.png"
+          alt="facebook"
+        />
+      </a>
+
+      <a href={`${baseUrl}/auth/github`}>
+        <StyledImage src="../../static/social/social-github.png" alt="github" />
+      </a>
+
+      <a href={`${baseUrl}/auth/google`}>
+        <StyledImage src="../../static/social/social-google.png" alt="google" />
+      </a>
+    </SocialWrapper>
     <BottomWrapper>
       <Text small>
         <Link href="/auth/reset-password">Forgot Password?</Link>
@@ -159,18 +150,18 @@ const Error = styled.p`
   color: #e29273;
 `;
 
-const TopWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  padding: 2rem;
+// const TopWrapper = styled.div`
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   position: relative;
+//   padding: 2rem;
 
-  h2 {
-    text-align: center;
-  }
-`;
+//   h2 {
+//     text-align: center;
+//   }
+// `;
 
 const BottomWrapper = styled.div`
   width: 100%;

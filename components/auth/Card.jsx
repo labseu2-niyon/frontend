@@ -28,7 +28,6 @@ const AuthCard = styled.div`
   align-items: center;
   width: 400px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
   border-radius: 5px;
 `;
 

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 import { Heading4, Text, Button } from '../~common/index';
-import Logo from '../~common/Logo';
+import Header from './CardHeader';
 import Card from './Card';
 
 const EmailSent = () => (
   <Card>
-    <Logo></Logo>
+    <Header></Header>
     <TopWrapper>
       <Heading4 primary>We have just emailed you a link.</Heading4>
       <Text small>

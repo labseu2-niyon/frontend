@@ -6,7 +6,7 @@ import { Heading3, Button } from '../~common/index';
 import { changePassword } from '../../redux/actions/authActions';
 import { theme } from '../../lib/theme';
 import PropTypes from 'prop-types';
-import Logo from '../~common/Logo';
+import Header from './CardHeader';
 import Card from './Card';
 
 const ChangePassword = ({
@@ -19,7 +19,7 @@ const ChangePassword = ({
 }) => {
   return (
     <Card>
-      <Logo />
+      <Header />
       <TopWrapper>
         <Heading3 primary>Please enter your new password.</Heading3>
       </TopWrapper>

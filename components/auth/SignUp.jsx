@@ -5,14 +5,14 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { Text, Button, Heading2 } from '../~common/index';
 import { getUrl } from '../../redux/actions/utils';
-import Logo from '../~common/Logo';
+import Header from './CardHeader';
 import Card from './Card';
 
 const baseUrl = getUrl();
 
 const SignUp = () => (
   <Card>
-    <Logo></Logo>
+    <Header></Header>
 
     <Heading2 primary>Signup</Heading2>
     <ButtonArea>

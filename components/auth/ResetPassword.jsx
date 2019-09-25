@@ -5,12 +5,12 @@ import Link from 'next/link';
 import { connect } from 'react-redux';
 import { Heading2, Text, Button } from '../~common/index';
 import { resetPassword } from '../../redux/actions/authActions';
-import Logo from '../~common/Logo';
+import Header from './CardHeader';
 import Card from './Card';
 
 const ResetPassword = ({ errors, touched, status, loading }) => (
   <Card>
-    <Logo></Logo>
+    <Header></Header>
 
     <TopWrapper>
       <Heading2 primary>Let's find your account.</Heading2>
