@@ -41,7 +41,6 @@ const Main = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  background-color: red;
 
   .ant-card-body {
     padding: 0;

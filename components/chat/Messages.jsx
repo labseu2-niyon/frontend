@@ -151,7 +151,6 @@ const Wrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 100vh;
-  background-color: lightblue;
 
   .ant-card-bordered {
     border: none;
@@ -160,22 +159,22 @@ const Wrapper = styled.div`
 
 const Window = styled(Card)`
   overflow-y: scroll;
-  margin: 15px;
+  margin: 1rem;
   padding: 0;
   flex-grow:1;
 `;
 
 const InputWrapper = styled.form`
   display: flex;
-  margin: 0 20px;
+  margin: 0 1.25rem;
   border: 1px solid #cecece;
   align-items: center;
-  border-radius: 4px;
+  border-radius: 0.25rem;
 
   input {
     border: none;
     width: 100%;
-    margin: 5px 10px;
+    margin: 0.3rem 0.6rem;
   }
 
   input::placeholder {
@@ -191,7 +190,7 @@ const InputWrapper = styled.form`
   }
 
   .icon {
-    margin-right: 10px;
+    margin-right: 0.8rem;
     color: #348fbb;
     cursor: pointer;
   }
@@ -199,20 +198,20 @@ const InputWrapper = styled.form`
 
 const Emojis = styled.div`
   position: absolute;
-  bottom: 55px;
-  right: 20px;
+  bottom: 3.4rem;
+  right: 1.25rem;
 `;
 
 const UserTyping = styled.div`
   display: flex;
   color: #c2c2c2;
   font-style: italic;
-  margin: 5px 20px;
-  padding: 0px 10px;
-  min-height: 30px;
+  margin: 0.3rem 1.25rem;
+  padding: 0 0.6rem;
+  min-height: 1.9rem;
   p {
-    margin-right: 2px;
-    margin-bottom: 0px;
-    font-size: 14px;
+    margin-right: 0.1rem;
+    margin-bottom: 0;
+    font-size: 0.9rem;
   }
 `;

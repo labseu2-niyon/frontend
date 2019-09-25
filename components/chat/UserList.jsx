@@ -106,8 +106,7 @@ const IconWrapper = styled.div`
   background: #f5f5f5;
   color: #348fbb;
   cursor: pointer;
-  margin-right: 0.7rem;
-  background-color: lightblue;
+  margin-right: 0.6rem;
 
   @media screen and (max-width: ${({ theme }) => theme.mobileWidth}) {
     margin: 0;
@@ -128,10 +127,10 @@ const IconWrapper = styled.div`
 const UserInfo = styled.div`
   display: flex;
   align-items: center;
-  
+
   p {
     font-weight: 500;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     margin: 0;
     text-transform: uppercase;
 
