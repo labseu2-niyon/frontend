@@ -31,10 +31,6 @@ const EditProfile = ({
     getCurrentJobId();
   }, []);
 
-  console.log(user);
-
-  useEffect(() => {}, [allJobs, user]);
-
   const getCurrentJobId = () => {
     const id =
       user &&
