@@ -5,6 +5,7 @@ import Steps from './StepsComp';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import { socialDataHandler } from '../../redux/actions/authActions';
+import { theme } from '../../lib/theme';
 
 const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
   const [facebook, setFacebook] = useState('');
@@ -113,7 +114,7 @@ const FormArea = styled.form`
   justify-content: space-between;
   height: 320px;
 
-  @media (min-width: 500px) {
+  @media (min-width: ${({ theme }) => theme.mobileWidth}) {
     width: 50%;
   }
 

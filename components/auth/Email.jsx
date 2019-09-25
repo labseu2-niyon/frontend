@@ -7,9 +7,9 @@ import { connect } from 'react-redux';
 import Steps from './StepsComp';
 import { Heading2, Text, Button } from '../~common/index';
 import { emailSignup } from '../../redux/actions/authActions';
+import { theme } from '../../lib/theme';
 
 const Email = ({ errors, touched, loading, status }) => {
-  //console.log(loading, status);
   return (
     <Root>
       <Steps stepNumber="1" />
@@ -165,7 +165,7 @@ const FormArea = styled(Form)`
       opacity: 0.4;
     }
 
-    @media (min-width: 500px) {
+    @media (min-width: ${({ theme }) => theme.mobileWidth}) {
       width: 80%;
     }
   }

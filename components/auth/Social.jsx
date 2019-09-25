@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { Heading2, Text, Button } from '../~common/index';
 import StepsComp from './StepsComp';
 import { socialData, saveToken } from '../../redux/actions/authActions';
+import { theme } from '../../lib/theme';
 
 const Social = ({
  errors, touched, username, saveToken 
@@ -125,7 +126,7 @@ const FormArea = styled(Form)`
   justify-content: center;
   height: 400px;
 
-  @media (min-width: 500px) {
+  @media (min-width: ${({ theme }) => theme.mobileWidth}) {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     width: 50%;
   }
@@ -143,7 +144,7 @@ const FormArea = styled(Form)`
       opacity: 0.4;
     }
 
-    @media (min-width: 500px) {
+    @media (min-width: ${({ theme }) => theme.mobileWidth}) {
       width: 50%;
     }
   }
@@ -166,7 +167,7 @@ const Error = styled.p`
   left: 3%;
   color: #e29273;
 
-  @media (min-width: 500px) {
+  @media (min-width: ${({ theme }) => theme.mobileWidth}) {
     left: 20%;
   }
 `;

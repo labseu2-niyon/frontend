@@ -10,6 +10,7 @@ import {
   userProfileInfo,
   imageUpload
 } from '../../redux/actions/authActions';
+import { theme } from '../../lib/theme';
 
 const ProfileInfo = props => {
   const [image, setImage] = useState('');
@@ -169,7 +170,7 @@ const FormArea = styled.form`
   align-items: center;
   justify-content: space-between;
 
-  @media (min-width: 500px) {
+  @media (min-width: ${({ theme }) => theme.mobileWidth}) {
     width: 50%;
   }
 

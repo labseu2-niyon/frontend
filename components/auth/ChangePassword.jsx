@@ -131,7 +131,7 @@ const FormArea = styled(Form)`
   height: 50%;
   width: 100%;
 
-  @media (min-width: 500px) {
+  @media (min-width: ${({ theme }) => theme.mobileWidth}) {
     width: 50%;
   }
 
