@@ -26,7 +26,6 @@ const Main = styled.div`
   margin-left: 25%;
   margin-right: 5%;
   width: 100%;
-  background-color: red;
 
   @media (max-width: ${({ theme }) => theme.mobileWidth}) {
     margin-left: 15%;
