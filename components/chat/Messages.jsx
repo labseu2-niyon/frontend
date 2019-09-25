@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Card, Icon } from 'antd';
 import { connect } from 'react-redux';
@@ -98,7 +98,7 @@ const Chat = ({
             />
             <Icon
               type="smile"
-              style={{ fontSize: '18px' }}
+              style={{ fontSize: '1.1rem' }}
               className="icon"
               onClick={toggleEmojis}
             />
@@ -191,7 +191,7 @@ const InputWrapper = styled.form`
 
   .icon {
     margin-right: 0.8rem;
-    color: #348fbb;
+    color: ${({ theme }) => theme.primary};
     cursor: pointer;
   }
 `;
@@ -204,7 +204,7 @@ const Emojis = styled.div`
 
 const UserTyping = styled.div`
   display: flex;
-  color: #c2c2c2;
+  color: ${({ theme }) => theme.grey};
   font-style: italic;
   margin: 0.3rem 1.25rem;
   padding: 0 0.6rem;

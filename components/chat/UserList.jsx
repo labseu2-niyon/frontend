@@ -104,7 +104,7 @@ const IconWrapper = styled.div`
   height: 2rem;
   border-radius: 50%;
   background: #f5f5f5;
-  color: #348fbb;
+  color: ${({ theme }) => theme.primary};
   cursor: pointer;
   margin-right: 0.6rem;
 
@@ -113,8 +113,8 @@ const IconWrapper = styled.div`
   }
 
   &:hover {
-    color: #ffffff;
-    background: #348fbb;
+    color: ${({ theme }) => theme.white};
+    background: ${({ theme }) => theme.primary};
   }
 
   .icon {
