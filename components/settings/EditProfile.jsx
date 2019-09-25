@@ -10,7 +10,7 @@ import {
   getJobTitles
 } from '../../redux/actions/authActions';
 import EditLocation from './EditLocation';
-import EditMentorship from './EditMentorhip';
+//import EditMentorship from './EditMentorhip';
 import EditImage from './EditImage';
 import EditSocialMedia from './EditSocialMedia';
 import EditnameBio from './EditNameBio';
@@ -30,6 +30,8 @@ const EditProfile = ({
     getJobTitles();
     getCurrentJobId();
   }, []);
+
+  console.log(user);
 
   useEffect(() => {}, [allJobs, user]);
 

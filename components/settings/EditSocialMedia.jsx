@@ -6,9 +6,9 @@ import { Form, Input, message, Button } from 'antd';
 import { theme } from '../../lib/theme';
 
 const EditSocialMedia = ({ user, form, socialDataHandler }) => {
-  const [google, setGoogle] = useState('');
-  const [github, setGithub] = useState('');
-  const [facebook, setFacebook] = useState('');
+  const [twitter, setTwitter] = useState(null);
+  const [linkedin, setLinkedin] = useState(null);
+  const [facebook, setFacebook] = useState(null);
 
   const success = () => {
     message.success('Your Profile was update succesfully');
@@ -22,12 +22,26 @@ const EditSocialMedia = ({ user, form, socialDataHandler }) => {
 
   const handleSocialMedia = e => {
     e.preventDefault();
-    const data = {
-      twitter: google, //old version in database
-      linkedin: github, //old version in database
-      facebook
-    };
-    socialDataHandler(data, user.username);
+    form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+        const data = {
+          twitter,
+          linkedin,
+          facebook
+        };
+
+        //not working yet ***************************//
+        //need some more work on backend -
+        // Problem: everytime that a user change just one of the handler needs to change them all for the endpoint to work
+        socialDataHandler(data, user.username);
+
+        form.setFieldsValue({ facebook: null });
+        form.setFieldsValue({ twitter: null });
+        form.setFieldsValue({ linkedin: null });
+        success();
+      }
+    });
   };
 
   if (user) {
@@ -37,35 +51,35 @@ const EditSocialMedia = ({ user, form, socialDataHandler }) => {
           Update Your Social Media Handlers
         </Text>
         <Form onSubmit={handleSocialMedia}>
-          <Form.Item label="Google">
-            {getFieldDecorator('google', {
+          <Form.Item label="Twitter">
+            {getFieldDecorator('twitter', {
               rules: [
                 {
                   required: false,
-                  message: 'Please input your Google handler!'
+                  message: 'Please input your Twitter handler!'
                 }
               ]
             })(
               <Input
                 // value={google}
-                placeholder="Google handler"
-                onChange={e => setGoogle(e.target.value)}
+                placeholder="Twitter handler"
+                onChange={e => setTwitter(e.target.value)}
               />
             )}
           </Form.Item>
-          <Form.Item label="Github">
-            {getFieldDecorator('github', {
+          <Form.Item label="Linkedin">
+            {getFieldDecorator('linkedin', {
               rules: [
                 {
                   required: false,
-                  message: 'Please input your Github handler!'
+                  message: 'Please input your Linkedin handler!'
                 }
               ]
             })(
               <Input
                 // value={google}
-                placeholder="GitHub handler"
-                onChange={e => setGithub(e.target.value)}
+                placeholder="Linkedin handler"
+                onChange={e => setLinkedin(e.target.value)}
               />
             )}
           </Form.Item>
