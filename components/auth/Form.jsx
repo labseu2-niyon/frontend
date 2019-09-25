@@ -7,7 +7,7 @@ const FormStyles = styled(Form)`
   display: flex;
   flex-direction: column;
 
-  div {
+  .input-wrapper {
     min-height: 65px;
     display: flex;
     flex-direction: column;
@@ -32,7 +32,7 @@ const FormStyles = styled(Form)`
     -webkit-box-shadow: 0 0 0 30px white inset !important;
   }
 
-  p {
+.error {
     color: #e29273;
     padding: 2px 0;
     margin: 0;
@@ -57,6 +57,19 @@ const FormStyles = styled(Form)`
     align-self: center;
     margin: 20px 0;
   }
+
+  textarea {
+    margin-bottom: 20px;
+    padding: 0.5rem;
+    width: 100%;
+    height: 120px;
+    display: block;
+    color: #4d2d52;
+    border: 2px solid #ededed;
+    border-radius: 4px;
+    ::placeholder {
+        color: #c2c2c2;
+    }
 `;
 
 export default FormStyles;
