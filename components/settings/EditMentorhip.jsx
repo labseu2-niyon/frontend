@@ -14,6 +14,7 @@ import {
 } from '../../redux/actions/authActions';
 import { theme } from '../../lib/theme';
 import { Button, Text } from '../~common/index';
+
 const { TabPane } = Tabs;
 
 const err = {
@@ -66,7 +67,7 @@ const JobTitle = ({
   };
 
   function callback(key) {
-    //console.log(key);
+    // console.log(key);
     setActiveTab(key);
   }
   return (
@@ -95,8 +96,8 @@ const JobTitle = ({
         <InputWrapperJob>
           <select value={jobTypeId} onChange={handleSelect}>
             <option>{user.job.tech_name}</option>
-            {allJobs &&
-              allJobs.map(job => (
+            {allJobs
+              && allJobs.map(job => (
                 <option value={job.id} key={job.tech_name}>
                   {job.tech_name}
                 </option>
@@ -195,7 +196,7 @@ const FormArea = styled.form`
     font-size: 16px;
     width: 70%;
     display: block;
-    color: #4d2d52;
+    color: ${({ theme }) => theme.inputPurple};
     border: 1px solid rgba(77, 45, 82, 0.8);
     border-radius: 4px;
     ::placeholder {
@@ -245,7 +246,7 @@ const Error = styled.p`
   position: absolute;
   bottom: 10%;
   left: 15%;
-  color: #e29273;
+  color: ${({ theme }) => theme.errorOrange};
 `;
 
 const MError = styled.p`
@@ -253,7 +254,7 @@ const MError = styled.p`
   font-size: 14px;
   bottom: 0;
   left: 26%;
-  color: #e29273;
+  color: ${({ theme }) => theme.errorOrange};
   text-align: center;
 `;
 
