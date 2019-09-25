@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Form, Input, message, Button } from 'antd';
+import { Form, Input, message, Button, Select } from 'antd';
 import { theme } from '../../lib/theme';
 
 const EditNameBio = ({ user, form, userProfileInfo, jobId }) => {
@@ -128,7 +128,18 @@ const EditNameBio = ({ user, form, userProfileInfo, jobId }) => {
               />
             )}
           </Form.Item>
-
+          <Form.Item label="Change Job Type" hasFeedback>
+            {getFieldDecorator('select', {
+              rules: [
+                { required: false, message: 'Please select your country!' }
+              ]
+            })(
+              <Select placeholder="Please select a country">
+                <Option value="china">China</Option>
+                <Option value="usa">U.S.A</Option>
+              </Select>
+            )}
+          </Form.Item>
           <Button
             type="primary"
             size="large"

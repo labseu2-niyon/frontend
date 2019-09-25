@@ -316,3 +316,7 @@ export const storeToken = (token, username) => dispatch => {
 export const saveLocationId = id => dispatch => {
   dispatch({ type: 'SAVE_LOCATION_ID', payload: id });
 };
+
+export const saveConnectionId = id => dispatch => {
+  dispatch({ type: 'SAVE_CONN', payload: id });
+};

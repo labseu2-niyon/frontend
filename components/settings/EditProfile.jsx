@@ -58,7 +58,6 @@ const EditProfile = ({
         />
         <Divider dashed />
         <EditLocation user={user} jobId={jobId} />
-        <Divider dashed />
         {/* <EditMentorship user={user} /> */}
         <Divider dashed />
         <EditSocialMedia socialDataHandler={socialDataHandler} user={user} />

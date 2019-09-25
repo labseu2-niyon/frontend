@@ -14,5 +14,7 @@
 
 export const getUrl = () => {
   const _BASE_URL = 'https://niyon-dev.herokuapp.com/api';
+  //const _BASE_URL = 'http://localhost:5001/api';
+
   return _BASE_URL;
 };

@@ -221,6 +221,11 @@ export const authReducer = (
         token: payload.token,
         emailData: { ...state.emailData, username: payload.username }
       };
+    case 'SAVE_CONN':
+      return {
+        ...state,
+        connectionId: payload
+      };
     default:
       return state;
   }
