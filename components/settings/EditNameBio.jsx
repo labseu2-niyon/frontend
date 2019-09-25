@@ -15,8 +15,6 @@ const EditNameBio = ({ user, form, userProfileInfo, jobId }) => {
     jobId && setJobid(jobId[0].id);
   }, [jobId]);
 
-  console.log(job);
-
   const { TextArea } = Input;
   useEffect(() => {
     if (user) {

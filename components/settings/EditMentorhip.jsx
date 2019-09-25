@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
@@ -37,15 +38,7 @@ const JobTitle = ({
   const [userType, setUserType] = useState('');
   const [activeTab, setActiveTab] = useState('');
   const [jobTypeId, setJobTypeId] = useState(100);
-  const [errors, setErrors] = useState({
-    jobError: false,
-    userTypeError: false,
-    helpError: false
-  });
-  const [testError, setTestError] = useState(false);
-  const [checkedValue, setCheckedValue] = useState([]);
-
-  //console.log(activeTab);
+  console.log(activeTab, userType, user);
 
   useEffect(() => {
     getJobTitles();
@@ -53,34 +46,27 @@ const JobTitle = ({
     user.mentee ? setActiveTab('1') : setActiveTab('2');
   }, []);
 
+  useEffect(() => {
+    activeTab === '1' ? setUserType('mentee') : setUserType('mentor');
+  }, [activeTab]);
+
   const handleSelect = e => {
-    if (e.target.value === 100 || e.target.value === 'Select your job title') {
-      setErrors({ jobError: true });
-      setTestError(true);
-    } else {
-      setJobTypeId(e.target.value);
-      setErrors({ jobError: false });
-      setTestError(false);
-    }
+    e.target.value === 100 || e.target.value === 'Select your job title';
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    // Handling Job type error
-    if (jobTypeId === 100) {
-      setErrors({ jobError: true });
-      setTestError(true);
-    }
 
-    !checkedValue.length && setErrors({ helpError: true });
     const data = {
       locationId,
       industryId: '1'
     };
+    console.log(data, user.username, userType);
+    // userTypeHandler(data, user.username, userType);
   };
 
   function callback(key) {
-    console.log(key);
+    //console.log(key);
     setActiveTab(key);
   }
   return (
@@ -105,7 +91,6 @@ const JobTitle = ({
         </TabPane>
       </TabsWrapper>
 
-      {errors.userTypeError && <MError>{err.userTypeError}</MError>}
       <FormArea onSubmit={handleSubmit}>
         <InputWrapperJob>
           <select value={jobTypeId} onChange={handleSelect}>
