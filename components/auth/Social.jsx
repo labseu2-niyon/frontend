@@ -165,7 +165,7 @@ const Error = styled.p`
   position: absolute;
   bottom: 6%;
   left: 3%;
-  color: #e29273;
+  color: ${({ theme }) => theme.errorOrange};
 
   @media (min-width: ${({ theme }) => theme.mobileWidth}) {
     left: 20%;

@@ -384,7 +384,7 @@ const Error = styled.p`
   position: absolute;
   bottom: 10%;
   left: 15%;
-  color: #e29273;
+  color: ${({ theme }) => theme.errorOrange};
 `;
 
 const MError = styled.p`
@@ -392,7 +392,7 @@ const MError = styled.p`
   font-size: 14px;
   bottom: 0;
   left: 26%;
-  color: #e29273;
+  color: ${({ theme }) => theme.errorOrange};
   text-align: center;
 `;
 
@@ -402,7 +402,7 @@ const OptionError = styled.p`
   position: absolute;
   bottom: 0;
   left: 15%;
-  color: #e29273;
+  color: ${({ theme }) => theme.errorOrange};
 `;
 
 const Label = styled.label`

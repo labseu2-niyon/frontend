@@ -181,7 +181,7 @@ const Error = styled.p`
   font-size: 14px;
   bottom: 10%;
   left: 15%;
-  color: #e29273;
+  color: ${({ theme }) => theme.errorOrange};
 `;
 
 const TopWrapper = styled.div`

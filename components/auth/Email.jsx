@@ -186,5 +186,5 @@ const Error = styled.p`
   position: absolute;
   bottom: 10%;
   left: 10%;
-  color: #e29273;
+  color: ${({ theme }) => theme.errorOrange};
 `;

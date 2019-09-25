@@ -141,7 +141,7 @@ const Error = styled.p`
   position: absolute;
   bottom: 10%;
   left: 15%;
-  color: #e29273;
+  color: ${({ theme }) => theme.errorOrange};
 `;
 
 const ButtonArea = styled.div`

@@ -153,5 +153,5 @@ const Error = styled.p`
   font-size: 14px;
   bottom: 10%;
   left: 26%;
-  color: #e29273;
+  color: ${({ theme }) => theme.errorOrange};
 `;
