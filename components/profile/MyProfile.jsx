@@ -23,9 +23,10 @@ function Profile(props) {
 
   const job = props.userReducer.user.job ? props.userReducer.user.job.tech_name : 'Not listed';
   const photoProps = { ...props.userReducer, profileUser: { ...props.userReducer.user, job } };
-
+ 
   return (
     <Container>
+      <title> Niyon {props.user} Profile</title>
       <PhotoSection {...photoProps} isLoggedInUser />
       <Bio {...props.userReducer} />
     </Container>

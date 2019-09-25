@@ -10,7 +10,13 @@ const ChatData = ({ fetchUser, authReducer }) => {
     fetchUser(userInfo.username);
   }, []);
 
-  return <div></div>;
+  return (
+    <div>
+      <title>
+        Niyon {userInfo.username} chats History
+      </title>
+    </div>
+  );
 };
 
 const mapStateToProps = state => ({

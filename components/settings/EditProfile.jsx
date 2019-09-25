@@ -9,6 +9,9 @@ const dummyUser = {
 const EditProfile = ({ user }) => {
   return (
     <div>
+       <title>
+        Niyon {user.username} EditProfile
+      </title>
       <Image>
         <Avatar large source={dummyUser.image} />
         <p>Edit Profile Image</p>
