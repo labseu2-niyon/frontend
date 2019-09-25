@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Form, Input, message, Button, Select } from 'antd';
 import { theme } from '../../lib/theme';
 
-const EditNameBio = ({ user, form, userProfileInfo, jobId }) => {
+const EditNameBio = ({ user, form, userProfileInfo, jobId, allJobs }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastname] = useState('');
   const [bio, setBio] = useState('');
@@ -39,7 +39,7 @@ const EditNameBio = ({ user, form, userProfileInfo, jobId }) => {
     e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        //console.log('Received values of form: ', values);
         const data = {
           firstName,
           lastName,
@@ -135,8 +135,14 @@ const EditNameBio = ({ user, form, userProfileInfo, jobId }) => {
               ]
             })(
               <Select placeholder="Please select a country">
-                <Option value="china">China</Option>
-                <Option value="usa">U.S.A</Option>
+                {/* <Option value="china">China</Option>
+                <Option value="usa">U.S.A</Option> */}
+                {allJobs &&
+                  allJobs.map(job => (
+                    <option value={job.id} key={job.tech_name}>
+                      {job.tech_name}
+                    </option>
+                  ))}
               </Select>
             )}
           </Form.Item>

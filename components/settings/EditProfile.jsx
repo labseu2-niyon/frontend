@@ -24,7 +24,7 @@ const EditProfile = ({
 }) => {
   const [jobId, setJobId] = useState(null);
   const router = useRouter();
-  //console.log(user);
+  console.log(user);
   //console.log(jobId);
   //console.log(allJobs);
 
@@ -55,6 +55,7 @@ const EditProfile = ({
           userProfileInfo={userProfileInfo}
           user={user}
           jobId={jobId}
+          allJobs={allJobs}
         />
         <Divider dashed />
         <EditLocation user={user} jobId={jobId} />
