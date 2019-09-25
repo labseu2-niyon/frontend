@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { Heading, Button } from '../~common';
+import { theme } from '../../lib/theme';
 
 const Wrapper = styled.section`
   width: 100%;
@@ -13,7 +14,7 @@ const Wrapper = styled.section`
   border-top: 1px solid #eaeaea;
   border-bottom: 1px solid #eaeaea;
 
-  @media (max-width: 600px) {
+  @media (max-width: ${({ theme }) => theme.mobileWidth}) {
     flex-direction: column;
   }
 `;

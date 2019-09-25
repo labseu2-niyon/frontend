@@ -143,11 +143,11 @@ const FormArea = styled(Form)`
   width: 100%;
   padding: 2rem 0;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${({ theme }) => theme.mobileWidth}) {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     width: 70%;
   }
-  @media (min-width: 950px) {
+  @media (min-width: ${({ theme }) => theme.tabletWidth}) {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     width: 30%;
   }
