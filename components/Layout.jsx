@@ -1,18 +1,17 @@
-import Navigation from './Navigation';
 import styled from 'styled-components';
+import Navigation from './Navigation';
 import Header from './Header';
+import { theme } from '../lib/theme';
 
-const Layout = ({ children, pageName }) => {
-  return (
-    <Wrapper>
-      <Navigation></Navigation>
-      <Main>
-        <Header pageName={pageName}></Header>
-        {children}
-      </Main>
-    </Wrapper>
-  );
-};
+const Layout = ({ children, pageName }) => (
+  <Wrapper>
+    <Navigation />
+    <Main>
+      <Header pageName={pageName} />
+      {children}
+    </Main>
+  </Wrapper>
+);
 
 const Wrapper = styled.div`
   /* background: linear-gradient(
@@ -24,13 +23,14 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.div`
-  margin-left: 300px;
-  margin-right: 50px;
+  margin-left: 25%;
+  margin-right: 5%;
   width: 100%;
+  background-color: red;
 
-  @media (max-width: 500px) {
-    margin-left: 70px;
-    margin-right: 20px;
+  @media (max-width: ${({ theme }) => theme.mobileWidth}) {
+    margin-left: 15%;
+    margin-right: 3%;
   }
 `;
 
