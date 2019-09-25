@@ -21,8 +21,7 @@ const FormStyles = styled(Form)`
     border: 2px solid #ededed;
     border-radius: 5px;
     ::placeholder {
-      color: grey;
-      opacity: 0.4;
+      color: #c2c2c2;
     }
   }
 
@@ -56,7 +55,6 @@ const FormStyles = styled(Form)`
   }
 
   a {
-    color: #348fbb;
     align-self: center;
   }
 `;

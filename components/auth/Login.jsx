@@ -12,8 +12,8 @@ import { getUrl } from '../../redux/actions/utils';
 import Header from './Header';
 import Card from './Card';
 import Content from './ContentWrapper';
-import { lighten } from 'polished';
 import FormStyles from './Form';
+import SocialWrapper from './SocialWrapper';
 
 const baseUrl = getUrl();
 
@@ -40,34 +40,14 @@ const Login = ({ errors, touched, loading, status }) => (
           <a>Forgot Password?</a>
         </Link>
       </FormStyles>
-      <SocialWrapper>
-        <a href={`${baseUrl}/auth/facebook`}>
-          <StyledImage
-            src="../../static/social/social-facebook.png"
-            alt="facebook"
-          />
-        </a>
-
-        <a href={`${baseUrl}/auth/github`}>
-          <StyledImage
-            src="../../static/social/social-github.png"
-            alt="github"
-          />
-        </a>
-
-        <a href={`${baseUrl}/auth/google`}>
-          <StyledImage
-            src="../../static/social/social-google.png"
-            alt="google"
-          />
-        </a>
-      </SocialWrapper>
-      <BottomWrapper>
-        <Link href="/auth/signup">
-          <a>New to Niyon? Join now</a>
-        </Link>
-      </BottomWrapper>
+      <SocialWrapper baseUrl={baseUrl} type="Login"></SocialWrapper>
     </Content>
+    <BottomWrapper>
+      <div className="line"></div>
+      <Link href="/auth/signup">
+        <a>New to Niyon? Join now</a>
+      </Link>
+    </BottomWrapper>
   </Card>
 );
 
@@ -104,24 +84,13 @@ export default connect(
   { logInUser }
 )(FormikLoginForm);
 
-const SocialWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1rem;
-`;
-
-const StyledImage = styled.img`
-  width: 3rem;
-  margin: 0 0.8rem;
-`;
-
 const BottomWrapper = styled.div`
+  .line {
+    margin-bottom: 1px solid #ededed;
+  }
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 `;
