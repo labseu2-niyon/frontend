@@ -197,7 +197,7 @@ export const socialDataHandler = (data, username) => dispatch => {
       dispatch({ type: types.SET_SOCIAL_MEDIA_DATA, payload: data });
       return res.data.status;
     })
-    .catch(() => {
+    .catch(e => {
       dispatch({ type: types.STOP_LOADING });
     });
 };
