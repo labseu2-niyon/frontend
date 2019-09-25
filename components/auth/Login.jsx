@@ -9,59 +9,68 @@ import Router from 'next/router';
 import { Heading2, Text, Button } from '../~common/index';
 import { logInUser } from '../../redux/actions/authActions';
 import { getUrl } from '../../redux/actions/utils';
-import Header from './CardHeader';
+import Header from './Header';
 import Card from './Card';
+import Content from './ContentWrapper';
 
 const baseUrl = getUrl();
 
 const Login = ({ errors, touched, loading, status }) => (
   <Card>
     <Header />
-    <h2>Welcome!</h2>
-    <FormArea>
-      <InputWrapper>
-        <Field name="email" type="email" placeholder="email" />
-        {touched.email && errors.email && <Error>{errors.email}</Error>}
-      </InputWrapper>
-      <InputWrapper>
-        <Field name="password" type="password" placeholder="password" />
-        {touched.password && errors.password && (
-          <Error>{errors.password}</Error>
-        )}
-        {status && status.msg && <Error>{status.msg}</Error>}
-      </InputWrapper>
-      <InputWrapper>
-        <Button small primary type="submit" loadingB={loading}>
-          Log In
-        </Button>
-      </InputWrapper>
-    </FormArea>
-    <SocialWrapper>
-      <a href={`${baseUrl}/auth/facebook`}>
-        <StyledImage
-          src="../../static/social/social-facebook.png"
-          alt="facebook"
-        />
-      </a>
+    <Content>
+      <h3>Welcome!</h3>
+      <p>Please enter your details to login</p>
+      <FormArea>
+        <InputWrapper>
+          <Field name="email" type="email" placeholder="email" />
+          {touched.email && errors.email && <Error>{errors.email}</Error>}
+        </InputWrapper>
+        <InputWrapper>
+          <Field name="password" type="password" placeholder="password" />
+          {touched.password && errors.password && (
+            <Error>{errors.password}</Error>
+          )}
+          {status && status.msg && <Error>{status.msg}</Error>}
+        </InputWrapper>
+        <InputWrapper>
+          <Button small primary type="submit" loadingB={loading}>
+            Log In
+          </Button>
+        </InputWrapper>
+      </FormArea>
+      <SocialWrapper>
+        <a href={`${baseUrl}/auth/facebook`}>
+          <StyledImage
+            src="../../static/social/social-facebook.png"
+            alt="facebook"
+          />
+        </a>
 
-      <a href={`${baseUrl}/auth/github`}>
-        <StyledImage src="../../static/social/social-github.png" alt="github" />
-      </a>
+        <a href={`${baseUrl}/auth/github`}>
+          <StyledImage
+            src="../../static/social/social-github.png"
+            alt="github"
+          />
+        </a>
 
-      <a href={`${baseUrl}/auth/google`}>
-        <StyledImage src="../../static/social/social-google.png" alt="google" />
-      </a>
-    </SocialWrapper>
-    <BottomWrapper>
-      <Text small>
-        <Link href="/auth/reset-password">Forgot Password?</Link>
-      </Text>
-      <Text small>
-        <Link href="/auth/signup">New to Niyon? Join now</Link>
-      </Text>
-    </BottomWrapper>
+        <a href={`${baseUrl}/auth/google`}>
+          <StyledImage
+            src="../../static/social/social-google.png"
+            alt="google"
+          />
+        </a>
+      </SocialWrapper>
+      <BottomWrapper>
+        <Text small>
+          <Link href="/auth/reset-password">Forgot Password?</Link>
+        </Text>
+        <Text small>
+          <Link href="/auth/signup">New to Niyon? Join now</Link>
+        </Text>
+      </BottomWrapper>
+    </Content>
   </Card>
-  // </Root>
 );
 
 const FormikLoginForm = withFormik({

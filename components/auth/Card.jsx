@@ -16,7 +16,6 @@ const Wrapper = styled.div`
   min-height: 100vh;
 `;
 
-// The authcard aligns the items inside the card and adds padding between content and border
 const AuthCard = styled.div`
   @media (max-width: 450px) {
     width: 100%;
@@ -25,7 +24,6 @@ const AuthCard = styled.div`
 
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 400px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 5px;

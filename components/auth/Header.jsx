@@ -3,8 +3,8 @@ import Flip from 'react-reveal/Flip';
 import Blob from '../svgs/Blob';
 import BlueLogo from '../svgs/BlueLogo';
 
-const CardHeader = () => (
-  <Header>
+const Header = () => (
+  <Wrapper>
     <a href="https://niyonapp.com/">
       <Title>
         <Flip>
@@ -14,10 +14,10 @@ const CardHeader = () => (
       </Title>
     </a>
     <Blob></Blob>
-  </Header>
+  </Wrapper>
 );
 
-const Header = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
@@ -25,7 +25,7 @@ const Header = styled.div`
 `;
 
 const Title = styled.div`
-  margin-left: 45px;
+  margin-left: 40px;
   display: flex;
   align-items: center;
 
@@ -35,4 +35,4 @@ const Title = styled.div`
   }
 `;
 
-export default CardHeader;
+export default Header;
