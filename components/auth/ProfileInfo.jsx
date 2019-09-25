@@ -4,12 +4,13 @@ import Router from 'next/router';
 import { connect } from 'react-redux';
 import { Text, Button, Heading2, Skip } from '../~common/index';
 import { Upload, Icon, message } from 'antd';
-import Steps from './StepsComp';
+import Steps from './Steps';
 import {
   profileData,
   userProfileInfo,
   imageUpload
 } from '../../redux/actions/authActions';
+import Card from './Card';
 
 const ProfileInfo = props => {
   const [image, setImage] = useState('');
@@ -78,40 +79,44 @@ const ProfileInfo = props => {
   };
 
   return (
-    <Root>
+    <main>
       <Steps stepNumber="4" />
-      <Heading2 primary>Choose your profile picture</Heading2>
-      <FormArea onSubmit={handleSubmit}>
-        <RoundIcon
-          name="avatar"
-          listType="picture-card"
-          className="avatar-uploader"
-          showUploadList={false}
-          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-          beforeUpload={beforeUpload}
-          onChange={handleChange}
-          style={{ fontSize: '30px', padding: '20px' }}
-        >
-          {imgUrl ? <img src={imgUrl} alt="avatar" /> : uploadButton}
-        </RoundIcon>
-        <Text small>Share more about you.</Text>
-        <textarea
-          type="text"
-          placeholder="Biography"
-          onChange={e => setBio(e.target.value)}
-          maxLength="1501"
-        />
+      <Card>
+        <Heading2 primary>Choose your profile picture</Heading2>
+        <FormArea onSubmit={handleSubmit}>
+          <RoundIcon
+            name="avatar"
+            listType="picture-card"
+            className="avatar-uploader"
+            showUploadList={false}
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            beforeUpload={beforeUpload}
+            onChange={handleChange}
+            style={{ fontSize: '30px', padding: '20px' }}
+          >
+            {imgUrl ? <img src={imgUrl} alt="avatar" /> : uploadButton}
+          </RoundIcon>
+          <Text small>Share more about you.</Text>
+          <textarea
+            type="text"
+            placeholder="Biography"
+            onChange={e => setBio(e.target.value)}
+            maxLength="1501"
+          />
 
-        {bio.length > 1500 && (
-          <p>Sorry, your biography should have a maximum of 1500 characters!</p>
-        )}
+          {bio.length > 1500 && (
+            <p>
+              Sorry, your biography should have a maximum of 1500 characters!
+            </p>
+          )}
 
-        <Button small primary type="submit" loadingB={props.loading}>
-          Next
-        </Button>
-        <Skip onHandle={handleSubmit}></Skip>
-      </FormArea>
-    </Root>
+          <Button small primary type="submit" loadingB={props.loading}>
+            Next
+          </Button>
+          <Skip onHandle={handleSubmit}></Skip>
+        </FormArea>
+      </Card>
+    </main>
   );
 };
 
@@ -127,19 +132,6 @@ export default connect(
   mapPropsToProps,
   { profileData, userProfileInfo, imageUpload }
 )(ProfileInfo);
-
-const Root = styled.div`
-  height: 97vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-
-  h2 {
-    margin: 0 20px;
-    text-align: center;
-  }
-`;
 
 const RoundIcon = styled(Upload)`
   display: flex;

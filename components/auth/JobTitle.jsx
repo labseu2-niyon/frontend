@@ -10,9 +10,10 @@ import {
   getMentorType,
   userChoise
 } from '../../redux/actions/authActions';
-import Steps from './StepsComp';
+import Steps from './Steps';
 import { theme } from '../../lib/theme';
 import { Heading2, Button, Text } from '../~common/index';
+import Card from './Card';
 
 const err = {
   jobTypeError: 'Please select a job',
@@ -35,7 +36,6 @@ const JobTitle = ({
   const [mentorPressed, setMentorPressed] = useState(false);
   const [menteePressed, setMenteePressed] = useState(false);
   const [userType, setUserType] = useState('');
-  // const [mentorError, setMentorError] = useState(true);
   const [jobTypeId, setJobTypeId] = useState(100);
   const [errors, setErrors] = useState({
     jobError: false,
@@ -91,7 +91,7 @@ const JobTitle = ({
       checkedValue.forEach(item => {
         userChoise({ mentorTypeId: Number(item), mentorId: userId }, userType);
       });
-    userTypeHandler(data, username, userType, jobTypeId).then(res => { 
+    userTypeHandler(data, username, userType, jobTypeId).then(res => {
       setErrors({ helpError: false });
       if (res === 201) {
         Router.push('/auth/profile-info');
@@ -174,63 +174,65 @@ const JobTitle = ({
     setUserType('mentor');
   };
   return (
-    <Root>
+    <main>
       <Steps stepNumber="3" />
-      <Header>
-        <Heading2 primary>Who are you?</Heading2>
-        <Text small>Choose your mentorship type.</Text>
-      </Header>
-      <MentorIcons>
-        <Custom>
-          <i
-            className="fas fa-user-graduate fa-6x"
-            style={{ color: menteePressed && theme.primary }}
-            onClick={onMenteePressed}
-          />
-          <Info>
-            <p>Mentee</p>
-            <i className="fas fa-info-circle" />
-          </Info>
-        </Custom>
-        <Custom>
-          <i
-            className="fas fa-user-cog fa-6x"
-            style={{ color: mentorPressed && theme.primary }}
-            onClick={onMentorPressed}
-          />
-          <Info>
-            <p>Mentor</p>
-            <i className="fas fa-info-circle" />
-          </Info>
-        </Custom>
-      </MentorIcons>
-      {errors.userTypeError && <MError>{err.userTypeError}</MError>}
-      <FormArea onSubmit={handleSubmit}>
-        <InputWrapperJob>
-          <select value={jobTypeId} onChange={handleSelect}>
-            <option>What is your job title?</option>
-            {allJobs &&
-              allJobs.map(job => (
-                <option value={job.id} key={job.tech_name}>
-                  {job.tech_name}
-                </option>
-              ))}
-          </select>
-          {testError && <Error>{err.jobTypeError}</Error>}
-        </InputWrapperJob>
-        {menteePressed && mentee()}
-        {mentorPressed && mentor()}
-        <Button
-          small
-          primary
-          type="submit"
-          loadingB={loading}
-          onClick={handleSubmit}
-        >
-          Next
-        </Button>
-      </FormArea>
-    </Root>
+      <Card>
+        <Header>
+          <Heading2 primary>Who are you?</Heading2>
+          <Text small>Choose your mentorship type.</Text>
+        </Header>
+        <MentorIcons>
+          <Custom>
+            <i
+              className="fas fa-user-graduate fa-6x"
+              style={{ color: menteePressed && theme.primary }}
+              onClick={onMenteePressed}
+            />
+            <Info>
+              <p>Mentee</p>
+              <i className="fas fa-info-circle" />
+            </Info>
+          </Custom>
+          <Custom>
+            <i
+              className="fas fa-user-cog fa-6x"
+              style={{ color: mentorPressed && theme.primary }}
+              onClick={onMentorPressed}
+            />
+            <Info>
+              <p>Mentor</p>
+              <i className="fas fa-info-circle" />
+            </Info>
+          </Custom>
+        </MentorIcons>
+        {errors.userTypeError && <MError>{err.userTypeError}</MError>}
+        <FormArea onSubmit={handleSubmit}>
+          <InputWrapperJob>
+            <select value={jobTypeId} onChange={handleSelect}>
+              <option>What is your job title?</option>
+              {allJobs &&
+                allJobs.map(job => (
+                  <option value={job.id} key={job.tech_name}>
+                    {job.tech_name}
+                  </option>
+                ))}
+            </select>
+            {testError && <Error>{err.jobTypeError}</Error>}
+          </InputWrapperJob>
+          {menteePressed && mentee()}
+          {mentorPressed && mentor()}
+          <Button
+            small
+            primary
+            type="submit"
+            loadingB={loading}
+            onClick={handleSubmit}
+          >
+            Next
+          </Button>
+        </FormArea>
+      </Card>
+    </main>
   );
 };
 
@@ -256,14 +258,6 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(JobTitle);
-
-const Root = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-`;
 
 const Header = styled.div`
   display: flex;

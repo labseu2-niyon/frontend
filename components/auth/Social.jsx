@@ -5,12 +5,11 @@ import * as Yup from 'yup';
 import Router, { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import { Heading2, Text, Button } from '../~common/index';
-import StepsComp from './StepsComp';
+import StepsComp from './Steps';
 import { socialData, saveToken } from '../../redux/actions/authActions';
+import Card from './Card';
 
-const Social = ({
- errors, touched, username, saveToken 
-}) => {
+const Social = ({ errors, touched, username, saveToken }) => {
   const nextRouter = useRouter();
   const newToken = nextRouter.query.token;
   if (newToken) {
@@ -21,38 +20,40 @@ const Social = ({
     saveToken(newToken, user.username);
   }
   return (
-    <Root>
+    <main>
       <StepsComp stepNumber="1" />
-      <Heading2 primary>What's your name?</Heading2>
-      <IconT className="far fa-user" />
-      <FormArea>
-        <InputWrapper>
-          <Text small>Please enter your first and last name.</Text>
-          <Field
-            name="username"
-            type="text"
-            placeholder="username"
-            value={username}
-            disabled
-          />
-        </InputWrapper>
-        <InputWrapper>
-          <Field name="firstName" type="text" placeholder="First Name" />
-          {touched.firstName && errors.firstName && (
-            <Error>{errors.firstName}</Error>
-          )}
-        </InputWrapper>
-        <InputWrapper>
-          <Field name="lastName" type="text" placeholder="Last Name" />
-          {touched.lastName && errors.lastName && (
-            <Error>{errors.lastName}</Error>
-          )}
-        </InputWrapper>
-        <Button primary small type="submit">
-          Next
-        </Button>
-      </FormArea>
-    </Root>
+      <Card>
+        <Heading2 primary>What's your name?</Heading2>
+        <IconT className="far fa-user" />
+        <FormArea>
+          <InputWrapper>
+            <Text small>Please enter your first and last name.</Text>
+            <Field
+              name="username"
+              type="text"
+              placeholder="username"
+              value={username}
+              disabled
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <Field name="firstName" type="text" placeholder="First Name" />
+            {touched.firstName && errors.firstName && (
+              <Error>{errors.firstName}</Error>
+            )}
+          </InputWrapper>
+          <InputWrapper>
+            <Field name="lastName" type="text" placeholder="Last Name" />
+            {touched.lastName && errors.lastName && (
+              <Error>{errors.lastName}</Error>
+            )}
+          </InputWrapper>
+          <Button primary small type="submit">
+            Next
+          </Button>
+        </FormArea>
+      </Card>
+    </main>
   );
 };
 
@@ -99,19 +100,6 @@ export default connect(
   mapDispatchToProps
 )(FormikWithSocialForm);
 
-const Root = styled.div`
-  height: 96vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-
-  p {
-    padding: 0 20px;
-    text-align: center;
-  }
-`;
-
 const IconT = styled.i`
   font-size: 100px;
   color: green;
@@ -124,11 +112,6 @@ const FormArea = styled(Form)`
   align-items: center;
   justify-content: center;
   height: 400px;
-
-  @media (min-width: 500px) {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    width: 50%;
-  }
 
   input {
     padding: 0.5rem;

@@ -6,37 +6,36 @@ import { connect } from 'react-redux';
 import { Heading2, Text, Button } from '../~common/index';
 import { resetPassword } from '../../redux/actions/authActions';
 import Logo from '../~common/Logo';
+import Card from './Card';
 
 const ResetPassword = ({ errors, touched, status, loading }) => (
-  <>
-    <Root>
-      <Logo></Logo>
+  <Card>
+    <Logo></Logo>
 
-      <TopWrapper>
-        <Heading2 primary>Let's find your account.</Heading2>
-        <Text small>Please enter your email.</Text>
-      </TopWrapper>
-      <FormArea>
-        <InputWrapper>
-          <Field name="email" type="email" placeholder="email" />
-          {touched.email && errors.email && <Error>{errors.email}</Error>}
-          {status && status.msg && <Error>{status.msg}</Error>}
-        </InputWrapper>
-        <ButtonArea>
-          <Button large primary loadingB={loading} type="submit">
-            Find Account
-          </Button>
-          <Link href="/auth/login">
-            <a>
-              <Button large secondary>
-                Go Back
-              </Button>
-            </a>
-          </Link>
-        </ButtonArea>
-      </FormArea>
-    </Root>
-  </>
+    <TopWrapper>
+      <Heading2 primary>Let's find your account.</Heading2>
+      <Text small>Please enter your email.</Text>
+    </TopWrapper>
+    <FormArea>
+      <InputWrapper>
+        <Field name="email" type="email" placeholder="email" />
+        {touched.email && errors.email && <Error>{errors.email}</Error>}
+        {status && status.msg && <Error>{status.msg}</Error>}
+      </InputWrapper>
+      <ButtonArea>
+        <Button large primary loadingB={loading} type="submit">
+          Find Account
+        </Button>
+        <Link href="/auth/login">
+          <a>
+            <Button large secondary>
+              Go Back
+            </Button>
+          </a>
+        </Link>
+      </ButtonArea>
+    </FormArea>
+  </Card>
 );
 
 const FormikResetPasswordForm = withFormik({
@@ -70,17 +69,6 @@ export default connect(
   mapStateToProps,
   { resetPassword }
 )(FormikResetPasswordForm);
-
-const Root = styled.div`
-  height: 85vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  a {
-    text-decoration: none;
-  }
-`;
 
 const FormArea = styled(Form)`
   display: flex;

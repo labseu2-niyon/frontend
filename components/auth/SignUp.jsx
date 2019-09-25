@@ -6,11 +6,12 @@ import Router from 'next/router';
 import { Text, Button, Heading2 } from '../~common/index';
 import { getUrl } from '../../redux/actions/utils';
 import Logo from '../~common/Logo';
+import Card from './Card';
 
 const baseUrl = getUrl();
 
 const SignUp = () => (
-  <Root>
+  <Card>
     <Logo></Logo>
 
     <Heading2 primary>Signup</Heading2>
@@ -51,7 +52,7 @@ const SignUp = () => (
     <Text small>
       Already a member? <Link href="/auth/login">Login IN</Link>{' '}
     </Text>
-  </Root>
+  </Card>
 );
 
 function mapStateToProps(state) {
@@ -62,24 +63,6 @@ export default connect(
   mapStateToProps,
   {}
 )(SignUp);
-
-const Root = styled.div`
-  height: 90vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  p {
-    text-align: center;
-    margin: 20px 0;
-  }
-  a {
-    text-decoration: none;
-  }
-  h2 {
-    padding: 2rem;
-  }
-`;
 
 const ButtonArea = styled.div`
   display: flex;

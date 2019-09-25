@@ -10,11 +10,12 @@ import { Heading2, Text, Button } from '../~common/index';
 import { logInUser } from '../../redux/actions/authActions';
 import { getUrl } from '../../redux/actions/utils';
 import Logo from '../~common/Logo';
+import Card from './Card';
 
 const baseUrl = getUrl();
 
 const Login = ({ errors, touched, loading, status }) => (
-  <Root>
+  <Card>
     <Logo />
 
     <TopWrapper>
@@ -68,7 +69,8 @@ const Login = ({ errors, touched, loading, status }) => (
         <Link href="/auth/signup">New to Niyon? Join now</Link>
       </Text>
     </BottomWrapper>
-  </Root>
+  </Card>
+  // </Root>
 );
 
 const FormikLoginForm = withFormik({
@@ -103,18 +105,6 @@ export default connect(
   mapStateToProps,
   { logInUser }
 )(FormikLoginForm);
-
-const Root = styled.div`
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  a {
-    text-decoration: none;
-  }
-  margin: 0 auto;
-`;
 
 const FormArea = styled(Form)`
   display: flex;

@@ -7,6 +7,7 @@ import { changePassword } from '../../redux/actions/authActions';
 import { theme } from '../../lib/theme';
 import PropTypes from 'prop-types';
 import Logo from '../~common/Logo';
+import Card from './Card';
 
 const ChangePassword = ({
   errors,
@@ -17,44 +18,41 @@ const ChangePassword = ({
   status
 }) => {
   return (
-    <>
-      <Root>
-        <Logo />
-        <TopWrapper>
-          <Heading3 primary>Please enter your new password.</Heading3>
-        </TopWrapper>
-        <FormArea>
-          <InputWrapper>
-            <Field name="password" type="password" placeholder="new password" />
-            {touched.password && errors.password && (
-              <Error>{errors.password}</Error>
-            )}
-          </InputWrapper>
-          <InputWrapper>
-            <Field
-              name="confirm"
-              type="password"
-              placeholder="confirm password"
-            />
-            {touched.confirm && errors.confirm && (
-              <Error>{errors.confirm}</Error>
-            )}
-          </InputWrapper>
-          {status && (
-            <h3 style={{ color: theme.secondary, textAlign: 'center' }}>
-              Password was reset succesfully !
-            </h3>
+    <Card>
+      <Logo />
+      <TopWrapper>
+        <Heading3 primary>Please enter your new password.</Heading3>
+      </TopWrapper>
+      <FormArea>
+        <InputWrapper>
+          <Field name="password" type="password" placeholder="new password" />
+          {touched.password && errors.password && (
+            <Error>{errors.password}</Error>
           )}
-          <ButtonArea>
-            <Button large primary loadingB={loading} type="submit">
-              Change my password
-            </Button>
-          </ButtonArea>
-        </FormArea>
-      </Root>
-    </>
+        </InputWrapper>
+        <InputWrapper>
+          <Field
+            name="confirm"
+            type="password"
+            placeholder="confirm password"
+          />
+          {touched.confirm && errors.confirm && <Error>{errors.confirm}</Error>}
+        </InputWrapper>
+        {status && (
+          <h3 style={{ color: theme.secondary, textAlign: 'center' }}>
+            Password was reset succesfully !
+          </h3>
+        )}
+        <ButtonArea>
+          <Button large primary loadingB={loading} type="submit">
+            Change my password
+          </Button>
+        </ButtonArea>
+      </FormArea>
+    </Card>
   );
 };
+
 const FormikChangePasswordForm = withFormik({
   mapPropsToValues({ password, confirm }) {
     return {
@@ -100,17 +98,6 @@ FormikChangePasswordForm.propTypes = {
   message: PropTypes.string,
   error: PropTypes.string
 };
-
-const Root = styled.div`
-  height: 85vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  a {
-    text-decoration: none;
-  }
-`;
 
 const FormArea = styled(Form)`
   display: flex;

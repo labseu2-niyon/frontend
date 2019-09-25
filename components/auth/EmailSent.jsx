@@ -2,55 +2,41 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { Heading4, Text, Button } from '../~common/index';
 import Logo from '../~common/Logo';
+import Card from './Card';
 
 const EmailSent = () => (
-  <>
-    <Root>
-      <Flip left>
-        <Logo></Logo>
-      </Flip>
-      <TopWrapper>
-        <Heading4 primary>We have just emailed you a link.</Heading4>
-        <Text small>
-          Please check your email and click the secure link. You will then be
-          able to change your password.
-        </Text>
-      </TopWrapper>
-      <ButtonArea>
-        <Link href="/auth/reset-password">
-          <a>
-            <Button large secondary>
-              Try a different email
-            </Button>
-          </a>
-        </Link>
-        <Link href="/auth/login">
-          <Button large primary type="submit">
-            Back to Login
+  <Card>
+    <Logo></Logo>
+    <TopWrapper>
+      <Heading4 primary>We have just emailed you a link.</Heading4>
+      <Text small>
+        Please check your email and click the secure link. You will then be able
+        to change your password.
+      </Text>
+    </TopWrapper>
+    <ButtonArea>
+      <Link href="/auth/reset-password">
+        <a>
+          <Button large secondary>
+            Try a different email
           </Button>
-        </Link>
-      </ButtonArea>
-      <BottomWrapper>
-        <Text small>
-          If you do not see our email, please check your spam folder.
-        </Text>
-      </BottomWrapper>
-    </Root>
-  </>
+        </a>
+      </Link>
+      <Link href="/auth/login">
+        <Button large primary type="submit">
+          Back to Login
+        </Button>
+      </Link>
+    </ButtonArea>
+    <BottomWrapper>
+      <Text small>
+        If you do not see our email, please check your spam folder.
+      </Text>
+    </BottomWrapper>
+  </Card>
 );
 
 export default EmailSent;
-
-const Root = styled.div`
-  height: 85vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  a {
-    text-decoration: none;
-  }
-`;
 
 const ButtonArea = styled.div`
   display: flex;

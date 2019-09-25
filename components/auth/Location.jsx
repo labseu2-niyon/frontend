@@ -2,11 +2,12 @@
 import { useState } from 'react';
 import { Text, Heading2, Button } from '../~common/index';
 import styled from 'styled-components';
-import Steps from './StepsComp';
+import Steps from './Steps';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import { locationData, locationRequest } from '../../redux/actions/authActions';
 import { Icon, AutoComplete } from 'antd';
+import Card from './Card';
 
 const Location = ({ locationRequest, locationData }) => {
   const [data, setData] = useState([]);
@@ -52,49 +53,51 @@ const Location = ({ locationRequest, locationData }) => {
   };
 
   return (
-    <Root>
+    <main>
       <Steps stepNumber="2" />
-      <Section>
-        <Heading2 primary>Where are you located?</Heading2>
-        <IconT className="fas fa-globe-europe" />
-        {/* <Icon type="pushpin" theme="twoTone" /> */}
-        <Text small>Please enter your city name.</Text>
-        <Auto>
-          <AutoComplete
-            onChange={getPossibleLocation}
-            onSelect={chosen}
-            style={{ width: 200 }}
-            dataSource={data}
-            // autoFocus={true}
-            placeholder="Your city name"
-            filterOption={(inputValue, option) =>
-              option.props.children
-                .toUpperCase()
-                .indexOf(inputValue.toUpperCase()) !== -1
-            }
-          />
-          {!select.state ? (
-            <Icon
-              type="loading"
-              style={{ marginLeft: '1em', fontSize: '1.5em' }}
+      <Card>
+        <Section>
+          <Heading2 primary>Where are you located?</Heading2>
+          <IconT className="fas fa-globe-europe" />
+          {/* <Icon type="pushpin" theme="twoTone" /> */}
+          <Text small>Please enter your city name.</Text>
+          <Auto>
+            <AutoComplete
+              onChange={getPossibleLocation}
+              onSelect={chosen}
+              style={{ width: 200 }}
+              dataSource={data}
+              // autoFocus={true}
+              placeholder="Your city name"
+              filterOption={(inputValue, option) =>
+                option.props.children
+                  .toUpperCase()
+                  .indexOf(inputValue.toUpperCase()) !== -1
+              }
             />
-          ) : (
-            <Icon
-              type="check-circle"
-              theme="twoTone"
-              twoToneColor="#52c41a"
-              style={{ marginLeft: '1em', fontSize: '1.5em' }}
-            />
-          )}
-        </Auto>
-        {warning && <Error>You need to enter a city name</Error>}
-        <InputWrapper>
-          <Button primary small onClick={handleSubmit} loadingB={loading}>
-            Next
-          </Button>
-        </InputWrapper>
-      </Section>
-    </Root>
+            {!select.state ? (
+              <Icon
+                type="loading"
+                style={{ marginLeft: '1em', fontSize: '1.5em' }}
+              />
+            ) : (
+              <Icon
+                type="check-circle"
+                theme="twoTone"
+                twoToneColor="#52c41a"
+                style={{ marginLeft: '1em', fontSize: '1.5em' }}
+              />
+            )}
+          </Auto>
+          {warning && <Error>You need to enter a city name</Error>}
+          <InputWrapper>
+            <Button primary small onClick={handleSubmit} loadingB={loading}>
+              Next
+            </Button>
+          </InputWrapper>
+        </Section>
+      </Card>
+    </main>
   );
 };
 
@@ -103,21 +106,6 @@ export default connect(
   { locationData, locationRequest }
 )(Location);
 
-const Root = styled.div`
-  height: 95vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-
-  h2 {
-    text-align: center;
-    padding: 0 20px;
-    @media (min-width: 500px) {
-      width: 50%;
-    }
-  }
-`;
 const Section = styled.section`
   padding: 5vw;
   display: flex;

@@ -4,64 +4,69 @@ import * as Yup from 'yup';
 import Link from 'next/link';
 import Router from 'next/router';
 import { connect } from 'react-redux';
-import Steps from './StepsComp';
+import Steps from './Steps';
 import { Heading2, Text, Button } from '../~common/index';
 import { emailSignup } from '../../redux/actions/authActions';
+import Card from './Card';
 
 const Email = ({ errors, touched, loading, status }) => {
   return (
-    <Root>
+    <main>
       <Steps stepNumber="1" />
-      <Heading2 primary>Register</Heading2>
-      <FormArea>
-        <InputWrapper>
-          <Field name="username" type="text" placeholder="username" />
-          {touched.username && errors.username && (
-            <Error>{errors.username}</Error>
-          )}
-        </InputWrapper>
-        <InputWrapper>
-          <Field name="email" type="email" placeholder="email" />
-          {touched.email && errors.email && <Error>{errors.email}</Error>}
-        </InputWrapper>
-        <InputWrapper>
-          <Field name="password" type="password" placeholder="password" />
-          {touched.password && errors.password && (
-            <Error>{errors.password}</Error>
-          )}
-        </InputWrapper>
-        <InputWrapper>
-          <Field
-            name="confirm"
-            type="password"
-            placeholder="confirm password"
-          />
-          {touched.confirm && errors.confirm && <Error>{errors.confirm}</Error>}
-        </InputWrapper>
+      <Card>
+        <FormArea>
+          <Heading2 primary>Register</Heading2>
+          <InputWrapper>
+            <Field name="username" type="text" placeholder="username" />
+            {touched.username && errors.username && (
+              <Error>{errors.username}</Error>
+            )}
+          </InputWrapper>
+          <InputWrapper>
+            <Field name="email" type="email" placeholder="email" />
+            {touched.email && errors.email && <Error>{errors.email}</Error>}
+          </InputWrapper>
+          <InputWrapper>
+            <Field name="password" type="password" placeholder="password" />
+            {touched.password && errors.password && (
+              <Error>{errors.password}</Error>
+            )}
+          </InputWrapper>
+          <InputWrapper>
+            <Field
+              name="confirm"
+              type="password"
+              placeholder="confirm password"
+            />
+            {touched.confirm && errors.confirm && (
+              <Error>{errors.confirm}</Error>
+            )}
+          </InputWrapper>
 
-        <Button small primary type="submit" loadingB={loading}>
-          Register
-        </Button>
-        {/* {error && <Error style={{ textAlign: 'center' }}>{error}</Error>} */}
-      </FormArea>
-      {status && (
-        <p
-          style={{
-            margin: '5px 10px',
-            textAlign: 'center',
-            fontSize: '14px',
-            color: 'red'
-          }}
-        >
-          {status}
-        </p>
-      )}
-      <Text small>
-        <Link href="/auth/signup">
-          <a>Sign up with Social Media</a>
-        </Link>
-      </Text>
-    </Root>
+          <Button small primary type="submit" loadingB={loading}>
+            Register
+          </Button>
+          {/* {error && <Error style={{ textAlign: 'center' }}>{error}</Error>} */}
+        </FormArea>
+        {status && (
+          <p
+            style={{
+              margin: '5px 10px',
+              textAlign: 'center',
+              fontSize: '14px',
+              color: 'red'
+            }}
+          >
+            {status}
+          </p>
+        )}
+        <Text small>
+          <Link href="/auth/signup">
+            <a>Sign up with Social Media</a>
+          </Link>
+        </Text>
+      </Card>
+    </main>
   );
 };
 
@@ -123,17 +128,6 @@ export default connect(
   { emailSignup }
 )(FormikWithEmailForm);
 
-const Root = styled.div`
-  height: 95vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  a {
-    text-decoration: none;
-  }
-`;
-
 const FormArea = styled(Form)`
   display: flex;
   flex-direction: column;
@@ -141,23 +135,16 @@ const FormArea = styled(Form)`
   justify-content: center;
   width: 100%;
   padding: 2rem 0;
-
-  @media (min-width: 600px) {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    width: 70%;
-  }
-  @media (min-width: 950px) {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    width: 30%;
-  }
+  background: white;
+  border-radius: 5px;
 
   input {
     padding: 0.5rem;
     font-size: 16px;
     width: 80%;
     display: block;
-    color: #4d2d52;
-    border: 1px solid rgba(77, 45, 82, 0.8);
+    color: #e8e8e8;
+    border: 2px solid #e8e8e8;
     border-radius: 4px;
     ::placeholder {
       color: grey;

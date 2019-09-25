@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Button, Heading2, Skip } from '../~common/index';
 import styled from 'styled-components';
-import Steps from './StepsComp';
+import Steps from './Steps';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import { socialDataHandler } from '../../redux/actions/authActions';
+import Card from './Card';
 
 const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
   const [facebook, setFacebook] = useState('');
@@ -27,41 +28,42 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
     });
   };
   return (
-    <Root>
+    <main>
       <Steps stepNumber="5" />
-      <Heading2 primary>Add your social media handles</Heading2>
-      <FormArea onSubmit={handleSubmit}>
-        <InputWrapper>
-          <input
-            type="text"
-            placeholder="Facebook handle"
-            onChange={e => {
-              setFacebook(e.target.value);
-            }}
-          />
-          <i className="fab fa-facebook fa-lg"></i>
-        </InputWrapper>
-        <InputWrapper>
-          <input
-            type="text"
-            placeholder="Linkedin handle"
-            onChange={e => {
-              setLinkedin(e.target.value);
-            }}
-          />
-          <i className="fab fa-linkedin fa-lg"></i>
-        </InputWrapper>
-        <InputWrapper>
-          <input
-            type="text"
-            placeholder="Twitter handle"
-            onChange={e => {
-              setTweeter(e.target.value);
-            }}
-          />
-          <i className="fab fa-twitter fa-lg"></i>
-        </InputWrapper>
-        {/* <InputWrapper>
+      <Card>
+        <Heading2 primary>Add your social media handles</Heading2>
+        <FormArea onSubmit={handleSubmit}>
+          <InputWrapper>
+            <input
+              type="text"
+              placeholder="Facebook handle"
+              onChange={e => {
+                setFacebook(e.target.value);
+              }}
+            />
+            <i className="fab fa-facebook fa-lg"></i>
+          </InputWrapper>
+          <InputWrapper>
+            <input
+              type="text"
+              placeholder="Linkedin handle"
+              onChange={e => {
+                setLinkedin(e.target.value);
+              }}
+            />
+            <i className="fab fa-linkedin fa-lg"></i>
+          </InputWrapper>
+          <InputWrapper>
+            <input
+              type="text"
+              placeholder="Twitter handle"
+              onChange={e => {
+                setTweeter(e.target.value);
+              }}
+            />
+            <i className="fab fa-twitter fa-lg"></i>
+          </InputWrapper>
+          {/* <InputWrapper>
           <input
             type="text"
             placeholder="Github handle"
@@ -72,12 +74,13 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
           <i className="fab fa-github fa-lg"></i>
         </InputWrapper> */}
 
-        <Button small primary type="submit" loadingB={loading}>
-          Next
-        </Button>
-        <Skip onHandle={() => Router.push('/')}></Skip>
-      </FormArea>
-    </Root>
+          <Button small primary type="submit" loadingB={loading}>
+            Next
+          </Button>
+          <Skip onHandle={() => Router.push('/')}></Skip>
+        </FormArea>
+      </Card>
+    </main>
   );
 };
 
