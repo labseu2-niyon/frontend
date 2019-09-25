@@ -18,6 +18,7 @@ const Location = ({
   user,
   saveLocationId,
   locationId,
+  jobId,
   userProfileInfo
 }) => {
   const [data, setData] = useState([]);
@@ -26,6 +27,11 @@ const Location = ({
   const [warning, setWarning] = useState('');
   const [input, setInput] = useState('');
   const [userType, setUserType] = useState('');
+  const [job, setJobid] = useState(null);
+
+  useEffect(() => {
+    jobId && setJobid(jobId[0].id);
+  }, [jobId]);
 
   useEffect(() => {
     user.mentee ? setUserType('mentee') : setUserType('mentor');
@@ -70,9 +76,9 @@ const Location = ({
             lastName: user.last_name,
             bio: user.bio,
             locationId: res.id,
-            jobId: '5' //not sure how to take job id from the user yet
+            jobId: job
           };
-
+          console.log(data);
           setLoading(false);
           setWarning('');
           userProfileInfo(data, user.username);

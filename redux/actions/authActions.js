@@ -155,7 +155,7 @@ export const getMentorType = () => dispatch => {
 // data: {firstName: String, lastName: String, country: String, city: String, bio: String}
 // user : username
 export const userProfileInfo = (data, user) => dispatch => {
-  console.log(data);
+  //console.log(data);
   dispatch({ type: types.USER_INFO_REQUEST });
   return axiosWithToken()
     .patch(`${getUrl()}/user/${user}/profile`, data)

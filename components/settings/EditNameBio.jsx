@@ -47,7 +47,7 @@ const EditNameBio = ({ user, form, userProfileInfo, jobId }) => {
           lastName,
           bio,
           locationId: user.location.locationId,
-          jobId: job //not sure how to take job id from the user yet
+          jobId: job
         };
         setLoading(true);
         userProfileInfo(data, user.username).then(res => {
