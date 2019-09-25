@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Link from 'next/link';
 import Router from 'next/router';
-import { Text, Button, Heading2 } from '../~common/index';
 import { getUrl } from '../../redux/actions/utils';
-import Header from './CardHeader';
+import Header from './Header';
 import Card from './Card';
+import Content from './ContentWrapper';
+import SocialWrapper from './SocialWrapper';
+import { lighten } from 'polished';
 
 const baseUrl = getUrl();
 
@@ -14,44 +16,20 @@ const SignUp = () => (
   <Card>
     <Header></Header>
 
-    <Heading2 primary>Signup</Heading2>
-    <ButtonArea>
-      <SocialWrapper>
-        <a href={`${baseUrl}/auth/facebook`}>
-          <StyledImage
-            src="../../static/social/social-facebook.png"
-            alt="facebook"
-          />
-        </a>
+    <Content>
+      <h3>Signup</h3>
+      <Button onClick={() => Router.push('/auth/email')}>Email</Button>
+      <SocialWrapper baseUrl={baseUrl} type="sign up"></SocialWrapper>
 
-        <a href={`${baseUrl}/auth/github`}>
-          <StyledImage
-            src="../../static/social/social-github.png"
-            alt="github"
-          />
-        </a>
-
-        <a href={`${baseUrl}/auth/google`}>
-          <StyledImage
-            src="../../static/social/social-google.png"
-            alt="google"
-          />
-        </a>
-      </SocialWrapper>
-      <Flip top>
-        <Button
-          large
-          outline
-          primary
-          onClick={() => Router.push('/auth/email')}
-        >
-          Email
-        </Button>
-      </Flip>
-    </ButtonArea>
-    <Text small>
-      Already a member? <Link href="/auth/login">Login IN</Link>{' '}
-    </Text>
+      <BottomWrapper>
+        <p>
+          Already a member?{' '}
+          <Link href="/auth/login">
+            <a>Login</a>
+          </Link>{' '}
+        </p>
+      </BottomWrapper>
+    </Content>
   </Card>
 );
 
@@ -64,23 +42,29 @@ export default connect(
   {}
 )(SignUp);
 
-const ButtonArea = styled.div`
+const Button = styled.button`
+  width: 100%;
+  height: 35px;
+  border-radius: 5px;
+  color: #348fbb;
+  border: 2px solid #348fbb;
+  margin: 15px 0;
+
+  cursor: pointer;
+  &:hover {
+    border: 2px solid ${lighten(0.1, '#348fbb')};
+  }
+  transition: background 1s ease;
+
+  &:first-child {
+    margin-bottom: 15px;
+  }
+`;
+
+const BottomWrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
-  height: 50%;
-  width: 90%;
-`;
-
-const SocialWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-
-const StyledImage = styled.img`
-  width: 3rem;
-  margin: 0 0.8rem;
+  margin-top: 30px;
 `;
