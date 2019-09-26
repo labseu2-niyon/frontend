@@ -6,24 +6,24 @@ import { Text } from '../~common/index';
 import { theme } from '../../lib/theme';
 
 const EditSocialMedia = ({ user, form, socialDataHandlerSettings }) => {
-  const [twitter, setTwitter] = useState(null);
-  const [linkedin, setLinkedin] = useState(null);
-  const [facebook, setFacebook] = useState(null);
-  const [github, setGithub] = useState(null);
+  // const [twitter, setTwitter] = useState(null);
+  // const [linkedin, setLinkedin] = useState(null);
+  // const [facebook, setFacebook] = useState(null);
+  // const [github, setGithub] = useState(null);
 
   useEffect(() => {
     if (user) {
       form.getFieldDecorator('twitter', {
-        initialValue: user.social_media.facebook
+        initialValue: user.social_media ? user.social_media.twitter : ''
       });
       form.getFieldDecorator('linkedin', {
-        initialValue: user.social_media.linkedin
+        initialValue: user.social_media ? user.social_media.linkedin : ''
       });
       form.getFieldDecorator('facebook', {
-        initialValue: user.social_media.facebook
+        initialValue: user.social_media ? user.social_media.facebook : ''
       });
       form.getFieldDecorator('github', {
-        initialValue: user.social_media.github
+        initialValue: user.social_media ? user.social_media.github : ''
       });
     }
   }, []);
@@ -86,7 +86,7 @@ const EditSocialMedia = ({ user, form, socialDataHandlerSettings }) => {
             })(
               <Input
                 // value={google}
-                placeholder={user.social_media.twitter}
+                placeholder={user.social_media ? user.social_media.twitter : ''}
                 onChange={e => setTwitter(e.target.value)}
               />
             )}
@@ -102,7 +102,9 @@ const EditSocialMedia = ({ user, form, socialDataHandlerSettings }) => {
             })(
               <Input
                 // value={google}
-                placeholder={user.social_media.linkedin}
+                placeholder={
+                  user.social_media ? user.social_media.linkedin : ''
+                }
                 onChange={e => setLinkedin(e.target.value)}
               />
             )}
@@ -118,7 +120,9 @@ const EditSocialMedia = ({ user, form, socialDataHandlerSettings }) => {
             })(
               <Input
                 // value={google}
-                placeholder={user.social_media.facebook}
+                placeholder={
+                  user.social_media ? user.social_media.facebook : ''
+                }
                 onChange={e => setFacebook(e.target.value)}
               />
             )}
@@ -134,7 +138,7 @@ const EditSocialMedia = ({ user, form, socialDataHandlerSettings }) => {
             })(
               <Input
                 // value={github}
-                placeholder={user.social_media.github}
+                placeholder={user.social_media ? user.social_media.github : ''}
                 onChange={e => setGithub(e.target.value)}
               />
             )}
