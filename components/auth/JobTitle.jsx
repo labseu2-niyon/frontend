@@ -14,6 +14,9 @@ import Steps from './Steps';
 import { theme } from '../../lib/theme';
 import { Heading2, Button, Text } from '../~common/index';
 import Card from './Card';
+import Content from './ContentWrapper';
+import FormStyles from './Form';
+import ToggleButton from './ToggleButton';
 
 const err = {
   jobTypeError: 'Please select a job',
@@ -85,7 +88,7 @@ const JobTitle = ({
     }
   };
 
-  //action creators request for update user information and added user choices
+  // action creators request for update user information and added user choices
   const handleRequest = data => {
     checkedValue &&
       checkedValue.forEach(item => {
@@ -175,62 +178,63 @@ const JobTitle = ({
   };
   return (
     <main>
-      <Steps stepNumber="3" />
+      <Steps stepNumber={1} />
       <Card>
-        <Header>
-          <Heading2 primary>Who are you?</Heading2>
-          <Text small>Choose your mentorship type.</Text>
-        </Header>
-        <MentorIcons>
-          <Custom>
-            <i
-              className="fas fa-user-graduate fa-6x"
-              style={{ color: menteePressed && theme.primary }}
-              onClick={onMenteePressed}
-            />
-            <Info>
-              <p>Mentee</p>
-              <i className="fas fa-info-circle" />
-            </Info>
-          </Custom>
-          <Custom>
-            <i
-              className="fas fa-user-cog fa-6x"
-              style={{ color: mentorPressed && theme.primary }}
-              onClick={onMentorPressed}
-            />
-            <Info>
-              <p>Mentor</p>
-              <i className="fas fa-info-circle" />
-            </Info>
-          </Custom>
-        </MentorIcons>
-        {errors.userTypeError && <MError>{err.userTypeError}</MError>}
-        <FormArea onSubmit={handleSubmit}>
-          <InputWrapperJob>
-            <select value={jobTypeId} onChange={handleSelect}>
-              <option>What is your job title?</option>
-              {allJobs &&
-                allJobs.map(job => (
-                  <option value={job.id} key={job.tech_name}>
-                    {job.tech_name}
-                  </option>
-                ))}
-            </select>
-            {testError && <Error>{err.jobTypeError}</Error>}
-          </InputWrapperJob>
-          {menteePressed && mentee()}
-          {mentorPressed && mentor()}
-          <Button
-            small
-            primary
-            type="submit"
-            loadingB={loading}
-            onClick={handleSubmit}
-          >
-            Next
-          </Button>
-        </FormArea>
+        <Content>
+          <h4>Job Information</h4>
+          <ToggleButton></ToggleButton>
+
+          <MentorIcons>
+            <Custom>
+              <i
+                className="fas fa-user-graduate fa-6x"
+                style={{ color: menteePressed && theme.primary }}
+                onClick={onMenteePressed}
+              />
+              <Info>
+                <p>Mentee</p>
+                <i className="fas fa-info-circle" />
+              </Info>
+            </Custom>
+            <Custom>
+              <i
+                className="fas fa-user-cog fa-6x"
+                style={{ color: mentorPressed && theme.primary }}
+                onClick={onMentorPressed}
+              />
+              <Info>
+                <p>Mentor</p>
+                <i className="fas fa-info-circle" />
+              </Info>
+            </Custom>
+          </MentorIcons>
+          {errors.userTypeError && <MError>{err.userTypeError}</MError>}
+          <FormArea onSubmit={handleSubmit}>
+            <InputWrapperJob>
+              <select value={jobTypeId} onChange={handleSelect}>
+                <option>What is your job title?</option>
+                {allJobs &&
+                  allJobs.map(job => (
+                    <option value={job.id} key={job.tech_name}>
+                      {job.tech_name}
+                    </option>
+                  ))}
+              </select>
+              {testError && <Error>{err.jobTypeError}</Error>}
+            </InputWrapperJob>
+            {menteePressed && mentee()}
+            {mentorPressed && mentor()}
+            <Button
+              small
+              primary
+              type="submit"
+              loadingB={loading}
+              onClick={handleSubmit}
+            >
+              Next
+            </Button>
+          </FormArea>
+        </Content>
       </Card>
     </main>
   );
@@ -259,17 +263,17 @@ export default connect(
   mapDispatchToProps
 )(JobTitle);
 
-const Header = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 40px 0;
-  p {
-    padding: 0 20px;
-    text-align: center;
-  }
-`;
+// const Header = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: space-between;
+//   padding: 40px 0;
+//   p {
+//     padding: 0 20px;
+//     text-align: center;
+//   }
+// `;
 
 const MentorIcons = styled.div`
   width: 85%;

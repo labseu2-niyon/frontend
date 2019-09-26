@@ -26,17 +26,21 @@ const ChangePassword = ({
         <h4>Please enter your new password:</h4>
 
         <FormStyles>
-          <div>
+          <div className="input-wrapper">
             <Field name="password" type="password" placeholder="New Password" />
-            {touched.password && errors.password && <p>{errors.password}</p>}
+            {touched.password && errors.password && (
+              <p className="error">{errors.password}</p>
+            )}
           </div>
-          <div>
+          <div className="input-wrapper">
             <Field
               name="confirm"
               type="password"
               placeholder="Confirm Passsword"
             />
-            {touched.confirm && errors.confirm && <p>{errors.confirm}</p>}
+            {touched.confirm && errors.confirm && (
+              <p className="error">{errors.confirm}</p>
+            )}
           </div>
           <button type="submit">Change my password</button>
           {status && <h4>Your password was changed successfully!</h4>}

@@ -25,15 +25,19 @@ const Login = ({ errors, touched, loading, status }) => (
         <h3>Login</h3>
         <p>Please enter your details to login:</p>
         <FormStyles>
-          <div>
+          <div className="input-wrapper">
             <Field name="email" type="email" placeholder="Email" />
-            {touched.email && errors.email && <p>{errors.email}</p>}
+            {touched.email && errors.email && (
+              <p className="error">{errors.email}</p>
+            )}
           </div>
-          <div>
+          <div className="input-wrapper">
             <Field name="password" type="password" placeholder="Password" />
-            {touched.password && errors.password && <p>{errors.password}</p>}
+            {touched.password && errors.password && (
+              <p className="error">{errors.password}</p>
+            )}
           </div>
-          {status && status.msg && <p>{status.msg}</p>}
+          {status && status.msg && <p className="error">{status.msg}</p>}
 
           <button type="submit">Login</button>
           <Link href="/auth/reset-password">

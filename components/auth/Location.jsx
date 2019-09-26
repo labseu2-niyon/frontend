@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { locationData, locationRequest } from '../../redux/actions/authActions';
 import { Icon, AutoComplete } from 'antd';
 import Card from './Card';
+import Content from './ContentWrapper';
 
 const Location = ({ locationRequest, locationData }) => {
   const [data, setData] = useState([]);
@@ -54,12 +55,11 @@ const Location = ({ locationRequest, locationData }) => {
 
   return (
     <main>
-      <Steps stepNumber="2" />
+      <Steps stepNumber={1} />
       <Card>
-        <Section>
-          <Heading2 primary>Where are you located?</Heading2>
+        <Content>
+          <h3>Where are you located?</h3>
           <IconT className="fas fa-globe-europe" />
-          {/* <Icon type="pushpin" theme="twoTone" /> */}
           <Text small>Please enter your city name.</Text>
           <Auto>
             <AutoComplete
@@ -67,7 +67,6 @@ const Location = ({ locationRequest, locationData }) => {
               onSelect={chosen}
               style={{ width: 200 }}
               dataSource={data}
-              // autoFocus={true}
               placeholder="Your city name"
               filterOption={(inputValue, option) =>
                 option.props.children
@@ -95,7 +94,7 @@ const Location = ({ locationRequest, locationData }) => {
               Next
             </Button>
           </InputWrapper>
-        </Section>
+        </Content>
       </Card>
     </main>
   );

@@ -18,25 +18,33 @@ const Email = ({ errors, touched, loading, status }) => {
         <Content>
           <h3>Register</h3>
           <FormStyles>
-            <div>
+            <div className="input-wrapper">
               <Field name="username" type="text" placeholder="Username" />
-              {touched.username && errors.username && <p>{errors.username}</p>}
+              {touched.username && errors.username && (
+                <p className="error">{errors.username}</p>
+              )}
             </div>
-            <div>
+            <div className="input-wrapper">
               <Field name="email" type="email" placeholder="Email" />
-              {touched.email && errors.email && <p>{errors.email}</p>}
+              {touched.email && errors.email && (
+                <p className="error">{errors.email}</p>
+              )}
             </div>
-            <div>
+            <div className="input-wrapper">
               <Field name="password" type="password" placeholder="Password" />
-              {touched.password && errors.password && <p>{errors.password}</p>}
+              {touched.password && errors.password && (
+                <p className="error">{errors.password}</p>
+              )}
             </div>
-            <div>
+            <div className="input-wrapper">
               <Field
                 name="confirm"
                 type="password"
                 placeholder="Confirm Password"
               />
-              {touched.confirm && errors.confirm && <p>{errors.confirm}</p>}
+              {touched.confirm && errors.confirm && (
+                <p className="error">{errors.confirm}</p>
+              )}
             </div>
 
             <button type="submit">Register</button>
