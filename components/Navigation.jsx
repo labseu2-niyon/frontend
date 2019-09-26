@@ -121,6 +121,7 @@ const Nav = styled.div`
   padding: 2.5rem 0;
   height: 100vh;
   width: 20%;
+  max-width: 300px;
   position: fixed;
   z-index: 1;
   top: 0;

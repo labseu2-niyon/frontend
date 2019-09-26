@@ -7,74 +7,24 @@ import Head from 'next/head';
 import { fetchUser } from '../../redux/actions/userActions';
 import {
   userProfileInfo,
-  socialDataHandler,
+  socialDataHandlerSettings,
   getJobTitles
 } from '../../redux/actions/authActions';
 import EditLocation from './EditLocation';
-//import EditMentorship from './EditMentorhip';
 import EditImage from './EditImage';
 import EditSocialMedia from './EditSocialMedia';
 import EditnameBio from './EditNameBio';
 
-const dummyUser = {
-  image: 'https://milan.serverlessdays.io/speakers/guillermo-rauch.jpg',
-  name: 'Guillermo Rauch'
-};
-
-const EditProfile = ({ user }) => {
-  return (
-    <div>
-      <Head>
-        <title>
-          Niyon {user.username} EditProfile
-        </title>
-      </Head>
-      <Image>
-        <Avatar large source={dummyUser.image} />
-        <p>Edit Profile Image</p>
-      </Image>
-      </div>
-        <div>
-          <p>First Name</p>
-          <input type="text" name="firstName" value={user.first_name}></input>
-        </div>
-        <div>
-          <p>Last Name</p>
-          <input type="text" name="lastName" value={user.last_name}></input>
-        </div>
-        <div>
-          <p>Username</p>
-          <input type="text" name="username" value={user.username}></input>
-        </div>
-        <div>
-          <p>Bio</p>
-          <textarea
-            name="message"
-            rows="10"
-            cols="30"
-            value={user.biography}
-          ></textarea>
-        </div>
-        <div>
-          <p>Email</p>
-          <input type="text" name="email" value={user.email}></input>
-        </div>
-
-        <h3>Location</h3>
-        <div>
-          <p>Location</p>
-          <input type="text"></input>
-        </div>
-
-        <h3>Mentorship</h3>
-        <div>
-          <p>Job Title</p>
-          <select name="jobTitle"></select>
-        </div>
-        <div>
-          <p>Mentor or Mentee Option</p>
-          <select name="jobTitle"></select>
-        </div>
+const EditProfile = ({
+  user,
+  userProfileInfo,
+  socialDataHandlerSettings,
+  getJobTitles,
+  allJobs
+}) => {
+  const [jobId, setJobId] = useState(null);
+  const router = useRouter();
+  console.log(user);
 
   useEffect(() => {
     fetchUser(router.query.user);
@@ -94,6 +44,9 @@ const EditProfile = ({ user }) => {
   if (user) {
     return (
       <>
+        <Head>
+          <title>Niyon {user.username} EditProfile</title>
+        </Head>
         <EditImage user={user} />
         <Divider dashed />
         <EditnameBio
@@ -106,7 +59,10 @@ const EditProfile = ({ user }) => {
         <EditLocation user={user} jobId={jobId} />
         {/* <EditMentorship user={user} /> */}
         <Divider dashed />
-        <EditSocialMedia socialDataHandler={socialDataHandler} user={user} />
+        <EditSocialMedia
+          socialDataHandlerSettings={socialDataHandlerSettings}
+          user={user}
+        />
       </>
     );
   }
@@ -116,7 +72,7 @@ const EditProfile = ({ user }) => {
 const mapDispatchToProps = {
   fetchUser,
   userProfileInfo,
-  socialDataHandler,
+  socialDataHandlerSettings,
   getJobTitles
 };
 const mapStateToProps = state => {

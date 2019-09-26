@@ -152,8 +152,8 @@ const Bio = styled.div`
   display: none;
 
   @media (min-width: ${({ theme }) => theme.mobileWidth}) and (max-width: ${({
-  theme
-}) => theme.tabletWidth}) {
+      theme
+    }) => theme.tabletWidth}) {
     display: contents;
   }
 
