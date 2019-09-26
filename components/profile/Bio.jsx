@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { Icon } from 'antd';
 import { Heading2 } from '../~common';
 
@@ -82,7 +80,6 @@ const Social = styled.div`
 
 function Bio(props) {
   const { user } = props;
-  const router = useRouter();
 
   const loco = user.location
     ? `${user.location.city_name}, ${user.location.country_name}`
