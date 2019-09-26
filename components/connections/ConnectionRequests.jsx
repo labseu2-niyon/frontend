@@ -27,7 +27,6 @@ const CardWrapper = styled.div`
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-end;
-    height: 100px;
     width: 100%;
 `;
 
@@ -42,6 +41,7 @@ const Person = styled.div`
   align-items: center;
   padding: 8px 6px;
   padding-right: 32px;
+  margin: 8px 0;
   margin-right: 32px;
   transition: transform 400ms;
 
@@ -72,14 +72,16 @@ const Person = styled.div`
   }
 `;
 
-function ConnectionRequests({ users }) {
+function ConnectionRequests({ requests, connections }) {
+  console.log(requests);
+
   return (
     <Wrapper>
       <Header>
         <Heading2>Connection Requests</Heading2>
       </Header>
       <CardWrapper>
-        { users.map(({ connection }) => (
+        { !requests.length ? <div>You have no connection requests</div> : requests.map(({ connection }) => (
           <Link href={{
             pathname: '/profile',
             query: { id: connection.id }
@@ -102,7 +104,8 @@ function ConnectionRequests({ users }) {
 }
 
 ConnectionRequests.propTypes = {
-  users: PropTypes.arrayOf().isRequired
+  requests: PropTypes.arrayOf().isRequired,
+  connections: PropTypes.arrayOf().isRequired
 };
 
 export default ConnectionRequests;
