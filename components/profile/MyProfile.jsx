@@ -8,7 +8,7 @@ import Bio from './MyBio';
 import { fetchUser } from '../../redux/actions/userActions';
 
 const Container = styled.main`
-    width: 100%;
+  width: 100%;
 `;
 
 function Profile(props) {
@@ -22,13 +22,21 @@ function Profile(props) {
     return <div>{props.userReducer.errorMessage}</div>;
   }
 
-  const job = props.userReducer.user.job ? props.userReducer.user.job.tech_name : 'Not listed';
-  const photoProps = { ...props.userReducer, profileUser: { ...props.userReducer.user, job } };
- 
+  const job = props.userReducer.user.job
+    ? props.userReducer.user.job.tech_name
+    : 'Not listed';
+  const photoProps = {
+    ...props.userReducer,
+    profileUser: { ...props.userReducer.user, job }
+  };
+
   return (
     <Container>
       <Head>
-        <title> Niyon {props.user} Profile</title>
+        <title>
+          Niyon | {props.userReducer.user.first_name}{' '}
+          {props.userReducer.user.last_name} | Profile
+        </title>
       </Head>
       <PhotoSection {...photoProps} isLoggedInUser />
       <Bio {...props.userReducer} />
@@ -44,4 +52,7 @@ Profile.propTypes = {
 
 const mapStateToProps = ({ userReducer }) => ({ userReducer });
 
-export default connect(mapStateToProps, { getUser: fetchUser })(Profile);
+export default connect(
+  mapStateToProps,
+  { getUser: fetchUser }
+)(Profile);

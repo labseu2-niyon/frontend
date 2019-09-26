@@ -45,7 +45,7 @@ const EditProfile = ({
     return (
       <>
         <Head>
-          <title>Niyon {user.username} EditProfile</title>
+          <title>Niyon | Settings</title>
         </Head>
         <EditImage user={user} />
         <Divider dashed />

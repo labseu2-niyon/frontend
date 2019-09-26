@@ -27,18 +27,20 @@ function ProfileList({ users }) {
   return (
     <Wrapper>
       <Head>
-        <title> Niyon Connections Page</title>
+        <title> Niyon | Connections</title>
       </Head>
       <Heading2>My Connections</Heading2>
       <Profiles>
-        { users.map((profile) => <ExploreCard {...profile} />) }
+        {users.map(profile => (
+          <ExploreCard {...profile} />
+        ))}
       </Profiles>
     </Wrapper>
   );
 }
 
 ProfileList.propTypes = {
-  users: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  users: PropTypes.arrayOf(PropTypes.shape()).isRequired
 };
 
 export default ProfileList;

@@ -33,7 +33,7 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
   return (
     <main>
       <Head>
-        <title>Niyon {username}</title>
+        <title>Niyon | {username}</title>
       </Head>
       <Steps stepNumber={2} />
       <Card>

@@ -53,11 +53,10 @@ function Explore(props) {
   };
 
   const filterJobTitle = job => {
-    
     const filteredUsers = props.users.map(user => {
       if (job === 'All') {
         return { ...user, filtered: true };
-      }else {
+      } else {
         if (user.job) {
           if (user.job.tech_name === job) {
             return { ...user, filtered: true };
@@ -66,7 +65,6 @@ function Explore(props) {
         }
         return { ...user, filtered: false };
       }
-      
     });
 
     props.setUsers(filteredUsers);
@@ -74,11 +72,9 @@ function Explore(props) {
 
   return (
     <Wrapper>
-       <Head>
-        <title>
-          Niyon Explore Page
-        </title>
-        </Head>
+      <Head>
+        <title>Niyon | Explore</title>
+      </Head>
       <TopSection
         buttons={<ExploreButtons numOfConnections={connectionsLength} />}
         src="/static/friends-online.svg"

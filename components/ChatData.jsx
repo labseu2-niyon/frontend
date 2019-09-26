@@ -14,9 +14,7 @@ const ChatData = ({ fetchUser, authReducer }) => {
   return (
     <div>
       <Head>
-        <title>
-          Niyon {userInfo.username} chats History
-        </title>
+        <title>Niyon | Chat History</title>
       </Head>
     </div>
   );

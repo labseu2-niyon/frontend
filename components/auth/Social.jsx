@@ -23,7 +23,7 @@ const Social = ({ errors, touched, username, saveToken }) => {
   return (
     <main>
       <Head>
-        <title>Niyon {username}</title>
+        <title>Niyon | {username}</title>
       </Head>
       <StepsComp stepNumber={0} />
       <Card>
