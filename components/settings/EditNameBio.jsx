@@ -129,7 +129,9 @@ const EditNameBio = ({ user, form, userProfileInfo, jobId, allJobs }) => {
                 { required: false, message: 'Please select your Job Type!' }
               ]
             })(
-              <Select placeholder={user.job.tech_name}>
+              <Select
+                placeholder={user.job ? user.job.tech_name : 'Web Developer'}
+              >
                 {allJobs &&
                   allJobs.map(job => (
                     <Select.Option value={job.id} key={job.tech_name}>

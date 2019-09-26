@@ -6,10 +6,10 @@ import { Text } from '../~common/index';
 import { theme } from '../../lib/theme';
 
 const EditSocialMedia = ({ user, form, socialDataHandlerSettings }) => {
-  const [twitter, setTwitter] = useState(null);
-  const [linkedin, setLinkedin] = useState(null);
-  const [facebook, setFacebook] = useState(null);
-  const [github, setGithub] = useState(null);
+  // const [twitter, setTwitter] = useState(null);
+  // const [linkedin, setLinkedin] = useState(null);
+  // const [facebook, setFacebook] = useState(null);
+  // const [github, setGithub] = useState(null);
 
   useEffect(() => {
     if (user) {
