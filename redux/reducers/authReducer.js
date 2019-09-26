@@ -72,6 +72,11 @@ export const authReducer = (
         locationId: payload,
         loading: false
       };
+    case 'SAVE_LOCATION_ID':
+      return {
+        ...state,
+        locationId: payload
+      };
 
     case types.SET_USER_NAME:
       return {
@@ -215,6 +220,11 @@ export const authReducer = (
         ...state,
         token: payload.token,
         emailData: { ...state.emailData, username: payload.username }
+      };
+    case 'SAVE_CONN':
+      return {
+        ...state,
+        connectionId: payload
       };
     default:
       return state;

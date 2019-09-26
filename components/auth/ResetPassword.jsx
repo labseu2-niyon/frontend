@@ -103,11 +103,11 @@ const FormArea = styled(Form)`
   height: 40%;
   width: 100%;
 
-  @media (min-width: 500px) {
+  @media (min-width: ${({ theme }) => theme.mobileWidth}) {
     width: 50%;
   }
 
-  @media (min-width: 950px) {
+  @media (min-width: ${({ theme }) => theme.tabletWidth}) {
     width: 30%;
   }
 
@@ -116,7 +116,7 @@ const FormArea = styled(Form)`
     font-size: 16px;
     width: 70%;
     display: block;
-    color: #4d2d52;
+    color: ${({ theme }) => theme.inputPurple};
     border: 1px solid rgba(77, 45, 82, 0.8);
     border-radius: 4px;
     ::placeholder {
@@ -141,7 +141,7 @@ const Error = styled.p`
   position: absolute;
   bottom: 10%;
   left: 15%;
-  color: #e29273;
+  color: ${({ theme }) => theme.errorOrange};
 `;
 
 const ButtonArea = styled.div`

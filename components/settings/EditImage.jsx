@@ -1,10 +1,10 @@
-import { useState } from 'react';
+/* eslint-disable no-unused-expressions */
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Router from 'next/router';
 import { connect } from 'react-redux';
-import { Text, Button, Heading2, Skip } from '../~common/index';
 import { Upload, Icon, message } from 'antd';
-import Steps from './StepsComp';
+import { Button } from '../~common/index';
 import {
   profileData,
   userProfileInfo,
@@ -14,9 +14,12 @@ import { theme } from '../../lib/theme';
 
 const ProfileInfo = props => {
   const [image, setImage] = useState('');
-  const [bio, setBio] = useState('');
   const [imgUrl, setImgUrl] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setImgUrl(props.user.profile_picture);
+  }, []);
 
   function getBase64(img, callback) {
     const reader = new FileReader();
@@ -58,71 +61,66 @@ const ProfileInfo = props => {
     }
   };
 
+  const success = () => {
+    message.success('Image update succesfuly');
+  };
+
+  const error = () => {
+    message.error('Error updating image');
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
-    const data = {
-      firstName: props.userInfo.userNameData.firstName,
-      lastName: props.userInfo.userNameData.lastName,
-      bio: bio,
-      locationId: props.userInfo.locationId,
-      jobId: Number(props.userInfo.userTypeData)
-    };
-    const username = props.userInfo.emailData.username;
+    image && setLoading(true);
+    const { username } = props.user;
     const imgData = new FormData();
     imgData.append('image', image);
-    image && props.imageUpload(imgData, username);
-    props.userProfileInfo(data, username).then(res => {
-      if (res === 200) {
-        Router.push('/auth/social-info');
-      }
-    });
+    image &&
+      props.imageUpload(imgData, username).then(res => {
+        //console.log(res);
+        if (res === 200) {
+          setLoading(false);
+          success();
+        } else {
+          setLoading(false);
+          error();
+        }
+        // res === 200 ? success() : error();
+      });
   };
 
   return (
-    <Root>
-      <Steps stepNumber="4" />
-      <Heading2 primary>Choose your profile picture</Heading2>
-      <FormArea onSubmit={handleSubmit}>
-        <RoundIcon
-          name="avatar"
-          listType="picture-card"
-          className="avatar-uploader"
-          showUploadList={false}
-          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-          beforeUpload={beforeUpload}
-          onChange={handleChange}
-          style={{ fontSize: '30px', padding: '20px' }}
-        >
-          {imgUrl ? <img src={imgUrl} alt="avatar" /> : uploadButton}
-        </RoundIcon>
-        <Text small>Share more about you.</Text>
-        <textarea
-          type="text"
-          placeholder="Biography"
-          onChange={e => setBio(e.target.value)}
-          maxLength="1501"
-        />
-
-        {bio.length > 1500 && (
-          <p>Sorry, your biography should have a maximum of 1500 characters!</p>
-        )}
-
-        <Button small primary type="submit" loadingB={props.loading}>
-          Next
-        </Button>
-        <Skip onHandle={handleSubmit}></Skip>
-      </FormArea>
-    </Root>
+    <Image>
+      <Root>
+        <FormArea onSubmit={handleSubmit}>
+          <RoundIcon
+            name="avatar"
+            listType="picture-card"
+            className="avatar-uploader"
+            showUploadList={false}
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            beforeUpload={beforeUpload}
+            onChange={handleChange}
+            style={{ fontSize: '30px', padding: '20px' }}
+          >
+            {imgUrl ? <img src={imgUrl} alt="avatar" /> : uploadButton}
+          </RoundIcon>
+          {image && (
+            <Button large primary type="submit" loadingB={loading}>
+              Set new Profile Image
+            </Button>
+          )}
+        </FormArea>
+      </Root>
+    </Image>
   );
 };
 
-const mapPropsToProps = state => {
-  return {
-    userInfo: state.authReducer,
-    loading: state.authReducer.loading,
-    error: state.authReducer.error
-  };
-};
+const mapPropsToProps = state => ({
+  userInfo: state.authReducer,
+  loading: state.authReducer.loading,
+  error: state.authReducer.error
+});
 
 export default connect(
   mapPropsToProps,
@@ -130,15 +128,26 @@ export default connect(
 )(ProfileInfo);
 
 const Root = styled.div`
-  height: 97vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  margin-top: 1rem;
 
   h2 {
     margin: 0 20px;
     text-align: center;
+  }
+`;
+
+const Image = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 0;
+  p {
+    margin-left: 1rem;
   }
 `;
 
@@ -160,7 +169,6 @@ const FormArea = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 470px;
 
   @media (min-width: ${({ theme }) => theme.mobileWidth}) {
     width: 50%;

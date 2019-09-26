@@ -144,7 +144,7 @@ const FormArea = styled(Form)`
     font-size: 16px;
     width: 100%;
     display: block;
-    color: #4d2d52;
+    color: ${({ theme }) => theme.inputPurple};
     border: 1px solid rgba(77, 45, 82, 0.8);
     border-radius: 4px;
     ::placeholder {
@@ -181,7 +181,7 @@ const Error = styled.p`
   font-size: 14px;
   bottom: 10%;
   left: 15%;
-  color: #e29273;
+  color: ${({ theme }) => theme.errorOrange};
 `;
 
 const TopWrapper = styled.div`

@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { lighten, darken } from 'polished';
 import { PacmanLoader } from 'react-spinners';
-
 import { css } from '@emotion/core';
 import { theme } from '../../lib/theme';
 
@@ -32,7 +31,7 @@ const B = styled.button`
     outline: none;
   }
 
-  @media (max-width: ${({ theme }) => theme.mobileWidth || '500px'}) {
+  @media (max-width: ${({ theme }) => theme.mobileWidth}) {
     width: ${({ width }) => width || '100%'};
   }
 `;
