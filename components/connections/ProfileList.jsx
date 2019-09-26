@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Head from 'next/head';
 import { Heading2 } from '../~common';
 import ExploreCard from '../explore/ExploreCard';
 
@@ -25,6 +26,9 @@ const Profiles = styled.div`
 function ProfileList({ users }) {
   return (
     <Wrapper>
+      <Head>
+        <title> Niyon Connections Page</title>
+      </Head>
       <Heading2>My Connections</Heading2>
       <Profiles>
         { users.map((profile) => <ExploreCard {...profile} />) }

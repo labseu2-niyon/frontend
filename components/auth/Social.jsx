@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import * as Yup from 'yup';
 import Router, { useRouter } from 'next/router';
 import { connect } from 'react-redux';
+import Head from 'next/head';
 import { Heading2, Text, Button } from '../~common/index';
 import StepsComp from './StepsComp';
 import { socialData, saveToken } from '../../redux/actions/authActions';
@@ -22,6 +23,11 @@ const Social = ({
   }
   return (
     <Root>
+      <Head>
+        <title>
+          Niyon {username}
+        </title>
+      </Head>
       <StepsComp stepNumber="1" />
       <Heading2 primary>What's your name?</Heading2>
       <IconT className="far fa-user" />

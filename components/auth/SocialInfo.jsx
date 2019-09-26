@@ -5,6 +5,7 @@ import Steps from './StepsComp';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import { socialDataHandler } from '../../redux/actions/authActions';
+import Head from 'next/head';
 
 const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
   const [facebook, setFacebook] = useState('');
@@ -28,6 +29,11 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
   };
   return (
     <Root>
+       <Head>
+        <title>
+          Niyon {username}
+        </title>
+        </Head>
       <Steps stepNumber="5" />
       <Heading2 primary>Add your social media handles</Heading2>
       <FormArea onSubmit={handleSubmit}>

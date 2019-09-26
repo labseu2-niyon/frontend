@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useEffect } from 'react';
+import Head from 'next/head';
 import TopSection from '../TopSection';
 import SearchBox from './SearchBox';
 import ProfileList from './ProfileList';
@@ -73,6 +74,11 @@ function Explore(props) {
 
   return (
     <Wrapper>
+       <Head>
+        <title>
+          Niyon Explore Page
+        </title>
+        </Head>
       <TopSection
         buttons={<ExploreButtons numOfConnections={connectionsLength} />}
         src="/static/friends-online.svg"

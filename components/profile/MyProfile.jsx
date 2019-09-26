@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Head from 'next/head';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import PhotoSection from './PhotoSection';
@@ -26,7 +27,9 @@ function Profile(props) {
  
   return (
     <Container>
-      <title> Niyon {props.user} Profile</title>
+      <Head>
+        <title> Niyon {props.user} Profile</title>
+      </Head>
       <PhotoSection {...photoProps} isLoggedInUser />
       <Bio {...props.userReducer} />
     </Container>
