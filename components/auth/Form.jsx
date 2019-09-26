@@ -22,7 +22,7 @@ const FormStyles = styled(Form)`
   }
   }
 
-  input {
+  input, select {
     padding: 5px;
     width: 100%;
     display: block;
