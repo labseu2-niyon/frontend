@@ -135,7 +135,6 @@ function Bio(props) {
               </button>
             </a>
           )}
-
           {github.length > 0 && (
             <a href={github} target="_blank">
               <button type="button">
