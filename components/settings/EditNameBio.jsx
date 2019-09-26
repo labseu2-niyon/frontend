@@ -10,6 +10,8 @@ const EditNameBio = ({ user, form, userProfileInfo, jobId, allJobs }) => {
   const [bio, setBio] = useState('');
   const [loading, setLoading] = useState(false);
 
+  console.log(user);
+
   const { TextArea } = Input;
   useEffect(() => {
     if (user) {

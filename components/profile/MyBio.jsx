@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Icon } from 'antd';
@@ -81,16 +81,23 @@ const Social = styled.div`
 `;
 
 function Bio(props) {
+  const [social, setSocial] = useState();
   const { user } = props;
   console.log(user);
   const loco = user.location
     ? `${user.location.city_name}, ${user.location.country_name}`
     : 'No location given';
 
-  const facebook = user.social_media ? `${user.social_media.facebook}` : '';
-  const github = user.social_media ? `${user.social_media.github}` : '';
-  const linkedin = user.social_media ? `${user.social_media.linkedin}` : '';
-  const twitter = user.social_media ? `${user.social_media.twitter}` : '';
+  const facebook = user.social_media.facebook
+    ? `${user.social_media.facebook}`
+    : '';
+  const github = user.social_media.github ? `${user.social_media.github}` : '';
+  const linkedin = user.social_media.linkedin
+    ? `${user.social_media.linkedin}`
+    : '';
+  const twitter = user.social_media.twitter
+    ? `${user.social_media.twitter}`
+    : '';
 
   return (
     <Wrapper>
@@ -108,26 +115,35 @@ function Bio(props) {
         <Heading2>Bio</Heading2>
         <p>{user.biography}</p>
         <Social>
-          <a href={linkedin} target="_blank">
-            <button type="button">
-              <Icon type="linkedin" size="large" />
-            </button>
-          </a>
-          <a href={twitter} target="_blank">
-            <button type="button">
-              <Icon type="twitter" />
-            </button>
-          </a>
-          <a href={facebook} target="_blank">
-            <button type="button">
-              <Icon type="facebook" />
-            </button>
-          </a>
-          <a href={github} target="_blank">
-            <button type="button">
-              <Icon type="github" />
-            </button>
-          </a>
+          {linkedin.length > 0 && (
+            <a href={linkedin} target="_blank">
+              <button type="button">
+                <Icon type="linkedin" size="large" />
+              </button>
+            </a>
+          )}
+          {twitter.length > 0 && (
+            <a href={twitter} target="_blank">
+              <button type="button">
+                <Icon type="twitter" />
+              </button>
+            </a>
+          )}
+          {facebook.length > 0 && (
+            <a href={facebook} target="_blank">
+              <button type="button">
+                <Icon type="facebook" />
+              </button>
+            </a>
+          )}
+
+          {github.length > 0 && (
+            <a href={github} target="_blank">
+              <button type="button">
+                <Icon type="github" />
+              </button>
+            </a>
+          )}
         </Social>
       </BioSection>
     </Wrapper>

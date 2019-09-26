@@ -88,19 +88,18 @@ function Bio(props) {
     ? `${user.location.city_name}, ${user.location.country_name}`
     : 'No location given';
 
-  const facebook = user.Social_medias.length
+  const facebook = user.Social_medias[0].facebook
     ? `${user.Social_medias[0].facebook}`
     : '';
-  const github = user.Social_medias.length
+  const github = user.Social_medias[0].github
     ? `${user.Social_medias[0].github}`
     : '';
-  const linkedin = user.Social_medias.length
+  const linkedin = user.Social_medias[0].linkedin
     ? `${user.Social_medias[0].linkedin}`
     : '';
-  const twitter = user.Social_medias.length
+  const twitter = user.Social_medias[0].twitter
     ? `${user.Social_medias[0].twitter}`
     : '';
-  console.log(github, linkedin);
 
   return (
     <Wrapper>
@@ -118,27 +117,35 @@ function Bio(props) {
         <Heading2>Bio</Heading2>
         <p>{user.biography}</p>
         <Social>
-          <a href={twitter} target="_blank">
-            <button type="button">
-              <Icon type="linkedin" size="large" />
-            </button>
-          </a>
+          {linkedin.length > 0 && (
+            <a href={linkedin} target="_blank">
+              <button type="button">
+                <Icon type="linkedin" size="large" />
+              </button>
+            </a>
+          )}
+          {twitter.length > 0 && (
+            <a href={twitter} target="_blank">
+              <button type="button">
+                <Icon type="twitter" />
+              </button>
+            </a>
+          )}
+          {facebook.length > 0 && (
+            <a href={facebook} target="_blank">
+              <button type="button">
+                <Icon type="facebook" />
+              </button>
+            </a>
+          )}
 
-          <a href={twitter} target="_blank">
-            <button type="button">
-              <Icon type="twitter" />
-            </button>
-          </a>
-          <a href={facebook} target="_blank">
-            <button type="button">
-              <Icon type="facebook" />
-            </button>
-          </a>
-          <a href={github} target="_blank">
-            <button type="button">
-              <Icon type="github" />
-            </button>
-          </a>
+          {github.length > 0 && (
+            <a href={github} target="_blank">
+              <button type="button">
+                <Icon type="github" />
+              </button>
+            </a>
+          )}
         </Social>
       </BioSection>
     </Wrapper>
