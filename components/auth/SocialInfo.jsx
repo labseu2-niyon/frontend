@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { Button, Heading2, Skip } from '../~common/index';
+import { useState } from 'react';
 import styled from 'styled-components';
 import Steps from './Steps';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import { socialDataHandler } from '../../redux/actions/authActions';
+import Head from 'next/head';
 import Card from './Card';
 import Content from './ContentWrapper';
 import FormStyles from './Form';
@@ -32,6 +32,9 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
   };
   return (
     <main>
+      <Head>
+        <title>Niyon | {username}</title>
+      </Head>
       <Steps stepNumber={2} />
       <Card>
         <Content>

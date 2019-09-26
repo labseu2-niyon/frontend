@@ -15,9 +15,11 @@ const Wrapper = styled.div`
 
 function Home(props) {
   const connectionsLength = props.connectionsAll ? props.connectionsAll.length : 0;
-
   return (
     <Wrapper>
+       <title>
+        Niyon 
+      </title>
       <TopSection
 
         buttons={(
