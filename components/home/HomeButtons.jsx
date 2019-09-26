@@ -11,7 +11,7 @@ const ButtonWrapper = styled.div`
     justify-content: space-between;
 
     @media (max-width: ${({ theme }) => theme.mobileWidth}) {
-        width: 150px;
+        width: 100%;
         height: 85px;
         flex-direction: column;
     }
