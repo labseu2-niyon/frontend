@@ -72,7 +72,7 @@ const EditSocialMedia = ({ user, form, socialDataHandlerSettings }) => {
     return (
       <SocialSection>
         <Text big bold>
-          Update Your Social Media Handlers
+          Update Your Social Media Links
         </Text>
         <Form onSubmit={handleSocialMedia}>
           <Form.Item label="Twitter">
@@ -86,7 +86,6 @@ const EditSocialMedia = ({ user, form, socialDataHandlerSettings }) => {
             })(
               <Input
                 // value={google}
-                addonBefore="www.twitter.com/"
                 placeholder={user.social_media.twitter}
                 onChange={e => setTwitter(e.target.value)}
               />
@@ -103,7 +102,6 @@ const EditSocialMedia = ({ user, form, socialDataHandlerSettings }) => {
             })(
               <Input
                 // value={google}
-                addonBefore="www.linkedin.com/"
                 placeholder={user.social_media.linkedin}
                 onChange={e => setLinkedin(e.target.value)}
               />
@@ -120,7 +118,6 @@ const EditSocialMedia = ({ user, form, socialDataHandlerSettings }) => {
             })(
               <Input
                 // value={google}
-                addonBefore="www.facebook.com/"
                 placeholder={user.social_media.facebook}
                 onChange={e => setFacebook(e.target.value)}
               />
@@ -137,7 +134,6 @@ const EditSocialMedia = ({ user, form, socialDataHandlerSettings }) => {
             })(
               <Input
                 // value={github}
-                addonBefore="www.github.com/"
                 placeholder={user.social_media.github}
                 onChange={e => setGithub(e.target.value)}
               />
@@ -150,7 +146,7 @@ const EditSocialMedia = ({ user, form, socialDataHandlerSettings }) => {
             htmlType="submit"
             style={{ backgroundColor: theme.primary }}
           >
-            Update Social Media Handlers
+            Update
           </Button>
         </Form>
       </SocialSection>
