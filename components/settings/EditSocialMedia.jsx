@@ -1,14 +1,32 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Text } from '../~common/index';
 import { Form, Input, message, Button } from 'antd';
+import { Text } from '../~common/index';
 import { theme } from '../../lib/theme';
 
-const EditSocialMedia = ({ user, form, socialDataHandler }) => {
+const EditSocialMedia = ({ user, form, socialDataHandlerSettings }) => {
   const [twitter, setTwitter] = useState(null);
   const [linkedin, setLinkedin] = useState(null);
   const [facebook, setFacebook] = useState(null);
+  const [github, setGithub] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      form.getFieldDecorator('twitter', {
+        initialValue: user.social_media.facebook
+      });
+      form.getFieldDecorator('linkedin', {
+        initialValue: user.social_media.linkedin
+      });
+      form.getFieldDecorator('facebook', {
+        initialValue: user.social_media.facebook
+      });
+      form.getFieldDecorator('github', {
+        initialValue: user.social_media.github
+      });
+    }
+  }, []);
 
   const success = () => {
     message.success('Your Profile was update succesfully');
@@ -26,20 +44,26 @@ const EditSocialMedia = ({ user, form, socialDataHandler }) => {
       if (!err) {
         console.log('Received values of form: ', values);
         const data = {
-          twitter,
-          linkedin,
-          facebook
+          twitter: values.twitter,
+          linkedin: values.linkedin,
+          facebook: values.facebook,
+          github: values.github
         };
 
         //not working yet ***************************//
         //need some more work on backend -
         // Problem: everytime that a user change just one of the handler needs to change them all for the endpoint to work
-        socialDataHandler(data, user.username);
-
-        form.setFieldsValue({ facebook: null });
-        form.setFieldsValue({ twitter: null });
-        form.setFieldsValue({ linkedin: null });
-        success();
+        socialDataHandlerSettings(data, user.username).then(res => {
+          if (res === 201) {
+            form.setFieldsValue({ facebook: values.facebook });
+            form.setFieldsValue({ twitter: values.twitter });
+            form.setFieldsValue({ linkedin: values.linkedin });
+            form.setFieldsValue({ github: values.github });
+            success();
+          } else {
+            error();
+          }
+        });
       }
     });
   };
@@ -62,7 +86,8 @@ const EditSocialMedia = ({ user, form, socialDataHandler }) => {
             })(
               <Input
                 // value={google}
-                placeholder="Twitter handler"
+                addonBefore="www.twitter.com/"
+                placeholder={user.social_media.twitter}
                 onChange={e => setTwitter(e.target.value)}
               />
             )}
@@ -78,7 +103,8 @@ const EditSocialMedia = ({ user, form, socialDataHandler }) => {
             })(
               <Input
                 // value={google}
-                placeholder="Linkedin handler"
+                addonBefore="www.linkedin.com/"
+                placeholder={user.social_media.linkedin}
                 onChange={e => setLinkedin(e.target.value)}
               />
             )}
@@ -94,8 +120,26 @@ const EditSocialMedia = ({ user, form, socialDataHandler }) => {
             })(
               <Input
                 // value={google}
-                placeholder="Facebook handler"
+                addonBefore="www.facebook.com/"
+                placeholder={user.social_media.facebook}
                 onChange={e => setFacebook(e.target.value)}
+              />
+            )}
+          </Form.Item>
+          <Form.Item label="GitHub">
+            {getFieldDecorator('github', {
+              rules: [
+                {
+                  required: false,
+                  message: 'Please input your GitHub handler!'
+                }
+              ]
+            })(
+              <Input
+                // value={github}
+                addonBefore="www.github.com/"
+                placeholder={user.social_media.github}
+                onChange={e => setGithub(e.target.value)}
               />
             )}
           </Form.Item>
