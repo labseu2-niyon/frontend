@@ -35,7 +35,7 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
       <Steps stepNumber={2} />
       <Card>
         <Content>
-          <h3>Add your social media links</h3>
+          <h4>Add your social media links</h4>
           <FormStyles onSubmit={handleSubmit}>
             <div className="input-wrapper">
               <input
@@ -80,16 +80,15 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
 
             <button type="submit">Next</button>
           </FormStyles>
-
-          <BottomWrapper>
-            <p>
-              <Link href="/">
-                <a>Skip</a>
-              </Link>
-            </p>
-          </BottomWrapper>
         </Content>
       </Card>
+      <BottomWrapper>
+        <p>
+          <Link href="/">
+            <a>Skip</a>
+          </Link>
+        </p>
+      </BottomWrapper>
     </main>
   );
 };
@@ -112,5 +111,7 @@ const BottomWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2rem 0 0 0;
+  a {
+    color: #348fbb;
+  }
 `;

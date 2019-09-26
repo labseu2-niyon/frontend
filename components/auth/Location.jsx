@@ -1,6 +1,5 @@
 /* eslint-disable */
 import { useState } from 'react';
-import { Text, Heading2, Button } from '../~common/index';
 import styled from 'styled-components';
 import Steps from './Steps';
 import Router from 'next/router';
@@ -9,7 +8,7 @@ import { locationData, locationRequest } from '../../redux/actions/authActions';
 import { Icon, AutoComplete } from 'antd';
 import Card from './Card';
 import Content from './ContentWrapper';
-import FormStyles from './Form';
+import { lighten } from 'polished'
 
 const Location = ({ locationRequest, locationData }) => {
   const [data, setData] = useState([]);
@@ -56,13 +55,11 @@ const Location = ({ locationRequest, locationData }) => {
 
   return (
     <main>
-      <Steps stepNumber={1} />
+      <Steps stepNumber={0} />
       <Card>
         <Content>
           <h3>Where are you located?</h3>
-
-          <p>Please enter your city name:</p>
-          <FormStyles>
+          <Form>
             <Auto>
               <AutoComplete
                 onChange={getPossibleLocation}
@@ -78,10 +75,11 @@ const Location = ({ locationRequest, locationData }) => {
               />
               <div className="icons">
                 {!select.state ? (
-                  <img
-                    src="../../static/earth.png"
-                    alt="Earth Icon"
-                    width="30px"
+                  <Icon
+                    type="close-circle"
+                    theme="twoTone"
+                    twoToneColor="#e8e8e8"
+                    style={{ fontSize: '25px' }}
                   />
                 ) : (
                   <Icon
@@ -97,7 +95,7 @@ const Location = ({ locationRequest, locationData }) => {
               <p className="error with-margin">You need to enter a city name</p>
             )}
             <button onClick={handleSubmit}>Next</button>
-          </FormStyles>
+          </Form>
         </Content>
       </Card>
     </main>
@@ -116,5 +114,64 @@ const Auto = styled.div`
 
   .icons {
     width: 30px;
+  }
+`;
+
+const Form = styled.div`
+  margin: 20px 0 0 0;
+  display: flex;
+  flex-direction: column;
+
+  .input-wrapper {
+    min-height: 65px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    i {
+      position: absolute;
+      z-index: 1;
+      top: 12px;
+      right: 8px;
+      color: #348fbb;
+    }
+  }
+
+  input,
+  select {
+    padding: 5px;
+    width: 100%;
+    display: block;
+    color: #222222;
+    border: 2px solid #ededed;
+    border-radius: 5px;
+    ::placeholder {
+      color: #c2c2c2;
+    }
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+  }
+
+  button {
+    width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    background: #348fbb;
+    color: white;
+    border: none;
+    cursor: pointer;
+    &:hover {
+      background: ${lighten(0.1, '#348fbb')};
+    }
+    transition: background 1s ease;
+
+    &:focus {
+      outline: 0;
+    }
   }
 `;

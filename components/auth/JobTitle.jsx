@@ -127,7 +127,7 @@ const JobTitle = ({
       <Steps stepNumber={1} />
       <Card>
         <Content>
-          <h4>Job Information</h4>
+          <h4>Who are you?</h4>
           <FormStyles onSubmit={handleSubmit}>
             <div className="input-wrapper">
               <select value={jobTypeId} onChange={handleSelect}>
@@ -141,8 +141,8 @@ const JobTitle = ({
               </select>
               {testError && <p className="error">{err.jobTypeError}</p>}
             </div>
-            <h4>Mentorship Information</h4>
-            <p>Would you like to be mentee or mentor?</p>
+
+            <h4>Choose your mentorship type</h4>
             <MentorIcons>
               <Custom onClick={onMenteePressed}>
                 <img
@@ -279,22 +279,8 @@ const Custom = styled.div`
   }
 
   .check-icon {
-    color: #859755;
-    margin: 3px 8px 0 0;
-  }
-`;
-
-const Info = styled.div`
-  display: flex;
-  align-self: flex-end;
-  margin: 3px;
-  align-items: center;
-
-
-  }
-
-  &:hover {
     color: #348fbb;
+    margin: 3px 8px 0 0;
   }
 `;
 

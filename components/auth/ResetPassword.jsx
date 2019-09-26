@@ -14,8 +14,7 @@ const ResetPassword = ({ errors, touched, status, loading }) => (
   <Card>
     <Header></Header>
     <Content>
-      <h3>Let's find your account.</h3>
-      <p>Please enter your email:</p>
+      <h4>First, let's find your account</h4>
       <FormStyles>
         <div className="input-wrapper">
           <Field name="email" type="email" placeholder="email" />

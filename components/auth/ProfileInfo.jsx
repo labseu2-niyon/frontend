@@ -78,8 +78,7 @@ const ProfileInfo = props => {
       <Steps stepNumber={2} />
       <Card>
         <Content>
-          <h2>Profile Information</h2>
-          <p>Upload your profile picture:</p>
+          <h4>Choose your profile picture</h4>
           <FormStyles onSubmit={handleSubmit}>
             <RoundIcon
               name="avatar"
@@ -103,7 +102,7 @@ const ProfileInfo = props => {
                 </div>
               )}
             </RoundIcon>
-            <p>Share more about you:</p>
+            <h4>Share more about you</h4>
             <textarea
               type="text"
               placeholder="Biography"
@@ -119,15 +118,15 @@ const ProfileInfo = props => {
 
             <button type="submit">Next</button>
           </FormStyles>
-          <BottomWrapper>
-            <p>
-              <Link href="/auth/social-info">
-                <a>Skip</a>
-              </Link>
-            </p>
-          </BottomWrapper>
         </Content>
       </Card>
+      <BottomWrapper>
+        <p>
+          <Link href="/auth/social-info">
+            <a>Skip</a>
+          </Link>
+        </p>
+      </BottomWrapper>
     </main>
   );
 };
@@ -156,15 +155,15 @@ const RoundIcon = styled(Upload)`
 
   img {
     width: 100px;
-    border-radius: 50%;
+    /* clip-path: circle(50% at 50% 50%); */
   }
 
   .ant-upload.ant-upload-select-picture-card {
-    border: 2px solid #ededed;
-    border-radius: 50%;
+    border: 2px dashed #ededed;
+    /* border-radius: 50%; */
     background-color: white;
-    width: 120px;
-    height: 120px;
+    /* width: 120px;
+    height: 120px; */
   }
 `;
 
@@ -173,5 +172,8 @@ const BottomWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2rem 0 0 0;
+
+  a {
+    color: #348fbb;
+  }
 `;

@@ -5,6 +5,7 @@ import { Icon } from 'antd';
 import Link from 'next/link';
 import { Heading3 } from '../~common';
 import { profile_placeholder } from '../../lib/utils';
+import { theme } from '../../lib/theme';
 
 function ExploreCard(props) {
   const position = props.Mentor ? 'Mentor' : 'Mentee';
@@ -22,13 +23,16 @@ function ExploreCard(props) {
         <Contents>
           <PhotoWrapper>
             <Photo>
-              <ImgProfile src={props.profile_picture || profile_placeholder} alt="Profile Picture" />
+              <ImgProfile
+                src={props.profile_picture || profile_placeholder}
+                alt="Profile Picture"
+              />
             </Photo>
           </PhotoWrapper>
           <Text>
-            <Heading3>
+            <StyledH3>
               {props.first_name || 'Not Listed'} {props.last_name}
-            </Heading3>
+            </StyledH3>
             <small>Field: {job || 'Not listed'}</small>
             <Bio>
               <p>{props.biography}</p>
@@ -61,7 +65,7 @@ ExploreCard.propTypes = {
   last_name: PropTypes.string.isRequired,
   location: PropTypes.shape().isRequired,
   profile_picture: PropTypes.string.isRequired,
-  job: PropTypes.shape.isRequired,
+  job: PropTypes.shape.isRequired
 };
 
 const Wrapper = styled.div`
@@ -77,9 +81,10 @@ const Wrapper = styled.div`
   background: white;
   cursor: pointer;
 
-  @media (max-width: 600px) {
+  @media (max-width: ${({ theme }) => theme.tabletWidth}) {
     width: 100%;
     padding: 0.5rem 1rem;
+    margin: 0;
   }
 
   &:hover {
@@ -112,8 +117,9 @@ const ImgProfile = styled.img`
   width: 100%;
 `;
 
-const Text = styled.div``;
-
+const Text = styled.div`
+  font-size: ${({ theme }) => theme.h4};
+`;
 
 const Location = styled.div`
   position: absolute;
@@ -143,12 +149,26 @@ const L = styled.div`
 const Bio = styled.div`
   flex-grow: 1;
   min-width: 0;
+  display: none;
+
+  @media (min-width: ${({ theme }) => theme.mobileWidth}) and (max-width: ${({
+  theme
+}) => theme.tabletWidth}) {
+    display: contents;
+  }
 
   p {
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+  }
+`;
+
+const StyledH3 = styled(Heading3)`
+  @media (max-width: ${({ theme }) => theme.tabletWidth}) {
+    margin-right: 30px;
+    font-size: 10px;
   }
 `;
 

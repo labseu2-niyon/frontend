@@ -1,10 +1,7 @@
-import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
-import { Heading3, Button } from '../~common/index';
 import { changePassword } from '../../redux/actions/authActions';
-import { theme } from '../../lib/theme';
 import PropTypes from 'prop-types';
 import Header from './Header';
 import Card from './Card';
@@ -23,7 +20,7 @@ const ChangePassword = ({
     <Card>
       <Header />
       <Content>
-        <h4>Please enter your new password:</h4>
+        <h4>Please enter your new password</h4>
 
         <FormStyles>
           <div className="input-wrapper">
@@ -36,7 +33,7 @@ const ChangePassword = ({
             <Field
               name="confirm"
               type="password"
-              placeholder="Confirm Passsword"
+              placeholder="Confirm Password"
             />
             {touched.confirm && errors.confirm && (
               <p className="error">{errors.confirm}</p>

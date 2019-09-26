@@ -28,7 +28,6 @@ const Social = ({ errors, touched, username, saveToken }) => {
         <Content>
           <h4>What's your name?</h4>
           <FormStyles>
-            <p>Please enter your first and last name:</p>
             <div className="input-wrapper">
               <Field
                 name="username"
@@ -100,57 +99,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(FormikWithSocialForm);
-
-const IconT = styled.i`
-  font-size: 100px;
-  color: green;
-`;
-
-const FormArea = styled(Form)`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 400px;
-
-  input {
-    padding: 0.5rem;
-    font-size: 16px;
-    width: 80%;
-    display: block;
-    color: #4d2d52;
-    border: 1px solid rgba(77, 45, 82, 0.8);
-    border-radius: 4px;
-    ::placeholder {
-      color: grey;
-      opacity: 0.4;
-    }
-
-    @media (min-width: 500px) {
-      width: 50%;
-    }
-  }
-`;
-
-const InputWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  padding-bottom: 30px;
-`;
-
-const Error = styled.p`
-  margin: 0;
-  font-size: 14px;
-  position: absolute;
-  bottom: 6%;
-  left: 3%;
-  color: #e29273;
-
-  @media (min-width: 500px) {
-    left: 20%;
-  }
-`;
