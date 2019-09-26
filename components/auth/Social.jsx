@@ -8,6 +8,8 @@ import { Heading2, Text, Button } from '../~common/index';
 import StepsComp from './Steps';
 import { socialData, saveToken } from '../../redux/actions/authActions';
 import Card from './Card';
+import Content from './ContentWrapper';
+import FormStyles from './Form';
 
 const Social = ({ errors, touched, username, saveToken }) => {
   const nextRouter = useRouter();
@@ -21,37 +23,36 @@ const Social = ({ errors, touched, username, saveToken }) => {
   }
   return (
     <main>
-      <StepsComp stepNumber="1" />
+      <StepsComp stepNumber={0} />
       <Card>
-        <Heading2 primary>What's your name?</Heading2>
-        <IconT className="far fa-user" />
-        <FormArea>
-          <InputWrapper>
-            <Text small>Please enter your first and last name.</Text>
-            <Field
-              name="username"
-              type="text"
-              placeholder="username"
-              value={username}
-              disabled
-            />
-          </InputWrapper>
-          <InputWrapper>
-            <Field name="firstName" type="text" placeholder="First Name" />
-            {touched.firstName && errors.firstName && (
-              <Error>{errors.firstName}</Error>
-            )}
-          </InputWrapper>
-          <InputWrapper>
-            <Field name="lastName" type="text" placeholder="Last Name" />
-            {touched.lastName && errors.lastName && (
-              <Error>{errors.lastName}</Error>
-            )}
-          </InputWrapper>
-          <Button primary small type="submit">
-            Next
-          </Button>
-        </FormArea>
+        <Content>
+          <h4>What's your name?</h4>
+          <FormStyles>
+            <p>Please enter your first and last name:</p>
+            <div className="input-wrapper">
+              <Field
+                name="username"
+                type="text"
+                placeholder="username"
+                value={username}
+                disabled
+              />
+            </div>
+            <div className="input-wrapper">
+              <Field name="firstName" type="text" placeholder="First Name" />
+              {touched.firstName && errors.firstName && (
+                <p className="error">{errors.firstName}</p>
+              )}
+            </div>
+            <div className="input-wrapper">
+              <Field name="lastName" type="text" placeholder="Last Name" />
+              {touched.lastName && errors.lastName && (
+                <p className="error">{errors.lastName}</p>
+              )}
+            </div>
+            <button type="submit">Next</button>
+          </FormStyles>
+        </Content>
       </Card>
     </main>
   );
