@@ -48,6 +48,10 @@ const FormStyles = styled(Form)`
     align-self: flex-end;
   }
 
+  .with-margin {
+    margin-bottom: 10px;
+  }
+
   button {
     width: 100%;
     height: 35px;

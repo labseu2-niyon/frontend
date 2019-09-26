@@ -9,6 +9,7 @@ import { locationData, locationRequest } from '../../redux/actions/authActions';
 import { Icon, AutoComplete } from 'antd';
 import Card from './Card';
 import Content from './ContentWrapper';
+import FormStyles from './Form';
 
 const Location = ({ locationRequest, locationData }) => {
   const [data, setData] = useState([]);
@@ -59,41 +60,44 @@ const Location = ({ locationRequest, locationData }) => {
       <Card>
         <Content>
           <h3>Where are you located?</h3>
-          <IconT className="fas fa-globe-europe" />
-          <Text small>Please enter your city name.</Text>
-          <Auto>
-            <AutoComplete
-              onChange={getPossibleLocation}
-              onSelect={chosen}
-              style={{ width: 200 }}
-              dataSource={data}
-              placeholder="Your city name"
-              filterOption={(inputValue, option) =>
-                option.props.children
-                  .toUpperCase()
-                  .indexOf(inputValue.toUpperCase()) !== -1
-              }
-            />
-            {!select.state ? (
-              <Icon
-                type="loading"
-                style={{ marginLeft: '1em', fontSize: '1.5em' }}
+
+          <p>Please enter your city name:</p>
+          <FormStyles>
+            <Auto>
+              <AutoComplete
+                onChange={getPossibleLocation}
+                onSelect={chosen}
+                style={{ width: '100%', marginRight: '5px' }}
+                dataSource={data}
+                placeholder="City Name"
+                filterOption={(inputValue, option) =>
+                  option.props.children
+                    .toUpperCase()
+                    .indexOf(inputValue.toUpperCase()) !== -1
+                }
               />
-            ) : (
-              <Icon
-                type="check-circle"
-                theme="twoTone"
-                twoToneColor="#52c41a"
-                style={{ marginLeft: '1em', fontSize: '1.5em' }}
-              />
+              <div className="icons">
+                {!select.state ? (
+                  <img
+                    src="../../static/earth.png"
+                    alt="Earth Icon"
+                    width="30px"
+                  />
+                ) : (
+                  <Icon
+                    type="check-circle"
+                    theme="twoTone"
+                    twoToneColor="#52c41a"
+                    style={{ fontSize: '25px' }}
+                  />
+                )}
+              </div>
+            </Auto>
+            {warning && (
+              <p className="error with-margin">You need to enter a city name</p>
             )}
-          </Auto>
-          {warning && <Error>You need to enter a city name</Error>}
-          <InputWrapper>
-            <Button primary small onClick={handleSubmit} loadingB={loading}>
-              Next
-            </Button>
-          </InputWrapper>
+            <button onClick={handleSubmit}>Next</button>
+          </FormStyles>
         </Content>
       </Card>
     </main>
@@ -105,37 +109,12 @@ export default connect(
   { locationData, locationRequest }
 )(Location);
 
-const Section = styled.section`
-  padding: 5vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  height: 100vh;
-`;
-
-const IconT = styled.i`
-  font-size: 100px;
-  color: green;
-`;
 const Auto = styled.div`
   display: flex;
   align-items: center;
-`;
+  margin-bottom: 20px;
 
-const InputWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  padding-bottom: 30px;
-`;
-
-const Error = styled.p`
-  margin: 0;
-  font-size: 14px;
-  bottom: 10%;
-  left: 26%;
-  color: #e29273;
+  .icons {
+    width: 30px;
+  }
 `;
