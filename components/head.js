@@ -10,7 +10,8 @@ const Head = ({
 }) => (
   <NextHead>
     <meta charSet="UTF-8" />
-    <title>{title || ''}</title>
+    {/* <title>{title || ''}</title> */}
+    <title>{title || 'Niyon'}</title>
     <meta
       name="description"
       content={description || defaultDescription}

@@ -1,10 +1,9 @@
-import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import jwt from 'jsonwebtoken';
 import * as Yup from 'yup';
 import Router, { useRouter } from 'next/router';
 import { connect } from 'react-redux';
-import { Heading2, Text, Button } from '../~common/index';
+import Head from 'next/head';
 import StepsComp from './Steps';
 import { socialData, saveToken } from '../../redux/actions/authActions';
 import Card from './Card';
@@ -23,6 +22,9 @@ const Social = ({ errors, touched, username, saveToken }) => {
   }
   return (
     <main>
+      <Head>
+        <title>Niyon | {username}</title>
+      </Head>
       <StepsComp stepNumber={0} />
       <Card>
         <Content>

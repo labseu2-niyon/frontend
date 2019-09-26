@@ -121,6 +121,7 @@ const Nav = styled.div`
   padding: 2.5rem 0;
   height: 100vh;
   width: 20%;
+  max-width: 300px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -175,7 +176,7 @@ const Links = styled.div`
   margin-top: 20px;
 
   div {
-    margin: 20px 0;
+    margin: 15px 0;
     display: flex;
     align-items: center;
     cursor: pointer;

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, useRouter } from 'next/router';
 import { Divider } from 'antd';
+import Head from 'next/head';
 import { fetchUser } from '../../redux/actions/userActions';
 import {
   userProfileInfo,
@@ -10,7 +11,6 @@ import {
   getJobTitles
 } from '../../redux/actions/authActions';
 import EditLocation from './EditLocation';
-//import EditMentorship from './EditMentorhip';
 import EditImage from './EditImage';
 import EditSocialMedia from './EditSocialMedia';
 import EditnameBio from './EditNameBio';
@@ -24,7 +24,6 @@ const EditProfile = ({
 }) => {
   const [jobId, setJobId] = useState(null);
   const router = useRouter();
-  console.log(user);
 
   useEffect(() => {
     fetchUser(router.query.user);
@@ -44,6 +43,9 @@ const EditProfile = ({
   if (user) {
     return (
       <>
+        <Head>
+          <title>Niyon | Settings</title>
+        </Head>
         <EditImage user={user} />
         <Divider dashed />
         <EditnameBio
