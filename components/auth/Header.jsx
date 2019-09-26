@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Flip from 'react-reveal/Flip';
 import Blob from '../svgs/Blob';
 import BlueLogo from '../svgs/BlueLogo';
 
@@ -7,9 +6,7 @@ const Header = () => (
   <Wrapper>
     <a href="https://niyonapp.com/">
       <Title>
-        <Flip>
-          <BlueLogo width={30} height={30}></BlueLogo>
-        </Flip>
+        <BlueLogo width={30} height={30}></BlueLogo>
         <h2>Niyon</h2>
       </Title>
     </a>

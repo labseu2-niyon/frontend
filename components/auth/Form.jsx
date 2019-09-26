@@ -64,6 +64,10 @@ const FormStyles = styled(Form)`
       background: ${lighten(0.1, '#348fbb')};
     }
     transition: background 1s ease;
+
+    &:focus {
+      outline: 0;
+      }
   }
 
   a {

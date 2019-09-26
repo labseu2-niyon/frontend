@@ -10,10 +10,10 @@ const EmailSent = () => (
     <Header></Header>
     <Content>
       <Section>
-        <h4>We have just emailed you a secure link.</h4>
+        <h4>We've just sent you an email.</h4>
         <p>
-          Please check your email and click on the link. You will then be able
-          to change your password.
+          Follow the instructions to change your password (if you do not see our
+          email please check your spam folder).
         </p>
       </Section>
 
@@ -26,12 +26,6 @@ const EmailSent = () => (
         <Link href="/auth/login">
           <Button primary>Back to login</Button>
         </Link>
-      </Section>
-
-      <Section>
-        <p className="warning">
-          If you do not see our email, please check your spam folder.
-        </p>
       </Section>
     </Content>
   </Card>
@@ -64,10 +58,6 @@ const Section = styled.div`
 
   h4 {
     margin-bottom: 20px;
-  }
-
-  .warning {
-    text-align: center;
   }
 `;
 
