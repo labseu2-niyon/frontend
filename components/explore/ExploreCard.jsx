@@ -82,7 +82,7 @@ const Wrapper = styled.div`
   cursor: pointer;
 
   @media (max-width: ${({ theme }) => theme.tabletWidth}) {
-    width: 90%;
+    width: 100%;
     padding: 0.5rem 1rem;
   }
 

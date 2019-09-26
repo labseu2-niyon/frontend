@@ -5,6 +5,7 @@ import TopSection from '../TopSection';
 import ProfileList from './ProfileList';
 import withUserData from '../containers/withUserData';
 import HomeButtons from './HomeButtons';
+import ConnectionRequests from '../connections/ConnectionRequests';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -26,6 +27,7 @@ function Home(props) {
         )}
         src="/static/hacker.svg"
       />
+      <ConnectionRequests requests={props.connectionsReceived.received || []} connections={props.connectionsAll || []} />
       <ProfileList title="User Suggestions" users={props.users || []} expandable />
       <div style={{
         width: '100%', height: 1, background: '#eaeaea', border: 'none',
