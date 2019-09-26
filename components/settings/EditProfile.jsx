@@ -24,7 +24,6 @@ const EditProfile = ({
 }) => {
   const [jobId, setJobId] = useState(null);
   const router = useRouter();
-  console.log(user);
 
   useEffect(() => {
     fetchUser(router.query.user);

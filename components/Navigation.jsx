@@ -176,7 +176,7 @@ const Links = styled.div`
   margin-top: 20px;
 
   div {
-    margin: 20px 0;
+    margin: 15px 0;
     display: flex;
     align-items: center;
     cursor: pointer;
