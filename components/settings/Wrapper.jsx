@@ -1,16 +1,13 @@
+//import Tab from './Tab';
 import styled from 'styled-components';
-import Tab from './Tab';
-import { theme } from '../../lib/theme';
 
-const Wrapper = ({ children }) => (
+const Wrapper = ({ children }) => {
+  return (
     <Main>
-      <Tabs>
-        <Tab name="Edit Profile" route="/settings" />
-        <Tab name="Change Password" route="/password"></Tab>
-      </Tabs>
       <div>{children}</div>
     </Main>
   );
+};
 
 const Main = styled.div`
   box-shadow: ${({ theme }) => theme.boxShadow};
@@ -18,20 +15,32 @@ const Main = styled.div`
   max-width: 650px;
   margin: 2rem auto;
   padding: 1rem 2rem;
-`;
 
-const Tabs = styled.div`
-  display: flex;
-  margin: 1rem 0;
-  justify-content: space-between;
-
-  a {
-    text-decoration: none;
-    color: ${({ theme }) => theme.black};
+  .ant-tabs {
+    width: 100%;
   }
+  .ant-tabs-nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    @media (max-width: 400px) {
+      width: 140px;
+      justify-content: space-between;
+    }
+  }
+  .ant-tabs-tab {
+    width: 250px;
+    text-align: center;
 
-  @media (max-width: ${({ theme }) => theme.mobileWidth}) {
-    flex-direction: column;
+    @media (max-width: 800px) {
+      width: 200px;
+    }
+    @media (max-width: 600px) {
+      width: 150px;
+    }
+    @media (max-width: 400px) {
+      width: 140px;
+    }
   }
 `;
 
