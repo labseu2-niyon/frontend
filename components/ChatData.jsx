@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
+import Head from 'next/head';
 import { fetchUser } from '../redux/actions/userActions';
 import withAuth from '../lib/withAuth';
 
@@ -12,9 +13,11 @@ const ChatData = ({ fetchUser, authReducer }) => {
 
   return (
     <div>
-      <title>
-        Niyon {userInfo.username} chats History
-      </title>
+      <Head>
+        <title>
+          Niyon {userInfo.username} chats History
+        </title>
+      </Head>
     </div>
   );
 };
