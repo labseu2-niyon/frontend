@@ -38,6 +38,13 @@ const ProgressBar = styled.div`
     background-color: #348fbb;
   }
 
+  .ant-steps-item-finish
+    > .ant-steps-item-container
+    > .ant-steps-item-content
+    > .ant-steps-item-title::after {
+    background-color: #348fbb;
+  }
+
   svg {
     fill: #348fbb;
   }
