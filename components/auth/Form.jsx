@@ -11,6 +11,15 @@ const FormStyles = styled(Form)`
     min-height: 65px;
     display: flex;
     flex-direction: column;
+    position: relative;
+
+    i {
+    position: absolute;
+    z-index: 1;
+    top: 12px;
+    right: 8px;
+    color: #348fbb;
+  }
   }
 
   input {
