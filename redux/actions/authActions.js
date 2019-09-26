@@ -202,6 +202,19 @@ export const socialDataHandler = (data, username) => dispatch => {
     });
 };
 
+export const socialDataHandlerSettings = (data, username) => dispatch => {
+  dispatch({ type: types.START_LOADING });
+  return axiosWithToken()
+    .patch(`${getUrl()}/user/${username}/socialmedia`, data)
+    .then(res => {
+      dispatch({ type: types.SET_SOCIAL_MEDIA_DATA, payload: data });
+      return res.data.status;
+    })
+    .catch(e => {
+      dispatch({ type: types.STOP_LOADING });
+    });
+};
+
 export const logInUser = ({ email, password }) => dispatch => {
   dispatch({ type: types.LOG_IN_USER_REQUEST });
   return axios

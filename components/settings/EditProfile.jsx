@@ -6,7 +6,7 @@ import { Divider } from 'antd';
 import { fetchUser } from '../../redux/actions/userActions';
 import {
   userProfileInfo,
-  socialDataHandler,
+  socialDataHandlerSettings,
   getJobTitles
 } from '../../redux/actions/authActions';
 import EditLocation from './EditLocation';
@@ -18,12 +18,13 @@ import EditnameBio from './EditNameBio';
 const EditProfile = ({
   user,
   userProfileInfo,
-  socialDataHandler,
+  socialDataHandlerSettings,
   getJobTitles,
   allJobs
 }) => {
   const [jobId, setJobId] = useState(null);
   const router = useRouter();
+  console.log(user);
 
   useEffect(() => {
     fetchUser(router.query.user);
@@ -55,7 +56,10 @@ const EditProfile = ({
         <EditLocation user={user} jobId={jobId} />
         {/* <EditMentorship user={user} /> */}
         <Divider dashed />
-        <EditSocialMedia socialDataHandler={socialDataHandler} user={user} />
+        <EditSocialMedia
+          socialDataHandlerSettings={socialDataHandlerSettings}
+          user={user}
+        />
       </>
     );
   }
@@ -65,7 +69,7 @@ const EditProfile = ({
 const mapDispatchToProps = {
   fetchUser,
   userProfileInfo,
-  socialDataHandler,
+  socialDataHandlerSettings,
   getJobTitles
 };
 const mapStateToProps = state => {
