@@ -108,7 +108,9 @@ const Location = ({
             />
             {!select.state ? (
               <Icon
-                type="loading"
+                type="check-circle"
+                theme="twoTone"
+                twoToneColor="#e8e8e8"
                 style={{ marginLeft: '1em', fontSize: '1.5em' }}
               />
             ) : (
