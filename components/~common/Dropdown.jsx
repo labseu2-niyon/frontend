@@ -2,9 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { Icon } from 'antd';
 
-function Dropdown({
-  title, list, grabOption, icon, width
-}) {
+function Dropdown({ title, list, grabOption, icon, width }) {
   const [showOptions, setOptions] = useState(false);
   const [currentTitle, setTitle] = useState(title);
 
@@ -18,11 +16,14 @@ function Dropdown({
     toggle();
   }
 
+  const onBlurHandler = () => {
+    setOptions(false);
+  };
+
   return (
     <div>
-      <Title onClick={toggle} width={width}>
+      <Title onClick={toggle} width={width} onBlur={onBlurHandler}>
         <p style={{ margin: 0 }}>{currentTitle}</p>
-        {/* <i className={icon}><span role="img" aria-label="pig">🐷</span></i> */}
         <Icon
           type="arrow-up"
           style={{
@@ -45,7 +46,7 @@ function Dropdown({
   );
 }
 
-const Title = styled.div`
+const Title = styled.button`
   box-sizing: border-box;
   cursor: pointer;
   line-height: 0.75rem;
@@ -62,7 +63,13 @@ const Title = styled.div`
   user-select: none;
   border: 1px solid #eaeaea;
 
-  .title { margin: none; }
+  .title {
+    margin: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const Options = styled.div`
