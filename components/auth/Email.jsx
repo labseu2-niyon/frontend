@@ -7,9 +7,9 @@ import { connect } from 'react-redux';
 import Steps from './StepsComp';
 import { Heading2, Text, Button } from '../~common/index';
 import { emailSignup } from '../../redux/actions/authActions';
+import { theme } from '../../lib/theme';
 
 const Email = ({ errors, touched, loading, status }) => {
-  //console.log(loading, status);
   return (
     <Root>
       <Steps stepNumber="1" />
@@ -143,11 +143,11 @@ const FormArea = styled(Form)`
   width: 100%;
   padding: 2rem 0;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${({ theme }) => theme.mobileWidth}) {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     width: 70%;
   }
-  @media (min-width: 950px) {
+  @media (min-width: ${({ theme }) => theme.tabletWidth}) {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     width: 30%;
   }
@@ -157,7 +157,7 @@ const FormArea = styled(Form)`
     font-size: 16px;
     width: 80%;
     display: block;
-    color: #4d2d52;
+    color: ${({ theme }) => theme.inputPurple};
     border: 1px solid rgba(77, 45, 82, 0.8);
     border-radius: 4px;
     ::placeholder {
@@ -165,7 +165,7 @@ const FormArea = styled(Form)`
       opacity: 0.4;
     }
 
-    @media (min-width: 500px) {
+    @media (min-width: ${({ theme }) => theme.mobileWidth}) {
       width: 80%;
     }
   }
@@ -186,5 +186,5 @@ const Error = styled.p`
   position: absolute;
   bottom: 10%;
   left: 10%;
-  color: #e29273;
+  color: ${({ theme }) => theme.errorOrange};
 `;

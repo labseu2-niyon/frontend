@@ -1,5 +1,20 @@
-import Avatar from '../~common/Avatar';
-import styled from 'styled-components';
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { withRouter, useRouter } from 'next/router';
+import { Divider } from 'antd';
+import Head from 'next/head';
+import { fetchUser } from '../../redux/actions/userActions';
+import {
+  userProfileInfo,
+  socialDataHandler,
+  getJobTitles
+} from '../../redux/actions/authActions';
+import EditLocation from './EditLocation';
+//import EditMentorship from './EditMentorhip';
+import EditImage from './EditImage';
+import EditSocialMedia from './EditSocialMedia';
+import EditnameBio from './EditNameBio';
 
 const dummyUser = {
   image: 'https://milan.serverlessdays.io/speakers/guillermo-rauch.jpg',
@@ -9,14 +24,16 @@ const dummyUser = {
 const EditProfile = ({ user }) => {
   return (
     <div>
-       <title>
-        Niyon {user.username} EditProfile
-      </title>
+      <Head>
+        <title>
+          Niyon {user.username} EditProfile
+        </title>
+      </Head>
       <Image>
         <Avatar large source={dummyUser.image} />
         <p>Edit Profile Image</p>
       </Image>
-      <div>
+      </div>
         <div>
           <p>First Name</p>
           <input type="text" name="firstName" value={user.first_name}></input>
@@ -59,36 +76,57 @@ const EditProfile = ({ user }) => {
           <select name="jobTitle"></select>
         </div>
 
-        <h3>Social</h3>
+  useEffect(() => {
+    fetchUser(router.query.user);
+    getJobTitles();
+    getCurrentJobId();
+  }, []);
 
-        <div>
-          <p>Github</p>
-          <input type="text"></input>
-        </div>
-        <div>
-          <p>Twitter</p>
-          <input type="text"></input>
-        </div>
-        <div>
-          <p>Linkedin</p>
-          <input type="text"></input>
-        </div>
+  const getCurrentJobId = () => {
+    const id =
+      user &&
+      allJobs.filter(job => {
+        return job.tech_name === user.job.tech_name;
+      });
+    setJobId(id);
+  };
 
-        <button>Save</button>
-      </div>
-    </div>
-  );
+  if (user) {
+    return (
+      <>
+        <EditImage user={user} />
+        <Divider dashed />
+        <EditnameBio
+          userProfileInfo={userProfileInfo}
+          user={user}
+          jobId={jobId}
+          allJobs={allJobs}
+        />
+        <Divider dashed />
+        <EditLocation user={user} jobId={jobId} />
+        {/* <EditMentorship user={user} /> */}
+        <Divider dashed />
+        <EditSocialMedia socialDataHandler={socialDataHandler} user={user} />
+      </>
+    );
+  }
+  return <></>;
 };
 
-const Image = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 3rem 0;
-  p {
-    margin-left: 1rem;
-  }
-`;
+const mapDispatchToProps = {
+  fetchUser,
+  userProfileInfo,
+  socialDataHandler,
+  getJobTitles
+};
+const mapStateToProps = state => {
+  return {
+    user: state.userReducer.user,
+    allJobs: state.authReducer.allJobs
+  };
+};
 
-export default EditProfile;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(EditProfile));

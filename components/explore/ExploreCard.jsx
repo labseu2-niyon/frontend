@@ -30,9 +30,9 @@ function ExploreCard(props) {
             </Photo>
           </PhotoWrapper>
           <Text>
-            <Heading3>
+            <StyledH3>
               {props.first_name || 'Not Listed'} {props.last_name}
-            </Heading3>
+            </StyledH3>
             <small>Field: {job || 'Not listed'}</small>
             <Bio>
               <p>{props.biography}</p>
@@ -82,8 +82,9 @@ const Wrapper = styled.div`
   cursor: pointer;
 
   @media (max-width: ${({ theme }) => theme.tabletWidth}) {
-    width: 90%;
+    width: 100%;
     padding: 0.5rem 1rem;
+    margin: 0;
   }
 
   &:hover {
@@ -116,7 +117,9 @@ const ImgProfile = styled.img`
   width: 100%;
 `;
 
-const Text = styled.div``;
+const Text = styled.div`
+  font-size: ${({ theme }) => theme.h4};
+`;
 
 const Location = styled.div`
   position: absolute;
@@ -159,6 +162,13 @@ const Bio = styled.div`
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+  }
+`;
+
+const StyledH3 = styled(Heading3)`
+  @media (max-width: ${({ theme }) => theme.tabletWidth}) {
+    margin-right: 30px;
+    font-size: 10px;
   }
 `;
 

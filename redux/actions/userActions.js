@@ -24,19 +24,21 @@ export const fetchUser = username => dispatch => {
 };
 
 export const updatePassword = (username, body) => dispatch => {
-  axiosWithAuth()
+  return axiosWithAuth()
     .patch(`${getUrl()}/user/${username}/password`, body)
     .then(res => {
       dispatch({
         type: types.UPDATE_PASSWORD_SUCCESS,
         payload: res.data.status
       });
+      return res.data.status;
     })
     .catch(error => {
       dispatch({
         type: types.UPDATE_PASSWORD_FAILURE,
         payload: error.response.status
       });
+      return error.response.status;
     });
 };
 
@@ -115,97 +117,105 @@ export const fetchAllUsers = user => dispatch => {
 //     });
 // };
 
-export const createConnection = ({ senderUserId, requestUserId, profileUser }) => (dispatch) => {
+export const createConnection = ({
+  senderUserId,
+  requestUserId,
+  profileUser
+}) => dispatch => {
   dispatch({ type: types.CREATE_CONNECTION_REQUEST });
 
   axiosWithAuth()
     .post(`${getUrl()}/connection`, {
       senderUserId,
-      requestUserId,
+      requestUserId
     })
     .then(() => {
       dispatch({
         type: types.CREATE_CONNECTION_SUCCESS,
-        payload: profileUser,
+        payload: profileUser
       });
     })
-    .catch((error) => {
+    .catch(error => {
       dispatch({
         type: types.CREATE_CONNECTION_FAILURE,
-        payload: error.message,
+        payload: error.message
       });
     });
 };
 
-export const fetchConnection = (id) => (dispatch) => {
+export const fetchConnection = id => dispatch => {
   dispatch({ type: types.FETCH_CONNECTION_REQUEST });
   // spinner
-  axiosWithAuth().get(`${getUrl()}/connection/${id}`)
-    .then((res) => {
+  axiosWithAuth()
+    .get(`${getUrl()}/connection/${id}`)
+    .then(res => {
       dispatch({
         type: types.FETCH_CONNECTION_SUCCESS,
-        payload: res.data.data,
+        payload: res.data.data
       });
     })
-    .catch((error) => {
+    .catch(error => {
       dispatch({
         type: types.FETCH_CONNECTION_FAILURE,
-        payload: error.message,
+        payload: error.message
       });
     });
 };
 
-export const acceptConnection = (id, profileUser) => (dispatch) => {
+export const acceptConnection = (id, profileUser) => dispatch => {
   dispatch({ type: types.ACCEPT_CONNECTION_REQUEST });
   // spinner
   const obj = { accepted: true, pending: false };
-  axiosWithAuth().patch(`${getUrl()}/connection/${id}`, obj)
+  axiosWithAuth()
+    .patch(`${getUrl()}/connection/${id}`, obj)
     .then(() => {
       dispatch({
         type: types.ACCEPT_CONNECTION_SUCCESS,
-        payload: { id, ...obj, profileUser },
+        payload: { id, ...obj, profileUser }
       });
     })
-    .catch((error) => {
+    .catch(error => {
       dispatch({
         type: types.ACCEPT_CONNECTION_FAILURE,
-        payload: error.message,
+        payload: error.message
       });
     });
 };
 
-export const fetchAllConnections = (id) => (dispatch) => {
+export const fetchAllConnections = id => dispatch => {
   dispatch({ type: types.FETCH_ALL_CONNECTIONS_REQUEST });
   // spinner
-  axiosWithAuth().get(`${getUrl()}/connection/${id}/accepted`)
-    .then((res) => {
+  axiosWithAuth()
+    .get(`${getUrl()}/connection/${id}/accepted`)
+    .then(res => {
       dispatch({
         type: types.FETCH_ALL_CONNECTIONS_SUCCESS,
-        payload: res.data.data,
+        payload: res.data.data
       });
     })
-    .catch((error) => {
+    .catch(error => {
       dispatch({
         type: types.FETCH_ALL_CONNECTIONS_FAILURE,
-        payload: error.message,
+        payload: error.message
       });
     });
 };
 
-export const fetchReceivedConnections = (id) => (dispatch) => {
+export const fetchReceivedConnections = id => dispatch => {
   dispatch({ type: types.FETCH_RECEIVED_CONNECTIONS_REQUEST });
   // spinner
-  axiosWithAuth().get(`${getUrl()}/connection/${id}/requests`)
-    .then((res) => {
+  axiosWithAuth()
+    .get(`${getUrl()}/connection/${id}/requests`)
+    .then(res => {
       dispatch({
         type: types.FETCH_RECEIVED_CONNECTIONS_SUCCESS,
-        payload: res.data.data,
+        payload: res.data.data
       });
     })
-    .catch((error) => {
+    .catch(error => {
       dispatch({
         type: types.FETCH_RECEIVED_CONNECTIONS_FAILURE,
-        payload: error.message,
+        payload: error.message
       });
     });
 };

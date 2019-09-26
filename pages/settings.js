@@ -7,43 +7,28 @@ import Layout from '../components/Layout';
 import withAuth from '../lib/withAuth';
 import Wrapper from '../components/settings/Wrapper';
 import EditProfile from '../components/settings/EditProfile';
-import { fetchUser } from '../redux/actions/userActions';
+import EditPassword from '../components/settings/EditPassword';
+import { Tabs } from 'antd';
+const { TabPane } = Tabs;
 
-function Page({ user, fetchUser, username }) {
-  useEffect(() => {
-    if (!user) return fetchUser(username);
-  }, []);
-
+function Page() {
   return (
     <Layout pageName="Settings">
       <Wrapper>
-        <EditProfile user={user} />
+        <Tabs type="card">
+          <TabPane tab="Edit Profile" key="1">
+            <EditProfile />
+          </TabPane>
+          <TabPane tab="Change Password" key="2">
+            <EditPassword />
+          </TabPane>
+        </Tabs>
       </Wrapper>
     </Layout>
   );
 }
 
-const mapStateToProps = (state) => ({
-  user: state.userReducer.user,
-});
-
-const mapDispatchToProps = {
-  fetchUser,
-};
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+  null,
+  {}
 )(withAuth(Page));
-
-Page.getInitialProps = async (ctx) => {
-  const cookies = nookies.get(ctx);
-  const { username } = jwt.decode(cookies.token);
-  return { username };
-};
-
-Page.propTypes = {
-  user: PropTypes.shape(),
-  username: PropTypes.string.isRequired,
-  fetchUser: PropTypes.func.isRequired,
-};

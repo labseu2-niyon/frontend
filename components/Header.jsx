@@ -1,6 +1,7 @@
 import { Heading3 } from './~common/index';
 import Logo from './svgs/Logo';
 import styled from 'styled-components';
+import { theme } from '../lib/theme';
 
 const Header = ({ pageName }) => {
   return (
@@ -27,7 +28,7 @@ const H = styled.div`
     text-transform: uppercase;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: ${({ theme }) => theme.mobileWidth}) {
     margin: 2rem 0;
 
     .mobile-logo {

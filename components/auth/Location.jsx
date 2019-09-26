@@ -7,6 +7,7 @@ import Router from 'next/router';
 import { connect } from 'react-redux';
 import { locationData, locationRequest } from '../../redux/actions/authActions';
 import { Icon, AutoComplete } from 'antd';
+import { theme } from '../../lib/theme';
 
 const Location = ({ locationRequest, locationData }) => {
   const [data, setData] = useState([]);
@@ -115,7 +116,7 @@ const Root = styled.div`
   h2 {
     text-align: center;
     padding: 0 20px;
-    @media (min-width: 500px) {
+    @media (min-width: ${({ theme }) => theme.mobileWidth}) {
       width: 50%;
     }
   }
@@ -152,5 +153,5 @@ const Error = styled.p`
   font-size: 14px;
   bottom: 10%;
   left: 26%;
-  color: #e29273;
+  color: ${({ theme }) => theme.errorOrange};
 `;

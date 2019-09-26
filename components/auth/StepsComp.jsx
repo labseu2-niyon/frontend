@@ -151,7 +151,7 @@ const Step = styled.div`
 const Divider = styled.hr`
   width: 6%;
 
-  @media (min-width: 500px) {
+  @media (min-width: ${({ theme }) => theme.mobileWidth}) {
     width: 50%;
   }
 `;
