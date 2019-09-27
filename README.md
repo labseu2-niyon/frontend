@@ -1,3 +1,5 @@
+#### Link to backend documentation https://github.com/labseu2-niyon/backend/blob/master/README.md
+
 # Niyon
 
 You can find the deployed project at https://niyonapp.com/
@@ -82,8 +84,6 @@ PassportJS allows us to integrate a lot of different auth providers (facebook, e
 
 [Socket.io](http://socket.io) is a chat framework that performs real-time chat analytics and is compatible across all platforms (web, mobile) and devices.
 
-### ⇒ Our choice: socket.io
-
 We choose [socket.io](http://socket.io) over Pusher because it gives us more flexibility, isn't a third party service (limited plan available for free).
 
 Moreover, [socket.io](http://socket.io) have the following 3 unique features:
@@ -106,105 +106,24 @@ Continuous integration is crucial in modern web development as it ensures all au
 
 ZEIT Now is a really simple and scalable way to deploy your application. Pages are deployed as server-less functions meaning billing only occurs in 100ms increments when the site is actually being used. Also as we are using Next.js, also a Zeit product, this allows a seem-less deployment process with two products designed to work together.
 
-#### [Back end] https://github.com/labseu2-niyon/backend built using:
 
-# Back-end
+# Installation Instructions
 
-## Database
-
-### **PostgreSQL**
-
-PostgreSQL is one of the largest open-source RBMS that comes with many features aimed to help developers build applications, administrators to protect data integrity and build fault-tolerant environments, and help you manage your data no matter how big or small the database is.
-
-We started with comparing SQL vs NoSQL. Our first tech choices were PostgreSQL and MongoDB. We choose PostgreSQL for our project because our application would contain and operate with a lot of relationships, therefore, using a relational database system with a large community that protects data integrity and tolerant environment.
-
-## Framework
-
-### **Node**
-
-Node is a server side environment where javascript can run. Having both our client and server code with the same language is helpful to our team's communication and integration.
-
-### **Express**
-
-Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
-
-### **Sequelize**
-
-Sequelize is perhaps the most popular and used promised base Javascript SQL ORM that is compatible with PostgreSQL and helps us handle relationships and their query.
-
-
-Having both our client and server code with the same language is helpful to our team's communication and integration. 
-
-We also considered which language all of our team was comfortable to work with, and that's why we settled on Node + Express.
-
-Sequelize is an ORM which can help us handle associations and their queries, and knex is only a query builder. This will make it the setup easier with sequelize.
-
-## APIs query type
-
-### **Rest API**
-
-REST API is a simple and popular architecture type both for client and server-side that helps us perform all CRUD operations. Since REST was covered in the curriculum and also effectively solves our problem in the early circle we would be starting with it.
-
-## Testing
-
-### **Jest Framework**
-
-Jest is a testing framework that focuses on simplicity. It was covered in the curriculum, have awesome documentation and practically covers every aspect of testing; from unit-test to snap-shot test, etc. 
-
-Jest have both units test, snap-shot test and react test. It's also simple and simply delightful.
-
-## **Continous Integration**
-
-Using continuous integration for our test helps us deploy our application dynamically, supports our development process by automatically building and testing code changes, providing immediate feedback on the success of the change.
-
-### **Circle CI**
-
-Circle CI is a fast automated triggered continuous integration service.
-
-Circle CI has a hub and automate all process of automated integration, from base to end. Automatically deploy to heroku, etc.
-
-# 3️⃣ Environment Variables
-
-In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
-
-🚫These are just examples, replace them with the specifics for your app
-
-    *  REACT_APP_apiKey - this is your Google API key, which can be generated in the Google Cloud Console
-    *  REACT_APP_authDomain - when you set up your Firebase project, this information will be in the dashboard
-    *  REACT_APP_databaseURL - in the Firebase dashboard
-    *  REACT_APP_projectID - in the Firebase dashboard
-    *  REACT_APP_storageBucket - in the Firebase dashboard
-    *  REACT_APP_messagingSenderId - in the Firebase dashboard
-    *  REACT_APP_stripe_API - this is your public Stripe API key, generated in the Stripe dashboard
-    *  REACT_APP_backendURL - optional for your local development server
-    *  REACT_APP_clientid - this is the Stripe_connect clientID, generated in Stripe_connect settings
-    *  REACT_APP_stripe_plan - this is the ID for a second Stripe subscription plan, generated under Stripe products
-
-# 5️⃣ Content Licenses
-
-🚫For all content - images, icons, etc, use this table to document permission of use. Remove the two placeholders and add you content to this table
-
-| Image Filename | Source / Creator | License                                                                      |
-| -------------- | ---------------- | ---------------------------------------------------------------------------- |
-| doodles.png    | Nicole Bennett   | [Creative Commons](https://www.toptal.com/designers/subtlepatterns/doodles/) |
-| rings.svg      | Sam Herbert      | [MIT](https://github.com/SamHerbert/SVG-Loaders)                             |
-
-# 4️⃣ Testing
-
-🚫Document what you used for testing and why
-
-# 4️⃣ Installation Instructions
-
-🚫explain how to install the required dependencies to get this project up and running with yarn and NPM
+yarn add or npm install
 
 ## Other Scripts
 
-🚫replace these examples with your own
-
-    * typecheck - runs the TypeScript compiler
-    * build - creates a build of the application
-    * start - starts the production server after a build is created
-    * test - runs tests in **tests** directory \* eject - copy the configuration files and dependencies into the project so you have full control over them
+"scripts": {
+    "dev": "next -p 3001",
+    "build": "next build", - creates a build of the application
+    "start": "next start", - starts the production server after a build is created
+    "test": "jest --watch --verbose", - runs tests
+    "husky-test": "jest",
+    "circle-ci-test": "jest",
+    "lint": "./node_modules/.bin/eslint . --fix",
+    "deploy:staging": "now -A staging.now.json --target production",
+    "deploy:production": "now -A production.now.json --target production"
+},
 
 # Contributing
 
