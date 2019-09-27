@@ -32,10 +32,10 @@ We connect you with mentors who are located in the same city, town or local gove
 
 ### **React**
 
-- is such a popular library, many modules are available, as is plenty of up-to-date information about it.
+- A popular library, many modules are available, as is plenty of up-to-date information about it.
 - Performance - ReactJS its using a virtual DOM that provides superior performance
-- reusable Components - React provides a component based structure. You can re-use components anywhere you need. As a result, (1) your app has consistent look and feel, (2) code re-use makes it easier to maintain and grow your codebase, and (3) it is easier to develop your app.
-- native Approach: React can be use to create mobile application( react native) .React code its really reusable. So at the same time someone can make IOS , Android application
+- Reusable Components - React provides a component based structure. You can re-use components anywhere you need. As a result, (1) your app has consistent look and feel, (2) code re-use makes it easier to maintain and grow your codebase, and (3) it is easier to develop your app.
+- Native Approach: React can be use to create mobile application( react native) .React code its really reusable. So at the same time someone can make IOS , Android application
 
 ### **Next JS**
 
@@ -105,10 +105,17 @@ Continuous integration is crucial in modern web development as it ensures all au
 
 ZEIT Now is a really simple and scalable way to deploy your application. Pages are deployed as server-less functions meaning billing only occurs in 100ms increments when the site is actually being used. Also as we are using Next.js, also a Zeit product, this allows a seem-less deployment process with two products designed to work together.
 
+# Content Licenses
+
+| Image Filename | Source / Creator | License                                                  |
+| -------------- | ---------------- | -------------------------------------------------------- |
+| mentor.png     | Freepik          | [Flat Icon](https://www.flaticon.com/packs/e-learning-3) |
+| student.png    | Freepik          | [Flat Icon](https://www.flaticon.com/packs/e-learning-3) |
 
 # Installation Instructions
 
-yarn add or npm install
+1. Install packages with `yarn install`
+2. Run the server locally with `yarn dev`
 
 ## Other Scripts
 
@@ -125,6 +132,8 @@ yarn add or npm install
     "deploy:production": "now -A production.now.json --target production"
 },
 ```
+
+It's also possible to use the [Now CLI](https://github.com/zeit/now). [More information](https://github.com/zeit/now).
 
 # Contributing
 
@@ -162,4 +171,3 @@ Remember that this project is licensed under the MIT license, and by submitting 
 ### Attribution
 
 These contribution guidelines have been adapted from [this good-Contributing.md-template](https://gist.github.com/PurpleBooth/b24679402957c63ec426).
-
