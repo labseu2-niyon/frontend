@@ -21,15 +21,13 @@ Find a mentor.
 Niyon is a platform for connecting young professionals with mentors in West Africa.
 We connect you with mentors who are located in the same city, town or local government area you are in.
 
-### 4️⃣ Key Features
+### Key Features
 
 - Create your account or login with your social account
 - Connect with mentors and mentees
 - Chat with them
 
 ## Tech Stack
-
-### Front end built using:
 
 ## Front End Frameworks & Libraries
 
@@ -110,45 +108,60 @@ ZEIT Now is a really simple and scalable way to deploy your application. Pages a
 
 #### [Back end] https://github.com/labseu2-niyon/backend built using:
 
-#### 🚫 back end framework goes here
+# Back-end
 
-- point one
-- point two
-- point three
+## Database
 
-🚫 List the rest of the back end end features and libraries in the same format as the framework above
+### **PostgreSQL**
 
-# APIs
+PostgreSQL is one of the largest open-source RBMS that comes with many features aimed to help developers build applications, administrators to protect data integrity and build fault-tolerant environments, and help you manage your data no matter how big or small the database is.
 
-## 2️⃣ Authentication API here
+We started with comparing SQL vs NoSQL. Our first tech choices were PostgreSQL and MongoDB. We choose PostgreSQL for our project because our application would contain and operate with a lot of relationships, therefore, using a relational database system with a large community that protects data integrity and tolerant environment.
 
-🚫Replace text below with a description of the API
+## Framework
 
-Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
+### **Node**
 
-## 2️⃣ Payment API here
+Node is a server side environment where javascript can run. Having both our client and server code with the same language is helpful to our team's communication and integration.
 
-🚫Replace text below with a description of the API
+### **Express**
 
-This is the way you take out your flustrations. Get away from those little Christmas tree things we used to make in school. Isn't it fantastic that you can change your mind and create all these happy things? Everything's not great in life, but we can still find beauty in it.
+Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
 
-## 3️⃣ Misc API here
+### **Sequelize**
 
-🚫Replace text below with a description of the API
+Sequelize is perhaps the most popular and used promised base Javascript SQL ORM that is compatible with PostgreSQL and helps us handle relationships and their query.
 
-You can do anything your heart can imagine. In life you need colors. This is where you take out all your hostilities and frustrations. It's better than kicking the puppy dog around and all that so. I'm sort of a softy, I couldn't shoot Bambi except with a camera. Trees get lonely too, so we'll give him a little friend. We'll lay all these little funky little things in there.
 
-## 3️⃣ Misc API here
+Having both our client and server code with the same language is helpful to our team's communication and integration. 
 
-🚫Replace text below with a description of the API
+We also considered which language all of our team was comfortable to work with, and that's why we settled on Node + Express.
 
-When you do it your way you can go anywhere you choose. Let your heart take you to wherever you want to be. If I paint something, I don't want to have to explain what it is. A tree needs to be your friend if you're going to paint him. That's a son of a gun of a cloud. Even the worst thing we can do here is good.
+Sequelize is an ORM which can help us handle associations and their queries, and knex is only a query builder. This will make it the setup easier with sequelize.
 
-## 3️⃣ Misc API here
+## APIs query type
 
-🚫Replace text below with a description of the API
+### **Rest API**
 
-Volunteering your time; it pays you and your whole community fantastic dividends. Maybe there's a happy little waterfall happening over here. You can spend all day playing with mountains. We don't have to be committed. We are just playing here. You have freedom here. The only guide is your heart. It's cold, but it's beautiful.
+REST API is a simple and popular architecture type both for client and server-side that helps us perform all CRUD operations. Since REST was covered in the curriculum and also effectively solves our problem in the early circle we would be starting with it.
+
+## Testing
+
+### **Jest Framework**
+
+Jest is a testing framework that focuses on simplicity. It was covered in the curriculum, have awesome documentation and practically covers every aspect of testing; from unit-test to snap-shot test, etc. 
+
+Jest have both units test, snap-shot test and react test. It's also simple and simply delightful.
+
+## **Continous Integration**
+
+Using continuous integration for our test helps us deploy our application dynamically, supports our development process by automatically building and testing code changes, providing immediate feedback on the success of the change.
+
+### **Circle CI**
+
+Circle CI is a fast automated triggered continuous integration service.
+
+Circle CI has a hub and automate all process of automated integration, from base to end. Automatically deploy to heroku, etc.
 
 # 3️⃣ Environment Variables
 
