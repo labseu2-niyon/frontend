@@ -87,6 +87,10 @@ Moreover, [socket.io](http://socket.io) have the following 3 unique features:
 - Binary streaming - Starting in 1.0, it's possible to send any blob back and forth: image, audio, video.
 - Instant messaging and chat - Socket.IO's "Hello world" is a chat app in just a few lines of code.
 
+## Form
+
+[Formik] takes care of the repetitive tasks, keeping track of values/errors/visited fields, orchestrating validation, and handling submission. It uses just plain React state and props. By staying within the core React framework, Formik makes debugging, testing, and reasoning about your forms a breeze.
+
 #### Front end deployed to:
 
 ### **Heroku - Development, Staging**
