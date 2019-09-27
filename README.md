@@ -1,158 +1,139 @@
-🚫 The numbers 1️⃣ through 5️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
+#### Link to backend documentation https://github.com/labseu2-niyon/backend/blob/master/README.md
 
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric. Contributing to docs does NOT count as a PR to meet your weekly requirements.
+# Niyon
 
-# 1️⃣ Title of project goes here
+You can find the deployed project at https://niyonapp.com/
 
-1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
+## Contributors
 
-## 4️⃣ Contributors
-
-🚫Add contributor info below, make sure add images and edit the social links for each member. Add to or delete these place-holders as needed
-
-|                                       [Student 1](https://github.com/)                                        |                                       [Student 2](https://github.com/)                                        |                                       [Student 3](https://github.com/)                                        |                                       [Student 4](https://github.com/)                                        |                                       [Student 5](https://github.com/)                                        |
-| :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
-|                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |
-|                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/)                 |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/honda0306)             |           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Mister-Corn)            |          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/NandoTheessen)           |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/wvandolah)             |
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) |
-
-<br>
-<br>
-
-🚫 4️⃣ Optional examples of using images with links for your tech stack, make sure to change these to fit your project
-
-![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
-![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
-![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)](netlify link goes in these parenthesis)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-
-🚫 more info on using badges [here](https://github.com/badges/shields)
+Check our about page at https://niyonapp.com/about
 
 ## Project Overview
 
-1️⃣ [Trello Board](🚫add link to trello board here)
+[Trello Board] https://trello.com/b/fvJgJWWA/niyon
 
-1️⃣ [Product Canvas](🚫add link to product canvas here)
+[Product Canvas] https://www.notion.so/Niyon-c215b4850eaf4cc39162e9c455993155
 
-1️⃣ [UX Design files](🚫add link to design files here) - 🚫 delete if not applicable
+[UX Design files] https://whimsical.com/51S63ddNuAZB5d7azZ9L9d
 
-🚫 Replace lorem ipsum with a description of your project
+Find a mentor.
+Niyon is a platform for connecting young professionals with mentors in West Africa.
+We connect you with mentors who are located in the same city, town or local government area you are in.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+### Key Features
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+- Create your account or login with your social account
+- Connect with mentors and mentees
+- Chat with them
 
+## Tech Stack
 
-### 4️⃣ Key Features
+## Front End Frameworks & Libraries
 
--    feature one
--    feature two
--    feature three
--    feature four
--    feature five
+### **React**
 
-## 1️⃣ Tech Stack
+- A popular library, many modules are available, as is plenty of up-to-date information about it.
+- Performance - ReactJS its using a virtual DOM that provides superior performance
+- Reusable Components - React provides a component based structure. You can re-use components anywhere you need. As a result, (1) your app has consistent look and feel, (2) code re-use makes it easier to maintain and grow your codebase, and (3) it is easier to develop your app.
+- Native Approach: React can be use to create mobile application( react native) .React code its really reusable. So at the same time someone can make IOS , Android application
 
-### Front end built using:
+### **Next JS**
 
-#### _Front end framework goes here_
+Handles routing (replaces React Router), clear separation between pages and components. Client-side rendered which makes loading faster.
 
-🚫 Why did you choose this framework?
+### **Hooks**
 
--    point one
--    point two
--    point three
--    point four
+Hooks makes it easier to update state, there's also no need for class components or lifecycle methods like componentDidMount.
 
-🚫List the rest of the front end features and libraries in the same format as the framework above.
+### **Redux**
 
-#### Front end deployed to `🚫insert service here`
+Provides one source of truth for state, easier to manage the application state if working in a group.
 
-#### [Back end](🚫link to back end repo here) built using:
+Our team has extensive experience in ReactJS and NextJS was chosen over React because of the server side rendering and integrated tooling/router.
 
-#### 🚫 back end framework goes here
+Hooks enable us to manage our state such as (form handling, dropdown menu etc) in a functional components.
 
--    point one
--    point two
--    point three
+Redux provides us with the ability to manage our state in a central store that can be accessed by all components.
 
-🚫 List the rest of the back end end features and libraries in the same format as the framework above
+### **Styled Components**
 
-# APIs
+Can have reusable components (easier to have a style guide), easier to organize than other CSS in JS methods (e.g. components can be kept in one file or sorted by type) :
 
-## 2️⃣ Authentication API here
+- scoped styles
+- normal CSS syntax
+- props based conditional style
+- create reusable style
+- native mobile support - for teams with a React codebase who also use React Native for mobile development, styled-components is one of the best-unified solution out there
 
-🚫Replace text below with a description of the API
+## User Auth
 
-Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
+### Passport JS
 
-## 2️⃣ Payment API here
+Passport JS is authentication middleware for Node.js. Extremely flexible and modular, Passport can be unobtrusively dropped into any Express-based web application. It has a social authentication feature that helps with authenticating users via their social handles like facebook, twitter, etc by interacting with these social handle API. It is compatible to use, free, flexible and secured.
 
-🚫Replace text below with a description of the API
+For users registering directly to our platform, we will use JSON Web Token.
 
-This is the way you take out your flustrations. Get away from those little Christmas tree things we used to make in school. Isn't it fantastic that you can change your mind and create all these happy things? Everything's not great in life, but we can still find beauty in it.
+PassportJS allows us to integrate a lot of different auth providers (facebook, etc.) and also enables us to integrate OAuth (all different versions).
 
-## 3️⃣ Misc API here
+## Chat
 
-🚫Replace text below with a description of the API
+[Socket.io](http://socket.io) is a chat framework that performs real-time chat analytics and is compatible across all platforms (web, mobile) and devices.
 
-You can do anything your heart can imagine. In life you need colors. This is where you take out all your hostilities and frustrations. It's better than kicking the puppy dog around and all that so. I'm sort of a softy, I couldn't shoot Bambi except with a camera. Trees get lonely too, so we'll give him a little friend. We'll lay all these little funky little things in there.
+We choose [socket.io](http://socket.io) over Pusher because it gives us more flexibility, isn't a third party service (limited plan available for free).
 
-## 3️⃣ Misc API here
+Moreover, [socket.io](http://socket.io) have the following 3 unique features:
 
-🚫Replace text below with a description of the API
+- Real-time analytics - Push data to clients that gets represented as real-time counters, charts or logs.
+- Binary streaming - Starting in 1.0, it's possible to send any blob back and forth: image, audio, video.
+- Instant messaging and chat - Socket.IO's "Hello world" is a chat app in just a few lines of code.
 
-When you do it your way you can go anywhere you choose. Let your heart take you to wherever you want to be. If I paint something, I don't want to have to explain what it is. A tree needs to be your friend if you're going to paint him. That's a son of a gun of a cloud. Even the worst thing we can do here is good.
+## Form
 
-## 3️⃣ Misc API here
+[Formik] takes care of the repetitive tasks, keeping track of values/errors/visited fields, orchestrating validation, and handling submission. It uses just plain React state and props. By staying within the core React framework, Formik makes debugging, testing, and reasoning about your forms a breeze.
 
-🚫Replace text below with a description of the API
+#### Front end deployed to:
 
-Volunteering your time; it pays you and your whole community fantastic dividends. Maybe there's a happy little waterfall happening over here. You can spend all day playing with mountains. We don't have to be committed. We are just playing here. You have freedom here. The only guide is your heart. It's cold, but it's beautiful.
+### **Heroku - Development, Staging**
 
-# 3️⃣ Environment Variables
+Heroku is a platform as a service for Amazon Web Services. Heroku makes it easy to set up an AWS deployment by handling most of the set up. This is ideal for development and staging as we can test projects without having to worry about too much set up.
 
-In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
+### **Circle CI - Testing**
 
-🚫These are just examples, replace them with the specifics for your app
+Continuous integration is crucial in modern web development as it ensures all automated tests pass before merging branches and deploying. This ensures bugs are caught at the earliest possible stage.
 
-    *  REACT_APP_apiKey - this is your Google API key, which can be generated in the Google Cloud Console
-    *  REACT_APP_authDomain - when you set up your Firebase project, this information will be in the dashboard
-    *  REACT_APP_databaseURL - in the Firebase dashboard
-    *  REACT_APP_projectID - in the Firebase dashboard
-    *  REACT_APP_storageBucket - in the Firebase dashboard
-    *  REACT_APP_messagingSenderId - in the Firebase dashboard
-    *  REACT_APP_stripe_API - this is your public Stripe API key, generated in the Stripe dashboard
-    *  REACT_APP_backendURL - optional for your local development server
-    *  REACT_APP_clientid - this is the Stripe_connect clientID, generated in Stripe_connect settings
-    *  REACT_APP_stripe_plan - this is the ID for a second Stripe subscription plan, generated under Stripe products
+### **Now - Production**
 
-# 5️⃣ Content Licenses
+ZEIT Now is a really simple and scalable way to deploy your application. Pages are deployed as server-less functions meaning billing only occurs in 100ms increments when the site is actually being used. Also as we are using Next.js, also a Zeit product, this allows a seem-less deployment process with two products designed to work together.
 
-🚫For all content - images, icons, etc, use this table to document permission of use. Remove the two placeholders and add you content to this table
+# Content Licenses
 
-| Image Filename | Source / Creator | License                                                                      |
-| -------------- | ---------------- | ---------------------------------------------------------------------------- |
-| doodles.png    | Nicole Bennett   | [Creative Commons](https://www.toptal.com/designers/subtlepatterns/doodles/) |
-| rings.svg      | Sam Herbert      | [MIT](https://github.com/SamHerbert/SVG-Loaders)                             |
+| Image Filename | Source / Creator | License                                                  |
+| -------------- | ---------------- | -------------------------------------------------------- |
+| mentor.png     | Freepik          | [Flat Icon](https://www.flaticon.com/packs/e-learning-3) |
+| student.png    | Freepik          | [Flat Icon](https://www.flaticon.com/packs/e-learning-3) |
 
-# 4️⃣ Testing
+# Installation Instructions
 
-🚫Document what you used for testing and why
-
-# 4️⃣ Installation Instructions
-
-🚫explain how to install the required dependencies to get this project up and running with yarn and NPM
+1. Install packages with `yarn install`
+2. Run the server locally with `yarn dev`
 
 ## Other Scripts
 
-🚫replace these examples with your own
+```
+"scripts": {
+    "dev": "next -p 3001",
+    "build": "next build", - creates a build of the application
+    "start": "next start", - starts the production server after a build is created
+    "test": "jest --watch --verbose", - runs tests
+    "husky-test": "jest",
+    "circle-ci-test": "jest",
+    "lint": "./node_modules/.bin/eslint . --fix",
+    "deploy:staging": "now -A staging.now.json --target production",
+    "deploy:production": "now -A production.now.json --target production"
+},
+```
 
-    * typecheck - runs the TypeScript compiler
-    * build - creates a build of the application
-    * start - starts the production server after a build is created
-    * test - runs tests in **tests** directory \* eject - copy the configuration files and dependencies into the project so you have full control over them
+It's also possible to use the [Now CLI](https://github.com/zeit/now). [More information](https://github.com/zeit/now).
 
 # Contributing
 
@@ -161,12 +142,13 @@ When contributing to this repository, please first discuss the change you wish t
 Please note we have a [code of conduct](./CODE_OF_CONDUCT.md). Please follow it in all your interactions with the project.
 
 ## Issue/Bug Request
-   
- **If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
- - Check first to see if your issue has already been reported.
- - Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
- - Create a live example of the problem.
- - Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes,  where you believe the issue is originating from, and any potential solutions you have considered.
+
+**If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
+
+- Check first to see if your issue has already been reported.
+- Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
+- Create a live example of the problem.
+- Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes, where you believe the issue is originating from, and any potential solutions you have considered.
 
 ### Feature Requests
 
@@ -189,7 +171,3 @@ Remember that this project is licensed under the MIT license, and by submitting 
 ### Attribution
 
 These contribution guidelines have been adapted from [this good-Contributing.md-template](https://gist.github.com/PurpleBooth/b24679402957c63ec426).
-
-## Documentation
-
-See [Backend Documentation](🚫_link to your backend readme here_) for details on the backend of our project.
