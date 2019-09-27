@@ -110,7 +110,8 @@ ZEIT Now is a really simple and scalable way to deploy your application. Pages a
 
 # Installation Instructions
 
-yarn install or npm install
+1. Install packages with `yarn install`
+2. Run the server locally with `yarn dev`
 
 ## Other Scripts
 
@@ -127,6 +128,8 @@ yarn install or npm install
     "deploy:production": "now -A production.now.json --target production"
 },
 ```
+
+It's also possible to use the [Now CLI](https://github.com/zeit/now). [More information](https://github.com/zeit/now).
 
 # Contributing
 
