@@ -8,9 +8,6 @@ You can find the deployed project at https://niyonapp.com/
 
 Check our about page at https://niyonapp.com/about
 
-<br>
-<br>
-
 ## Project Overview
 
 [Trello Board] https://trello.com/b/fvJgJWWA/niyon
@@ -80,8 +77,6 @@ PassportJS allows us to integrate a lot of different auth providers (facebook, e
 
 ## Chat
 
-### socket.io
-
 [Socket.io](http://socket.io) is a chat framework that performs real-time chat analytics and is compatible across all platforms (web, mobile) and devices.
 
 We choose [socket.io](http://socket.io) over Pusher because it gives us more flexibility, isn't a third party service (limited plan available for free).
@@ -94,7 +89,7 @@ Moreover, [socket.io](http://socket.io) have the following 3 unique features:
 
 #### Front end deployed to:
 
-### **Heroku - Development, Staging (Backend + Front-end)**
+### **Heroku - Development, Staging**
 
 Heroku is a platform as a service for Amazon Web Services. Heroku makes it easy to set up an AWS deployment by handling most of the set up. This is ideal for development and staging as we can test projects without having to worry about too much set up.
 
@@ -102,7 +97,7 @@ Heroku is a platform as a service for Amazon Web Services. Heroku makes it easy 
 
 Continuous integration is crucial in modern web development as it ensures all automated tests pass before merging branches and deploying. This ensures bugs are caught at the earliest possible stage.
 
-### **Now - Production (Front-end )**
+### **Now - Production**
 
 ZEIT Now is a really simple and scalable way to deploy your application. Pages are deployed as server-less functions meaning billing only occurs in 100ms increments when the site is actually being used. Also as we are using Next.js, also a Zeit product, this allows a seem-less deployment process with two products designed to work together.
 
@@ -113,6 +108,7 @@ yarn add or npm install
 
 ## Other Scripts
 
+```
 "scripts": {
     "dev": "next -p 3001",
     "build": "next build", - creates a build of the application
@@ -124,6 +120,7 @@ yarn add or npm install
     "deploy:staging": "now -A staging.now.json --target production",
     "deploy:production": "now -A production.now.json --target production"
 },
+```
 
 # Contributing
 
@@ -162,6 +159,3 @@ Remember that this project is licensed under the MIT license, and by submitting 
 
 These contribution guidelines have been adapted from [this good-Contributing.md-template](https://gist.github.com/PurpleBooth/b24679402957c63ec426).
 
-## Documentation
-
-See https://github.com/labseu2-niyon/backend/blob/development/README.md for details on the backend of our project.
