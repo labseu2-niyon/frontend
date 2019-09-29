@@ -1,91 +1,87 @@
-import Avatar from '../~common/Avatar';
-import styled from 'styled-components';
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { withRouter, useRouter } from 'next/router';
+import { Divider } from 'antd';
+import Head from 'next/head';
+import { fetchUser } from '../../redux/actions/userActions';
+import {
+  userProfileInfo,
+  socialDataHandlerSettings,
+  getJobTitles
+} from '../../redux/actions/authActions';
+import EditLocation from './EditLocation';
+import EditImage from './EditImage';
+import EditSocialMedia from './EditSocialMedia';
+import EditnameBio from './EditNameBio';
 
-const dummyUser = {
-  image: 'https://milan.serverlessdays.io/speakers/guillermo-rauch.jpg',
-  name: 'Guillermo Rauch'
-};
+const EditProfile = ({
+  user,
+  userProfileInfo,
+  socialDataHandlerSettings,
+  getJobTitles,
+  allJobs
+}) => {
+  const [jobId, setJobId] = useState(null);
+  const router = useRouter();
 
-const EditProfile = ({ user }) => {
-  return (
-    <div>
-      <Image>
-        <Avatar large source={dummyUser.image} />
-        <p>Edit Profile Image</p>
-      </Image>
-      <div>
-        <div>
-          <p>First Name</p>
-          <input type="text" name="firstName" value={user.first_name}></input>
-        </div>
-        <div>
-          <p>Last Name</p>
-          <input type="text" name="lastName" value={user.last_name}></input>
-        </div>
-        <div>
-          <p>Username</p>
-          <input type="text" name="username" value={user.username}></input>
-        </div>
-        <div>
-          <p>Bio</p>
-          <textarea
-            name="message"
-            rows="10"
-            cols="30"
-            value={user.biography}
-          ></textarea>
-        </div>
-        <div>
-          <p>Email</p>
-          <input type="text" name="email" value={user.email}></input>
-        </div>
+  useEffect(() => {
+    fetchUser(router.query.user);
+    getJobTitles();
+    getCurrentJobId();
+  }, []);
 
-        <h3>Location</h3>
-        <div>
-          <p>Location</p>
-          <input type="text"></input>
-        </div>
+  const getCurrentJobId = () => {
+    const id =
+      user &&
+      allJobs.filter(job => {
+        return job.tech_name === user.job.tech_name;
+      });
+    setJobId(id);
+  };
 
-        <h3>Mentorship</h3>
-        <div>
-          <p>Job Title</p>
-          <select name="jobTitle"></select>
-        </div>
-        <div>
-          <p>Mentor or Mentee Option</p>
-          <select name="jobTitle"></select>
-        </div>
-
-        <h3>Social</h3>
-
-        <div>
-          <p>Github</p>
-          <input type="text"></input>
-        </div>
-        <div>
-          <p>Twitter</p>
-          <input type="text"></input>
-        </div>
-        <div>
-          <p>Linkedin</p>
-          <input type="text"></input>
-        </div>
-
-        <button>Save</button>
-      </div>
-    </div>
-  );
-};
-
-const Image = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 3rem 0;
-  p {
-    margin-left: 1rem;
+  if (user) {
+    return (
+      <>
+        <Head>
+          <title>Niyon | Settings</title>
+        </Head>
+        <EditImage user={user} />
+        <Divider dashed />
+        <EditnameBio
+          userProfileInfo={userProfileInfo}
+          user={user}
+          jobId={jobId}
+          allJobs={allJobs}
+        />
+        <Divider dashed />
+        <EditLocation user={user} jobId={jobId} />
+        {/* <EditMentorship user={user} /> */}
+        <Divider dashed />
+        <EditSocialMedia
+          socialDataHandlerSettings={socialDataHandlerSettings}
+          user={user}
+        />
+      </>
+    );
   }
-`;
+  return <></>;
+};
 
-export default EditProfile;
+const mapDispatchToProps = {
+  fetchUser,
+  userProfileInfo,
+  socialDataHandlerSettings,
+  getJobTitles
+};
+const mapStateToProps = state => {
+  return {
+    user: state.userReducer.user,
+    allJobs: state.authReducer.allJobs
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(EditProfile));

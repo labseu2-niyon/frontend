@@ -1,12 +1,14 @@
 /* eslint-disable */
 import { useState } from 'react';
-import { Text, Heading2, Button } from '../~common/index';
 import styled from 'styled-components';
-import Steps from './StepsComp';
+import Steps from './Steps';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import { locationData, locationRequest } from '../../redux/actions/authActions';
 import { Icon, AutoComplete } from 'antd';
+import Card from './Card';
+import Content from './ContentWrapper';
+import { lighten } from 'polished'
 
 const Location = ({ locationRequest, locationData }) => {
   const [data, setData] = useState([]);
@@ -25,9 +27,7 @@ const Location = ({ locationRequest, locationData }) => {
             setData(res);
           }
         })
-        .catch(error => {
-          //console.log(error);
-        });
+        .catch(error => {});
   };
   const chosen = value => {
     setSelect({ state: true, data: value });
@@ -54,49 +54,51 @@ const Location = ({ locationRequest, locationData }) => {
   };
 
   return (
-    <Root>
-      <Steps stepNumber="2" />
-      <Section>
-        <Heading2 primary>Where are you located?</Heading2>
-        <IconT className="fas fa-globe-europe" />
-        {/* <Icon type="pushpin" theme="twoTone" /> */}
-        <Text small>Please enter your city name.</Text>
-        <Auto>
-          <AutoComplete
-            onChange={getPossibleLocation}
-            onSelect={chosen}
-            style={{ width: 200 }}
-            dataSource={data}
-            // autoFocus={true}
-            placeholder="Your city name"
-            filterOption={(inputValue, option) =>
-              option.props.children
-                .toUpperCase()
-                .indexOf(inputValue.toUpperCase()) !== -1
-            }
-          />
-          {!select.state ? (
-            <Icon
-              type="loading"
-              style={{ marginLeft: '1em', fontSize: '1.5em' }}
-            />
-          ) : (
-            <Icon
-              type="check-circle"
-              theme="twoTone"
-              twoToneColor="#52c41a"
-              style={{ marginLeft: '1em', fontSize: '1.5em' }}
-            />
-          )}
-        </Auto>
-        {warning && <Error>You need to enter a city name</Error>}
-        <InputWrapper>
-          <Button primary small onClick={handleSubmit} loadingB={loading}>
-            Next
-          </Button>
-        </InputWrapper>
-      </Section>
-    </Root>
+    <main>
+      <Steps stepNumber={0} />
+      <Card>
+        <Content>
+          <h3>Where are you located?</h3>
+          <Form>
+            <Auto>
+              <AutoComplete
+                onChange={getPossibleLocation}
+                onSelect={chosen}
+                style={{ width: '100%', marginRight: '5px' }}
+                dataSource={data}
+                placeholder="City Name"
+                filterOption={(inputValue, option) =>
+                  option.props.children
+                    .toUpperCase()
+                    .indexOf(inputValue.toUpperCase()) !== -1
+                }
+              />
+              <div className="icons">
+                {!select.state ? (
+                  <Icon
+                    type="close-circle"
+                    theme="twoTone"
+                    twoToneColor="#e8e8e8"
+                    style={{ fontSize: '25px' }}
+                  />
+                ) : (
+                  <Icon
+                    type="check-circle"
+                    theme="twoTone"
+                    twoToneColor="#52c41a"
+                    style={{ fontSize: '25px' }}
+                  />
+                )}
+              </div>
+            </Auto>
+            {warning && (
+              <p className="error with-margin">You need to enter a city name</p>
+            )}
+            <button onClick={handleSubmit}>Next</button>
+          </Form>
+        </Content>
+      </Card>
+    </main>
   );
 };
 
@@ -105,52 +107,71 @@ export default connect(
   { locationData, locationRequest }
 )(Location);
 
-const Root = styled.div`
-  height: 95vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-
-  h2 {
-    text-align: center;
-    padding: 0 20px;
-    @media (min-width: 500px) {
-      width: 50%;
-    }
-  }
-`;
-const Section = styled.section`
-  padding: 5vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  height: 100vh;
-`;
-
-const IconT = styled.i`
-  font-size: 100px;
-  color: green;
-`;
 const Auto = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
+
+  .icons {
+    width: 30px;
+  }
 `;
 
-const InputWrapper = styled.div`
-  width: 100%;
+const Form = styled.div`
+  margin: 20px 0 0 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  position: relative;
-  padding-bottom: 30px;
-`;
 
-const Error = styled.p`
-  margin: 0;
-  font-size: 14px;
-  bottom: 10%;
-  left: 26%;
-  color: #e29273;
+  .input-wrapper {
+    min-height: 65px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    i {
+      position: absolute;
+      z-index: 1;
+      top: 12px;
+      right: 8px;
+      color: #348fbb;
+    }
+  }
+
+  input,
+  select {
+    padding: 5px;
+    width: 100%;
+    display: block;
+    color: #222222;
+    border: 2px solid #ededed;
+    border-radius: 5px;
+    ::placeholder {
+      color: #c2c2c2;
+    }
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+  }
+
+  button {
+    width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    background: #348fbb;
+    color: white;
+    border: none;
+    cursor: pointer;
+    &:hover {
+      background: ${lighten(0.1, '#348fbb')};
+    }
+    transition: background 1s ease;
+
+    &:focus {
+      outline: 0;
+    }
+  }
 `;

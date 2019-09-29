@@ -1,10 +1,14 @@
-import { useState, useEffect } from 'react';
-import { Button, Heading2, Skip } from '../~common/index';
+import { useState } from 'react';
 import styled from 'styled-components';
-import Steps from './StepsComp';
+import Steps from './Steps';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import { socialDataHandler } from '../../redux/actions/authActions';
+import Head from 'next/head';
+import Card from './Card';
+import Content from './ContentWrapper';
+import FormStyles from './Form';
+import Link from 'next/link';
 
 const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
   const [facebook, setFacebook] = useState('');
@@ -27,41 +31,46 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
     });
   };
   return (
-    <Root>
-      <Steps stepNumber="5" />
-      <Heading2 primary>Add your social media handles</Heading2>
-      <FormArea onSubmit={handleSubmit}>
-        <InputWrapper>
-          <input
-            type="text"
-            placeholder="Facebook handle"
-            onChange={e => {
-              setFacebook(e.target.value);
-            }}
-          />
-          <i className="fab fa-facebook fa-lg"></i>
-        </InputWrapper>
-        <InputWrapper>
-          <input
-            type="text"
-            placeholder="Linkedin handle"
-            onChange={e => {
-              setLinkedin(e.target.value);
-            }}
-          />
-          <i className="fab fa-linkedin fa-lg"></i>
-        </InputWrapper>
-        <InputWrapper>
-          <input
-            type="text"
-            placeholder="Twitter handle"
-            onChange={e => {
-              setTweeter(e.target.value);
-            }}
-          />
-          <i className="fab fa-twitter fa-lg"></i>
-        </InputWrapper>
-        {/* <InputWrapper>
+    <main>
+      <Head>
+        <title>Niyon | {username}</title>
+      </Head>
+      <Steps stepNumber={2} />
+      <Card>
+        <Content>
+          <h4>Add your social media links</h4>
+          <FormStyles onSubmit={handleSubmit}>
+            <div className="input-wrapper">
+              <input
+                type="text"
+                placeholder="Facebook"
+                onChange={e => {
+                  setFacebook(e.target.value);
+                }}
+              />
+              <i className="fab fa-facebook fa-lg"></i>
+            </div>
+            <div className="input-wrapper">
+              <input
+                type="text"
+                placeholder="Linkedin"
+                onChange={e => {
+                  setLinkedin(e.target.value);
+                }}
+              />
+              <i className="fab fa-linkedin fa-lg"></i>
+            </div>
+            <div className="input-wrapper">
+              <input
+                type="text"
+                placeholder="Twitter"
+                onChange={e => {
+                  setTweeter(e.target.value);
+                }}
+              />
+              <i className="fab fa-twitter fa-lg"></i>
+            </div>
+            {/* <InputWrapper>
           <input
             type="text"
             placeholder="Github handle"
@@ -72,12 +81,18 @@ const SocialInfo = ({ socialDataHandler, username, loading, usernameId }) => {
           <i className="fab fa-github fa-lg"></i>
         </InputWrapper> */}
 
-        <Button small primary type="submit" loadingB={loading}>
-          Next
-        </Button>
-        <Skip onHandle={() => Router.push('/')}></Skip>
-      </FormArea>
-    </Root>
+            <button type="submit">Next</button>
+          </FormStyles>
+        </Content>
+      </Card>
+      <BottomWrapper>
+        <p>
+          <Link href="/">
+            <a>Skip</a>
+          </Link>
+        </p>
+      </BottomWrapper>
+    </main>
   );
 };
 
@@ -94,55 +109,12 @@ export default connect(
   { socialDataHandler }
 )(SocialInfo);
 
-const Root = styled.div`
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  h2 {
-    text-align: center;
-  }
-`;
-
-const FormArea = styled.form`
+const BottomWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  height: 320px;
-
-  @media (min-width: 500px) {
-    width: 50%;
-  }
-
-  input {
-    padding: 0.5rem;
-    font-size: 16px;
-    width: 70%;
-    display: block;
-    color: #4d2d52;
-    border: 1px solid rgba(77, 45, 82, 0.8);
-    border-radius: 4px;
-    ::placeholder {
-      color: grey;
-      opacity: 0.4;
-    }
-  }
-`;
-
-const InputWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-
-  i {
-    position: absolute;
-    right: 20%;
-    top: 30%;
-    color: grey;
+  a {
+    color: #348fbb;
   }
 `;

@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { Button } from '../~common';
+import { theme } from '../../lib/theme';
 
 const ButtonWrapper = styled.div`
     width: 350px;
     display: flex;
     justify-content: space-between;
 
-    @media (max-width: 600px) {
-        width: 150px;
+    @media (max-width: ${({ theme }) => theme.mobileWidth}) {
+        width: 100%;
         height: 85px;
         flex-direction: column;
     }

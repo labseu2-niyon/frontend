@@ -4,7 +4,6 @@ import Router, { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { storeToken } from '../../redux/actions/authActions';
-import { Heading2, Text, Button } from '../~common/index';
 
 const ContinuePage = ({ storeToken }) => {
   const nextRouter = useRouter();
@@ -12,7 +11,6 @@ const ContinuePage = ({ storeToken }) => {
     const newToken = nextRouter.query.token;
     if (newToken) {
       const user = jwt.decode(newToken);
-      console.log(user.username);
       storeToken(newToken, user.username);
       Router.push('/');
     } else {
@@ -21,9 +19,9 @@ const ContinuePage = ({ storeToken }) => {
   }, []);
 
   return (
-    <Root>
-      <Heading2 primary>Redirecting</Heading2>
-    </Root>
+    <Wrapper>
+      <h2>Redirecting...</h2>
+    </Wrapper>
   );
 };
 
@@ -36,15 +34,14 @@ export default connect(
   mapDispatchToProps
 )(ContinuePage);
 
-const Root = styled.div`
-  height: 96vh;
+const Wrapper = styled.div`
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 
-  p {
-    padding: 0 20px;
-    text-align: center;
+  h2 {
+    color: #348fbb;
   }
 `;

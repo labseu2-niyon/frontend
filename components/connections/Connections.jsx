@@ -26,7 +26,7 @@ function Connections(props) {
 )}
         src="/static/friends-online.svg"
       />
-      <ConnectionRequests users={props.connectionsReceived.received || []} />
+      <ConnectionRequests requests={props.connectionsReceived.received || []} connections={props.connectionsAll || []} />
       <ProfileList title="My Connections" users={props.connectionsAll || []} />
     </Wrapper>
   );

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useEffect } from 'react';
+import Head from 'next/head';
 import TopSection from '../TopSection';
 import SearchBox from './SearchBox';
 import ProfileList from './ProfileList';
@@ -12,10 +14,14 @@ const Wrapper = styled.main`
 `;
 
 function Explore(props) {
+  useEffect(() => {
+    props.jobs.unshift('All');
+    // console.log(props.jobs);
+  }, []);
+
   const connectionsLength = props.connectionsAll
     ? props.connectionsAll.length
     : 0;
-
   const filter = (mentor, mentee) => {
     const filteredUsers = props.users.map(user => {
       if (mentor && mentee) {
@@ -48,13 +54,17 @@ function Explore(props) {
 
   const filterJobTitle = job => {
     const filteredUsers = props.users.map(user => {
-      if (user.job) {
-        if (user.job.tech_name === job) {
-          return { ...user, filtered: true };
+      if (job === 'All') {
+        return { ...user, filtered: true };
+      } else {
+        if (user.job) {
+          if (user.job.tech_name === job) {
+            return { ...user, filtered: true };
+          }
+          return { ...user, filtered: false };
         }
         return { ...user, filtered: false };
       }
-      return { ...user, filtered: false };
     });
 
     props.setUsers(filteredUsers);
@@ -62,6 +72,9 @@ function Explore(props) {
 
   return (
     <Wrapper>
+      <Head>
+        <title>Niyon | Explore</title>
+      </Head>
       <TopSection
         buttons={<ExploreButtons numOfConnections={connectionsLength} />}
         src="/static/friends-online.svg"

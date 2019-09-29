@@ -10,7 +10,6 @@ const startLoading = () => ({
   type: types.START_LOADING
 });
 
-
 const stopLoading = () => ({ type: types.STOP_LOADING });
 
 // Action creator for persisting location data
@@ -21,6 +20,19 @@ export const locationData = data => dispatch => {
     .then(res => {
       dispatch({ type: types.SET_LOCATION_DATA, payload: res.data.data });
       return res.data.status;
+    })
+    .catch(() => {
+      dispatch({ type: types.STOP_LOADING });
+    });
+};
+
+export const locationDataForSettings = data => dispatch => {
+  dispatch({ type: types.START_LOADING });
+  return axios
+    .post(`${getUrl()}/location/getLocation`, data)
+    .then(res => {
+      dispatch({ type: types.SET_LOCATION_DATA, payload: res.data.data });
+      return { status: res.data.status, id: res.data.data };
     })
     .catch(() => {
       dispatch({ type: types.STOP_LOADING });
@@ -59,7 +71,6 @@ export const userChoise = (data, userType) => dispatch => {
 // body {username, email, password}
 export const emailSignup = data => dispatch => {
   dispatch({ type: types.REGISTER_USER_REQUEST });
-  // console.log('SignUp data: ', data);
   return axios
     .post(`${getUrl()}/user/signup`, data)
     .then(res => {
@@ -143,6 +154,7 @@ export const getMentorType = () => dispatch => {
 // data: {firstName: String, lastName: String, country: String, city: String, bio: String}
 // user : username
 export const userProfileInfo = (data, user) => dispatch => {
+  //console.log(data);
   dispatch({ type: types.USER_INFO_REQUEST });
   return axiosWithToken()
     .patch(`${getUrl()}/user/${user}/profile`, data)
@@ -165,10 +177,10 @@ export const userProfileInfo = (data, user) => dispatch => {
 // user : username
 export const imageUpload = (data, user) => dispatch => {
   dispatch(startLoading());
-  axiosWithToken()
+  return axiosWithToken()
     .patch(`${getUrl()}/user/${user}/image/upload`, data)
-    .then(() => {
-      // debugger;
+    .then(res => {
+      return res.data.status;
     })
     .catch(() => {
       // debugger;
@@ -185,7 +197,20 @@ export const socialDataHandler = (data, username) => dispatch => {
       dispatch({ type: types.SET_SOCIAL_MEDIA_DATA, payload: data });
       return res.data.status;
     })
-    .catch(() => {
+    .catch(e => {
+      dispatch({ type: types.STOP_LOADING });
+    });
+};
+
+export const socialDataHandlerSettings = (data, username) => dispatch => {
+  dispatch({ type: types.START_LOADING });
+  return axiosWithToken()
+    .patch(`${getUrl()}/user/${username}/socialmedia`, data)
+    .then(res => {
+      dispatch({ type: types.SET_SOCIAL_MEDIA_DATA, payload: data });
+      return res.data.status;
+    })
+    .catch(e => {
       dispatch({ type: types.STOP_LOADING });
     });
 };
@@ -286,7 +311,6 @@ export const saveToken = (token, username) => dispatch => {
   });
 };
 
-
 export const storeToken = (token, username) => dispatch => {
   nookies.set({}, 'token', token, {
     maxAge: 60 * 60 * 24 * 30,
@@ -298,5 +322,13 @@ export const storeToken = (token, username) => dispatch => {
       token,
       username
     }
-  }); 
+  });
+};
+
+export const saveLocationId = id => dispatch => {
+  dispatch({ type: 'SAVE_LOCATION_ID', payload: id });
+};
+
+export const saveConnectionId = id => dispatch => {
+  dispatch({ type: 'SAVE_CONN', payload: id });
 };

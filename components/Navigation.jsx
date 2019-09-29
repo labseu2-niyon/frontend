@@ -10,6 +10,7 @@ import { logOutUser } from '../redux/actions/authActions';
 import { fetchUser } from '../redux/actions/userActions';
 import { profile_placeholder } from '../lib/utils';
 import withAuth from '../lib/withAuth';
+import { theme } from '../lib/theme';
 
 const Navigation = ({ logOutUser, fetchUser, authReducer, user, socket }) => {
   const userInfo = jwt.decode(authReducer.token);
@@ -85,12 +86,21 @@ const Navigation = ({ logOutUser, fetchUser, authReducer, user, socket }) => {
             <a className="desktop">Explore</a>
           </div>
         </Link>
-        {/* <Link href="/settings">
-          <div>
-            <Icon type="setting" className="icon" />
-            <a className="desktop">Settings</a>
-          </div>
-        </Link> */}
+        {user && (
+          <Link
+            href={{
+              pathname: '/settings',
+              query: {
+                user: user.username
+              }
+            }}
+          >
+            <div>
+              <Icon type="setting" className="icon" />
+              <a className="desktop">Settings</a>
+            </div>
+          </Link>
+        )}
 
         <div onClick={handleClick}>
           <Icon type="logout" className="icon" />
@@ -110,7 +120,8 @@ const Nav = styled.div`
   box-sizing: border-box;
   padding: 2.5rem 0;
   height: 100vh;
-  width: 250px;
+  width: 20%;
+  max-width: 300px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -129,7 +140,7 @@ const Nav = styled.div`
     text-align: center;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: ${({ theme }) => theme.mobileWidth}) {
     padding: 30px 0;
     width: 50px;
     transition: width 2s ease;
@@ -165,7 +176,7 @@ const Links = styled.div`
   margin-top: 20px;
 
   div {
-    margin: 20px 0;
+    margin: 15px 0;
     display: flex;
     align-items: center;
     cursor: pointer;

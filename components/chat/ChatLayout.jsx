@@ -4,16 +4,18 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import UserList from './UserList';
 import Chat from './Messages';
+import { saveConnectionId } from '../../redux/actions/authActions';
 
 const ChatLayout = props => {
   const { socket } = props;
+  useEffect(() => {
+    props.saveConnectionId(props.currentConnectionId);
+    socket.emit('chatOpen', { chatId: props.currentConnectionId });
+  }, [props.currentConnectionId]);
 
   useEffect(() => {
-    socket.emit('chatOpen', { chatId: props.currentConnectionId });
-  }, []);
-
-  useEffect(() => {
-    socket.emit('chatOpen', { chatId: props.currentConnectionId });
+    saveConnectionId(props.connectionId);
+    socket.emit('chatOpen', { chatId: props.currentConnectionId2 });
   }, [props.chatHistory]);
 
   return (
@@ -22,7 +24,7 @@ const ChatLayout = props => {
         userList={props.userList}
         socket={socket}
         currentUser={props.currentUser}
-        currentConnectionId={props.currentConnectionId}
+        currentConnectionId={props.currentConnectionId2}
       />
       {props.chatHistory && (
         <Chat
@@ -54,12 +56,12 @@ const mapStateToProps = state => {
     currentUser: state.userReducer.user,
     authReducer: state.authReducer,
     //current connection its comming dirrectly from withAuth when user loggedin
-    currentConnectionId: state.authReducer.connectionId
+    currentConnectionId2: state.authReducer.connectionId
     //- not taken from redux-store anymore
   };
 };
 
 export default connect(
   mapStateToProps,
-  {}
+  { saveConnectionId }
 )(ChatLayout);

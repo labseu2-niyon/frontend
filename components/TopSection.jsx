@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Heading } from './~common';
+import { theme } from '../lib/theme';
 
 const Wrapper = styled.section`
     box-sizing: border-box;
@@ -17,7 +18,7 @@ const Wrapper = styled.section`
         line-height: 1.5;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: ${({ theme }) => theme.mobileWidth}) {
       flex-direction: column;
       flex-direction: column-reverse;
       
@@ -28,6 +29,7 @@ const Content = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
+    text-align: center;
 `;
 
 const Image = styled.div`
@@ -40,7 +42,7 @@ const Image = styled.div`
     width: 280px;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: ${({ theme }) => theme.mobileWidth}) {
     margin: 30px 0;
     width: 100%;
     
