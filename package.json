@@ -26,7 +26,7 @@
     "formik": "^1.5.8",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
-    "next": "^9.0.2",
+    "next": "^11.1.0",
     "next-nprogress": "^1.4.0",
     "next-redux-wrapper": "^3.0.0",
     "niyon-design": "^0.0.6",
